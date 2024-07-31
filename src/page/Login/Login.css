@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main_view{
+    background-image: url('../../assets/svg/page_Background.svg');
+    width: 100dvw;
+    height: 100dvh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_center_element{
+    background-color: rgba(94, 15, 28, 0.385);
+    /* width:70.15%; */
+    width: 100%;
+    height: 84%;
+    /* min-width: 1000px; */
+}
+.top_element{
+    /* background-color: rgba(182, 138, 25, 0.575); */
+    width: 100%;
+    height: 12.5%;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+}
+.bottom_element{
+    /* background-color: rgba(100, 148, 237, 0.604); */
+    width: 100%;
+    height: 87.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo_icon{
+    /* background-color: rgba(0, 139, 139, 0.679); */
+    width: 150px;
+    height: 50px;
+}
+.logo_icon img{
+    width: 100%;
+    height: 100%;
+}
+
+.login_box{
+    background-color: rgb(255, 255, 255);
+    /* width: 83.5%; */
+    height: 88%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    width: 900px;
+    margin: 0px 5px 0px 5px;
+}
+.login_left{
+    background-image: url('../../assets/svg/green_background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+    height: 100%;
+}
+.login_right{
+    /* background-color: blueviolet; */
+    width: 50%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 905px) {
+    .main_center_element{
+        /* width:70%; */
+        height: 84%;
+        /* min-width: 100%; */
+    }
+}
+@media only screen and (max-width: 750px) {
+    .login_left{
+        display: none;
+    }
+    .login_right{
+        width: 100%;
+    }
+    .login_box{
+        background-color: rgb(255, 255, 255);
+        width: 83.5%;
+        height: 88%;
+        min-width: 83.5%;
+    }
+}
+@media only screen and (max-width: 465px) {
+    .login_box{
+        width: 90%;
+    }
+}
