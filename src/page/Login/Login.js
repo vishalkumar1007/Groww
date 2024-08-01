@@ -1,8 +1,34 @@
+import { useEffect, useState } from 'react';
 import './Login.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
 import google_svg from '../../assets/svg/google.icon.svg'
-const Login = ()=>{
-    return(
+
+const Login = () => {
+    const [inputActive, setInputActive] = useState(false);
+    const [userEmailId, setUserEmailId] = useState('');
+    const [emailNotFoundError, setEmailNotFoundError] = useState(false);
+    const [incorrectEmail, setIncorrectEmail] = useState(false);
+    const [emailValidFromDataBase, setemailValidFromDataBase] = useState(false);
+    const checkInputFocus = () => {
+        setInputActive(true);
+    }
+    const handleBlur = (event) => {
+        if (event.target.value === "") {
+            setInputActive(false);
+        }
+    }
+
+    useEffect(() => {
+        if ((inputActive) && !(['@gmail.com'].some(operator => userEmailId.includes(operator)))) {
+            setIncorrectEmail(true);
+        } else if (inputActive === false) {
+            setIncorrectEmail(false);
+        } else {
+            setIncorrectEmail(false);
+        }
+    }, [inputActive, userEmailId]);
+
+    return (
         <div className="main_view">
             <div className='main_center_element'>
                 <div className='top_element'>
@@ -47,12 +73,36 @@ const Login = ()=>{
                                     </div>
                                 </div>
                                 <div className='login_with_id'>
-                                    <div className='input_email_div'>
-                                        <div className='ied_center'>
-                                            <p id='placeholder_move'>Your Email Address</p>
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
+                                    {
+                                        !emailValidFromDataBase ?
+                                            <div className='input_email_div'>
+                                                <div className='ied_center'>
+                                                    <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
+                                                    <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
+                                                    <div className='email_error_div'>
+                                                        {incorrectEmail ? <label id='email_incorrect_error'>Incorrect email</label> : ''}
+                                                        {<br />}
+                                                        {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            :
+                                            <div className='input_email_div'>
+                                                <div className='input_email_div'>
+                                                    <div className='ied_center'>
+                                                        <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Enter Password</label>
+                                                        <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
+                                                        <div className='email_error_div'>
+                                                            {incorrectEmail ? <label id='email_incorrect_error'>Incorrect Password</label> : ''}
+                                                            {<br />}
+                                                            {emailNotFoundError ? <label id='email_invalid_error'>Incorrect Password</label> : ''}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                    }
                                     <div className='continue_btn_div'>
                                         <button id='cnt_btn'>Continue</button>
                                     </div>
