@@ -5,20 +5,20 @@ import Forget_amico from '../../assets/svg/Forgot-password-bro-groww.svg'
 import Create_password_amico from '../../assets/img/Create_password_icon_amico.png'
 
 const Login = () => {
-    const [inputActive, setInputActive] = useState(false);
-    const [inputActiveEP, setInputActiveEP] = useState(false);
-    const [inputActiveCP, setInputActiveCP] = useState(false);
-    const [userEmailId, setUserEmailId] = useState('');
-    const [userInputOtp, setUserInputOtp] = useState('');
-    const [emailNotFoundError, setEmailNotFoundError] = useState(false);
-    const [incorrectEmail, setIncorrectEmail] = useState(false);
-    const [emailValidFromDataBase, setEmailValidFromDataBase] = useState(false);
-    const [otpValidFromDataBase, setOtpValidFromDataBase] = useState(false);
-    const [isChangePasswordSectionOpen, setIsChangePasswordSectionOpen] = useState(false);
-    const [changeInputPassword, setChangeInputPassword] = useState('')
-    const [errorCIP, setErrorCIP] = useState('')
-    const [changeInputConformPassword, setChangeInputConformPassword] = useState('')
-    const [errorCICP, setErrorCICP] = useState('')
+    const [f_inputActive, setF_inputActive] = useState(false);
+    const [f_inputActiveEP, setF_inputActiveEP] = useState(false);
+    const [f_inputActiveCP, setF_inputActiveCP] = useState(false);
+    const [f_userEmailId, setF_userEmailId] = useState('');
+    const [f_userInputOtp, setF_userInputOtp] = useState('');
+    const [f_emailNotFoundError, setF_emailNotFoundError] = useState(false);
+    const [f_incorrectEmail, setF_incorrectEmail] = useState(false);
+    const [f_emailValidFromDataBase, setF_emailValidFromDataBase] = useState(false);
+    const [f_otpValidFromDataBase, setF_otpValidFromDataBase] = useState(false);
+    const [f_isChangePasswordSectionOpen, setF_isChangePasswordSectionOpen] = useState(false);
+    const [f_changeInputPassword, setF_changeInputPassword] = useState('')
+    const [f_errorCIP, setF_errorCIP] = useState('')
+    const [f_changeInputConformPassword, setF_changeInputConformPassword] = useState('')
+    const [f_errorCICP, setF_errorCICP] = useState('')
 
 
     // useEffect(()=>{
@@ -26,175 +26,176 @@ const Login = () => {
     // },[userInputOtp])
 
     const checkInputFocus = () => {
-        setInputActive(true);
+        setF_inputActive(true);
     }
     const handleBlur = (event) => {
         if (event.target.value === "") {
-            setInputActive(false);
+            setF_inputActive(false);
         }
     }
     // ............... 
     const checkInputFocusEP = () => {
-        setInputActiveEP(true);
+        setF_inputActiveEP(true);
     }
     const handleBlurEP = (event) => {
         if (event.target.value === "") {
-            setInputActiveEP(false);
+            setF_inputActiveEP(false);
         }
     }
     // ............... 
     const checkInputFocusCP = () => {
-        setInputActiveCP(true);
+        setF_inputActiveCP(true);
     }
     const handleBlurCP = (event) => {
         if (event.target.value === "") {
-            setInputActiveCP(false);
+            setF_inputActiveCP(false);
         }
     }
 
     useEffect(() => {
-        if (inputActiveEP) {
-            if (changeInputPassword.length < 7 || changeInputPassword.length > 20) {
-                setErrorCIP('Password length must be between 7 to 20');
-            } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => changeInputPassword.includes(operator))) {
-                setErrorCIP('Not allow to use these character $ ! % ^ | ( ) ');
-            } else if (!(/\d/).test(changeInputPassword)) {
-                setErrorCIP('Password must be contain number');
-            } else if (!['@', '#', '-', '.', '/'].some(operator => changeInputPassword.includes(operator))) {
-                setErrorCIP('Password must be contain special character');
-            } else if (!(/[A-Z]/.test(changeInputPassword))) {
-                setErrorCIP('Password must contain at least one capital letter');
+        if (f_inputActiveEP) {
+            if (f_changeInputPassword.length < 7 || f_changeInputPassword.length > 20) {
+                setF_errorCIP('Password length must be between 7 to 20');
+            } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => f_changeInputPassword.includes(operator))) {
+                setF_errorCIP('Not allow to use these character $ ! % ^ | ( ) ');
+            } else if (!(/\d/).test(f_changeInputPassword)) {
+                setF_errorCIP('Password must be contain number');
+            } else if (!['@', '#', '-', '.', '/'].some(operator => f_changeInputPassword.includes(operator))) {
+                setF_errorCIP('Password must be contain special character');
+            } else if (!(/[A-Z]/.test(f_changeInputPassword))) {
+                setF_errorCIP('Password must contain at least one capital letter');
             } else {
-                setErrorCIP('Seems Like All Set For Login You Account');
+                setF_errorCIP('Seems Like All Set For Login You Account');
             }
-        } else if (changeInputPassword === '') {
-            setErrorCIP('');
+        } else if (f_changeInputPassword === '') {
+            setF_errorCIP('');
         }
-    }, [inputActiveEP, changeInputPassword]);
+    }, [f_inputActiveEP, f_changeInputPassword]);
 
     useEffect(() => {
-        if (inputActiveCP) {
-            if (changeInputConformPassword.length < 7 || changeInputConformPassword.length > 20) {
-                setErrorCICP('Password length must be between 7 to 20');
-            } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => changeInputConformPassword.includes(operator))) {
-                setErrorCICP('Not allow to use these character $ ! % ^ | ( ) ');
-            } else if (!(/\d/).test(changeInputConformPassword)) {
-                setErrorCICP('Password must be contain number');
-            } else if (!['@', '#', '-', '.', '/'].some(operator => changeInputConformPassword.includes(operator))) {
-                setErrorCICP('Password must be contain special character');
-            } else if (!(/[A-Z]/.test(changeInputConformPassword))) {
-                setErrorCICP('Password must contain at least one capital letter');
-            } else if (changeInputPassword !== changeInputConformPassword) {
-                setErrorCICP('Password Not Same');
+        if (f_inputActiveCP) {
+            if (f_changeInputConformPassword.length < 7 || f_changeInputConformPassword.length > 20) {
+                setF_errorCICP('Password length must be between 7 to 20');
+            } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => f_changeInputConformPassword.includes(operator))) {
+                setF_errorCICP('Not allow to use these character $ ! % ^ | ( ) ');
+            } else if (!(/\d/).test(f_changeInputConformPassword)) {
+                setF_errorCICP('Password must be contain number');
+            } else if (!['@', '#', '-', '.', '/'].some(operator => f_changeInputConformPassword.includes(operator))) {
+                setF_errorCICP('Password must be contain special character');
+            } else if (!(/[A-Z]/.test(f_changeInputConformPassword))) {
+                setF_errorCICP('Password must contain at least one capital letter');
+            } else if (f_changeInputPassword !== f_changeInputConformPassword) {
+                setF_errorCICP('Password Not Same');
             } else {
-                setErrorCICP('Seems Like All Set For Login You Account');
+                setF_errorCICP('Seems Like All Set For Login You Account');
             }
-        } else if (changeInputConformPassword === '') {
-            setErrorCICP('');
+        } else if (f_changeInputConformPassword === '') {
+            setF_errorCICP('');
         }
-    }, [inputActiveCP, changeInputConformPassword, changeInputPassword])
+    }, [f_inputActiveCP, f_changeInputConformPassword, f_changeInputPassword])
 
     useEffect(() => {
-        if (otpValidFromDataBase) {
+        if (f_otpValidFromDataBase) {
             setTimeout(() => {
-                setIsChangePasswordSectionOpen(true);
+                setF_isChangePasswordSectionOpen(true);
             }, 1500);
         }
         //  else {
         //     setIsChangePasswordSectionOpen(false);
         // }
-    }, [otpValidFromDataBase])
+    }, [f_otpValidFromDataBase])
 
     useEffect(() => {
-        if (inputActive) {
+        if (f_inputActive) {
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            setIncorrectEmail(!emailPattern.test(userEmailId));
+            setF_incorrectEmail(!emailPattern.test(f_userEmailId));
         } else {
-            setIncorrectEmail(false);
+            setF_incorrectEmail(false);
         }
-    }, [inputActive, userEmailId]);
+    }, [f_inputActive, f_userEmailId]);
 
     return (
         <div className="main_view_forget">
             <div className='main_center_element_forget'>
-                <div className='top_element'>
-                    <div className='logo_icon'>
+                <div className='top_element_forget'>
+                    <div className='logo_icon_forget'>
                         <img src={Logo_dark} alt="" />
                     </div>
                 </div>
-                <div className='bottom_element'>
-                    <div className='login_box'>
-                        <div className='login_left'>
-                            <div className='login_left_inter'>
-                                <div className='left_tagline_top'>
-                                    <p id='left_tagline_top_text'>Simple, Free</p>
-                                    <p id='left_tagline_top_text'>Investing.</p>
+                <div className='bottom_element_forget'>
+                    <div className='login_box_forget'>
+                        <div className='login_left_forget'>
+                            <div className='login_left_forget_inter'>
+                                <div className='left_tagline_top_forget'>
+                                    <p id='left_tagline_top_forget_text'>Simple, Free</p>
+                                    <p id='left_tagline_top_forget_text'>Investing.</p>
                                 </div>
-                                <div className='left_tagline_bottom'>
+                                <div className='left_tagline_bottom_forget'>
                                     <div id='interval'></div>
-                                    <p id='left_tagline_bottom_text'>Mutual Funds</p>
+                                    <p id='left_tagline_bottom_forget_text'>Mutual Funds</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='login_right'>
+                        <div className='login_right_forget'>
                             {
-                                !isChangePasswordSectionOpen
-                                    ?
-
-                                    <div className='login_right_arrange'>
-                                        <div className='login_with_google'>
-                                            <div className='lwg_title'>
+                                !f_isChangePasswordSectionOpen
+                                ?
+                                
+                                <div className='login_right_forget_arrange'>
+                                        <div className='login_with_forget'>
+                                            <div className='lwg_title_forget'>
                                                 <p>Forget Password</p>
                                             </div>
-                                            <div className='lwg_box'>
-                                                <div className='lwg_wrap_image'>
+                                            <div className='lwg_box_forget'>
+                                                <div className='lwg_wrap_image_forget'>
                                                     <img src={Forget_amico} alt="icon" />
                                                 </div>
                                             </div>
                                         </div>
 
+                                        {/* ............ */}
                                         {
-                                            !emailValidFromDataBase
-                                                ?
+                                            !f_emailValidFromDataBase
+                                            ?
+                                            
+                                                <div className='login_with_id_forget'>
 
-                                                <div className='login_with_id'>
-
-                                                    <div className='input_email_div'>
-                                                        <div className='ied_center'>
-                                                            <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
-                                                            <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
+                                                    <div className='input_email_div_forget'>
+                                                        <div className='ied_center_forget'>
+                                                            <label id={f_inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
+                                                            <input id={f_inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setF_userEmailId(e.target.value) }} />
                                                             <div className='email_error_div'>
-                                                                {incorrectEmail ? <label id='email_incorrect_error'>Incorrect email</label> : ''}
+                                                                {f_incorrectEmail ? <label id='email_incorrect_error_forget'>Incorrect email</label> : ''}
                                                                 {<br />}
-                                                                {emailNotFoundError ? <label id='email_invalid_error'>Invalid Email , First create your account</label> : ''}
+                                                                {f_emailNotFoundError ? <label id='email_invalid_error'>Invalid Email , First create your account</label> : ''}
                                                             </div>
                                                         </div>
 
                                                     </div>
 
-                                                    <div className='continue_btn_div'>
-                                                        <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Send OTP</button>
+                                                    <div className='continue_btn_div_forget'>
+                                                        <button id='cnt_btn' onClick={() => { if (!f_incorrectEmail && f_userEmailId !== '') { setF_inputActive(false); setF_emailValidFromDataBase(true) } }}>Send OTP</button>
                                                     </div>
-                                                    <div className='company_terms_div'>
+                                                    <div className='company_terms_div_forget'>
                                                         <p>Opps, i just remind my password ? <a href="https://google.com">Login Account</a> </p>
                                                     </div>
                                                 </div>
 
                                                 :
-                                                <div className='login_with_id'>
+                                                <div className='login_with_id_forget'>
 
-                                                    <div className='input_email_div'>
-                                                        <div className='input_email_div'>
-                                                            <div className='ied_center'>
-                                                                <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Enter OTP</label>
-                                                                <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type='number' onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserInputOtp(e.target.value) }} className="no-spinners" />
+                                                    <div className='input_email_div_forget'>
+                                                        <div className='input_email_div_forget'>
+                                                            <div className='ied_center_forget'>
+                                                                <label id={f_inputActive ? 'placeholder_move' : 'placeholder_static'}>Enter OTP</label>
+                                                                <input id={f_inputActive ? 'inputActive' : 'inputDeactivate'} type='number' onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setF_userInputOtp(e.target.value) }} className="no-spinners" />
                                                                 {
-                                                                    otpValidFromDataBase ?
+                                                                    f_otpValidFromDataBase ?
                                                                         <div className='email_error_div'>
                                                                             {
-                                                                                otpValidFromDataBase
+                                                                                f_otpValidFromDataBase
                                                                                     ?
-                                                                                    otpValidFromDataBase ? <label id='email_invalid_error' style={{ color: 'green' }}>OTP Verified Successfully</label> : ''
+                                                                                    f_otpValidFromDataBase ? <label id='email_invalid_error' style={{ color: 'green' }}>OTP Verified Successfully</label> : ''
                                                                                     :
                                                                                     <label id='email_invalid_error'>Incorrect Input OTP</label>
                                                                             }
@@ -207,10 +208,10 @@ const Login = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className='continue_btn_div'>
-                                                        <button id='cnt_btn' onClick={() => { if (userInputOtp !== '') { setOtpValidFromDataBase(true) } }}>Validate</button>
+                                                    <div className='continue_btn_div_forget'>
+                                                        <button id='cnt_btn' onClick={() => { if (f_userInputOtp !== '') { setF_otpValidFromDataBase(true) } }}>Validate</button>
                                                     </div>
-                                                    <div className='company_terms_div'>
+                                                    <div className='company_terms_div_forget'>
                                                         <p> Still not getting OTP ? <a href="https://google.com">Resend it</a></p>
                                                     </div>
                                                 </div>
@@ -218,7 +219,7 @@ const Login = () => {
                                         }
                                     </div>
                                     :
-                                    <div className='login_right_arrange'>
+                                    <div className='login_right_forget_arrange'>
                                         <div className='cretePass_heading'>
                                             <div className='cp_title'>
                                                 <p>Create Password</p>
@@ -233,29 +234,29 @@ const Login = () => {
                                         <div className='Create_password_section'>
 
                                             <div className='input_createPass_div'>
-                                                <div className='ied_center'>
-                                                    <label id={inputActiveEP ? 'placeholder_move' : 'placeholder_static'}>Enter Your Password</label>
-                                                    <input id={inputActiveEP ? 'inputActive' : 'inputDeactivate'} type='password' onFocus={() => { checkInputFocusEP() }} onBlur={handleBlurEP} onChange={(e) => { setChangeInputPassword(e.target.value) }} />
+                                                <div className='ied_center_forget'>
+                                                    <label id={f_inputActiveEP ? 'placeholder_move' : 'placeholder_static'}>Enter Your Password</label>
+                                                    <input id={f_inputActiveEP ? 'inputActive' : 'inputDeactivate'} type='password' onFocus={() => { checkInputFocusEP() }} onBlur={handleBlurEP} onChange={(e) => { setF_changeInputPassword(e.target.value) }} />
                                                     <div className='conformPass_error_div'>
-                                                        {<label id='email_incorrect_error' style={{ color: errorCIP === 'Seems Like All Set For Login You Account' ? '#39ac13' : '#d50707' }}>{errorCIP}</label>}
+                                                        {<label id='email_incorrect_error_forget' style={{ color: f_errorCIP === 'Seems Like All Set For Login You Account' ? '#39ac13' : '#d50707' }}>{f_errorCIP}</label>}
 
                                                     </div>
                                                 </div>
-                                                <div className='ied_center'>
-                                                    <label id={inputActiveCP ? 'placeholder_move' : 'placeholder_static'}>Conform Password</label>
-                                                    <input id={inputActiveCP ? 'inputActive' : 'inputDeactivate'} type='password' onFocus={() => { checkInputFocusCP() }} onBlur={handleBlurCP} onChange={(e) => { setChangeInputConformPassword(e.target.value) }} />
+                                                <div className='ied_center_forget'>
+                                                    <label id={f_inputActiveCP ? 'placeholder_move' : 'placeholder_static'}>Conform Password</label>
+                                                    <input id={f_inputActiveCP ? 'inputActive' : 'inputDeactivate'} type='password' onFocus={() => { checkInputFocusCP() }} onBlur={handleBlurCP} onChange={(e) => { setF_changeInputConformPassword(e.target.value) }} />
                                                     <div className='conformPass_error_div'>
-                                                        {<label id='email_incorrect_error' style={{ color: errorCICP === 'Seems Like All Set For Login You Account' ? '#39ac13' : '#d50707' }}>{errorCICP}</label>}
+                                                        {<label id='email_incorrect_error_forget' style={{ color: f_errorCICP === 'Seems Like All Set For Login You Account' ? '#39ac13' : '#d50707' }}>{f_errorCICP}</label>}
 
                                                     </div>
                                                 </div>
 
                                             </div>
 
-                                            <div className='createPass_continue_btn_div'>
-                                                <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Change</button>
+                                            <div className='createPass_continue_btn_div_forget'>
+                                                <button id='cnt_btn' onClick={() => { if (!f_incorrectEmail && f_userEmailId !== '') { setF_inputActive(false); setF_emailValidFromDataBase(true) } }}>Change</button>
                                             </div>
-                                            <div className='_createPass_company_terms_div'>
+                                            <div className='_createPass_company_terms_div_forget'>
                                                 <p>Issue in change password ? <a href="https://google.com">Go to Forget</a> </p>
                                             </div>
                                         </div>
