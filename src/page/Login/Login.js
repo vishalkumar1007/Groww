@@ -2,13 +2,19 @@ import { useEffect, useState } from 'react';
 import './Login.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
 import google_svg from '../../assets/svg/google.icon.svg'
+// import ForgetPassword from '../ForgetPassword/ForgetPassword'
 
 const Login = () => {
     const [inputActive, setInputActive] = useState(false);
     const [userEmailId, setUserEmailId] = useState('');
+    const [userPassword, setUserPassword] = useState('');
     const [emailNotFoundError, setEmailNotFoundError] = useState(false);
     const [incorrectEmail, setIncorrectEmail] = useState(false);
-    const [emailValidFromDataBase, setemailValidFromDataBase] = useState(false);
+    const [emailValidFromDataBase, setEmailValidFromDataBase] = useState(false);
+    const [passwordValidFromDataBase, setPasswordValidFromDataBase] = useState(false);
+    const [passwordErrorAlert, setPasswordErrorAlert] = useState('')
+
+
     const checkInputFocus = () => {
         setInputActive(true);
     }
@@ -19,10 +25,30 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if ((inputActive) && !(['@gmail.com'].some(operator => userEmailId.includes(operator)))) {
-            setIncorrectEmail(true);
-        } else if (inputActive === false) {
-            setIncorrectEmail(false);
+        if (inputActive) {
+            if (userPassword.length < 7 || userPassword.length > 20) {
+                setPasswordErrorAlert('Password length must be between 7 to 20');
+            } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => userPassword.includes(operator))) {
+                setPasswordErrorAlert('Not allow to use these character $ ! % ^ | ( ) ');
+            } else if (!(/\d/).test(userPassword)) {
+                setPasswordErrorAlert('Password must be contain number');
+            } else if (!['@', '#', '-', '.', '/'].some(operator => userPassword.includes(operator))) {
+                setPasswordErrorAlert('Password must be contain special character');
+            } else if (!(/[A-Z]/.test(userPassword))) {
+                setPasswordErrorAlert('Password must contain at least one capital letter');
+            } else {
+                setPasswordErrorAlert('Seems Like All Set For Login You Account');
+            }
+        } else if (userPassword === '') {
+            setPasswordErrorAlert('');
+        }
+    }, [inputActive, userPassword])
+
+
+    useEffect(() => {
+        if (inputActive) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            setIncorrectEmail(!emailPattern.test(userEmailId));
         } else {
             setIncorrectEmail(false);
         }
@@ -72,9 +98,13 @@ const Login = () => {
                                         <div className='or_line'></div>
                                     </div>
                                 </div>
-                                <div className='login_with_id'>
-                                    {
-                                        !emailValidFromDataBase ?
+
+                                {
+                                    !emailValidFromDataBase
+                                        ?
+
+                                        <div className='login_with_id'>
+
                                             <div className='input_email_div'>
                                                 <div className='ied_center'>
                                                     <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
@@ -87,29 +117,46 @@ const Login = () => {
                                                 </div>
 
                                             </div>
-                                            :
+
+                                            <div className='continue_btn_div'>
+                                                <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Continue</button>
+                                            </div>
+                                            <div className='company_terms_div'>
+                                                <p>By proceeding, I agree to <a href="https://google.com">T&C</a>, <a href="https://google.com">Privacy Policy</a> & <a href="https://google.com">Tariff Rates</a></p>
+                                            </div>
+                                        </div>
+
+                                        :
+
+                                        <div className='login_with_id'>
+
                                             <div className='input_email_div'>
                                                 <div className='input_email_div'>
                                                     <div className='ied_center'>
                                                         <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Enter Password</label>
-                                                        <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
+                                                        <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserPassword(e.target.value) }} />
                                                         <div className='email_error_div'>
-                                                            {incorrectEmail ? <label id='email_incorrect_error'>Incorrect Password</label> : ''}
-                                                            {<br />}
-                                                            {emailNotFoundError ? <label id='email_invalid_error'>Incorrect Password</label> : ''}
+                                                            {
+                                                                passwordValidFromDataBase
+                                                                    ?
+                                                                    <label id='email_invalid_error'>Your Password is Incorrect</label>
+                                                                    :
+                                                                    <label id='email_incorrect_error' style={{ color: passwordErrorAlert === 'Seems Like All Set For Login You Account' ? '#39ac13' : '#d50707' }}>{passwordErrorAlert}</label>
+                                                            }
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
-                                    }
-                                    <div className='continue_btn_div'>
-                                        <button id='cnt_btn'>Continue</button>
-                                    </div>
-                                    <div className='company_terms_div'>
-                                        <p>By proceeding, I agree to <a href="https://google.com">T&C</a>, <a href="https://google.com">Privacy Policy</a> & <a href="https://google.com">Tariff Rates</a></p>
-                                    </div>
-                                </div>
+
+                                            <div className='continue_btn_div'>
+                                                <button id='cnt_btn'>Login</button>
+                                            </div>
+                                            <div className='company_terms_div'>
+                                                {/* <p>Don't remember Password ? <a href={ForgetPassword}>Forget Password</a></p> */}
+                                            </div>
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
