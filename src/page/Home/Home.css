@@ -1,0 +1,264 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.HomeMain{
+    /* background-color: rgb(197, 197, 197); */
+    width: 100%;
+    height: 100dvh;
+}
+.Home_navbar{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.Home_nav_logo{
+    /* background-color: coral; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    /* max-width: 150px; */
+    /* max-height: 50px; */
+    /* min-width: 122px; */
+    box-sizing: border-box;
+    /* margin-left: -45px; */
+}
+.Home_nav_logo_handel{
+    /* background-color: pink; */
+    /* margin-left: -50px; */
+    /* min-width: 120px; */
+    width: 150px;
+    /* min-width: 120.88px; */
+    height: 100%;
+}
+.Home_nav_logo_handel img{
+    width: 100%;
+    height: 100%;
+}
+.Home_nav_search{
+    /* background-color: crimson; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 27%;
+    height: 48%;
+    min-width: 263.95px;
+    /* border-radius: 7px; */
+    /* overflow: hidden; */
+}
+.Home_nav_search input{
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    border: 1px solid #e9e9e9;
+    padding-left: 40px;
+    color: gray;
+    min-width: 263.95px;
+}
+
+.Home_nav_search input::placeholder{
+    color: rgb(160, 160, 160);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+.Home_nav_register{
+    background-color: #00B386;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 8%; */
+    width: 122.78px;
+    height: 40px;
+    border-radius: 10px;
+}
+.Home_nav_register:hover{
+    background-color: #03a77e;
+    box-shadow: 0px 0px 10px #00b3864b;
+}
+.Home_nav_register button{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: 520;
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+}
+
+.Home_three_line_nav{
+    display: none;
+}
+/* .................  */
+
+.Home_body{
+    /* background-color: cornflowerblue; */
+    /* width: 100%; */
+    /* height: 850px; */
+}
+.Home_body_section_1{
+    
+}
+.Home_body_section_2{
+
+}
+.Home_body_section_3{
+
+}
+.Home_body_section_4{
+
+}
+.Home_body_section_5{
+
+}
+
+/* ...............  */
+
+.Home_footer{
+
+}
+
+.Home_footer_main{
+
+}
+
+.Home_footer_build_with_love{
+
+}
+
+@media only screen and (min-width: 1200px) {
+    .Home_nav_logo {
+        margin-left: -40px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .Home_navbar{
+        justify-content: space-between;
+    }
+    .Home_nav_search{
+        display: none;
+    }
+    /* .Home_nav_search input{
+        display: none;
+    } */
+    .Home_nav_logo{
+        /* background-color: coral; */
+        /* min-width: 100px; */
+        /* min-height: 50px; */
+        max-width: 140px;
+        margin-left: 15px;
+        /* max-height: 50px; */
+    }
+    .Home_nav_logo_handel{
+        width: 100%;
+        height: 100%;
+    }
+    .Home_nav_logo_handel img{
+        width: 100%;
+        height: 100%;
+    }
+    .Home_nav_register{
+        margin-right: 15px;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    .Home_navbar{
+        /* background-color: #00B386; */
+        justify-content: space-between;
+    }
+    .Home_nav_search{
+        display: none;
+    }
+    /* .Home_nav_search input{
+        display: none;
+    } */
+    .Home_nav_logo{
+        /* background-color: coral; */
+        min-width: 110px;
+        /* min-height: 50px; */
+        /* max-width: 100px; */
+        margin-left: 15px;
+        /* max-height: 50px; */
+    }
+    .Home_nav_logo_handel{
+        /* background-color: blanchedalmond; */
+        width: 100%;
+        height: 100%;
+    }
+    .Home_nav_logo_handel img{
+        width: 100%;
+        height: 100%;
+    }
+    .Home_nav_register{
+        display: none;
+    }
+    .Home_three_line_nav{
+        /* background-color: red; */
+        /* width: 30px; */
+        /* height: 25px; */
+        margin-right: 17px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s ease-in-out;
+        position: relative;
+    }
+    .Home_three_line_nav #svgMenu1{
+        transition: 0.7s ease-in-out;
+        /* color: red; */
+    }
+    .Home_three_line_nav #svgMenu2{
+        transition: 0.7s ease-in-out;
+        /* color: red; */
+    }
+    .Home_three_menu_bar{
+        background-color: #696868b6;
+        position: absolute;
+        /* width: 220px; */
+        /* height: 250px; */
+        padding: 25px;
+        top: 60px;
+        right: 30px;
+        border-radius: 15px;
+        transition: 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .Home_nav_register_menu{
+        background-color: #00B386;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* width: 8%; */
+        width: 122.78px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    .Home_nav_register_menu button{
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-weight: 520;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .Home_nav_register_menu:hover{
+        background-color: #03a77e;
+        box-shadow: 0px 0px 10px #00b3864b;
+    }
+}

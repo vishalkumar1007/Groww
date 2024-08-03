@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
 import './ForgetPassword.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
 import Forget_amico from '../../assets/svg/Forgot-password-bro-groww.svg'
@@ -50,6 +51,10 @@ const Login = () => {
         if (event.target.value === "") {
             setF_inputActiveCP(false);
         }
+    }
+
+    const reloadPage = ()=>{
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -177,7 +182,7 @@ const Login = () => {
                                                         <button id='cnt_btn' onClick={() => { if (!f_incorrectEmail && f_userEmailId !== '') { setF_inputActive(false); setF_emailValidFromDataBase(true) } }}>Send OTP</button>
                                                     </div>
                                                     <div className='company_terms_div_forget'>
-                                                        <p>Opps, i just remind my password ? <a href="https://google.com">Login Account</a> </p>
+                                                        <p>Opps, i just remind my password ? <Link to='/'>Login Account</Link> </p>
                                                     </div>
                                                 </div>
 
@@ -257,7 +262,7 @@ const Login = () => {
                                                 <button id='cnt_btn' onClick={() => { if (!f_incorrectEmail && f_userEmailId !== '') { setF_inputActive(false); setF_emailValidFromDataBase(true) } }}>Change</button>
                                             </div>
                                             <div className='_createPass_company_terms_div_forget'>
-                                                <p>Issue in change password ? <a href="https://google.com">Go to Forget</a> </p>
+                                                <p>Issue in change password ? <Link to='#!' onClick={reloadPage}>Go to Forget</Link> </p>
                                             </div>
                                         </div>
                                     </div>

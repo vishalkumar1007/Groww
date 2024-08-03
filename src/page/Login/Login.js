@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
 import './Login.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
 import google_svg from '../../assets/svg/google.icon.svg'
@@ -153,7 +154,7 @@ const Login = () => {
                                                 <button id='cnt_btn'>Login</button>
                                             </div>
                                             <div className='company_terms_div'>
-                                                <p>Don't remember Password ? <a href={ForgetPassword}>Forget Password</a></p>
+                                                <p>Don't remember Password ? <Link to='forget' >Forget Password</Link></p>
                                             </div>
                                         </div>
                                 }
