@@ -154,7 +154,7 @@ const Login = () => {
                                                 <button id='cnt_btn'>Login</button>
                                             </div>
                                             <div className='company_terms_div'>
-                                                <p>Don't remember Password ? <Link to='forget' >Forget Password</Link></p>
+                                                <p>Don't remember Password ? <Link to='/forget' >Forget Password</Link></p>
                                             </div>
                                         </div>
                                 }

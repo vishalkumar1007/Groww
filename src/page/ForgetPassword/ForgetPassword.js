@@ -182,7 +182,7 @@ const Login = () => {
                                                         <button id='cnt_btn' onClick={() => { if (!f_incorrectEmail && f_userEmailId !== '') { setF_inputActive(false); setF_emailValidFromDataBase(true) } }}>Send OTP</button>
                                                     </div>
                                                     <div className='company_terms_div_forget'>
-                                                        <p>Opps, i just remind my password ? <Link to='/'>Login Account</Link> </p>
+                                                        <p>Opps, i just remind my password ? <Link to='/login'>Login Account</Link> </p>
                                                     </div>
                                                 </div>
 
