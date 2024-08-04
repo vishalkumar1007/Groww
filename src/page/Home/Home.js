@@ -1,5 +1,6 @@
 import './Home.css';
-import GrowwLogo from '../../assets/svg/groww-logo-light.svg'
+import GrowwLogo from '../../assets/svg/groww-logo-light.svg';
+import Home_img from '../../assets/img/home_image_intro.png'
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 const Home = () => {
@@ -42,7 +43,25 @@ const Home = () => {
 
                 </div>
                 <div className='Home_body'>
-                    <div className='Home_body_section_1'></div>
+                    <div className='Home_body_section_1'>
+                        <div className='Home_body_section_1_text'>
+                            <div className='Home_body_section_1_text_top'>
+                                <p>All things finance,</p>
+                                <p>Right here.</p>
+                            </div>
+                            <div className='Home_body_section_1_text_mid'>
+                                <p>Build for growing India</p>
+                            </div>
+                            <div className='Home_body_section_1_text_btn'>
+                                <button>Get Started</button>
+                            </div>
+                        </div>
+                        <div className='Home_body_section_1_image'>
+                            <div className='Home_body_section_1_image_arrange'>
+                                <img src={Home_img} alt="" />
+                            </div>
+                        </div>
+                    </div>
                     <div className='Home_body_section_2'></div>
                     <div className='Home_body_section_3'></div>
                     <div className='Home_body_section_4'></div>
