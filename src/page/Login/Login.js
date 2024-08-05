@@ -111,7 +111,7 @@ const Login = () => {
                                                     <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
                                                     <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
                                                     <div className='email_error_div'>
-                                                        {incorrectEmail ? <label id='email_incorrect_error'>Incorrect email</label> : ''}
+                                                        {incorrectEmail ? <label id='email_incorrect_error'>Enter your email id</label> : ''}
                                                         {<br />}
                                                         {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
                                                     </div>
@@ -123,7 +123,7 @@ const Login = () => {
                                                 <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Continue</button>
                                             </div>
                                             <div className='company_terms_div'>
-                                                <p>By proceeding, I agree to <a href="https://google.com">T&C</a>, <a href="https://google.com">Privacy Policy</a> & <a href="https://google.com">Tariff Rates</a></p>
+                                                <p>You don't have account ? <Link to={'/'}>Sign up account</Link></p>
                                             </div>
                                         </div>
 
