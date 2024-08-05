@@ -6,6 +6,12 @@ import indian_market_building from '../../assets/img/indianMarketBuilding.a399b6
 import Stocks_icon from '../../assets/img/stocksHistogram.1c5dd346.webp'
 import Mutual_icon from '../../assets/img/mutualFundBlocks.ee53101c.webp'
 import Future_icon from '../../assets/img/fnoClock.0c7a0775.webp'
+import Credit_building from '../../assets/img/creditBuilding.c26d1ba5.webp'
+import Personal_loan from '../../assets/img/personalLoan.9d5e746c.webp'
+import General_store from '../../assets/img/generalStore.ab44242a.webp'
+import Pay_bill from '../../assets/img/payBillsComp.86cfc514.webp'
+import google_play_logo from '../../assets/img/google-play-badge.webp'
+import app_store_logo from '../../assets/img/app-store-logo.webp'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 const Home = () => {
@@ -152,9 +158,102 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='Home_body_section_3'></div>
-                    <div className='Home_body_section_4'></div>
-                    <div className='Home_body_section_5'></div>
+                    <div className='Home_body_section_3'>
+
+                        <div className='Home_body_section_2_pd_horizontal'>
+                            <div className='Home_body_section_2_left' id='hbs3M_p1'>
+                                <div className='Home_body_section_2_left_contain'>
+                                    <div className='Home_body_section_2_left_contain_icon_div' id='hbs3_p1'>
+                                        <div className='Home_body_section_2_left_contain_icon_div_img'>
+                                            <img src={Credit_building} alt="" />
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_title_div' id='hbs3_p2'>
+                                        <div className='Home_body_section_2_left_contain_title'>
+                                            <p>Credit</p>
+                                            <p>when you need it.</p>
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_tagline_div' id='hbs3_p3'>
+                                        <div className='Home_body_section_2_left_contain_tagline'>
+                                            <p>Apply for a lone get it within minute</p>
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_stock_option_div' id='hbs3_p4'>
+                                        <div className='Home_body_section_2_left_contain_stock_option_div_arrange'>
+                                            <div className='Home_body_section_2_left_contain_stock_option_1'>
+                                                <div className='Home_body_section_2_left_contain_stock_option_1_div'>
+                                                    <div className='Home_body_section_1_text_btn' id='hbs3_button'>
+                                                        <button >Know More</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='Home_body_section_3_right' id='hbs3M_p2'>
+                                <div className='Home_body_section_3_right_mobile_div'>
+                                    <img src={Personal_loan} alt="" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='Home_body_section_4'>
+                        <div className='Home_body_section_2_pd_horizontal'>
+                            <div className='Home_body_section_2_left' id='hbs4M_p1'>
+                                <div className='Home_body_section_2_left_contain'>
+                                    <div className='Home_body_section_2_left_contain_icon_div' id='hbs3_p1'>
+                                        <div className='Home_body_section_2_left_contain_icon_div_img'>
+                                            <img src={General_store} alt="" />
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_title_div' id='hbs3_p2'>
+                                        <div className='Home_body_section_2_left_contain_title'>
+                                            <p>All Your bills in</p>
+                                            <p>one place.</p>
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_tagline_div' id='hbs3_p3'>
+                                        <div className='Home_body_section_2_left_contain_tagline'>
+                                            <p>Pay anyone,anytime,anywhere with Groww Pay</p>
+                                        </div>
+                                    </div>
+                                    <div className='Home_body_section_2_left_contain_stock_option_div' id='hbs3_p4'>
+                                        <div className='Home_body_section_2_left_contain_stock_option_div_arrange'>
+                                            <div className='Home_body_section_2_left_contain_stock_option_1'>
+                                                <div className='Home_body_section_2_left_contain_stock_option_1_div'>
+                                                    <div className='Home_body_section_1_text_btn' id='hbs3_button'>
+                                                        <button >Know More</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='Home_body_section_4_right' id='hbs4M_p2'>
+                                <div className='Home_body_section_3_right_mobile_div' id='hbs4M_p2_img_div'>
+                                    <img src={Pay_bill} alt="" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='Home_body_section_5'>
+                            <div className='Home_body_section_5_end'>
+                                <div className='Home_body_section_5_end_left'>
+                                    <img src={GrowwLogo} alt="" />
+                                </div>
+                                <div className='Home_body_section_5_end_right'>
+                                    <img src={google_play_logo} alt="" />
+                                    <img src={app_store_logo} alt="" />
+                                </div>
+                            </div>
+                    </div>
                 </div>
                 <div className='Home_footer'>
                     <div className="Home_footer_main"></div>
