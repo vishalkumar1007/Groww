@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import './Login.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
 import google_svg from '../../assets/svg/google.icon.svg'
-import ForgetPassword from '../ForgetPassword/ForgetPassword'
 
 const Login = () => {
     const [inputActive, setInputActive] = useState(false);
@@ -81,7 +80,7 @@ const Login = () => {
                             <div className='login_right_arrange'>
                                 <div className='login_with_google'>
                                     <div className='lwg_title'>
-                                        <p>Welcome to Groww</p>
+                                        <p>Welcome Back</p>
                                     </div>
                                     <div className='lwg_box'>
                                         <div className='lwg_btn'>
