@@ -2,135 +2,184 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './SignUp.css';
 import Logo_dark from '../../assets/svg/groww-logo-dark.svg'
-import google_svg from '../../assets/svg/google.icon.svg'
 
 const SignUp = () => {
-    const [inputActive, setInputActive] = useState(false);
+    const [inputActiveFirstName, setInputActiveFirstName] = useState(false);
+    const [inputActiveLastName, setInputActiveLastName] = useState(false);
+    const [inputActiveEmailId, setInputActiveEmailId] = useState(false);
+    const [inputActivePassword, setInputActivePassword] = useState(false);
+    const [userFirstName, setUserFirstName] = useState('');
+    const [userLastName, setUserLastName] = useState('');
     const [userEmailId, setUserEmailId] = useState('');
-    const [userPassword, setUserPassword] = useState('');
-    const [emailNotFoundError, setEmailNotFoundError] = useState(false);
-    const [incorrectEmail, setIncorrectEmail] = useState(false);
-    const [emailValidFromDataBase, setEmailValidFromDataBase] = useState(false);
-    const [passwordValidFromDataBase, setPasswordValidFromDataBase] = useState(false);
-    const [passwordErrorAlert, setPasswordErrorAlert] = useState('')
+    const [userPassword, setUserPassword] = useState('');    
+    const [firstNameInputError , setFirstNameError] = useState('');
+    const [lastNameInputError , setLastNameError] = useState('');
+    const [emailInputError , setEmailInputError] = useState('');
+    const [passwordInputError , setPasswordInputError] = useState('');
 
 
-    const checkInputFocus = () => {
-        setInputActive(true);
-    }
-    const handleBlur = (event) => {
+    const handleBlurFirstName = (event) => {
         if (event.target.value === "") {
-            setInputActive(false);
+            setInputActiveFirstName(false);
+        }
+    }
+    const handleBlurLastName = (event) => {
+        if (event.target.value === "") {
+            setInputActiveLastName(false);
+        }
+    }
+    const handleBlurEmail = (event) => {
+        if (event.target.value === "") {
+            setInputActiveEmailId(false);
+        }
+    }
+    const handleBlurPassword = (event) => {
+        if (event.target.value === "") {
+            setInputActivePassword(false);
         }
     }
 
+    useEffect(()=>{
+
+        if(inputActiveFirstName){
+            if(userFirstName.length<4 || userFirstName.length>12){
+                setFirstNameError('Length of name must be between 4 to 12');
+            }else if(/[0-9]/.test(userFirstName)){
+                setFirstNameError('Name does not contain any number');
+            }else if(['$', '!', '%', '^', '*', '(', ')', '|','@', '#', '-', '.', '/'].some((ele)=> userFirstName.includes(ele) )){
+                setFirstNameError('Name does not any special character');
+            }else{
+                setFirstNameError('');
+            }
+        }else{
+            setFirstNameError('');
+        }
+    },[userFirstName,inputActiveFirstName]);
+
+    useEffect(()=>{
+
+        if(inputActiveLastName){
+            if(userLastName.length<2 || userLastName.length>10){
+                setLastNameError('Length of name must be between 2 to 10');
+            }else if(/[0-9]/.test(userLastName)){
+                setLastNameError('Name does not contain any number');
+            }else if(['$', '!', '%', '^', '*', '(', ')', '|','@', '#', '-', '.', '/'].some((ele)=> userLastName.includes(ele) )){
+                setLastNameError('Name does not any special character');
+            }else{
+                setLastNameError('');
+            }
+        }else{
+            setLastNameError('');
+        }
+    },[userLastName,inputActiveLastName]);
+
     useEffect(() => {
-        if (inputActive) {
+        if (inputActivePassword) {
             if (userPassword.length < 7 || userPassword.length > 20) {
-                setPasswordErrorAlert('Password length must be between 7 to 20');
+                setPasswordInputError('Password length must be between 7 to 20');
             } else if (['$', '!', '%', '^', '*', '(', ')', '|'].some(operator => userPassword.includes(operator))) {
-                setPasswordErrorAlert('Not allow to use these character $ ! % ^ | ( ) ');
+                setPasswordInputError('Not allow to use these character $ ! % ^ | ( ) ');
             } else if (!(/\d/).test(userPassword)) {
-                setPasswordErrorAlert('Password must be contain number');
+                setPasswordInputError('Password must be contain number');
             } else if (!['@', '#', '-', '.', '/'].some(operator => userPassword.includes(operator))) {
-                setPasswordErrorAlert('Password must be contain special character');
+                setPasswordInputError('Password must be contain special character');
             } else if (!(/[A-Z]/.test(userPassword))) {
-                setPasswordErrorAlert('Password must contain at least one capital letter');
+                setPasswordInputError('Password must contain at least one capital letter');
             } else {
-                setPasswordErrorAlert('Seems Like All Set For Login You Account');
+                setPasswordInputError('');
             }
         } else if (userPassword === '') {
-            setPasswordErrorAlert('');
+            setPasswordInputError('');
         }
-    }, [inputActive, userPassword])
+    }, [inputActivePassword, userPassword])
 
 
     useEffect(() => {
-        if (inputActive) {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            setIncorrectEmail(!emailPattern.test(userEmailId));
-        } else {
-            setIncorrectEmail(false);
+        if(inputActiveEmailId){            
+            if(!userEmailId.length){
+                setEmailInputError('Enter your email id');
+            }else if(!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmailId))){
+                setEmailInputError('Incorrect email format');
+            }else{
+                setEmailInputError('');
+            }
+        }else{
+            setEmailInputError('');
         }
-    }, [inputActive, userEmailId]);
+    }, [inputActiveEmailId, userEmailId]);
 
     return (
-        <div className="main_view">
-            <div className='main_center_element'>
-                <div className='top_element'>
-                    <div className='logo_icon'>
+        <div className="main_view_sign_up">
+            <div className='main_center_element_sign_up'>
+                <div className='top_element_sign_up'>
+                    <div className='logo_icon_sign_up'>
                         <img src={Logo_dark} alt="" />
                     </div>
                 </div>
-                <div className='bottom_element'>
-                    <div className='login_box'>
-                        <div className='login_left'>
-                            <div className='login_left_inter'>
-                                <div className='left_tagline_top'>
-                                    <p id='left_tagline_top_text'>Simple, Free</p>
-                                    <p id='left_tagline_top_text'>Investing.</p>
+                <div className='bottom_element_sign_up'>
+                    <div className='sign_up_box'>
+                        <div className='sign_up_left'>
+                            <div className='sign_up_left_inter'>
+                                <div className='left_tagline_top_sign_up'>
+                                    <p id='left_tagline_top_sign_up_text'>Simple, Free</p>
+                                    <p id='left_tagline_top_sign_up_text'>Investing.</p>
                                 </div>
-                                <div className='left_tagline_bottom'>
+                                <div className='left_tagline_bottom_sign_up'>
                                     <div id='interval'></div>
-                                    <p id='left_tagline_bottom_text'>Mutual Funds</p>
+                                    <p id='left_tagline_bottom_sign_up_text'>Mutual Funds</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='login_right'>
-                            <div className='login_right_arrange'>
-                                <div className='login_with_google'>
-                                    <div className='lwg_title'>
+                        <div className='sign_up_right'>
+                            <div className='sign_up_right_arrange'>
+                                <div className='with_sign_up'>
+                                    <div className='lwg_title_sign_up'>
                                         <p>Welcome to Groww</p>
                                     </div>
                                 </div>
 
-                                <div className='login_with_id'>
+                                <div className='sign_up_with_id'>
 
-                                    <div className='input_email_div'>
-                                        <div className='ied_center'>
-                                            <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your First Name</label>
-                                            <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
-                                            <div className='email_error_div'>
-                                                {incorrectEmail ? <label id='email_incorrect_error'>Enter your email id</label> : ''}
-                                                {<br />}
-                                                {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
+                                    <div className='input_email_div_sign_up'>
+                                        <div className='ied_center_sign_up'>
+                                            <label className={inputActiveFirstName ? 'placeholder_move_sign_up' : 'placeholder_static_sign_up'}>First Name</label>
+                                            <input className={inputActiveFirstName ? 'inputActive' : 'inputDeactivate'} type="name" onFocus={() => { setInputActiveFirstName(true) }} onBlur={handleBlurFirstName} onChange={(e) => { setUserFirstName(e.target.value) }} />
+                                            <div className='email_error_div_sign_up'>
+                                                {firstNameInputError!=='' ? <label id='error_sign_up_label'>{firstNameInputError}</label> : null}
+                                                
                                             </div>
                                         </div>
-                                        <div className='ied_center'>
-                                            <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Last Name</label>
-                                            <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
-                                            <div className='email_error_div'>
-                                                {incorrectEmail ? <label id='email_incorrect_error'>Enter your email id</label> : ''}
-                                                {<br />}
-                                                {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
+                                        <div className='ied_center_sign_up'>
+                                            <label className={inputActiveLastName ? 'placeholder_move_sign_up' : 'placeholder_static_sign_up'}>Last Name</label>
+                                            <input className={inputActiveLastName ? 'inputActive' : 'inputDeactivate'} type="name" onFocus={() => { setInputActiveLastName(true) }} onBlur={handleBlurLastName} onChange={(e) => { setUserLastName(e.target.value) }} />
+                                            <div className='email_error_div_sign_up'>
+                                                {lastNameInputError!=='' ? <label id='error_sign_up_label'>{lastNameInputError}</label> : null}
                                             </div>
                                         </div>
-                                        <div className='ied_center'>
-                                            <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Your Email Address</label>
-                                            <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
-                                            <div className='email_error_div'>
-                                                {incorrectEmail ? <label id='email_incorrect_error'>Enter your email id</label> : ''}
-                                                {<br />}
-                                                {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
+                                        <div className='ied_center_sign_up'>
+                                            <label className={inputActiveEmailId ? 'placeholder_move_sign_up' : 'placeholder_static_sign_up'}>Email Address</label>
+                                            <input className={inputActiveEmailId ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { setInputActiveEmailId(true) }} onBlur={handleBlurEmail} onChange={(e) => { setUserEmailId(e.target.value) }} />
+                                            <div className='email_error_div_sign_up'>
+                                                {emailInputError!=='' ? <label id='error_sign_up_label'>{emailInputError}</label> : null}
+                                                
                                             </div>
                                         </div>
-                                        <div className='ied_center'>
-                                            <label id={inputActive ? 'placeholder_move' : 'placeholder_static'}>Enter Password</label>
-                                            <input id={inputActive ? 'inputActive' : 'inputDeactivate'} type="email" onFocus={() => { checkInputFocus() }} onBlur={handleBlur} onChange={(e) => { setUserEmailId(e.target.value) }} />
-                                            <div className='email_error_div'>
-                                                {incorrectEmail ? <label id='email_incorrect_error'>Enter your email id</label> : ''}
-                                                {<br />}
-                                                {emailNotFoundError ? <label id='email_invalid_error'>Email invalid Create your account</label> : ''}
+                                        <div className='ied_center_sign_up'>
+                                            <label className={inputActivePassword ? 'placeholder_move_sign_up' : 'placeholder_static_sign_up'}>Enter Password</label>
+                                            <input className={inputActivePassword ? 'inputActive' : 'inputDeactivate'} type={'password'} onFocus={() => { setInputActivePassword(true) }} onBlur={handleBlurPassword} onChange={(e) => { setUserPassword(e.target.value) }} />
+                                            <div className='email_error_div_sign_up'>
+                                                {passwordInputError ? <label id='error_sign_up_label'>{passwordInputError}</label> : null}
+                                                
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div className='continue_btn_div'>
-                                        <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Continue</button>
+                                    <div className='continue_btn_div_sign_up'>
+                                        <button id='cnt_btn'>Sign up</button>
                                     </div>
-                                    <div className='company_terms_div'>
-                                        <p>You don't have account ? <Link to={'/'}>Sign up account</Link></p>
+                                    <div className='company_terms_div_sign_up'>
+                                        <p>Have already account ? <Link to={'/login'}>Login account</Link></p>
                                     </div>
                                 </div>
 

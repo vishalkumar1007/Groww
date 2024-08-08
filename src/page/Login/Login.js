@@ -122,7 +122,7 @@ const Login = () => {
                                                 <button id='cnt_btn' onClick={() => { if (!incorrectEmail && userEmailId !== '') { setInputActive(false); setEmailValidFromDataBase(true) } }}>Continue</button>
                                             </div>
                                             <div className='company_terms_div'>
-                                                <p>You don't have account ? <Link to={'/'}>Sign up account</Link></p>
+                                                <p>You don't have account ? <Link to={'/signUp'}>Sign up account</Link></p>
                                             </div>
                                         </div>
 
