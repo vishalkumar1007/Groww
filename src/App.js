@@ -4,6 +4,7 @@ import Login from './page/Login/Login';
 import ForgetPassword from './page/ForgetPassword/ForgetPassword';
 import Home from './page/Home/Home';
 import SignUp from './page/SignUp/SignUp';
+import Dashboard from './page/Dashboard/Dashboard';
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Route path='login' element={<Login/>}/>
         <Route path='forget' element={<ForgetPassword/>}/>
         <Route path='signup' element={<SignUp/>}/>
+        <Route path='dashboard' element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
 
