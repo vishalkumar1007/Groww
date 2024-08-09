@@ -4,7 +4,7 @@ const Dashboard =() =>{
     return(
         <div className='Dashboard_main'>
             <Navbar/>
-            <div>hello from Dashboard</div>
+            {/* <div>hello from Dashboard</div> */}
         </div>
     )
 }
