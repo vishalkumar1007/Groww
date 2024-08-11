@@ -99,13 +99,15 @@ const Footer = ()=>{
                     </div>
                 </div>
                 <div className='footer_build_with_love'>
-                    <div className='footer_build_with_love_text'></div>
+                    <div className='footer_build_with_love_text'>
+                        <p>&#169; 2016-2024 Groww. All right reserved, Build with <span id='footer_love_with_india_red_heard_text'>♥</span> in India</p>
+                    </div>
                     <div className='footer_build_with_love_logo'>
                         <div className='footer_build_with_love_logo_googlePlay'>
-                            <img src="" alt="" />
+                            <img src={googlePlay_icon} alt="" />
                         </div>
                         <div className='footer_build_with_love_logo_appStore'>
-                            <img src="" alt="" />
+                            <img src={appStore_icon} alt="" />
                         </div>
                     </div>
                 </div>
