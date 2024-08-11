@@ -1,0 +1,363 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.footerMain{
+    width: 100%;
+    height: 400px;
+    background-color: #f0f0f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerMain_screen_range{
+    /* background-color: rgb(94, 122, 112); */
+    width: 80%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.footer_content_main{
+    /* background-color: rgba(165, 165, 165, 0.789); */
+    width: 100%;
+    height: 80%;
+    /* padding-top: 50px; */
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 25px;
+}
+.footer_content_main_contact{
+    /* background-color: pink; */
+    height: 85%;
+    width:25%;
+    min-width: 242px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.footer_content_main_contact_logo{
+    /* background-color: rgb(137, 153, 153); */
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+.footer_content_main_contact_location{
+    /* background-color: rgb(98, 113, 169); */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.footer_content_main_contact_location p{
+    font-size: 16px;
+    /* font-weight: 500; */
+    color: #3d3d3d;
+}
+.footer_content_main_contact_location p a{
+    color: #002229;
+}
+.footer_content_main_contact_social_media{
+    /* background-color: #c13878; */
+    width: 100%;
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 5px;
+}
+.footer_content_main_contact_social_media span{
+    /* background-color: #38c13d; */
+    height: 30px;
+    width: 30px;
+    min-width: 25px;
+    min-height: 25px;
+    display: flex;
+    /* flex-direction: row; */
+    cursor: pointer;
+}
+.footer_content_main_contact_social_media span img{
+    /* background-color: #c13838; */
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+.footer_content_main_products{
+    /* background-color: turquoise; */
+    height: 85%;
+    width:25%;
+    min-width: 129px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.footer_content_main_products_heading{
+    /* background-color: #c13878; */
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+.footer_content_main_products_heading p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #353535;
+}
+.footer_content_main_products_links{
+    /* background-color: chocolate; */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.footer_content_main_products_links_Stocks {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_products_links_Stocks p {
+    color: #3d3d3d;
+}
+.footer_content_main_products_links_Stocks:hover p {
+    color: #00B386;
+}
+
+.footer_content_main_products_links_futureAndOptions {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_products_links_futureAndOptions p {
+    color: #3d3d3d;
+}
+.footer_content_main_products_links_futureAndOptions:hover p {
+    color: #00B386;
+}
+.footer_content_main_products_links_IPO {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_products_links_IPO p {
+    color: #3d3d3d;
+}
+.footer_content_main_products_links_IPO:hover p {
+    color: #00B386;
+}
+.footer_content_main_products_links_MutualFunds {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_products_links_MutualFunds p {
+    color: #3d3d3d;
+}
+.footer_content_main_products_links_MutualFunds:hover p {
+    color: #00B386;
+}
+.footer_content_main_products_NFO {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_products_NFO p {
+    color: #3d3d3d;
+}
+.footer_content_main_products_NFO:hover p {
+    color: #00B386;
+}
+
+
+/* ...................  */
+
+
+.footer_content_main_groww{
+    /* background-color: rgb(92, 128, 0); */
+    height: 85%;
+    width:25%;
+    min-width: 129px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.footer_content_main_groww_heading{
+    /* background-color: #c13878; */
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+.footer_content_main_groww_heading p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #353535;
+}
+.footer_content_main_groww_links{
+    /* background-color: chocolate; */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.footer_content_main_groww_links_about_us {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_groww_links_about_us p {
+    color: #3d3d3d;
+}
+.footer_content_main_groww_links_about_us:hover p {
+    color: #00B386;
+}
+
+.footer_content_main_groww_links_pricing {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_groww_links_pricing p {
+    color: #3d3d3d;
+}
+.footer_content_main_groww_links_pricing:hover p {
+    color: #00B386;
+}
+.footer_content_main_groww_links_blogs {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_groww_links_blogs p {
+    color: #3d3d3d;
+}
+.footer_content_main_groww_links_blogs:hover p {
+    color: #00B386;
+}
+.footer_content_main_groww_links_careers {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_groww_links_careers p {
+    color: #3d3d3d;
+}
+.footer_content_main_groww_links_careers:hover p {
+    color: #00B386;
+}
+.footer_content_main_groww_links_media_and_press {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_groww_links_media_and_press p{
+    color: #3d3d3d;
+}
+.footer_content_main_groww_links_media_and_press:hover p {
+    color: #00B386;
+}
+
+
+/* ...............  */
+.footer_content_main_quickLink{
+    /* background-color: royalblue; */
+    height: 85%;
+    width:25%;
+    min-width: 129px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.footer_content_main_quickLink_heading{
+    /* background-color: #c13878; */
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+.footer_content_main_quickLink_heading p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #353535;
+}
+.footer_content_main_quickLink_links{
+    /* background-color: chocolate; */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.footer_content_main_quickLink_links_amcMutualFund {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_quickLink_links_amcMutualFund p {
+    color: #3d3d3d;
+}
+.footer_content_main_quickLink_links_amcMutualFund:hover p {
+    color: #00B386;
+}
+
+.footer_content_main_quickLink_links_calculator {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_quickLink_links_calculator p {
+    color: #3d3d3d;
+}
+.footer_content_main_quickLink_links_calculator:hover p {
+    color: #00B386;
+}
+.footer_content_main_quickLink_links_glossary {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_quickLink_links_glossary p {
+    color: #3d3d3d;
+}
+.footer_content_main_quickLink_links_glossary:hover p {
+    color: #00B386;
+}
+.footer_content_main_quickLink_links_sitemap {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_quickLink_links_sitemap p {
+    color: #3d3d3d;
+}
+.footer_content_main_quickLink_links_sitemap:hover p {
+    color: #00B386;
+}
+.footer_content_main_quickLink_links_growwDigits {
+    /* font-size: 16px; */
+    /* background-color: red; */
+    cursor: pointer;
+}
+.footer_content_main_quickLink_links_growwDigits p {
+    color: #3d3d3d;
+}
+.footer_content_main_quickLink_links_growwDigits:hover p {
+    color: #00B386;
+}
+
+
+
+/* ..................  */
+
+.footer_build_with_love{
+    background-color: darkred;
+    height: 20%;
+    width: 100%;
+    border-top: 1px solid gray;
+}
+
+
+@media only screen and (max-width: 750px) {
+
+}
