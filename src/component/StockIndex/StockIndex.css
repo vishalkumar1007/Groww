@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.comp_stocks_index_main {
+  background-color: #ffffff;
+  width: 226.4px;
+  height: 74px;
+  padding: 14px 8px 14px 16px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 7px;
+  border: 1.5px solid #e5e5e5;
+  min-width: 226.4px;
+}
+.comp_stocks_index_main:hover .comp_stocks_three_dot_main_cursor {
+  display: block;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.comp_stocks_index_main_left {
+  /* background-color: #4169e1a4; */
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comp_stocks_index_main_left_title p {
+  font-weight: 500;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+.comp_stocks_index_main_left_value {
+  /* background-color: hotpink; */
+  gap: 7px;
+  display: flex;
+  white-space: nowrap;
+  /* justify-content: center; */
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.comp_stocks_index_main_left_value_number {
+  /* background-color: burlywood; */
+  max-width: 41%;
+  overflow: hidden;
+}
+.comp_stocks_index_main_left_value_number span {
+  font-size: 14px;
+  color: #4a4a4a;
+  font-weight: 400;
+}
+
+.comp_stocks_index_main_left_value_percent {
+  /* background-color: rgb(18, 0, 39); */
+  max-width: 59%;
+  /* overflow: hidden; */
+}
+.comp_stocks_index_main_left_value_percent span {
+  font-size: 14px;
+  color: #00b386;
+  font-weight: 400;
+}
+
+.comp_stocks_index_main_right {
+  /* background-color: sienna; */
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.comp_stocks_three_dot_main_cursor {
+  /* background-color: #6adb00; */
+  display: none;
+}
+.comp_stocks_three_dot_main_cursor:hover
+  .comp_stocks_index_main_right_more_option_main {
+  display: block;
+  height: 80px;
+}
+.comp_stocks_three_dot_main {
+  background-color: #ffffff;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  /* position: relative; */
+}
+.comp_stocks_three_dot_main:hover {
+  background-color: #f2f2f2;
+}
+
+.comp_stocks_dot {
+  background-color: #6a6a6a;
+  width: 3.2px;
+  height: 3.2px;
+  border-radius: 50%;
+}
+
+.comp_stocks_index_main_right_more_option_main {
+  background-color: #ffffff;
+  width: 140px;
+  height: 0px; 
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  transition: 0.2s ease-in-out;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.comp_stocks_index_main_right_more_option{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 7px;
+}
+.comp_stocks_index_main_right_more_option_chain{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+.comp_stocks_index_main_right_more_option_chain:hover{
+    background-color: #f4f4f4;
+}
+
+
+.comp_stocks_index_main_right_more_option_terminal{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 10;
+}
+.comp_stocks_index_main_right_more_option_terminal:hover{
+    background-color: #f4f4f4;
+}
+#icon_more_option{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: #4c4c4c;
+    font-size: 14px;
+}
+#title_more_option{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #707070;
+    font-size: 14px;
+}
+.comp_stocks_index_main_right_more_option_chain:hover #option_chain_svg{
+    stroke: #00b386;
+}
+.comp_stocks_index_main_right_more_option_terminal:hover #terminal_svg{
+    stroke: #00b386;
+    fill: #00b386;
+}

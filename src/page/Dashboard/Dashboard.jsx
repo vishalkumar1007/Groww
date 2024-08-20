@@ -1,5 +1,7 @@
 import Navbar  from '../../component/Navbar/Navbar';
 import Footer from '../../component/Footer/Footer';
+import Stocks from '../Stocks/Stocks';
+import MutualFund from '../MutualFund/MutualFund'
 import './Dashboard.css';
 import { useState } from 'react';
 const Dashboard =() =>{
@@ -26,7 +28,10 @@ const Dashboard =() =>{
                 </div>
             </div>
             <div className='dashboard_main'>
-                
+                {
+                    optionActive==='stocks'?
+                    <Stocks/>:<MutualFund/>
+                }
             </div>
             <Footer/>
         </div>
