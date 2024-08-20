@@ -71,9 +71,23 @@
 .stock_left_most_bought_on_groww {
   background-color: skyblue;
   width: 99.5%;
-  height: 220px;
-
+  height: 245px;
+  display: flex;
+  flex-direction: column;
 }
+.stock_left_most_bought_on_groww_title{
+  background-color: #a15e0b;
+  width: 100%;
+  height: 18%;
+}
+.stock_left_most_bought_on_groww_component{
+  background-color: #8b008b;
+  width: 100%;
+  height: 72%;
+  display: flex;
+}
+
+
 .stocks_left_product_and_tools {
   background-color: rgb(235, 163, 135);
   width: 99.5%;
@@ -224,4 +238,14 @@
   background-color: #007924;
   width: 100%;
   height: 70%;
+}
+
+
+@media (max-width:900px){
+  .stocks_content_right{
+    display: none;
+  }
+  .stocks_main_content_left{
+    width: 100%;
+  }
 }

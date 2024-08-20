@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.stocksCard_main{
+    background-color: #ffffff;
+    width: 188px;
+    height: 176px;
+    border-radius: 7px;
+    border: 1.5px solid #c5c5c5;
+    padding: 16px;
+    cursor: pointer;
+}
+.stocksCard_main:hover .stocksCard_main_top_add{
+    display: block;
+}
+.stocksCard_main_top{
+    /* background-color: rgb(2, 14, 35); */
+    width: 100%;
+    height: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.stocksCard_main_top_logo_and_add{
+    /* background-color: crimson; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.stocksCard_main_top_logo{
+    /* background-color: rgb(255, 255, 255); */
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid #cccccc;
+    border-radius: 7px;
+}
+.stocksCard_main_top_add{
+    /* background-color: #709e74; */
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: none;
+    transition: 0.2s ease-in-out;
+}
+.stocksCard_main_top_add:hover{
+    width: 26px;
+    height: 26px;
+
+}
+.stocksCard_main_top_add_circle{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #00B386;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.stocksCard_main_top_add_horizontal_line{
+    width: 12%;
+    height: 70%;
+    background-color: #00B386;
+    position: absolute;
+}
+.stocksCard_main_top_add_vertical_line{
+    width: 70%;
+    height: 12%;
+    background-color: #00B386;
+    position: absolute;
+}
+
+.stocksCard_main_top_left_title{
+    /* background-color: skyblue; */
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a4a4a;
+}
+
+.stocksCard_main_bottom{
+    /* background-color: violet; */
+    width: 100%;
+    height: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 4px;
+}
+.stocksCard_main_bottom_cost{
+    background-color: #ffffff;
+    color: #4a4a4a;
+    font-size: 16px;
+    font-weight: 500;
+}
+.stocksCard_main_bottom_costPerRate{
+    background-color: rgb(255, 255, 255);
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 500;
+}

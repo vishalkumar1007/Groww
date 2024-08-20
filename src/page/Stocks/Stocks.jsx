@@ -1,4 +1,5 @@
 import StocksIndex from '../../component/StockIndex/StockIndex';
+import StocksCard from '../../component/StockCard/StockCard';
 import './Stocks.css';
 
 const Stocks = ()=>{
@@ -21,7 +22,16 @@ const Stocks = ()=>{
                         </div>
                     </div>
                     <div className="stock_left_most_bought_on_groww">
-
+                        <div className="stock_left_most_bought_on_groww_title">
+                            <span>Most Bought on Groww</span>
+                        </div>
+                        <div className="stock_left_most_bought_on_groww_component">
+                            <StocksCard />
+                            <StocksCard/>
+                            <StocksCard/>
+                            <StocksCard/>
+                            <StocksCard/>
+                        </div>
                     </div>
                     <div className="stocks_left_product_and_tools">
 
@@ -69,7 +79,7 @@ const Stocks = ()=>{
                         </div>
                     </div> */}
 
-                    
+
                 </div>
             </div>
         </div>

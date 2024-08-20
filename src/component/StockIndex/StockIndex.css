@@ -49,9 +49,9 @@
   overflow: hidden;
 }
 .comp_stocks_index_main_left_value_number span {
-  font-size: 14px;
-  color: #4a4a4a;
-  font-weight: 400;
+  font-size: 13.5px;
+  color: #686868;
+  font-weight: 500;
 }
 
 .comp_stocks_index_main_left_value_percent {
@@ -60,9 +60,9 @@
   /* overflow: hidden; */
 }
 .comp_stocks_index_main_left_value_percent span {
-  font-size: 14px;
+  font-size: 13.5px;
   color: #00b386;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .comp_stocks_index_main_right {
