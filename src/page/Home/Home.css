@@ -461,8 +461,9 @@
 /* .........end ......... */
 .Home_body_section_5 {
   background-color: rgb(247, 247, 247);
+  background-color: red;
   width: 100%;
-  height: 200px;
+  /* height: 900px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -506,6 +507,10 @@
 }
 
 .Home_footer_build_with_love {
+}
+
+.Home_three_menu_bar{
+  display: none;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -893,6 +898,9 @@
     align-items: center;
     transition: 0.5s ease-in-out;
     position: relative;
+    cursor: pointer;
+    background-color: white;
+    border: none;
   }
   .Home_three_line_nav #svgMenu1 {
     transition: 0.7s ease-in-out;
@@ -903,27 +911,32 @@
     /* color: red; */
   }
   .Home_three_menu_bar {
-    background-color: #696868b6;
+    background-color: #535353d0;
     position: absolute;
-    /* width: 220px; */
-    /* height: 250px; */
-    padding: 25px;
+    width: 160px;
+    height: 0px;
     top: 60px;
     right: 30px;
     border-radius: 15px;
-    transition: 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: height 0.3s ease-in-out;
   }
+  
+  #Home_three_menu_bar_animation {
+    height: 100px;
+  }
+
+
   .Home_nav_register_menu {
     background-color: #00b386;
     display: flex;
     justify-content: center;
     align-items: center;
     /* width: 8%; */
-    width: 122.78px;
-    height: 40px;
+    width: 70%;
+    height: 45%;
     border-radius: 10px;
   }
   .Home_nav_register_menu button {
@@ -1022,18 +1035,6 @@
     /* background-color: #7b7b7b; */
     width: 100%;
     height: 900px;
-  }
-  .Home_body_section_5_end_left{
-    height: 30px;
-  }
-  .Home_body_section_5_end_right{
-    height: 30px;
-    display: flex;
-    gap: 10px;
-  }
-  .Home_body_section_5{
-    height: 120px;
-    /* background-color: red; */
   }
   
 }
