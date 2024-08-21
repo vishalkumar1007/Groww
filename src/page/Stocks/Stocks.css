@@ -76,18 +76,18 @@
   display: flex;
   flex-direction: column;
 }
-.stock_left_most_bought_on_groww_title{
+.stock_left_most_bought_on_groww_title {
   /* background-color: #a15e0b; */
   width: 100%;
   height: 18%;
   overflow: hidden;
 }
-.stock_left_most_bought_on_groww_title span{
+.stock_left_most_bought_on_groww_title span {
   color: #434343;
   font-size: 18.5px;
   font-weight: 500;
 }
-.stock_left_most_bought_on_groww_component{
+.stock_left_most_bought_on_groww_component {
   /* background-color: #8b008b; */
   width: 100%;
   height: 72%;
@@ -109,18 +109,18 @@
   margin-top: 35px;
 }
 
-.stocks_left_product_and_tools_title{
+.stocks_left_product_and_tools_title {
   /* background-color: #a980a9; */
   width: 100%;
   height: 25%;
 }
-.stocks_left_product_and_tools_title span{
+.stocks_left_product_and_tools_title span {
   font-size: 18.5px;
   color: #434343;
   font-weight: 500;
 }
 
-.stocks_left_product_and_tools_card_section{
+.stocks_left_product_and_tools_card_section {
   /* background-color: cadetblue; */
   width: 100%;
   height: 75%;
@@ -134,24 +134,85 @@
   display: none;
 }
 
-
-
-
-
-
-
-
-
-
+/* ...................  */
 .stocks_left_top_gainers {
-  background-color: rgb(217, 235, 135);
+  /* background-color: rgb(217, 235, 135); */
   width: 99.5%;
-  height: 265px;
+  height: 280px;
+  margin-top: 60px;
 }
+
+.stocks_left_top_gainers_heading {
+  /* background-color: rgb(220, 135, 235); */
+  width: 100%;
+  height: 18%;
+  display: flex;
+  justify-content: space-between;
+}
+.stocks_left_top_gainers_heading_title {
+  font-size: 19px;
+  color: #373737;
+  font-weight: 500;
+}
+.stocks_left_top_gainers_heading_seeMore {
+  font-size: 14px;
+  color: #00b386;
+  font-weight: 500;
+  cursor: pointer;
+}
+.stocks_left_top_gainers_filter {
+  /* background-color: #6632cd; */
+  width: 100%;
+  height: 18%;
+  display: flex;
+  gap: 20px;
+}
+.stocks_left_top_gainers_filter_large,
+.stocks_left_top_gainers_filter_mid,
+.stocks_left_top_gainers_filter_small {
+  background-color: #ffffff;
+  cursor: pointer;
+  height: 30px;
+  padding: 0px 11px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ededed;
+  color: #989898;
+}
+#stocks_left_top_gainers_filter_active {
+  background-color: #ebf9f5;
+  color: #00b386;
+  border: 1px solid #ebf9f5;
+}
+
+
+
+.stocks_left_top_gainers_card_component {
+  /* background-color: thistle; */
+  width: 100%;
+  height: 64%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  overflow-x: scroll;
+}
+
+.stocks_left_top_gainers_card_component::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ..............  */
 .stocks_left_in_news {
   background-color: rgb(135, 235, 175);
   width: 99.5%;
   height: 220px;
+  margin-top: 60px;
 }
 .stocks_left_top_losers {
   background-color: rgb(220, 135, 235);
@@ -163,7 +224,6 @@
   width: 99.5%;
   height: 500px;
 }
-
 
 /* ........... right ............  */
 
@@ -181,26 +241,25 @@
   width: 99%;
   height: 120px;
 }
-.stocks_content_right_yourInvestments_title_head{
+.stocks_content_right_yourInvestments_title_head {
   /* background-color: #dbdbdb; */
   width: 100%;
   height: 37%;
   display: flex;
   justify-content: space-between;
 }
-#scry_title_text{
+#scry_title_text {
   font-size: 19px;
   font-weight: 500;
   color: #4a4a4a;
 }
-#scry_more{
+#scry_more {
   font-size: 14px;
   font-weight: 500;
   color: #00b386;
   cursor: pointer;
-
 }
-.stocks_content_right_yourInvestments_card_main{
+.stocks_content_right_yourInvestments_card_main {
   /* background-color: yellowgreen; */
   width: 100%;
   height: 63%;
@@ -211,9 +270,8 @@
   gap: 5px;
   box-sizing: border-box;
   padding: 14px 14px;
-
 }
-.stocks_content_right_yourInvestments_card_main_total_return{
+.stocks_content_right_yourInvestments_card_main_total_return {
   /* background-color: teal; */
   width: 50%;
   height: 100%;
@@ -221,18 +279,18 @@
   flex-direction: column;
   justify-content: space-between;
 }
-#stocks_content_right_yourInvestments_card_main_total_return_rupees{
+#stocks_content_right_yourInvestments_card_main_total_return_rupees {
   /* background-color: rgb(235, 163, 135); */
   font-size: 18px;
   font-weight: 500;
   color: #4a4a4a;
 }
-#stocks_content_right_yourInvestments_card_main_total_return_title{
+#stocks_content_right_yourInvestments_card_main_total_return_title {
   /* background-color: crimson; */
   font-size: 14px;
   color: #898989;
 }
-.stocks_content_right_yourInvestments_card_main_current_value{
+.stocks_content_right_yourInvestments_card_main_current_value {
   /* background-color: #322d92; */
   width: 50%;
   height: 100%;
@@ -241,7 +299,7 @@
   justify-content: space-between;
   /* align-items: end; */
 }
-#stocks_content_right_yourInvestments_card_main_current_value_rupees{
+#stocks_content_right_yourInvestments_card_main_current_value_rupees {
   /* background-color: rgb(186, 29, 186); */
   display: flex;
   justify-content: end;
@@ -249,7 +307,7 @@
   font-weight: 500;
   color: #4a4a4a;
 }
-#stocks_content_right_yourInvestments_card_main_current_value_title{
+#stocks_content_right_yourInvestments_card_main_current_value_title {
   /* background-color: olivedrab; */
   display: flex;
   justify-content: end;
@@ -257,45 +315,40 @@
   color: #898989;
 }
 
-
-
-
-
 .stocks_content_right_watchLists {
   background-color: steelblue;
   width: 99%;
   height: 180px;
 }
-.stocks_content_right_watchLists_title_head{
+.stocks_content_right_watchLists_title_head {
   background-color: #a980a9;
   width: 100%;
   height: 30%;
   display: flex;
   justify-content: space-between;
 }
-#scrw_title_text{
+#scrw_title_text {
   font-size: 19px;
   font-weight: 500;
   color: #373737;
 }
-#scrw_more{
+#scrw_more {
   font-size: 14px;
   font-weight: 500;
   color: #00b386;
   cursor: pointer;
 }
-.stocks_content_right_watchLists_card_main{
+.stocks_content_right_watchLists_card_main {
   background-color: #007924;
   width: 100%;
   height: 70%;
 }
 
-
-@media (max-width:900px){
-  .stocks_content_right{
+@media (max-width: 900px) {
+  .stocks_content_right {
     display: none;
   }
-  .stocks_main_content_left{
+  .stocks_main_content_left {
     width: 100%;
   }
 }
