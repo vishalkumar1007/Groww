@@ -4,8 +4,15 @@ import ola_logo from '../../assets/svg/ola_logo.svg';
 import GTL_logo from '../../assets/svg/GTL_logo.webp';
 import MD_ship_logo from '../../assets/svg/GSTK_logo.webp';
 import Angel_one_logo from '../../assets/svg/angel_one_logo.webp';
+// ...... product and tool ....... 
+import fAndO_icon from '../../assets/svg/product_and_tool/F&O.svg'
+import event_icon from '../../assets/svg/product_and_tool/event.svg'
+import intraday_icon from '../../assets/svg/product_and_tool/intraday.svg'
+import ipo_icon from '../../assets/svg/product_and_tool/ipo.svg'
+import screener_icon from '../../assets/svg/product_and_tool/screener.svg'
 
 import './Stocks.css';
+import StockToolsCard from '../../component/StockToolsCard/StockToolsCard';
 
 const Stocks = ()=>{
     return(
@@ -39,7 +46,16 @@ const Stocks = ()=>{
 
                     </div>
                     <div className="stocks_left_product_and_tools">
-
+                        <div className="stocks_left_product_and_tools_title">
+                            <span>Products & tools</span>
+                        </div>
+                        <div className="stocks_left_product_and_tools_card_section">
+                            <StockToolsCard iconUrl={fAndO_icon} title='F&O'/>
+                            <StockToolsCard iconUrl={event_icon} title='Event'/>
+                            <StockToolsCard iconUrl={intraday_icon} title='Intraday'/>
+                            <StockToolsCard iconUrl={ipo_icon} title='IPO'/>
+                            <StockToolsCard iconUrl={screener_icon} title='Screener'/>
+                        </div>
                     </div>
                     <div className="stocks_left_top_gainers">
                         
