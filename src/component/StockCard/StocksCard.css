@@ -6,10 +6,13 @@
     background-color: #ffffff;
     width: 188px;
     height: 176px;
+    min-width: 188px;
+    min-height: 176px;
     border-radius: 7px;
-    border: 1.5px solid #c5c5c5;
+    border: 1.5px solid #e5e5e5;
     padding: 16px;
     cursor: pointer;
+    overflow: hidden;
 }
 .stocksCard_main:hover .stocksCard_main_top_add{
     display: block;
@@ -34,14 +37,18 @@
     height: 40px;
     border: 1.5px solid #cccccc;
     border-radius: 7px;
+    overflow: hidden;
+}
+.stocksCard_main_top_logo img{
+    width: 100%;
+    height: 100%;
 }
 .stocksCard_main_top_add{
     /* background-color: #709e74; */
     width: 24px;
     height: 24px;
-    border-radius: 50%;
     display: none;
-    transition: 0.2s ease-in-out;
+    transition: 0.15s ease-in-out;
 }
 .stocksCard_main_top_add:hover{
     width: 26px;
@@ -96,6 +103,7 @@
 .stocksCard_main_bottom_costPerRate{
     background-color: rgb(255, 255, 255);
     color: #4a4a4a;
+    /* color: #EB5B3C; */
     font-size: 14px;
     font-weight: 500;
 }

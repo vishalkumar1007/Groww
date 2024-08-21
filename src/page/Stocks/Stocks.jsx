@@ -1,5 +1,10 @@
 import StocksIndex from '../../component/StockIndex/StockIndex';
 import StocksCard from '../../component/StockCard/StockCard';
+import ola_logo from '../../assets/svg/ola_logo.svg';
+import GTL_logo from '../../assets/svg/GTL_logo.webp';
+import MD_ship_logo from '../../assets/svg/GSTK_logo.webp';
+import Angel_one_logo from '../../assets/svg/angel_one_logo.webp';
+
 import './Stocks.css';
 
 const Stocks = ()=>{
@@ -15,7 +20,7 @@ const Stocks = ()=>{
                         <div className="stock_left_index_component_boxes">
                             <StocksIndex title='NIFTY 50' valueNo='24,705.57' valuePercentage='134.66 (0.56%)'/>
                             <StocksIndex title='SENSEX' valueNo='80,802.57' valuePercentage='137.18 (0.47%)'/>
-                            <StocksIndex title='BANKNIFTY' valueNo='50,803.15' valuePercentage='434.66 (0.86%)'/>
+                            <StocksIndex title='BANKNIFTY' valueNo='50,803.15' valuePercentage='-434.66 (0.86%)'/>
                             <StocksIndex title='FINNIFTY' valueNo='12,645.47' valuePercentage='440.43 (0.32%)'/>
                             <StocksIndex title='MIDCPNIFTY' valueNo='11,105.21' valuePercentage='734.76 (0.56%)'/>
                             <StocksIndex title='BANKEX' valueNo='54,135.51' valuePercentage='114.45 (0.16%)'/>
@@ -26,12 +31,12 @@ const Stocks = ()=>{
                             <span>Most Bought on Groww</span>
                         </div>
                         <div className="stock_left_most_bought_on_groww_component">
-                            <StocksCard />
-                            <StocksCard/>
-                            <StocksCard/>
-                            <StocksCard/>
-                            <StocksCard/>
+                            <StocksCard logoUrl={ola_logo}  title='GTL Infrastructure' cost='2.77' costPerRate = '0.26 (0.19%)'/>
+                            <StocksCard logoUrl={GTL_logo}  title='Ola Electric Mobility' cost='123.19' costPerRate = '0.04 (1.42%)'/>
+                            <StocksCard logoUrl={MD_ship_logo}  title='Mazagon Dock Ship' cost='4,539.65' costPerRate = '240.1 (5.52%)'/>
+                            <StocksCard logoUrl={Angel_one_logo}  title='Angel One' cost='2,699.90' costPerRate = '-3.00 (0.11%)'/>
                         </div>
+
                     </div>
                     <div className="stocks_left_product_and_tools">
 

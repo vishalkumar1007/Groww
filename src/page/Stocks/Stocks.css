@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .stocks_width_arrange {
@@ -69,24 +70,37 @@
 }
 
 .stock_left_most_bought_on_groww {
-  background-color: skyblue;
+  /* background-color: skyblue; */
   width: 99.5%;
   height: 245px;
   display: flex;
   flex-direction: column;
 }
 .stock_left_most_bought_on_groww_title{
-  background-color: #a15e0b;
+  /* background-color: #a15e0b; */
   width: 100%;
   height: 18%;
+  overflow: hidden;
+}
+.stock_left_most_bought_on_groww_title span{
+  color: #434343;
+  font-size: 18.5px;
+  font-weight: 500;
 }
 .stock_left_most_bought_on_groww_component{
-  background-color: #8b008b;
+  /* background-color: #8b008b; */
   width: 100%;
   height: 72%;
+  /* min-width: 770px; */
   display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+  gap: 18px;
 }
 
+.stock_left_most_bought_on_groww_component::-webkit-scrollbar {
+  display: none;
+}
 
 .stocks_left_product_and_tools {
   background-color: rgb(235, 163, 135);

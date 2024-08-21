@@ -1,18 +1,36 @@
+import { useState,useEffect } from "react";
 import "./StockIndex.css";
 
 const StockIndex = ({title,valueNo,valuePercentage}) => {
+
+  const [isValuePercentage , setIsValuePercentage] = useState(false);
+
+  useEffect(()=>{
+      if(valuePercentage.length>0){
+          for (const element of valuePercentage) {
+              if(element==='-'){
+                setIsValuePercentage(true);
+                  break;
+              }else{
+                setIsValuePercentage(false);
+              }
+          }
+      }
+  },[valuePercentage]);
+
+
   return (
     <div className="comp_stocks_index_main">
       <div className="comp_stocks_index_main_left">
         <div className="comp_stocks_index_main_left_title">
-          <p> {title || 'NIFTY 50'} </p>
+          <p> {title || 'Index Title'} </p>
         </div>
         <div className="comp_stocks_index_main_left_value">
           <div className="comp_stocks_index_main_left_value_number">
-            <span>{valueNo || '24,705.57'}</span>
+            <span>{valueNo || '00,000.00'}</span>
           </div>
           <div className="comp_stocks_index_main_left_value_percent">
-            <span>{valuePercentage || '134.66 (0.56%)'}</span>
+            <span style={{color:isValuePercentage?'#EB5B3C':(valuePercentage===''?'#4a4a4a':'#00B386')}}>{valuePercentage || '0.00 (0.00%)'}</span>
           </div>
         </div>
       </div>
@@ -35,10 +53,9 @@ const StockIndex = ({title,valueNo,valuePercentage}) => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="#4c4c4c"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-link-2"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M9 17H7A5 5 0 0 1 7 7h2" />
                     <path d="M15 7h2a5 5 0 1 1 0 10h-2" />
@@ -57,10 +74,9 @@ const StockIndex = ({title,valueNo,valuePercentage}) => {
                     viewBox="0 -5 24 24"
                     fill="#4c4c4c"
                     stroke="#4c4c4c"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-chart-candlestick"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M9 5v4" />
                     <rect width="4" height="6" x="7" y="9" rx="1" />
