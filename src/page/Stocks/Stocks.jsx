@@ -62,7 +62,7 @@ const Stocks = () => {
           <div className="stock_left_index">
             <div className="stock_left_index_title">
               <p>Index</p>
-              <p id="allIndices">All indices</p>
+              <button> <p id="allIndices">All indices</p> </button>
             </div>
             <div className="stock_left_index_component_boxes">
               <StocksIndex
@@ -146,7 +146,7 @@ const Stocks = () => {
                 Top Gainer
               </span>
               <span className="stocks_left_top_gainers_heading_seeMore">
-                See more
+                <button>See more</button>
               </span>
             </div>
             <div className="stocks_left_top_gainers_filter">
@@ -334,7 +334,7 @@ const Stocks = () => {
                 Top Losers
               </span>
               <span className="stocks_left_top_losers_heading_seeMore">
-                See more
+                <button>See more</button>
               </span>
             </div>
             <div className="stocks_left_top_losers_filter">
@@ -463,13 +463,23 @@ const Stocks = () => {
               )}
             </div>
           </div>
-          <div className="stocks_left_market_cap"></div>
+          <div className="stocks_left_top_sector">
+            <div className="stocks_left_top_sector_heading">
+              <span>Top Sectors</span>
+              <button><p>See more</p></button>
+            </div>
+            <div className="stocks_left_top_sector_card_component">
+            </div>
+          </div>
+          <div className="stocks_left_market_cap">
+            
+          </div>
         </div>
         <div className="stocks_content_right">
           <div className="stocks_content_right_yourInvestments">
             <div className="stocks_content_right_yourInvestments_title_head">
               <span id="scry_title_text">Your Investments</span>
-              <span id="scry_more">Dashboard</span>
+              <span id="scry_more"><button>Dashboard</button></span>
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
               <div className="stocks_content_right_yourInvestments_card_main_total_return">
