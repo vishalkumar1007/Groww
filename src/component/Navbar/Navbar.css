@@ -556,6 +556,15 @@
     font-weight: 500;
     font-size: 13px;
     color: #515151;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.Navbar_user_Profile_section_footer_arrange_logout p:hover{
+    font-weight: 500;
+    font-size: 13px;
+    color: #00B386;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 

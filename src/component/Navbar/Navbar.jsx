@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import CompanyLogo from "../../assets/svg/groww-logo-light.svg";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("Explore");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   // const [screenWidthUpdate, setScreenWidthUpdate] = useState(true);
@@ -17,11 +19,7 @@ const Navbar = () => {
       profileSectionRef.current.style.height = "0px";
       profileSectionRef.current.style.border = "0px solid #dfdfdf";
     }
-
-    
   }, [isProfileOpen]);
-
-
 
   return (
     <div className="Navbar_main">
@@ -478,9 +476,13 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="Navbar_user_Profile_section_footer_arrange_logout">
-                  <a href="">
-                    <p>Log out</p>
-                  </a>
+                    <p
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Log out
+                    </p>
                 </div>
               </div>
             </div>
