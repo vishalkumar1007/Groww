@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.stock_market_cap_main {
+  /* background-color: rgb(192, 255, 213); */
+  width: 100%;
+  height: 73px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1.5px solid #e5e5e5;
+}
+.stock_market_cap_main_arrange_width {
+  /* background-color: rgb(163, 110, 196); */
+  width: 95%;
+  height: 100%;
+  display: flex;
+  gap: 8px;
+}
+.stock_market_cap_main_title_section_company_and_graph {
+  /* background-color: pink; */
+  width: 72%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+}
+
+.stock_market_cap_main_title_section_company {
+  /* background-color: #ededed; */
+  min-width: 65px;
+  height: fit-content;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.stock_market_cap_main_title_section_company span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #44475b;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stock_market_cap_main_title_section_price_and_watchlist {
+  /* background-color: goldenrod; */
+  width: 28%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  min-width: 165px;
+  justify-content: space-between;
+}
+.stock_market_cap_main_title_section_price_main {
+  /* background-color: slateblue; */
+  min-width: 82px;
+  max-width: 82px;
+  height: fit-content;
+}
+.stock_market_cap_main_title_section_price {
+  /* background-color: violet; */
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  width: 100%;
+  height: 100%;
+}
+
+#stock_market_cap_price_value {
+  /* background-color: #fbffe9; */
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #44475b;
+}
+#stock_market_cap_price_valuePerRate {
+  /* background-color: #f9f9f9; */
+  font-size: 12px;
+  color: #717171;
+}
+
+.stock_market_cap_main_title_section_watchlist {
+  /* background-color: rgb(79, 54, 190); */
+  min-width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+.stock_market_cap_main_title_section_watchlist button {
+  color: #00B386;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+}

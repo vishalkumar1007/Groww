@@ -2,3 +2,53 @@
     margin: 0;
     padding: 0;
 }
+.top_sector_main{
+    /* background-color: rgb(150, 117, 181); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 36px; */
+    width: fit-content;
+    padding: 5px 16px;
+    gap: 8px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    max-height: 36px;
+}
+.top_sector_main:hover{
+    background-color: #f9f9f9;
+}
+.top_sector_main_title{
+    /* background-color: blueviolet; */
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+.top_sector_main_title span{
+    /* background-color: blueviolet; */
+    font-size: 14px;
+    color: #44475B;
+    height: fit-content;
+    width: fit-content;
+    box-sizing: border-box;
+}
+.top_sector_main_line{
+    background-color: #F0F0F2;
+    height: 16px;
+    width: 1.7px;
+}
+.top_sector_main_value{
+    /* background-color: pink; */
+}
+.top_sector_main_value p{
+    /* background-color: pink; */
+    font-size: 12px;
+    color: #00B386;
+    font-weight: 500;
+}

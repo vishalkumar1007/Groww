@@ -44,11 +44,11 @@ import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
 import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
 import tata from "../../assets/img/top_looser/tata_icon.webp";
 
-
-
 // .........imp / comp .............
 import "./Stocks.css";
 import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
+import TopSector from "../../component/TopSector/TopSector";
+import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 import { useState } from "react";
 
 const Stocks = () => {
@@ -62,7 +62,10 @@ const Stocks = () => {
           <div className="stock_left_index">
             <div className="stock_left_index_title">
               <p>Index</p>
-              <button> <p id="allIndices">All indices</p> </button>
+              <button>
+                {" "}
+                <p id="allIndices">All indices</p>{" "}
+              </button>
             </div>
             <div className="stock_left_index_component_boxes">
               <StocksIndex
@@ -466,20 +469,114 @@ const Stocks = () => {
           <div className="stocks_left_top_sector">
             <div className="stocks_left_top_sector_heading">
               <span>Top Sectors</span>
-              <button><p>See more</p></button>
+              <button>
+                <p>See more</p>
+              </button>
             </div>
             <div className="stocks_left_top_sector_card_component">
+              <TopSector title="Banking" value="41" />
+              <TopSector title="Energy" value="99" />
+              <TopSector title="Healthcare" value="235" />
+              <TopSector title="FMGC" value="222" />
+              <TopSector title="Tele-communication" value="47" />
+              <TopSector title="Auotmobile" value="145" />
+              <TopSector title="Media & Entertainment" value="105" />
             </div>
           </div>
           <div className="stocks_left_market_cap">
-            
+            <div className="stocks_left_market_cap_heading">
+              <span className="stocks_left_market_cap_heading_title">
+                Top by Market Cap
+              </span>
+              <button className="stocks_left_market_cap_heading_seeMore">
+                <p>See more</p>
+              </button>
+            </div>
+            <div className="stocks_left_market_cap_card_component_container">
+              <div className="stocks_left_market_cap_card_component_container_main">
+                <div className="stocks_left_market_cap_head_title_section">
+                  <div className="stocks_left_market_cap_head_title_section_arrange_width">
+                    <div className="stocks_left_market_cap_head_title_section_company_and_graph">
+                      <div className="stocks_left_market_cap_head_title_section_company">
+                        <span>Company</span>
+                      </div>
+                    </div>
+                    <div className="stocks_left_market_cap_head_title_section_price_and_watchlist">
+                      <div className="stocks_left_market_cap_head_title_section_price">
+                        <span>Market Price</span>
+                      </div>
+                      <div className="stocks_left_market_cap_head_title_section_watchlist">
+                        <span>Watchlist</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="stocks_left_market_cap_card_component_section">
+                  <StockMarketCap
+                    companyName="Toyota"
+                    cost="3,287.40"
+                    costPerRate="0.56 (0.17%)"
+                  />
+                  <StockMarketCap
+                    companyName="Ford"
+                    cost="2,998.15"
+                    costPerRate="1.22 (0.41%)"
+                  />
+                  <StockMarketCap
+                    companyName="General Motors"
+                    cost="5,045.75"
+                    costPerRate="-2.45 (0.48%)"
+                  />
+                  <StockMarketCap
+                    companyName="Tesla"
+                    cost="8,712.90"
+                    costPerRate="3.89 (0.65%)"
+                  />
+                  <StockMarketCap
+                    companyName="BMW"
+                    cost="7,132.10"
+                    costPerRate="0.95 (0.13%)"
+                  />
+                  <StockMarketCap
+                    companyName="Volkswagen"
+                    cost="4,882.65"
+                    costPerRate="0.77 (0.25%)"
+                  />
+                  <StockMarketCap
+                    companyName="Nissan"
+                    cost="3,445.80"
+                    costPerRate="-1.30 (0.38%)"
+                  />
+                  <StockMarketCap
+                    companyName="Hyundai"
+                    cost="5,301.20"
+                    costPerRate="0.99 (0.19%)"
+                  />
+                  <StockMarketCap
+                    companyName="Mercedes-Benz"
+                    cost="6,732.50"
+                    costPerRate="2.12 (0.31%)"
+                  />
+                  <StockMarketCap
+                    companyName="Chevrolet"
+                    cost="4,012.45"
+                    costPerRate="0.67 (0.22%)"
+                  />
+                </div>
+                <div className="stocks_left_market_cap_pagination_section">
+                  <div className="stocks_left_market_cap_pagination_section_arrange_width"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="stocks_content_right">
           <div className="stocks_content_right_yourInvestments">
             <div className="stocks_content_right_yourInvestments_title_head">
               <span id="scry_title_text">Your Investments</span>
-              <span id="scry_more"><button>Dashboard</button></span>
+              <span id="scry_more">
+                <button>Dashboard</button>
+              </span>
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
               <div className="stocks_content_right_yourInvestments_card_main_total_return">
