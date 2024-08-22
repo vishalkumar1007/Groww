@@ -13,6 +13,9 @@
     padding: 16px;
     cursor: pointer;
     overflow: hidden;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }
 .stocksCard_main:hover .stocksCard_main_top_add{
     display: block;

@@ -16,6 +16,9 @@
     background-color: transparent;
     cursor: pointer;
     max-height: 36px;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }
 .top_sector_main:hover{
     background-color: #f9f9f9;

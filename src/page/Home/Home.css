@@ -7,6 +7,10 @@
   /* background-color: rgb(197, 197, 197); */
   width: 100%;
   height: 100dvh;
+  /* prevent to select text  */
+  -webkit-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
 }
 .Home_navbar {
   background-color: rgb(255, 255, 255);

@@ -10,6 +10,9 @@
     min-width: 147.2px;
     min-height: 112px;
     cursor: pointer;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }
 .stock_tool_card_main_top_icon{
     background-color: #f8f8f8;

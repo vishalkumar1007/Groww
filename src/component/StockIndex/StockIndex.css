@@ -12,6 +12,9 @@
   border-radius: 7px;
   border: 1.5px solid #e5e5e5;
   min-width: 226.4px;
+  -webkit-user-select: none; 
+  -ms-user-select: none;
+  user-select: none;
 }
 .comp_stocks_index_main:hover .comp_stocks_three_dot_main_cursor {
   display: block;

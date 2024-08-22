@@ -11,6 +11,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* prevent to select text  */
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }
 .main_center_element{
     /* background-color: rgba(94, 15, 28, 0.385); */

@@ -38,13 +38,21 @@
   align-items: center;
 }
 
-.stock_market_cap_main_title_section_company span {
+.stock_market_cap_main_title_section_company button {
+  /* background-color: red; */
+  background-color: transparent;
+  border: none;
   font-size: 14px;
   font-weight: 500;
   color: #44475b;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+.stock_market_cap_main_title_section_company button:hover{
+  color: #00B386;
+  text-decoration: underline;
 }
 
 .stock_market_cap_main_title_section_price_and_watchlist {
@@ -55,6 +63,10 @@
   align-items: center;
   min-width: 165px;
   justify-content: space-between;
+
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
 }
 .stock_market_cap_main_title_section_price_main {
   /* background-color: slateblue; */

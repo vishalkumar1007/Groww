@@ -2,6 +2,10 @@
     background-color: #ffffff;
     width: 100%;
     height: 100dvh;
+    /* prevent to select text  */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .option_main_stock_and_mutualFund{
     /* background-color: pink; */

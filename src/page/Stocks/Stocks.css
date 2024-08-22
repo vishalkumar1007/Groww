@@ -11,6 +11,10 @@
   align-items: center;
   overflow: hidden;
   min-width: 225px;
+  /* prevent to select text  */
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
 }
 
 .stocks_width_arrange {
@@ -420,6 +424,10 @@
   height: 905px;
   margin: 60px 0px;
   min-width: 282px;
+  /* prevent to select text  */
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
 }
 
 .stocks_left_market_cap_heading{
