@@ -4,26 +4,46 @@ import ola_logo from "../../assets/svg/ola_logo.svg";
 import GTL_logo from "../../assets/svg/GTL_logo.webp";
 import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
 import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
+
 // ...... product and tool .......
 import fAndO_icon from "../../assets/svg/product_and_tool/F&O.svg";
 import event_icon from "../../assets/svg/product_and_tool/event.svg";
 import intraday_icon from "../../assets/svg/product_and_tool/intraday.svg";
 import ipo_icon from "../../assets/svg/product_and_tool/ipo.svg";
 import screener_icon from "../../assets/svg/product_and_tool/screener.svg";
-// ............. top gainers .........
 
-import diviLabs from '../../assets/img/top_gainer/divis_lab_icon.webp';
-import varunBeverages from '../../assets/img/top_gainer/varun_beverages_icon.webp';
-import titan from '../../assets/img/top_gainer/titan_icon.webp';
-import sbiLife from '../../assets/img/top_gainer/sbi_icon.webp';
-import nykaa from '../../assets/img/top_gainer/mid_nykaa_icon.webp';
-import mazagonShip from '../../assets/img/top_gainer/mid_mazagon_ship_icon.webp';
-import patanjaliFood from '../../assets/img/top_gainer/mid_patanjali_food_icon.webp';
-import bandhanBank from '../../assets/img/top_gainer/mid_bandhan_bank_icon.webp';
-import aloakIndustries from '../../assets/img/top_gainer/small_aloak_industry_icon.webp';
-import pnbHouse from '../../assets/img/top_gainer/small_pnb_house_finance_icon.webp';
-import centuryTextile from '../../assets/img/top_gainer/small_century_textiles_icon.webp';
-import castrolIndia from '../../assets/img/top_gainer/small_castrol_india_icon.webp';
+// ............. top gainers .........
+import diviLabs from "../../assets/img/top_gainer/divis_lab_icon.webp";
+import varunBeverages from "../../assets/img/top_gainer/varun_beverages_icon.webp";
+import titan from "../../assets/img/top_gainer/titan_icon.webp";
+import sbiLife from "../../assets/img/top_gainer/sbi_icon.webp";
+import nykaa from "../../assets/img/top_gainer/mid_nykaa_icon.webp";
+import mazagonShip from "../../assets/img/top_gainer/mid_mazagon_ship_icon.webp";
+import patanjaliFood from "../../assets/img/top_gainer/mid_patanjali_food_icon.webp";
+import bandhanBank from "../../assets/img/top_gainer/mid_bandhan_bank_icon.webp";
+import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
+import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
+import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
+import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
+
+//.......... stock news ...........
+import zomato from "../../assets/img/news_stock/zomato_icon.webp";
+import Dwarikesh_Sugar from "../../assets/img/news_stock/Dwarikesh_Sugar_icon.webp";
+import tata_motors from "../../assets/img/news_stock/tata_moters_icon.webp";
+import geojit from "../../assets/img/news_stock/geojit_icon.webp";
+
+// ............. top gainers .........
+import cholamandalam_invest from "../../assets/img/top_looser/Cholamandalam_Invest_icon.webp";
+import firstsource_soln from "../../assets/img/top_looser/Firstsource_Soln_icon.webp";
+import SJVN from "../../assets/img/top_looser/SJVN_icon.webp";
+import adani from "../../assets/img/top_looser/adani_icon.webp";
+import cyient from "../../assets/img/top_looser/cyient_icon.webp";
+import gland from "../../assets/img/top_looser/gland_icon.webp";
+import jsw_energy from "../../assets/img/top_looser/jsw_energy_icon.webp";
+import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
+import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
+import tata from "../../assets/img/top_looser/tata_icon.webp";
+
 
 
 // .........imp / comp .............
@@ -33,6 +53,7 @@ import { useState } from "react";
 
 const Stocks = () => {
   const [topGainActive, setTopGainActive] = useState("large");
+  const [topLosersActive, setTopLosersActive] = useState("large");
 
   return (
     <div className="stocks_main">
@@ -254,8 +275,194 @@ const Stocks = () => {
               )}
             </div>
           </div>
-          <div className="stocks_left_in_news"></div>
-          <div className="stocks_left_top_losers"></div>
+          <div className="stocks_left_in_news">
+            <div className="stocks_left_in_news_heading">
+              <span className="stocks_left_in_news_heading_title">
+                Stocks in News
+              </span>
+              <button className="stocks_left_in_news_heading_news_box">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-newspaper"
+                >
+                  <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                  <path d="M18 14h-8" />
+                  <path d="M15 18h-5" />
+                  <path d="M10 6h8v4h-8V6Z" />
+                </svg>
+                <p>News</p>
+              </button>
+            </div>
+            <div className="stocks_left_in_news_card_component">
+              <StocksCard
+                logoUrl={zomato}
+                title="Zomato"
+                cost="42.77"
+                costPerRate="-1.21 (0.29%)"
+              />
+              <StocksCard
+                logoUrl={Dwarikesh_Sugar}
+                title="Dwarikesh Sugar"
+                cost="828.77"
+                costPerRate="12.26 (23.19%)"
+              />
+              <StocksCard
+                logoUrl={tata_motors}
+                title="Tata Motors"
+                cost="1070.76"
+                costPerRate="14.08 (1.39%)"
+              />
+              <StocksCard
+                logoUrl={geojit}
+                title="Geojit Financial Services"
+                cost="212.12"
+                costPerRate="-4.26 (2.31%)"
+              />
+            </div>
+          </div>
+          <div className="stocks_left_top_losers">
+            <div className="stocks_left_top_losers_heading">
+              <span className="stocks_left_top_losers_heading_title">
+                Top Losers
+              </span>
+              <span className="stocks_left_top_losers_heading_seeMore">
+                See more
+              </span>
+            </div>
+            <div className="stocks_left_top_losers_filter">
+              <button
+                className="stocks_left_top_losers_filter_large"
+                id={
+                  topLosersActive === "large"
+                    ? "stocks_left_top_losers_filter_active"
+                    : null
+                }
+                onClick={() => {
+                  setTopLosersActive("large");
+                }}
+              >
+                Large
+              </button>
+              <button
+                className="stocks_left_top_losers_filter_mid"
+                id={
+                  topLosersActive === "mid"
+                    ? "stocks_left_top_losers_filter_active"
+                    : null
+                }
+                onClick={() => {
+                  setTopLosersActive("mid");
+                }}
+              >
+                Mid
+              </button>
+              <button
+                className="stocks_left_top_losers_filter_small"
+                id={
+                  topLosersActive === "small"
+                    ? "stocks_left_top_losers_filter_active"
+                    : null
+                }
+                onClick={() => {
+                  setTopLosersActive("small");
+                }}
+              >
+                Small
+              </button>
+            </div>
+            <div className="stocks_left_top_losers_card_component">
+              {topLosersActive === "large" ? (
+                <>
+                  <StocksCard
+                    logoUrl={adani}
+                    title="Adani"
+                    cost="2,212.80"
+                    costPerRate="-177.65 (13.76%)"
+                  />
+                  <StocksCard
+                    logoUrl={firstsource_soln}
+                    title="Firstsource Soln"
+                    cost="546.10"
+                    costPerRate="-52.50 (4.69%)"
+                  />
+                  <StocksCard
+                    logoUrl={SJVN}
+                    title="SJVN"
+                    cost="260.88"
+                    costPerRate="-85.26 (2.16%)"
+                  />
+                  <StocksCard
+                    logoUrl={cholamandalam_invest}
+                    title="Cholamandalam Invest"
+                    cost="200.60"
+                    costPerRate="-69.3 (2.24%)"
+                  />
+                </>
+              ) : topLosersActive === "mid" ? (
+                <>
+                  <StocksCard
+                    logoUrl={cyient}
+                    title="Cyient"
+                    cost="310.39"
+                    costPerRate="-18.17 (9.48%)"
+                  />
+                  <StocksCard
+                    logoUrl={gland}
+                    title="Gland"
+                    cost="693.2"
+                    costPerRate="-240.12 (5.52%)"
+                  />
+                  <StocksCard
+                    logoUrl={jsw_energy}
+                    title="JWS Energy"
+                    cost="101.32"
+                    costPerRate="-29.04 (4.36%)"
+                  />
+                  <StocksCard
+                    logoUrl={bandhanBank}
+                    title="Bandhan Bank"
+                    cost="203.77"
+                    costPerRate="-43.84 (3.42%)"
+                  />
+                </>
+              ) : (
+                <>
+                  <StocksCard
+                    logoUrl={mahanagar_gas}
+                    title="Mahanagar Gas"
+                    cost="28.32"
+                    costPerRate="-22.10 (10.7%)"
+                  />
+                  <StocksCard
+                    logoUrl={pnbHouse}
+                    title="PNB Housing Finance"
+                    cost="392.21"
+                    costPerRate="-17.21 (0.61%)"
+                  />
+                  <StocksCard
+                    logoUrl={mahindra}
+                    title="Century Textiles"
+                    cost="990.10"
+                    costPerRate="-252.66 (7.91%)"
+                  />
+                  <StocksCard
+                    logoUrl={tata}
+                    title="Tata Motors"
+                    cost="1,128.90"
+                    costPerRate="-57.80 (7.10%)"
+                  />
+                </>
+              )}
+            </div>
+          </div>
           <div className="stocks_left_market_cap"></div>
         </div>
         <div className="stocks_content_right">

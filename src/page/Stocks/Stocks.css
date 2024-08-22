@@ -209,20 +209,144 @@
 
 /* ..............  */
 .stocks_left_in_news {
-  background-color: rgb(135, 235, 175);
+  /* background-color: rgb(135, 235, 175); */
   width: 99.5%;
-  height: 220px;
+  height: 225px;
   margin-top: 60px;
 }
-.stocks_left_top_losers {
-  background-color: rgb(220, 135, 235);
-  width: 99.5%;
-  height: 265px;
+
+.stocks_left_in_news_heading{
+  /* background-color: rosybrown; */
+  width: 100%;
+  height: 21%;
+  display: flex;
+  justify-content: space-between;
 }
+.stocks_left_in_news_heading_title{
+  color: #373737;
+  font-size: 19px;
+  font-weight: 500;
+}
+.stocks_left_in_news_heading_news_box{
+  background-color: #EBF9F5;
+  border: none;
+  display: flex;
+  height: fit-content;
+  width: 80px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.stocks_left_in_news_heading_news_box svg{
+  background-color: white;
+  background-color: #EBF9F5;
+  fill: #00B386;
+  stroke: #EBF9F5;
+}
+.stocks_left_in_news_heading_news_box p{
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #EBF9F5;
+  color: #00B386;
+}
+
+.stocks_left_in_news_card_component{
+  /* background-color: #bbeea3; */
+  width: 100%;
+  height: 79%;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+.stocks_left_in_news_card_component::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ........................... xxxxxxxxxxxxxx ...................  */
+
+
+.stocks_left_top_losers {
+  /* background-color: rgb(220, 135, 235); */
+  width: 99.5%;
+  height: 280px;
+  margin-top: 60px;
+}
+
+
+.stocks_left_top_losers_heading {
+  /* background-color: rgb(220, 135, 235); */
+  width: 100%;
+  height: 18%;
+  display: flex;
+  justify-content: space-between;
+}
+.stocks_left_top_losers_heading_title {
+  font-size: 19px;
+  color: #373737;
+  font-weight: 500;
+}
+.stocks_left_top_losers_heading_seeMore {
+  font-size: 14px;
+  color: #00b386;
+  font-weight: 500;
+  cursor: pointer;
+}
+.stocks_left_top_losers_filter {
+  /* background-color: #6632cd; */
+  width: 100%;
+  height: 18%;
+  display: flex;
+  gap: 20px;
+}
+.stocks_left_top_losers_filter_large,
+.stocks_left_top_losers_filter_mid,
+.stocks_left_top_losers_filter_small {
+  background-color: #ffffff;
+  cursor: pointer;
+  height: 30px;
+  padding: 0px 11px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ededed;
+  color: #989898;
+}
+#stocks_left_top_losers_filter_active {
+  background-color: #ebf9f5;
+  color: #00b386;
+  border: 1px solid #ebf9f5;
+}
+
+
+
+.stocks_left_top_losers_card_component {
+  /* background-color: thistle; */
+  width: 100%;
+  height: 64%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  overflow-x: scroll;
+}
+
+.stocks_left_top_losers_card_component::-webkit-scrollbar {
+  display: none;
+}
+/* .................. xxxxxxxxxxxxx ................  */
 .stocks_left_market_cap {
   background-color: rgb(198, 139, 84);
   width: 99.5%;
   height: 500px;
+  margin-top: 60px;
 }
 
 /* ........... right ............  */
@@ -343,6 +467,8 @@
   width: 100%;
   height: 70%;
 }
+
+
 
 @media (max-width: 900px) {
   .stocks_content_right {
