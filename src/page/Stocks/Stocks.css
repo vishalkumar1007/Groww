@@ -564,6 +564,9 @@
   /* background-color: rgb(218, 32, 91); */
   width: 95%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.pagination_comp_main {
+  /* background-color: rgba(39, 7, 62, 0.307); */
+  /* width: 200px; */
+  /* height: 35px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 4px;
+  /* max-width: 275px; */
+}
+/* .........  */
+
+.pagination_comp_main_back_btn {
+  background-color: transparent;
+  background-color: #f7f7f7;
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+#backSpan {
+  width: 16px;
+  height: 16px;
+}
+.pagination_comp_main_back_btn svg {
+  /* background-color: rgb(130, 188, 191); */
+  width: 100%;
+  height: 100%;
+}
+/* ...........  */
+.pagination_comp_main_pages {
+    /* background-color: rgb(184, 214, 124); */
+  display: flex;
+  gap: 3.5px;
+  max-width: 155px;
+  padding:0px 10px;
+}
+
+
+
+
+
+.pagination_comp_main_pages::-webkit-scrollbar {
+  display: none;
+}
+
+.pagination_comp_main_page_btn {
+  background-color: transparent;
+  /* background-color: red; */
+  /* width: 25px;
+    height: 25px; */
+  /* min-width: 25px; */
+  /* min-height: 25px; */
+  border: none;
+  cursor: pointer;
+  font-weight: 400;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(70, 70, 70);
+  border: 1px solid #ffffffdc;
+  padding: 2px 4px;
+  /* transition: 0.2s ease-in-out; */
+}
+
+#activePage {
+  border: 1px solid #00b588dc;
+  background-color: #00b3860e;
+  color: #00b588;
+  /* transition: 0.1s ease-in-out; */
+}
+
+.pagination_comp_main_pages p {
+  /* background-color: #88b986; */
+  /* width: 18px;
+    height: 18px; */
+  min-width: 15px;
+  min-height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-bottom: 1px; */
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+/* ...........  */
+
+.pagination_comp_main_next_btn {
+  background-color: transparent;
+  background-color: #f7f7f7;
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#nextSpan {
+  width: 16px;
+  height: 16px;
+}
+.pagination_comp_main_next_btn svg {
+  /* background-color: rgb(130, 188, 191); */
+  width: 100%;
+  height: 100%;
+  /* color: #1d1c1c; */
+}
+
+
+/* .............. */
+
+.pagination_comp_effect_blur_left{
+    /* background-color: red; */
+    width: 1px;
+    height: 25px;
+    position: relative;
+}
+.pagination_comp_effect_blur_left::after{
+    background-color: #ffffff;
+    /* background-color: #ff0000; */
+    content: '';
+    width: 5px;
+    height: 100%;
+    left: 2.5px;
+    position: absolute;
+    filter: blur(2px);
+}
+.pagination_comp_effect_blur_rigth{
+    /* background-color: red; */
+    width: 1px;
+    height: 25px;
+    position: relative;
+}
+.pagination_comp_effect_blur_rigth::after{
+    background-color: #ffffff;
+    /* background-color: #ff0000; */
+    content: '';
+    width: 5px;
+    height: 100%;
+    right: 2px;
+    position: absolute;
+    filter: blur(2px);
+}
+
+.pagination_comp_main_rigth_main{
+    /* background-color: palevioletred; */
+    display: flex;
+    gap: 8px;
+    
+}
+.pagination_comp_main_left_main{
+    /* background-color: powderblue; */
+    display: flex;
+    gap: 8px;
+
+}

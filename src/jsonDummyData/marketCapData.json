@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "companyName": "Toyota",
+      "cost": "3,287.40",
+      "costPerRate": "0.56 (0.17%)"
+    },
+    {
+      "id": 2,
+      "companyName": "Ford",
+      "cost": "2,998.15",
+      "costPerRate": "1.22 (0.41%)"
+    },
+    {
+      "id": 3,
+      "companyName": "General Motors",
+      "cost": "5,045.75",
+      "costPerRate": "-2.45 (0.48%)"
+    },
+    {
+      "id": 4,
+      "companyName": "Tesla",
+      "cost": "8,712.90",
+      "costPerRate": "3.89 (0.65%)"
+    },
+    {
+      "id": 5,
+      "companyName": "BMW",
+      "cost": "7,132.10",
+      "costPerRate": "0.95 (0.13%)"
+    },
+    {
+      "id": 6,
+      "companyName": "Volkswagen",
+      "cost": "4,882.65",
+      "costPerRate": "0.77 (0.25%)"
+    },
+    {
+      "id": 7,
+      "companyName": "Nissan",
+      "cost": "3,445.80",
+      "costPerRate": "-1.30 (0.38%)"
+    },
+    {
+      "id": 8,
+      "companyName": "Hyundai",
+      "cost": "5,301.20",
+      "costPerRate": "0.99 (0.19%)"
+    },
+    {
+      "id": 9,
+      "companyName": "Mercedes-Benz",
+      "cost": "6,732.50",
+      "costPerRate": "2.12 (0.31%)"
+    },
+    {
+      "id": 10,
+      "companyName": "Chevrolet",
+      "cost": "4,012.45",
+      "costPerRate": "0.67 (0.22%)"
+    },
+    {
+      "id": 11,
+      "companyName": "Honda",
+      "cost": "5,243.30",
+      "costPerRate": "1.25 (0.24%)"
+    },
+    {
+      "id": 12,
+      "companyName": "Ferrari",
+      "cost": "8,921.00",
+      "costPerRate": "4.18 (0.47%)"
+    },
+    {
+      "id": 13,
+      "companyName": "Lamborghini",
+      "cost": "9,312.50",
+      "costPerRate": "5.67 (0.61%)"
+    },
+    {
+      "id": 14,
+      "companyName": "Audi",
+      "cost": "6,543.25",
+      "costPerRate": "2.13 (0.33%)"
+    },
+    {
+      "id": 15,
+      "companyName": "Porsche",
+      "cost": "7,845.30",
+      "costPerRate": "3.29 (0.42%)"
+    },
+    {
+      "id": 16,
+      "companyName": "Jaguar",
+      "cost": "5,432.10",
+      "costPerRate": "0.88 (0.16%)"
+    },
+    {
+      "id": 17,
+      "companyName": "Land Rover",
+      "cost": "6,123.85",
+      "costPerRate": "1.45 (0.24%)"
+    },
+    {
+      "id": 18,
+      "companyName": "Mitsubishi",
+      "cost": "3,987.45",
+      "costPerRate": "-0.55 (0.14%)"
+    },
+    {
+      "id": 19,
+      "companyName": "Mazda",
+      "cost": "4,212.70",
+      "costPerRate": "1.23 (0.29%)"
+    },
+    {
+      "id": 20,
+      "companyName": "Kia",
+      "cost": "4,598.20",
+      "costPerRate": "0.77 (0.17%)"
+    }
+  ]
+  

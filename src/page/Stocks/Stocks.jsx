@@ -49,11 +49,28 @@ import "./Stocks.css";
 import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
 import TopSector from "../../component/TopSector/TopSector";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
-import { useState } from "react";
+import Pagination from "../../component/Pagination/Pagination";
+import { useEffect, useState } from "react";
+
+// ............. json data ............
+import marketCapData from "../../jsonDummyData/marketCapData.json";
 
 const Stocks = () => {
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
+  const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
+    useState();
+
+  const currentActivePage = (activePage) => {
+    setPaginationCurrentActivePage(activePage);
+    // console.log('print from stock : ', paginationCurrentActivePage);
+  };
+
+  // console.log(marketCapData[0].cost);
+
+  // useEffect(()=>{
+  //   console.log('print from stock xxxx: ', paginationCurrentActivePage);
+  // },[paginationCurrentActivePage])
 
   return (
     <div className="stocks_main">
@@ -512,59 +529,24 @@ const Stocks = () => {
                   </div>
                 </div>
                 <div className="stocks_left_market_cap_card_component_section">
-                  <StockMarketCap
-                    companyName="Toyota"
-                    cost="3,287.40"
-                    costPerRate="0.56 (0.17%)"
-                  />
-                  <StockMarketCap
-                    companyName="Ford"
-                    cost="2,998.15"
-                    costPerRate="1.22 (0.41%)"
-                  />
-                  <StockMarketCap
-                    companyName="General Motors"
-                    cost="5,045.75"
-                    costPerRate="-2.45 (0.48%)"
-                  />
-                  <StockMarketCap
-                    companyName="Tesla"
-                    cost="8,712.90"
-                    costPerRate="3.89 (0.65%)"
-                  />
-                  <StockMarketCap
-                    companyName="BMW"
-                    cost="7,132.10"
-                    costPerRate="0.95 (0.13%)"
-                  />
-                  <StockMarketCap
-                    companyName="Volkswagen"
-                    cost="4,882.65"
-                    costPerRate="0.77 (0.25%)"
-                  />
-                  <StockMarketCap
-                    companyName="Nissan"
-                    cost="3,445.80"
-                    costPerRate="-1.30 (0.38%)"
-                  />
-                  <StockMarketCap
-                    companyName="Hyundai"
-                    cost="5,301.20"
-                    costPerRate="0.99 (0.19%)"
-                  />
-                  <StockMarketCap
-                    companyName="Mercedes-Benz"
-                    cost="6,732.50"
-                    costPerRate="2.12 (0.31%)"
-                  />
-                  <StockMarketCap
-                    companyName="Chevrolet"
-                    cost="4,012.45"
-                    costPerRate="0.67 (0.22%)"
-                  />
+                  {marketCapData.slice(0, 10).map((data) => (
+                    <StockMarketCap
+                      key={data.id}
+                      companyName={data.companyName}
+                      cost={data.cost}
+                      costPerRate={data.costPerRate}
+                    />
+                  ))}
                 </div>
                 <div className="stocks_left_market_cap_pagination_section">
-                  <div className="stocks_left_market_cap_pagination_section_arrange_width"></div>
+                  <div className="stocks_left_market_cap_pagination_section_arrange_width">
+                    <Pagination
+                      totalPage={marketCapData.length/10}
+                      currentActivePage={(activePage) => {
+                        currentActivePage(activePage);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
