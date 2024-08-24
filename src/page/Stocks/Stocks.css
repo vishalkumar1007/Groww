@@ -425,9 +425,6 @@
   margin: 60px 0px;
   min-width: 282px;
   /* prevent to select text  */
-  -webkit-user-select: none; 
-  -ms-user-select: none; 
-  user-select: none;
 }
 
 .stocks_left_market_cap_heading{
@@ -548,7 +545,11 @@
 .stocks_left_market_cap_card_component_section {
   /* background-color: pink; */
   width: 100%;
+  height: auto;
   flex-grow: 1;
+  max-height: 730px;
+  min-height: 730px;
+  overflow: hidden;
 }
 
 .stocks_left_market_cap_pagination_section {

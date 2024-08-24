@@ -52,14 +52,6 @@
   padding:0px 10px;
 }
 
-
-
-
-
-.pagination_comp_main_pages::-webkit-scrollbar {
-  display: none;
-}
-
 .pagination_comp_main_page_btn {
   background-color: transparent;
   /* background-color: red; */

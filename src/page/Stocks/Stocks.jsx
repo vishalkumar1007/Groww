@@ -58,19 +58,21 @@ import marketCapData from "../../jsonDummyData/marketCapData.json";
 const Stocks = () => {
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
-  const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
-    useState();
+  const [paginationCurrentActivePage, setPaginationCurrentActivePage] = useState(1);
+  const [paginationEndIndex, setPaginationEndIndex] = useState(0);
+  const [paginationStartIndex, setPaginationStartIndex] = useState(0);
 
   const currentActivePage = (activePage) => {
     setPaginationCurrentActivePage(activePage);
-    // console.log('print from stock : ', paginationCurrentActivePage);
   };
 
-  // console.log(marketCapData[0].cost);
-
-  // useEffect(()=>{
-  //   console.log('print from stock xxxx: ', paginationCurrentActivePage);
-  // },[paginationCurrentActivePage])
+  useEffect(() => {
+    const endIndex = (paginationCurrentActivePage * 10) > marketCapData.length?(marketCapData.length):(paginationCurrentActivePage * 10);
+    const startIndex = endIndex-(endIndex===marketCapData.length?(endIndex%10):10);
+    setPaginationStartIndex(startIndex);
+    setPaginationEndIndex(endIndex);
+  }, [paginationCurrentActivePage]);
+  
 
   return (
     <div className="stocks_main">
@@ -528,20 +530,26 @@ const Stocks = () => {
                     </div>
                   </div>
                 </div>
-                <div className="stocks_left_market_cap_card_component_section">
-                  {marketCapData.slice(0, 10).map((data) => (
-                    <StockMarketCap
-                      key={data.id}
-                      companyName={data.companyName}
-                      cost={data.cost}
-                      costPerRate={data.costPerRate}
-                    />
-                  ))}
+                <div
+                  className="stocks_left_market_cap_card_component_section"
+                  // ref={PreventScrollMarketCap}
+                  // onScroll={handleScrollMarketCap}
+                >
+                  {marketCapData
+                    .slice(paginationStartIndex, paginationEndIndex)
+                    .map((data) => (
+                      <StockMarketCap
+                        key={data.id}
+                        companyName={data.companyName}
+                        cost={data.cost}
+                        costPerRate={data.costPerRate}
+                      />
+                    ))}
                 </div>
                 <div className="stocks_left_market_cap_pagination_section">
                   <div className="stocks_left_market_cap_pagination_section_arrange_width">
                     <Pagination
-                      totalPage={marketCapData.length/10}
+                      totalPage={Math.ceil(marketCapData.length / 10)}
                       currentActivePage={(activePage) => {
                         currentActivePage(activePage);
                       }}

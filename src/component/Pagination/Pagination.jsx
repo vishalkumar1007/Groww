@@ -1,14 +1,14 @@
 import "./Pagination.css";
 import { useEffect, useState, useRef } from "react";
 
-const Pagination = ({ totalPage = 1 , currentActivePage}) => {
+const Pagination = ({ totalPage = 0 , currentActivePage}) => {
   const [activePage, setActivePage] = useState(1);
   const [numberOfTotalPage, setNumberOfTotalPage] = useState(0);
   const activePageRef = useRef(null);
   const paginationContainerRef = useRef(null);
 
   useEffect(() => {
-    setNumberOfTotalPage(totalPage <= 0 ? 1 : totalPage);
+    setNumberOfTotalPage(totalPage <= 0 ? 0 : totalPage);
     setActivePage(1);
   }, [totalPage]);
 
