@@ -577,7 +577,7 @@
 
 .stocks_content_right {
   /* background-color: #9a939a; */
-  height: 100%;
+  height: fit-content;
   width: 33%;
   display: flex;
   flex-direction: column;
@@ -599,7 +599,7 @@
 #scry_title_text {
   font-size: 19px;
   font-weight: 500;
-  color: #4a4a4a;
+  color: #434343;
 }
 #scry_more {
   height: fit-content;
@@ -669,21 +669,21 @@
 }
 
 .stocks_content_right_watchLists {
-  background-color: steelblue;
+  /* background-color: steelblue; */
   width: 99%;
-  height: 180px;
+  /* height: 180px; */
 }
 .stocks_content_right_watchLists_title_head {
-  background-color: #a980a9;
+  /* background-color: #a980a9; */
   width: 100%;
-  height: 30%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
 }
 #scrw_title_text {
   font-size: 19px;
   font-weight: 500;
-  color: #373737;
+  color: #434343;
 }
 #scrw_more {
   font-size: 14px;
@@ -692,12 +692,51 @@
   cursor: pointer;
 }
 .stocks_content_right_watchLists_card_main {
-  background-color: #007924;
+  /* background-color: #00c73c4a; */
   width: 100%;
-  height: 70%;
+  /* height: 70%; */
+  border: 1.5px solid #e5e5e5;
+  border-radius: 10px;
+  overflow: hidden;
+  
 }
-
-
+.stocks_content_right_watchLists_card_main_comp{
+  /* background-color: rgba(255, 99, 71, 0.433); */
+}
+.stocks_content_right_watchLists_card_main_add_box{
+  /* background-color: rgba(102, 51, 153, 0.221); */
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.stocks_content_right_watchLists_card_main_add_box_arrange_width{
+  /* background-color: orangered; */
+  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+#stocks_content_right_watchLists_card_main_add_box_arrange_width_icon{
+  /* background-color: #373737; */
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#stocks_content_right_watchLists_card_main_add_box_arrange_width_icon svg{
+  width: 100%;
+  height: 100%;
+}
+#stocks_content_right_watchLists_card_main_add_box_arrange_width_title{
+  color: #00B386;
+  font-weight: 500;
+  font-size: 14.5px;
+}
 
 @media (max-width: 900px) {
   .stocks_content_right {

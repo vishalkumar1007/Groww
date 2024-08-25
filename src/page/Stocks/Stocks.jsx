@@ -54,11 +54,13 @@ import { useEffect, useState } from "react";
 
 // ............. json data ............
 import marketCapData from "../../jsonDummyData/marketCapData.json";
+import StockWatchListCard from "../../component/StockWatchListCard/StockWatchListCard";
 
 const Stocks = () => {
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
-  const [paginationCurrentActivePage, setPaginationCurrentActivePage] = useState(1);
+  const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
+    useState(1);
   const [paginationEndIndex, setPaginationEndIndex] = useState(0);
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
 
@@ -67,12 +69,15 @@ const Stocks = () => {
   };
 
   useEffect(() => {
-    const endIndex = (paginationCurrentActivePage * 10) > marketCapData.length?(marketCapData.length):(paginationCurrentActivePage * 10);
-    const startIndex = endIndex-(endIndex===marketCapData.length?(endIndex%10):10);
+    const endIndex =
+      paginationCurrentActivePage * 10 > marketCapData.length
+        ? marketCapData.length
+        : paginationCurrentActivePage * 10;
+    const startIndex =
+      endIndex - (endIndex === marketCapData.length ? endIndex % 10 : 10);
     setPaginationStartIndex(startIndex);
     setPaginationEndIndex(endIndex);
   }, [paginationCurrentActivePage]);
-  
 
   return (
     <div className="stocks_main">
@@ -590,15 +595,44 @@ const Stocks = () => {
 
           {/* coming soon feature */}
 
-          {/* <div className="stocks_content_right_watchLists">
-                        <div className="stocks_content_right_watchLists_title_head">
-                            <span id='scrw_title_text'>All watchlists</span>
-                            <span id='scrw_more'>View all</span>
-                        </div>
-                        <div className="stocks_content_right_watchLists_card_main">
-
-                        </div>
-                    </div> */}
+          <div className="stocks_content_right_watchLists">
+            <div className="stocks_content_right_watchLists_title_head">
+              <span id="scrw_title_text">All watchlists</span>
+              <span id="scrw_more">View all</span>
+            </div>
+            <div className="stocks_content_right_watchLists_card_main">
+              <div className="stocks_content_right_watchLists_card_main_comp">
+                {/* <StockWatchListCard watchlistTitle='vishal'/> */}
+                {/* <StockWatchListCard watchlistTitle='shubham'/> */}
+              </div>
+              <div className="stocks_content_right_watchLists_card_main_add_box">
+                <div className="stocks_content_right_watchLists_card_main_add_box_arrange_width">
+                  <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="svg_add"
+                    width="23"
+                    height="23"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#00B386"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-plus"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                  </svg>
+                  </span>
+                  <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_title">
+                    Create New Watchlist
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

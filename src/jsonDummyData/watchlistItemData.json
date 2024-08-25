@@ -1,0 +1,104 @@
+{
+  "dummy": [
+    {
+      "id": 0,
+      "companyName": "Nodata",
+      "cost": "000.00",
+      "costPerRate": "0.00 (0.0%)"
+    }
+  ],
+  "vishal": [
+    {
+      "id": 15,
+      "companyName": "Porsche",
+      "cost": "7,845.30",
+      "costPerRate": "3.29 (0.42%)"
+    },
+    {
+      "id": 16,
+      "companyName": "Jaguar",
+      "cost": "5,432.10",
+      "costPerRate": "-0.88 (0.16%)"
+    },
+    {
+      "id": 17,
+      "companyName": "Land Rover",
+      "cost": "6,123.85",
+      "costPerRate": "-1.45 (0.24%)"
+    },
+    {
+      "id": 18,
+      "companyName": "Mitsubishi",
+      "cost": "3,987.45",
+      "costPerRate": "0.55 (0.14%)"
+    },
+    {
+      "id": 19,
+      "companyName": "Mazda",
+      "cost": "4,212.70",
+      "costPerRate": "1.23 (0.29%)"
+    }
+  ],
+  "shubham": [
+    {
+      "id": 28,
+      "companyName": "Toyota",
+      "cost": "112.40",
+      "costPerRate": "0.61 (0.55%)"
+    },
+    {
+      "id": 29,
+      "companyName": "Intel",
+      "cost": "53.82",
+      "costPerRate": "0.12 (0.22%)"
+    },
+    {
+      "id": 30,
+      "companyName": "Facebook",
+      "cost": "327.23",
+      "costPerRate": "1.05 (0.32%)"
+    },
+    {
+      "id": 31,
+      "companyName": "Boeing",
+      "cost": "206.54",
+      "costPerRate": "-0.87 (0.42%)"
+    },
+    {
+      "id": 32,
+      "companyName": "Coca-Cola",
+      "cost": "60.74",
+      "costPerRate": "0.15 (0.25%)"
+    },
+    {
+      "id": 33,
+      "companyName": "Pfizer",
+      "cost": "44.92",
+      "costPerRate": "0.18 (0.40%)"
+    },
+    {
+      "id": 34,
+      "companyName": "Ford",
+      "cost": "213.48",
+      "costPerRate": "0.74 (0.35%)"
+    },
+    {
+      "id": 35,
+      "companyName": "PepsiCo",
+      "cost": "155.76",
+      "costPerRate": "0.82 (0.53%)"
+    },
+    {
+      "id": 36,
+      "companyName": "McDonald's",
+      "cost": "245.63",
+      "costPerRate": "-0.98 (0.40%)"
+    },
+    {
+      "id": 37,
+      "companyName": "Nike",
+      "cost": "133.87",
+      "costPerRate": "0.65 (0.49%)"
+    }
+  ]
+}
