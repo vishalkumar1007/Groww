@@ -602,7 +602,7 @@ const Stocks = () => {
             </div>
             <div className="stocks_content_right_watchLists_card_main">
               <div className="stocks_content_right_watchLists_card_main_comp">
-                {/* <StockWatchListCard watchlistTitle='vishal'/> */}
+                <StockWatchListCard watchlistTitle='vishal'/>
                 {/* <StockWatchListCard watchlistTitle='shubham'/> */}
               </div>
               <div className="stocks_content_right_watchLists_card_main_add_box">

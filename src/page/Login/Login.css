@@ -255,6 +255,48 @@
     justify-content: center;
     align-items: end; */
 }
+
+
+.ied_center_password_hide_and_view{
+    background-color: rgb(255, 255, 255);
+    width: 25px;
+    height: 22px;
+    position: absolute;
+    top:4px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ied_center_password_hide_and_view::before{
+    content: '';
+    background-color: #ffffff;
+    width: 12px;
+    height: 20px;
+    position: absolute;
+    filter: blur(4px);
+    left: -10px;
+}
+.ied_center_password_hide_and_view::after{
+    content: '';
+    background-color: #ffffff;
+    width: 14px;
+    height: 20px;
+    position: absolute;
+    right: -10px;
+}
+
+#ied_center_password_hide_and_view_svg_notSee{
+    color: #3a3a3a;
+}
+
+#ied_center_password_hide_and_view_svg_see{
+    /* color: #127e63; */
+    color: #a50808;
+}
+
 #placeholder_static{
     /* background-color: brown; */
     position: absolute;
