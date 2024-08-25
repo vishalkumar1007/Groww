@@ -5,15 +5,21 @@ import ForgetPassword from './page/ForgetPassword/ForgetPassword';
 import Home from './page/Home/Home';
 import SignUp from './page/SignUp/SignUp';
 import Dashboard from './page/Dashboard/Dashboard';
+import PageNotFound from './component/PageNotFound/PageNotFound';
+import Error from './component/UnexpectedError/UnexpectedError';
+
 function App() {
   return (
+
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='login' element={<Login/>}/>
-        <Route path='forget' element={<ForgetPassword/>}/>
-        <Route path='signup' element={<SignUp/>}/>
-        <Route path='dashboard' element={<Dashboard/>}/>
+        <Route path='*' element={<PageNotFound/>} errorElement={<Error/>}/>
+        <Route path='/' element={<Home/>} errorElement={<Error/>}/>
+        <Route path='login' element={<Login/>} errorElement={<Error/>}/>
+        <Route path='forget' element={<ForgetPassword/>} errorElement={<Error/>}/>
+        <Route path='signup' element={<SignUp/>} errorElement={<Error/>}/>
+        <Route path='dashboard' element={<Dashboard/>} errorElement={<Error/>}/>
+
       </Routes>
     </BrowserRouter>
 
