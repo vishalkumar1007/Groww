@@ -160,14 +160,14 @@ const Stocks = () => {
               <span>Products & tools</span>
             </div>
             <div className="stocks_left_product_and_tools_card_section">
-              <StockToolsCard iconUrl={fAndO_icon} title="F&O" />
-              <StockToolsCard iconUrl={event_icon} title="Event" />
-              <StockToolsCard iconUrl={intraday_icon} title="Intraday" />
-              <StockToolsCard iconUrl={ipo_icon} title="IPO" />
-              <StockToolsCard iconUrl={screener_icon} title="Screener" />
+              <StockToolsCard iconUrl={fAndO_icon} title="F&O" redirect="/under_construction"/>
+              <StockToolsCard iconUrl={event_icon} title="Event" redirect="/under_construction"/>
+              <StockToolsCard iconUrl={intraday_icon} title="Intraday" redirect="/under_construction"/>
+              <StockToolsCard iconUrl={ipo_icon} title="IPO" redirect="/under_construction"/>
+              <StockToolsCard iconUrl={screener_icon} title="Screener"  redirect="/all_stocks_filter"/>
             </div>
           </div>
-          <div className="stocks_left_top_gainers">
+          <div className="stocks_left_top_gainers" >
             <div className="stocks_left_top_gainers_heading">
               <span className="stocks_left_top_gainers_heading_title">
                 Top Gainer
