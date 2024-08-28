@@ -13,7 +13,10 @@ const AllStocksFilter = () => {
   const[isActiveIndex , setIsActiveIndex] = useState(false);
   const[isActiveMarketCap , setIsActiveMarketCap] = useState(false);
   const[isActiveSClosePrice , setIsActiveClosePrice] = useState(false);
-
+  // ....................... 
+  const [marketCapUserInputStartValue , setMarketCapUserInputStartValue] = useState(0);
+  const [marketCapUserInputEndValue , setMarketCapUserInputEndValue] = useState(100);
+  const [activeMarketCapRangeBtn , setActiveMarketCapRangeBtn] = useState('small');
 
   return (
     <div className="all_stock_main">
@@ -156,7 +159,27 @@ const AllStocksFilter = () => {
                       </span>
                     </div>
                     <div className="all_stock_filter_container_main_market_cap_hidden_box" id={isActiveMarketCap?"asf_market_cap_hidden_box":null}>
-                      
+                      <div className="all_stock_filter_container_main_market_cap_hidden_box_content">
+                        <div className="all_stock_filter_container_main_market_cap_hidden_box_content_range">
+
+                        </div>
+                        <div className="all_stock_filter_container_main_market_cap_hidden_box_content_input">
+                            <input id="all_stock_filter_market_cap_hidden_box_content_input_start"  type="number" min="0" value={marketCapUserInputStartValue} onChange={(e)=>{setMarketCapUserInputStartValue(e.target.value===''?0:e.target.value)}}/>
+                            <span id="all_stock_filter_market_cap_hidden_box_content_input_to">to</span>
+                            <input id="all_stock_filter_market_cap_hidden_box_content_input_end"  type="number" min="0" value={marketCapUserInputEndValue}  onChange={(e)=>{setMarketCapUserInputEndValue(e.target.value===''?0:e.target.value)}}/>
+                        </div>
+                        <div className="all_stock_filter_container_main_market_cap_hidden_box_content_btn">
+                            <div id="all_stock_filter_container_main_market_cap_hidden_box_content_btn_small" >
+                              <button id={activeMarketCapRangeBtn==='small'?"market_cap_active_range_btn":null} className="all_stock_filter_cap_hidden_box_content_btn_small_btn" onClick={()=>{setActiveMarketCapRangeBtn('small')}}>Small</button>
+                            </div>
+                            <div id="all_stock_filter_container_main_market_cap_hidden_box_content_btn_mid">
+                              <button id={activeMarketCapRangeBtn==='mid'?"market_cap_active_range_btn":null} className="all_stock_filter_cap_hidden_box_content_btn_mid_btn" onClick={()=>{setActiveMarketCapRangeBtn('mid')}}>Mid</button>
+                            </div>
+                            <div id="all_stock_filter_container_main_market_cap_hidden_box_content_btn_large" >
+                              <button id={activeMarketCapRangeBtn==='large'?"market_cap_active_range_btn":null} className="all_stock_filter_cap_hidden_box_content_btn_large_btn" onClick={()=>{setActiveMarketCapRangeBtn('large')}}>Large</button>
+                            </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
