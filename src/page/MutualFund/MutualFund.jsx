@@ -1,10 +1,25 @@
-import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
-import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
-import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
-import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
+
+
+import Motilal_Oswal from "../../assets/img/Mutual_Fund/Motilal_Oswal_Midcap Fund_Direct_Growth.webp";
+import Quant_Small from "../../assets/img/Mutual_Fund/Quant_Small_Cap_Fund Direct_Plan_Growth.webp";
+import Parag_Parikh from "../../assets/img/Mutual_Fund/Parag_Parikh_Flexi_Cap Fund_Direct_Growth.webp";
+import Nippon_India from "../../assets/img/Mutual_Fund/Nippon_India_Large_Cap_Fund_Direct_Growth.png";
+import Groww_logo from "../../assets/img/Mutual_Fund/groww/indiabulls_groww.webp";
+import High_return from '../../assets/img/Mutual_Fund/collection/high_returns.svg'
+import SIP_with_500 from '../../assets/img/Mutual_Fund/collection/sip_with_500.svg'
+import Tax_Saving from '../../assets/img/Mutual_Fund/collection/tax_saving.svg'
+import Large_Cap from '../../assets/img/Mutual_Fund/collection/large_cap.svg'
+import Mid_Cap from '../../assets/img/Mutual_Fund/collection/mid_cap.svg'
+import Small_Cap from '../../assets/img/Mutual_Fund/collection/small_cap.svg'
+import new_fund_offering from "../../assets/img/Mutual_Fund/quick_access/nfo.svg";
+
+
 
 import "./MutualFund.css";
 import StocksCard from "../../component/StockCard/StockCard";
+import MutualFundCard from "../../MutualFundComponents/MutualFundCard/MutualFundCard";
+import MutualFundCollectionCard from "../../MutualFundComponents/MutualFundCollectionCard/MutualFundCollectionCard";
+import QuicksAccess from "../../MutualFundComponents/QuicksAccess/QuicksAccess";
 
 const MutualFund = () => {
   return (
@@ -24,9 +39,9 @@ const MutualFund = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="M3 6h18" />
                   <path d="M7 12h10" />
@@ -36,29 +51,29 @@ const MutualFund = () => {
               </span>
             </div>
             <div className="mutual_fund_main_left_popular_fund_comp_div">
-              <StocksCard
-                logoUrl={aloakIndustries}
-                title="Alok Industries"
-                cost="28.32"
-                costPerRate="2.10 (10.7%)"
+              <MutualFundCard
+                logoUrl={Motilal_Oswal}
+                title="Motilal Oswal Midcap Fund Direct Growth"
+                percentage="40.0"
+                year="3"
               />
-              <StocksCard
-                logoUrl={pnbHouse}
-                title="PNB Housing Finance"
-                cost="892.21"
-                costPerRate="17.21 (0.61%)"
+              <MutualFundCard
+                logoUrl={Quant_Small}
+                title="Quant Small Cap Fund Direct Plan Growth"
+                percentage="34.6"
+                year="3"
               />
-              <StocksCard
-                logoUrl={centuryTextile}
-                title="Century Textiles"
-                cost="2,300.10"
-                costPerRate="152.66 (7.91%)"
+              <MutualFundCard
+                logoUrl={Parag_Parikh}
+                title="Parag Parikh Flexi Cap Fund Direct Growth"
+                percentage="20.4"
+                year="3"
               />
-              <StocksCard
-                logoUrl={castrolIndia}
-                title="Castrol India"
-                cost="268.90"
-                costPerRate="17.80 (7.10%)"
+              <MutualFundCard
+                logoUrl={Nippon_India}
+                title="Nippon India Large Cap Fund Direct Growth"
+                percentage="24.9"
+                year="3"
               />
             </div>
           </div>
@@ -69,34 +84,59 @@ const MutualFund = () => {
               </span>
             </div>
             <div className="mutual_fund_main_left_collection_comp_div">
-              <StocksCard
-                logoUrl={aloakIndustries}
-                title="Alok Industries"
-                cost="28.32"
-                costPerRate="2.10 (10.7%)"
+              <MutualFundCollectionCard logoUrl={High_return} title='High return'/>
+              <MutualFundCollectionCard logoUrl={SIP_with_500} title='SIP with 500'/>
+              <MutualFundCollectionCard logoUrl={Tax_Saving} title='Tax Saving'/>
+              <MutualFundCollectionCard logoUrl={Large_Cap} title='Large Cap'/>
+              <MutualFundCollectionCard logoUrl={Mid_Cap} title='Mid Cap'/>
+              <MutualFundCollectionCard logoUrl={Small_Cap} title='Small Cap'/>
+            </div>
+          </div>
+          <div className="mutual_fund_main_left_fund_by_groww">
+            <div className="mutual_fund_main_left_fund_by_groww_head">
+              <span id="mutual_fund_main_left_fund_by_groww_head_title">
+                Funds by Groww
+              </span>
+              <span id="mutual_fund_main_left_fund_by_groww_view_all">
+                <p>View all</p>
+              </span>
+            </div>
+            <div className="mutual_fund_main_left_fund_by_groww_comp_div">
+              <MutualFundCard
+                logoUrl={Groww_logo}
+                title="Groww Nifty EV & New Age Automotive ETF FoF Direct Growth"
+                year="1"
               />
-              <StocksCard
-                logoUrl={pnbHouse}
-                title="PNB Housing Finance"
-                cost="892.21"
-                costPerRate="17.21 (0.61%)"
+              <MutualFundCard
+                logoUrl={Groww_logo}
+                title="Groww Value Fund Direct Growth"
+                year="1"
               />
-              <StocksCard
-                logoUrl={centuryTextile}
-                title="Century Textiles"
-                cost="2,300.10"
-                costPerRate="152.66 (7.91%)"
+              <MutualFundCard
+                logoUrl={Groww_logo}
+                title="Groww Nifty Total Market Index Fund Direct Growth"
+                year="1"
               />
-              <StocksCard
-                logoUrl={castrolIndia}
-                title="Castrol India"
-                cost="268.90"
-                costPerRate="17.80 (7.10%)"
+              <MutualFundCard
+                logoUrl={Groww_logo}
+                title="Groww Nifty Smallcap 250 Index Fund Direct Growth"
+                year="1"
               />
             </div>
           </div>
-          <div className="mutual_fund_main_left_fund_by_groww"></div>
-          <div className="mutual_fund_main_left_quick_access"></div>
+          <div className="mutual_fund_main_left_quick_access">
+            <div className="mutual_fund_main_left_fund_by_groww_head">
+              <span id="mutual_fund_main_left_fund_by_groww_head_title">
+                Quick Access
+              </span>
+            </div>
+            <div className="mutual_fund_main_left_quick_access_component">
+              <QuicksAccess logoUrl={new_fund_offering} title="New Fund Offering"/>
+              <QuicksAccess logoUrl={new_fund_offering} title="Import Fund"/>
+              <QuicksAccess logoUrl={new_fund_offering} title="Compare Funds"/>
+              <QuicksAccess logoUrl={new_fund_offering} title="SIP Calculator"/>
+            </div>
+          </div>
         </div>
         <div className="mutual_fund_main_right"></div>
       </div>

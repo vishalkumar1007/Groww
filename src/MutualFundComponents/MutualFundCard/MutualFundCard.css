@@ -1,0 +1,101 @@
+.mutual_fund_card_main{
+    background-color: #ffffff;
+    width: 188px;
+    height: 176px;
+    min-width: 188px;
+    min-height: 176px;
+    border-radius: 7px;
+    border: 1.5px solid #e5e5e5;
+    padding: 16px;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+    transition: 1s ease-in-out;
+}
+.mutual_fund_card_main:hover{
+    zoom: 100.2%;
+    transition: 1s ease-in-out;
+}
+.mutual_fund_card_main:hover .mutual_fund_card_main_top_add{
+    display: block;
+}
+.mutual_fund_card_main_top{
+    /* background-color: rgb(2, 14, 35); */
+    width: 100%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.mutual_fund_card_main_top_logo_and_add{
+    /* background-color: crimson; */
+    height: 45px;
+}
+.mutual_fund_card_main_top_logo{
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    border: 1px solid #eaeaea;
+    border-radius: 7px;
+    overflow: hidden;
+}
+.mutual_fund_card_main_top_logo img{
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.mutual_fund_card_main_top_left_title {
+    /* background-color: skyblue; */
+    width: 100%;
+    display: flex;
+}
+
+#mutual_fund_card_main_top_left_title_span {
+    /* background-color: rgba(223, 162, 162, 0.899); */
+    font-size: 14px;
+    font-weight: 500;
+    color: #5b5f75;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em; 
+    max-height: 3em; 
+    width: 100%;
+}
+
+
+.mutual_fund_card_main_bottom{
+    /* background-color: violet; */
+    width: 100%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.mutual_fund_card_main_bottom_costPerRate{
+    /* background-color: rgb(84, 152, 38); */
+    color: #4a4a4a;
+    display: flex;
+    gap: 8px;
+}
+#mutual_fund_card_main_bottom_costPerRate_percentage{
+    font-size: 15px;
+    font-weight: 500;
+    color: #4a4a4a;
+    
+}
+#mutual_fund_card_main_bottom_costPerRate_year{
+    font-size: 15px;
+    font-weight: 500;
+    color: #c2c2c2;
+
+}

@@ -1,0 +1,40 @@
+.mutual_fund_collection_card_main{
+    background-color: white;
+    width: 120px;
+    height: 105px;
+    min-width: 120px;
+    min-height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mutual_fund_collection_card_main_icon{
+    /* background-color: pink; */
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.mutual_fund_collection_card_main_icon_main_box{
+    /* background-color: crimson; */
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+.mutual_fund_collection_card_main_icon_main_box img{
+    width: 100%;
+    height: 100%;
+}
+.mutual_fund_collection_card_main_title{
+    /* background-color: lavender; */
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(83, 83, 109);
+}
