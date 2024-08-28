@@ -109,7 +109,7 @@ const Navbar = () => {
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
             </svg>
           </div>
-          <div className="Navbar_activity_wallet">
+          <div className="Navbar_activity_wallet" onClick={()=>{navigate('/wallet')}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -126,7 +126,7 @@ const Navbar = () => {
               <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
             </svg>
           </div>
-          <div className="Navbar_activity_shop">
+          <div className="Navbar_activity_shop" onClick={()=>{navigate('/shop_cart')}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"

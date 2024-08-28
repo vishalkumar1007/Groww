@@ -1,7 +1,7 @@
 .mutual_fund_main{
     /* background-color: forestgreen; */
     width: 100%;
-    height: 100%;
+    height: 1000px;
     min-width: 225px;
     display: flex;
     justify-content: center;
@@ -12,4 +12,130 @@
     width: 95%;
     height: 100%;
     max-width: 1230px;
+    display: flex;
+    gap: 30px;
+    padding-top: 30px;
+}
+.mutual_fund_main_left{
+    /* background-color: pink; */
+    height: 100%;
+    width: 67%;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+.mutual_fund_main_left_popular_fund{
+    /* background-color: rgb(128, 240, 132); */
+    width: 100%;
+    height: fit-content;
+}
+.mutual_fund_main_left_popular_fund_head{
+    /* background-color: rgb(142, 57, 57); */
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+#mutual_fund_main_left_popular_fund_head_title{
+    /* background-color: pink; */
+    font-weight: 500;
+    font-size: 20px;
+    color: #44475b;
+}
+#mutual_fund_main_left_popular_fund_head_screener{
+    background-color: #00b3862d;
+    padding: 5px 12px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+#mutual_fund_main_left_popular_fund_head_screener p{
+    font-size: 12px;
+    font-weight: 400;
+    color: #00B386;
+}
+#mutual_fund_main_left_popular_fund_head_screener svg{
+    width: 17px;
+    height: 17px;
+    color: #00B386;
+}
+
+.mutual_fund_main_left_popular_fund_comp_div{
+    /* background-color: rgb(98, 169, 185); */
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 18px;
+    overflow-x: scroll;
+}
+.mutual_fund_main_left_popular_fund_comp_div::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+.mutual_fund_main_left_collection{
+    background-color: lightseagreen;
+    width: 100%;
+    height: fit-content;
+}
+
+.mutual_fund_main_left_collection_head{
+    /* background-color: rgb(142, 57, 57); */
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+#mutual_fund_main_left_collection_head_title{
+    /* background-color: pink; */
+    font-weight: 500;
+    font-size: 20px;
+    color: #44475b;
+}
+
+.mutual_fund_main_left_collection_comp_div{
+    /* background-color: rgb(98, 169, 185); */
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 18px;
+    overflow-x: scroll;
+}
+.mutual_fund_main_left_collection_comp_div::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+.mutual_fund_main_left_fund_by_groww{
+    background-color: lightsteelblue;
+    width: 100%;
+}
+.mutual_fund_main_left_quick_access{
+    background-color: lightgoldenrodyellow;
+    width: 100%;
+}
+/* ............... right .........  */
+
+.mutual_fund_main_right{
+    background-color: slateblue;
+    height: 100%;
+    width: 33%;
 }

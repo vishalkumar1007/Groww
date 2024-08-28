@@ -9,6 +9,8 @@ import PageNotFound from './component/PageNotFound/PageNotFound';
 import Error from './component/UnexpectedError/UnexpectedError';
 import AllStocksFilter from './page/AllStocksFilter/AllStocksFilter';
 import ComingSoon from './component/ComingSoon/ComingSoon';
+import Wallet from './page/Wallet/Wallet';
+import ShopCart from './page/ShopCart/ShopCart.jsx';
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
         <Route path='dashboard' element={<Dashboard/>} errorElement={<Error/>}/>
         <Route path='all_stocks_filter' element={<AllStocksFilter/>} errorElement={<Error/>}/>
         <Route path='under_construction' element={<ComingSoon/>} errorElement={<Error/>}/>
+        <Route path='wallet' element={<Wallet/>} errorElement={<Error/>}/>
+        <Route path='wallet' element={<Wallet/>} errorElement={<Error/>}/>
+        <Route path='shop_cart' element={<ShopCart/>} errorElement={<Error/>}/>
 
       </Routes>
     </BrowserRouter>

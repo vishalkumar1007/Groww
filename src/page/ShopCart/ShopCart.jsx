@@ -1,11 +1,12 @@
 import ComingSoon from '../../component/ComingSoon/ComingSoon';
-import './Wallet.css';
-const Wallet = ()=>{
+import './ShopCart.css';
+
+const ShopCart = ()=>{
     return(
-        <div className='wallet_main'>
+        <div className='shop_cart_main'>
             <ComingSoon/>
         </div>
     )
 }
 
-export default Wallet;
+export default ShopCart;
