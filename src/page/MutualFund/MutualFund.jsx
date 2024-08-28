@@ -19,7 +19,6 @@ import sip_calculator from "../../assets/img/Mutual_Fund/quick_access/calculator
 
 
 import "./MutualFund.css";
-import StocksCard from "../../component/StockCard/StockCard";
 import MutualFundCard from "../../MutualFundComponents/MutualFundCard/MutualFundCard";
 import MutualFundCollectionCard from "../../MutualFundComponents/MutualFundCollectionCard/MutualFundCollectionCard";
 import QuicksAccess from "../../MutualFundComponents/QuicksAccess/QuicksAccess";
