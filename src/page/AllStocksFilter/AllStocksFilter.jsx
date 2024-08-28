@@ -1,9 +1,20 @@
+import { useState } from "react";
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
+import SelectCategory from '../../AllStockFilterComponents/SelectCategory/SelectCategory';
 
 import "./AllStocksFilter.css";
 
+
+
 const AllStocksFilter = () => {
+
+  const[isActiveSector , setIsActiveSector] = useState(false);
+  const[isActiveIndex , setIsActiveIndex] = useState(false);
+  const[isActiveMarketCap , setIsActiveMarketCap] = useState(false);
+  const[isActiveSClosePrice , setIsActiveClosePrice] = useState(false);
+
+
   return (
     <div className="all_stock_main">
       <Navbar />
@@ -27,56 +38,157 @@ const AllStocksFilter = () => {
                     </span>
                   </div>
                 </div>
+
+                {/* ..................  */}
+                
                 <div className="all_stock_filter_container_main_sector">
                   <div className="all_stock_filter_container_main_sector_arrange_width">
-                    <div className="all_stock_filter_container_main_sector_head">
+                    <div className="all_stock_filter_container_main_sector_head" onClick={()=>{setIsActiveSector(!isActiveSector)}}>
                       <span id="all_stock_filter_container_main_sector_head_title">
                         Sectors
                       </span>
                       <span id="all_stock_filter_container_main_sector_head_toggle_arrow">
-                        #
+                        <svg
+                          id={isActiveSector?"svg_rotate_on_open":"svg_rotate_on_close"}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
                       </span>
                     </div>
-                    <div className="all_stock_filter_container_main_sector_hidden_box"></div>
+                    <div className="all_stock_filter_container_main_sector_hidden_box" id={isActiveSector?"asf_sector_hidden_box":null}>
+                    
+                    <div className="all_stock_filter_container_main_sector_hidden_box_arrange_height">
+                      <SelectCategory title="Agricultural"/>
+                      <SelectCategory title="Apparel & Accessories"/>
+                      <SelectCategory title="Automobile & Ancillaries"/>
+                      <SelectCategory title="Banking"/>
+                      <SelectCategory title="Consumer Durables"/>
+                      <SelectCategory title="Derived Materials"/>
+                      <SelectCategory title="Energy"/>
+                      <SelectCategory title="Financial"/>
+                      <SelectCategory title="FMGC"/>
+                      <SelectCategory title="Healthcare"/>
+                      <SelectCategory title="Hospitality & Travel"/>
+                      <SelectCategory title="Industrial Products"/>
+                      <SelectCategory title="Industries"/>
+                      <SelectCategory title="IT Industry"/>
+                      <SelectCategory title="Logistics & Freight"/>
+                      <SelectCategory title="Media & Entertainment"/>
+                      <SelectCategory title="Others"/>
+                      <SelectCategory title="Raw Material"/>
+                      <SelectCategory title="Tele-Communication"/>
+                      <SelectCategory title="Textile Industry"/>
+
+                    </div>
+                    </div>
                   </div>
                 </div>
+
+                {/* ..................  */}
+                
                 <div className="all_stock_filter_container_main_index">
                   <div className="all_stock_filter_container_main_index_arrange_width">
-                    <div className="all_stock_filter_container_main_index_head">
+                    <div className="all_stock_filter_container_main_index_head" onClick={()=>{setIsActiveIndex(!isActiveIndex)}}>
                       <span id="all_stock_filter_container_main_index_head_title">
                         Index
                       </span>
                       <span id="all_stock_filter_container_main_index_head_toggle_arrow">
-                        #
+                        <svg
+                          id={isActiveIndex?"svg_rotate_on_open":"svg_rotate_on_close"}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
                       </span>
                     </div>
-                    <div className="all_stock_filter_container_main_index_hidden_box"></div>
+                    <div className="all_stock_filter_container_main_index_hidden_box"  id={isActiveIndex?"asf_index_hidden_box":null}>
+                      <SelectCategory title="Nifty Bank"/>
+                      <SelectCategory title="Nifty Bank 50"/>
+                      <SelectCategory title="Nifty Midcap 100"/>
+                      <SelectCategory title="SENSEX"/>
+                      <SelectCategory title="Nifty 50"/>
+                      <SelectCategory title="Nifty 100"/>
+                      <SelectCategory title="BSE 100"/>
+                    </div>
                   </div>
                 </div>
+
+                {/* ..................  */}
+                
                 <div className="all_stock_filter_container_main_market_cap">
                   <div className="all_stock_filter_container_main_market_cap_arrange_width">
-                    <div className="all_stock_filter_container_main_market_cap_head">
+                    <div className="all_stock_filter_container_main_market_cap_head" onClick={()=>{setIsActiveMarketCap(!isActiveMarketCap)}}>
                       <span id="all_stock_filter_container_main_market_cap_head_title">
                         Market Cap (cr)
                       </span>
                       <span id="all_stock_filter_container_main_market_cap_head_toggle_arrow">
-                        #
+                        <svg
+                          id={isActiveMarketCap?"svg_rotate_on_open":"svg_rotate_on_close"}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
                       </span>
                     </div>
-                    <div className="all_stock_filter_container_main_market_cap_hidden_box"></div>
+                    <div className="all_stock_filter_container_main_market_cap_hidden_box" id={isActiveMarketCap?"asf_market_cap_hidden_box":null}>
+                      
+                    </div>
                   </div>
                 </div>
+
+                {/* ..................  */}
+                
                 <div className="all_stock_filter_container_main_close_price">
                   <div className="all_stock_filter_container_main_close_price_arrange_width">
-                    <div className="all_stock_filter_container_main_close_price_head">
+                    <div className="all_stock_filter_container_main_close_price_head" onClick={()=>{setIsActiveClosePrice(!isActiveSClosePrice)}}>
                       <span id="all_stock_filter_container_main_close_price_head_title">
                         Close Price
                       </span>
                       <span id="all_stock_filter_container_main_close_price_head_toggle_arrow">
-                        #
+                        <svg
+                          id={isActiveSClosePrice?"svg_rotate_on_open":"svg_rotate_on_close"}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
                       </span>
                     </div>
-                    <div className="all_stock_filter_container_main_close_price_hidden_box"></div>
+                    <div className="all_stock_filter_container_main_close_price_hidden_box" id={isActiveSClosePrice?"asf_close_price_hidden_box":null}>
+                      
+                    </div>
                   </div>
                 </div>
               </div>
