@@ -12,6 +12,9 @@ import Large_Cap from '../../assets/img/Mutual_Fund/collection/large_cap.svg'
 import Mid_Cap from '../../assets/img/Mutual_Fund/collection/mid_cap.svg'
 import Small_Cap from '../../assets/img/Mutual_Fund/collection/small_cap.svg'
 import new_fund_offering from "../../assets/img/Mutual_Fund/quick_access/nfo.svg";
+import import_fund from "../../assets/img/Mutual_Fund/quick_access/import_funds.svg";
+import compare_fund from "../../assets/img/Mutual_Fund/quick_access/compare_funds.svg";
+import sip_calculator from "../../assets/img/Mutual_Fund/quick_access/calculator.svg";
 
 
 
@@ -132,9 +135,9 @@ const MutualFund = () => {
             </div>
             <div className="mutual_fund_main_left_quick_access_component">
               <QuicksAccess logoUrl={new_fund_offering} title="New Fund Offering"/>
-              <QuicksAccess logoUrl={new_fund_offering} title="Import Fund"/>
-              <QuicksAccess logoUrl={new_fund_offering} title="Compare Funds"/>
-              <QuicksAccess logoUrl={new_fund_offering} title="SIP Calculator"/>
+              <QuicksAccess logoUrl={import_fund} title="Import Fund"/>
+              <QuicksAccess logoUrl={compare_fund} title="Compare Funds"/>
+              <QuicksAccess logoUrl={sip_calculator} title="SIP Calculator"/>
             </div>
           </div>
         </div>
