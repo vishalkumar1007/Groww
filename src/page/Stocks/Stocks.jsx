@@ -63,18 +63,16 @@ const Stocks = () => {
     useState(1);
   const [paginationEndIndex, setPaginationEndIndex] = useState(0);
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
+  const paginationChunk = 10;
 
   const currentActivePage = (activePage) => {
     setPaginationCurrentActivePage(activePage);
   };
 
   useEffect(() => {
-    const endIndex =
-      paginationCurrentActivePage * 10 > marketCapData.length
-        ? marketCapData.length
-        : paginationCurrentActivePage * 10;
-    const startIndex =
-      endIndex - (endIndex === marketCapData.length ? endIndex % 10 : 10);
+    const endIndex = ((paginationChunk * paginationCurrentActivePage)>marketCapData.length ? marketCapData.length : (paginationChunk * paginationCurrentActivePage));
+    const startIndex = endIndex - ((endIndex===marketCapData.length ? ((endIndex%10)+paginationChunk === paginationChunk?paginationChunk:(endIndex%10)):(paginationChunk)));
+    
     setPaginationStartIndex(startIndex);
     setPaginationEndIndex(endIndex);
   }, [paginationCurrentActivePage]);
