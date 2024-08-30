@@ -11,6 +11,7 @@ import AllStocksFilter from './page/AllStocksFilter/AllStocksFilter';
 import ComingSoon from './component/ComingSoon/ComingSoon';
 import Wallet from './page/Wallet/Wallet';
 import ShopCart from './page/ShopCart/ShopCart.jsx';
+import StockDetail from './page/StockDetail/StockDetail.jsx';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path='wallet' element={<Wallet/>} errorElement={<Error/>}/>
         <Route path='wallet' element={<Wallet/>} errorElement={<Error/>}/>
         <Route path='shop_cart' element={<ShopCart/>} errorElement={<Error/>}/>
-
+        <Route path='stock_detail' element={<StockDetail/>} errorElement={<Error/>} />
       </Routes>
     </BrowserRouter>
 

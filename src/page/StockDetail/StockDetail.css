@@ -1,0 +1,254 @@
+.stock_detail_main_page_not_found {
+  width: 100%;
+  height: 100dvh;
+}
+
+.stock_detail_main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
+}
+
+.stock_detail_main_arrange_width {
+  width: 95%;
+  max-width: 1230px;
+  height: 1200px;
+  /* background-color: rgba(95, 158, 160, 0.577); */
+  margin: 50px 0px;
+  display: flex;
+  gap: 30px;
+}
+
+/* ................. Company Info ..............  */
+
+.stock_detail_company_information_main {
+  /* background-color: rgb(208, 158, 188); */
+  width: 67%;
+  height: 100%;
+  padding-top: 15px;
+}
+.stock_detail_company_information_head {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 160px;
+  display: flex;
+}
+
+.stock_detail_company_information_head_left {
+  /* background-color: forestgreen; */
+  width: 75%;
+  height: 100%;
+}
+.stock_detail_company_information_head_left_logo {
+  /* background-color: #a3990e; */
+  width: 100%;
+  height: 40%;
+}
+#stock_detail_company_logo_span {
+  /* background-color: violet; */
+  width: 60px;
+  height: 60px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+}
+#stock_detail_company_logo_span img {
+  width: 100%;
+  height: 100%;
+}
+.stock_detail_company_information_head_left_title_and_cost {
+  /* background-color: gray; */
+  width: 100%;
+  height: 60%;
+}
+.stock_detail_company_information_head_left_title {
+  /* background-color: whitesmoke; */
+  width: 100%;
+  height: 61%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+#stock_detail_company_name {
+  font-size: 26px;
+  font-weight: 500;
+  color: #44475b;
+}
+.stock_detail_company_information_head_left_cost_and_CostPerRate {
+  /* background-color: chocolate; */
+  width: 100%;
+  height: 39%;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  gap: 15px;
+  /* position: relative; */
+  /* overflow: hidden; */
+}
+#stock_detail_company_information_head_left_cost {
+  /* background-color: #d2d2d2; */
+  font-size: 14px;
+  font-weight: 500;
+  height: 100%;
+  font-size: 27px;
+  font-weight: 500;
+  color: #44475b;
+  display: flex;
+  align-items: end;
+}
+#stock_detail_company_information_head_left_CostPerRate {
+  /* background-color: rgb(183, 183, 194); */
+  font-size: 14px;
+  font-weight: 500;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  /* position: absolute; */
+  left: 105px;
+  top: 15px;
+  color: #eb5b3c;
+}
+
+.stock_detail_company_information_head_right {
+  /* background-color: rgb(137, 6, 137); */
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+.stock_detail_company_information_head_right_alert {
+  background-color: transparent;
+  width: 115px;
+  height: 32px;
+  min-width: 115px;
+  min-height: 32px;
+  border: 1px solid #e9e9e9;
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #44475bdf;
+  transition: 0.3s ease-in-out;
+}
+.stock_detail_company_information_head_right_alert:hover {
+  border: 1px solid #97deced4;
+  transition: 0.3s ease-in-out;
+}
+.stock_detail_company_information_head_right_alert span {
+  /* background-color: #eb5b3c; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stock_detail_company_information_head_right_alert svg {
+  /* background-color: aquamarine; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stock_detail_company_information_head_right_watchlist {
+  background-color: transparent;
+  width: 97px;
+  height: 32px;
+  min-width: 97px;
+  min-height: 32px;
+  border: 1px solid #e9e9e9;
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #44475bd4;
+  transition: 0.3s ease-in-out;
+}
+.stock_detail_company_information_head_right_watchlist:hover {
+  border: 1px solid #97deced0;
+  transition: 0.3s ease-in-out;
+}
+
+
+.stock_detail_company_information_head_right_watchlist span {
+  /* background-color: #eb5b3c; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stock_detail_company_information_head_right_watchlist svg {
+  /* background-color: aquamarine; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ................ Buy Stock ...............  */
+
+.stock_detail_buy_stock_main {
+  background-color: rgba(192, 128, 76, 0.93);
+  width: 33%;
+  height: 100%;
+}
+
+@media (max-width: 850px) {
+  .stock_detail_company_information_main {
+    width: 100%;
+  }
+  .stock_detail_buy_stock_main {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .stock_detail_company_information_head_left {
+    width: 85%;
+  }
+  .stock_detail_company_information_head_right {
+    width: 15%;
+    min-width: 50px;
+    max-width: 60px;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+  }
+  .stock_detail_company_information_head_right_alert {
+    width: fit-content;
+    min-width: fit-content;
+    height: fit-content;
+    min-height: fit-content;
+    padding: 6px 7px;
+  }
+  .stock_detail_company_information_head_right_watchlist {
+    width: fit-content;
+    min-width: fit-content;
+    height: fit-content;
+    min-height: fit-content;
+    padding: 6px 7px;
+  }
+  .stock_detail_company_information_head_right span {
+    display: none;
+  }
+  .stock_detail_company_information_head_right svg {
+    width: 18px;
+    height: 18px;
+  }
+}

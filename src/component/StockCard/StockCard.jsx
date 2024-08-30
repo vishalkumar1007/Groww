@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./StocksCard.css";
+import { useNavigate } from "react-router-dom";
 
 const StocksCard = ({
   logoUrl = "",
@@ -7,8 +8,10 @@ const StocksCard = ({
   cost = "",
   costPerRate = "",
 }) => {
+  const navigate = useNavigate();
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
+  const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState('');
 
   useEffect(() => {
     if (costPerRate.length > 0) {
@@ -23,11 +26,37 @@ const StocksCard = ({
     }
   }, [costPerRate]);
 
+  useEffect(() => {
+    let updatedTitle = title;
+    for (let i = 0; i < updatedTitle.length; i++) {
+      if (updatedTitle[i] === " ") {
+        updatedTitle = updatedTitle.substring(0, i) + '-' + updatedTitle.substring(i + 1);
+      }
+      if(/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])){
+        updatedTitle = updatedTitle.substring(0, i) + '' + updatedTitle.substring(i + 1);
+      }
+      if (updatedTitle.charCodeAt(i) >= 65 && updatedTitle.charCodeAt(i) <= 90) {
+        updatedTitle =
+        updatedTitle.substring(0, i) +
+        updatedTitle[i].toLowerCase() +
+        updatedTitle.substring(i + 1);
+      }
+    }
+    setUpdatedTitleForUrl(updatedTitle);
+  }, [title]);
+  
   return (
-    <div className="stocksCard_main">
+    <div
+      className="stocksCard_main"
+     
+    >
       <div className="stocksCard_main_top">
-        <div className="stocksCard_main_top_logo_and_add">
-          <div className="stocksCard_main_top_logo">
+        <div className="stocksCard_main_top_logo_and_add" >
+          <div className="stocksCard_main_top_logo"
+             onClick={() => {
+              navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+            }}
+          >
             <img src={logoUrl} alt="" />
           </div>
           <div className="stocksCard_main_top_add">
@@ -78,11 +107,19 @@ const StocksCard = ({
             </div>
           </div>
         </div>
-        <div className="stocksCard_main_top_left_title">
+        <div className="stocksCard_main_top_left_title" 
+             onClick={() => {
+              navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+            }}
+          >
           {title || "Stock Title"}
         </div>
       </div>
-      <div className="stocksCard_main_bottom">
+      <div className="stocksCard_main_bottom"  
+         onClick={() => {
+          navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+        }}
+      >
         <div className="stocksCard_main_bottom_cost">₹{cost || "000.00"}</div>
         <div
           className="stocksCard_main_bottom_costPerRate"

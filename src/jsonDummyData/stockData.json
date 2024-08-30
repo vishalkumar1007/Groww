@@ -1,0 +1,220 @@
+[
+    {
+      "id": "ola-electric-mobility-ltd",
+      "name": "Ola Electric Mobility",
+      "logo_url": "svg/ola_logo.svg",
+      "cost": "2.77",
+      "costPerRate": "0.26 (0.19%)"
+    },
+    {
+      "id": "gtl-infrastructure-ltd",
+      "name": "GTL Infrastructure",
+      "logo_url": "svg/GTL_logo.webp",
+      "cost": "123.19",
+      "costPerRate": "-0.04 (1.42%)"
+    },
+    {
+      "id": "mazagon-dock-ship-ltd",
+      "name": "Mazagon Dock Ship",
+      "logo_url" : "img/top_gainer/mid_mazagon_ship_icon.webp",
+      "cost": "4,539.65",
+      "costPerRate": "240.1 (5.52%)"
+    },
+    {
+      "id": "angel-one-ltd",
+      "name": "Angel One",
+      "logo_url" : "svg/angel_one_logo.webp",
+      "cost": "2,699.90",
+      "costPerRate": "-3.00 (0.11%)"
+    },
+    {
+      "id": "divis-labs-ltd",
+      "name": "Divi's Labs",
+      "logo_url": "img/top_gainer/divis_lab_icon.webp",
+      "cost": "4,980.80",
+      "costPerRate": "177.65 (3.76%)"
+    },
+    {
+      "id": "varun-beverages-ltd",
+      "name": "Varun Beverages",
+      "logo_url": "img/top_gainer/varun_beverages_icon.webp",
+      "cost": "1,546.10",
+      "costPerRate": "54.50 (4.69%)"
+    },
+    {
+      "id": "titan-ltd",
+      "name": "Titan",
+      "logo_url": "img/top_gainer/titan_icon.webp",
+      "cost": "3,560.88",
+      "costPerRate": "85.26 (2.16%)"
+    },
+    {
+      "id": "sbi-life-insurance-ltd",
+      "name": "SBI Life Insurance",
+      "logo_url": "img/top_gainer/sbi_icon.webp",
+      "cost": "1,800.60",
+      "costPerRate": "39.3 (2.24%)"
+    },
+    {
+      "id": "nykaa-ltd",
+      "name": "Nykaa",
+      "logo_url": "img/top_gainer/mid_nykaa_icon.webp",
+      "cost": "210.39",
+      "costPerRate": "18.17 (9.48%)"
+    },
+    {
+      "id": "mazagon-dock-ship-ltd",
+      "name": "Mazagon Dock Ship",
+      "logo_url": "img/top_gainer/mid_mazagon_ship_icon.webp",
+      "cost": "4,593.2",
+      "costPerRate": "240.12 (5.52%)"
+    },
+    {
+      "id": "patanjali-foods-ltd",
+      "name": "Patanjali Foods",
+      "logo_url": "img/top_gainer/mid_patanjali_food_icon.webp",
+      "cost": "1,901.32",
+      "costPerRate": "79.04 (4.36%)"
+    },
+    {
+      "id": "bandhan-bank-ltd",
+      "name": "Bandhan Bank",
+      "logo_url": "img/top_gainer/mid_bandhan_bank_icon.webp",
+      "cost": "203.77",
+      "costPerRate": "6.84 (3.42%)"
+    },
+    {
+      "id": "alok-industries-ltd",
+      "name": "Alok Industries",
+      "logo_url": "img/top_gainer/small_aloak_industry_icon.webp",
+      "cost": "28.32",
+      "costPerRate": "2.10 (10.7%)"
+    },
+    {
+      "id": "pnb-housing-finance-ltd",
+      "name": "PNB Housing Finance",
+      "logo_url": "img/top_gainer/small_pnb_house_finance_icon.webp",
+      "cost": "892.21",
+      "costPerRate": "17.21 (0.61%)"
+    },
+    {
+      "id": "century-textiles-ltd",
+      "name": "Century Textiles",
+      "logo_url": "img/top_gainer/small_century_textiles_icon.webp",
+      "cost": "2,300.10",
+      "costPerRate": "152.66 (7.91%)"
+    },
+    {
+      "id": "castrol-india-ltd",
+      "name": "Castrol India",
+      "logo_url": "img/top_gainer/small_castrol_india_icon.webp",
+      "cost": "268.90",
+      "costPerRate": "17.80 (7.10%)"
+    },
+    {
+      "id": "zomato-ltd",
+      "name": "Zomato",
+      "logo_url": "img/news_stock/zomato_icon.webp",
+      "cost": "42.77",
+      "costPerRate": "-1.21 (0.29%)"
+    },
+    {
+      "id": "dwarikesh-sugar-ltd",
+      "name": "Dwarikesh Sugar",
+      "logo_url": "img/news_stock/Dwarikesh_Sugar_icon.webp",
+      "cost": "828.77",
+      "costPerRate": "12.26 (23.19%)"
+    },
+    {
+      "id": "tata-motors-ltd",
+      "name": "Tata Motors",
+      "logo_url": "img/news_stock/tata_moters_icon.webp",
+      "cost": "1070.76",
+      "costPerRate": "14.08 (1.39%)"
+    },
+    {
+      "id": "geojit-financial-services-ltd",
+      "name": "Geojit Financial Services",
+      "logo_url": "img/news_stock/geojit_icon.webp",
+      "cost": "212.12",
+      "costPerRate": "-4.26 (2.31%)"
+    },
+    {
+      "id": "adani-ltd",
+      "name": "Adani",
+      "logo_url": "img/top_looser/adani_icon.webp",
+      "cost": "2,212.80",
+      "costPerRate": "-177.65 (13.76%)"
+    },
+    {
+      "id": "firstsource-soln-ltd",
+      "name": "Firstsource Soln",
+      "logo_url": "img/top_looser/Firstsource_Soln_icon.webp",
+      "cost": "546.10",
+      "costPerRate": "-52.50 (4.69%)"
+    },
+    {
+      "id": "sjvn-ltd",
+      "name": "SJVN",
+      "logo_url": "img/top_looser/SJVN_icon.webp",
+      "cost": "260.88",
+      "costPerRate": "-85.26 (2.16%)"
+    },
+    {
+      "id": "cholamandalam-invest-ltd",
+      "name": "Cholamandalam Invest",
+      "logo_url": "img/top_looser/Cholamandalam_Invest_icon.webp",
+      "cost": "200.60",
+      "costPerRate": "-69.3 (2.24%)"
+    },
+    {
+      "id": "cyient-ltd",
+      "name": "Cyient",
+      "logo_url": "img/top_looser/cyient_icon.webp",
+      "cost": "310.39",
+      "costPerRate": "-18.17 (9.48%)"
+    },
+    {
+      "id": "gland-ltd",
+      "name": "Gland",
+      "logo_url": "img/top_looser/gland_icon.webp",
+      "cost": "693.2",
+      "costPerRate": "-240.12 (5.52%)"
+    },
+    {
+      "id": "jws-energy-ltd",
+      "name": "JWS Energy",
+      "logo_url": "img/top_looser/jsw_energy_icon.webp",
+      "cost": "101.32",
+      "costPerRate": "-29.04 (4.36%)"
+    },
+    {
+      "id": "mahanagar-gas-ltd",
+      "name": "Mahanagar Gas",
+      "logo_url": "img/top_looser/mahanagar_gas_icon.webp",
+      "cost": "28.32",
+      "costPerRate": "-22.10 (10.7%)"
+    },
+    {
+      "id": "pnb-housing-finance-ltd",
+      "name": "PNB Housing Finance",
+      "logo_url": "img/top_gainer/small_pnb_house_finance_icon.webp",
+      "cost": "392.21",
+      "costPerRate": "-17.21 (0.61%)"
+    },
+    {
+      "id": "century-textiles-ltd",
+      "name": "Century Textiles",
+      "logo_url": "img/top_gainer/small_century_textiles_icon.webp",
+      "cost": "990.10",
+      "costPerRate": "-252.66 (7.91%)"
+    },
+    {
+      "id": "tata-motors-ltd",
+      "name": "Tata Motors",
+      "logo_url": "img/news_stock/tata_moters_icon.webp",
+      "cost": "1,128.90",
+      "costPerRate": "-57.80 (7.10%)"
+    }
+  ]
+  
