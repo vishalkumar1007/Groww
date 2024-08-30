@@ -1,0 +1,56 @@
+.buy_stock_card_main{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.buy_stock_card_main_title_head{
+    background-color: #ffd90025;
+    width: 100%;
+    height: 12.5%;
+    border-bottom: 1.5px solid #e1e1e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buy_stock_card_main_title_head_arrange_width{
+    background-color: #ffd90031;
+    width: 90%;
+    height: 100%;
+}
+.buy_stock_card_main_buy_and_sell{
+    background-color: #4683b40e;
+    width: 100%;
+    height: 87.5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.buy_stock_card_main_buy_and_sell_switch{
+    /* background-color: #4683b40e; */
+    width: 100%;
+    height: 10%;
+    border-bottom: 1.5px solid #e1e1e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buy_stock_card_main_buy_and_sell_switch_arrange_width{
+    background-color: #4683b40e;
+    width: 90%;
+    height: 100%;
+
+}
+.buy_stock_card_main_buy_and_sell_chose_rate_main{
+    background-color: #ffff0024;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buy_stock_card_main_buy_and_sell_chose_rate_main_arrange_width{
+    background-color: rgba(255, 182, 193, 0.403);
+    width: 90%;
+    height: 100%;
+}

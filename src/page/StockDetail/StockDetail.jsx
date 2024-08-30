@@ -6,6 +6,7 @@ import Footer from "../../component/Footer/Footer";
 import PageNotFound from "../../component/PageNotFound/PageNotFound";
 import StockData from "../../jsonDummyData/stockData.json";
 import useImage from "../../hooks/useImage";
+import BuyStockCard from '../../component/BuyStockCard/BuyStockCard';
 
 const StockDetail = () => {
   const location = useLocation();
@@ -132,7 +133,11 @@ const StockDetail = () => {
                 </div>
               </div>
               {/* ........... Buy Stock ............... */}
-              <div className="stock_detail_buy_stock_main"></div>
+              <div className="stock_detail_buy_stock_main">
+                <div className="stock_detail_buy_stock_main_buy_card_div">
+                  <BuyStockCard/>
+                </div>
+              </div>
             </div>
             <Footer />
           </div>

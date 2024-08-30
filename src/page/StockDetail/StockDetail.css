@@ -201,9 +201,24 @@
 /* ................ Buy Stock ...............  */
 
 .stock_detail_buy_stock_main {
-  background-color: rgba(192, 128, 76, 0.93);
+  /* background-color: rgba(192, 128, 76, 0.93); */
   width: 33%;
   height: 100%;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.stock_detail_buy_stock_main_buy_card_div{
+    /* background-color: rgba(245, 222, 179, 0.242); */
+    width: 98%;
+    height: 570px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid #e1e1e1;
+    position: sticky;
+    top: 40px;
+
 }
 
 @media (max-width: 850px) {
