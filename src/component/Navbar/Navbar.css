@@ -247,6 +247,7 @@
     overflow: hidden;
     box-shadow: 1px 0px 15px #efefefc2;
     transition: 0.4s ease-in-out;
+    z-index: 20;
 }
 
 /* .............. aninmation.............  */

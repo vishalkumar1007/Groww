@@ -218,7 +218,7 @@
     border: 1.5px solid #e1e1e1;
     position: sticky;
     top: 40px;
-
+  z-index: 4;
 }
 
 @media (max-width: 850px) {

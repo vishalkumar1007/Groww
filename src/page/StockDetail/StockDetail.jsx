@@ -135,7 +135,7 @@ const StockDetail = () => {
               {/* ........... Buy Stock ............... */}
               <div className="stock_detail_buy_stock_main">
                 <div className="stock_detail_buy_stock_main_buy_card_div">
-                  <BuyStockCard/>
+                  <BuyStockCard companyName={companyName} cost={companyCost} costPerRate={companyCostPerRate}/>
                 </div>
               </div>
             </div>
