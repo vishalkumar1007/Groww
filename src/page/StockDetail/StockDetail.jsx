@@ -41,9 +41,9 @@ const StockDetail = () => {
         setShareHolderPercentageRange3(14.71);
       }
       else if(activeShareholdingPatternDay==='day4'){
-        setShareHolderPercentageRange1(82.71);
-        setShareHolderPercentageRange2(32.61);
-        setShareHolderPercentageRange3(49.61);
+        setShareHolderPercentageRange1(52.71);
+        setShareHolderPercentageRange2(42.61);
+        setShareHolderPercentageRange3(100);
       }
   },[activeShareholdingPatternDay])
 

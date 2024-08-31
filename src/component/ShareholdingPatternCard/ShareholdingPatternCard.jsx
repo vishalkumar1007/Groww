@@ -9,14 +9,11 @@ const ShareholdingPatternCard = ({title , percentage})=>{
         if(percentage<0){
             setValidPercentage(0);
         }
-        else if(percentage>100){
-            setValidPercentage(100)
-        }
-        else{
+        else {
             let increase = 0;
             const interval = setInterval(()=>{
                 increase++;
-                if(increase<=percentage){
+                if(increase<=percentage && increase<=100){
                     setValidPercentage(increase);
                 }else{
                     clearInterval(interval);
