@@ -100,7 +100,7 @@ const Footer = ()=>{
                 </div>
                 <div className='footer_build_with_love'>
                     <div className='footer_build_with_love_text'>
-                        <p>&#169; 2016-2024 Groww. All right reserved, Build with <span id='footer_love_with_india_red_heard_text'>♥</span> in India</p>
+                        <p>&#169; 2024 Groww. All right reserved, Build by Vishal <span id='footer_love_with_india_red_heard_text'>♥</span> in India</p>
                     </div>
                     <div className='footer_build_with_love_logo'>
                         <div className='footer_build_with_love_logo_googlePlay'>

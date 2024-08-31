@@ -6,7 +6,7 @@ import Footer from "../../component/Footer/Footer";
 import PageNotFound from "../../component/PageNotFound/PageNotFound";
 import StockData from "../../jsonDummyData/stockData.json";
 import useImage from "../../hooks/useImage";
-import BuyStockCard from '../../component/BuyStockCard/BuyStockCard';
+import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
 
 const StockDetail = () => {
   const location = useLocation();
@@ -131,11 +131,155 @@ const StockDetail = () => {
                     </button>
                   </div>
                 </div>
+                <div className="stock_detail_company_graph_main"></div>
+                <div className="stock_detail_company_performance_main">
+                  <div className="stock_detail_company_performance_low_and_heigh">
+                    <div className="stock_detail_company_performance_low_and_heigh_title">
+                      <span id="stock_detail_company_performance_title_span">
+                        Performance
+                      </span>
+                    </div>
+                    <div className="stock_detail_company_performance_low_and_heigh_stats">
+                      <div className="stock_detail_company_performance_low_and_heigh_stats_todays">
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_todays_low">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_title">
+                            Today's Low
+                          </span>
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_data">
+                            117.21
+                          </span>
+                        </div>
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_graph_line">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_graph_line_span_view"></span>
+                        </div>
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_todays_high">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_title">
+                            Today's High
+                          </span>
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_data">
+                            122.95
+                          </span>
+                        </div>
+                      </div>
+                      <div className="stock_detail_company_performance_low_and_heigh_stats_52w">
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_52w_low">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_title">
+                            52W Low
+                          </span>
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_data">
+                            99.2
+                          </span>
+                        </div>
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_52w_graph_line">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_graph_line_span_view"></span>
+                        </div>
+                        <div className="stock_detail_company_performance_low_and_heigh_stats_52w_high">
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_title">
+                            52W High
+                          </span>
+                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_data">
+                            32.54
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="stock_detail_company_performance_data">
+                    <div className="stock_detail_company_performance_data_top">
+                      <span id="stock_detail_company_performance_data_top_open">
+                        <p id="perform_title_x">Open</p>
+                        <p id="perform_value_y">121.03</p>
+                      </span>
+                      <span id="stock_detail_company_performance_data_top_prev">
+                        <p id="perform_title_x">Prev. Close</p>
+                        <p id="perform_value_y">120.27</p>
+                      </span>
+                      <span id="stock_detail_company_performance_data_top_volume">
+                        <p id="perform_title_x">Volume</p>
+                        <p id="perform_value_y">22,42,076</p>
+                      </span>
+                    </div>
+                    <div className="stock_detail_company_performance_data_bottom">
+                      <span id="stock_detail_company_performance_data_bottom_tread_value">
+                        <p id="perform_title_x">Total traded value</p>
+                        <p id="perform_value_y">26.45 Cr</p>
+                      </span>
+                      <span id="stock_detail_company_performance_data_bottom_upper_circuit">
+                        <p id="perform_title_x">Upper Circuit</p>
+                        <p id="perform_value_y">128.63</p>
+                      </span>
+                      <span id="stock_detail_company_performance_data_bottom_lower_circuit">
+                        <p id="perform_title_x">Lower Circuit</p>
+                        <p id="perform_value_y">172.21</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="stock_detail_company_fundamental_main">
+                  <div className="stock_detail_company_fundamental_main_title">
+                    <span>Fundamentals</span>
+                  </div>
+                  <div className="stock_detail_company_fundamental_main_data">
+                    <div className="stock_detail_company_fundamental_main_data_left">
+                      <div className="stock_detail_company_fundamental_main_data_left_arrange_width">
+                        <div className="stock_detail_company_fundamental_main_data_left_market_cap">
+                          <span id="fundamental_title_x">Market Cap</span>
+                          <span id="fundamental_cost_x">₹52,043Cr</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_left_pe_ratio">
+                          <span id="fundamental_title_x">P/E Ratio(TTM)</span>
+                          <span id="fundamental_cost_x">-32.87</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_left_pb_ratio">
+                          <span id="fundamental_title_x">P/B Ratio</span>
+                          <span id="fundamental_cost_x">8.25</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_left_industry_pe">
+                          <span id="fundamental_title_x">Industry P/E</span>
+                          <span id="fundamental_cost_x">24.05</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_left_debt_equity">
+                          <span id="fundamental_title_x">Debt to Equity</span>
+                          <span id="fundamental_cost_x">1.34</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="stock_detail_company_fundamental_main_data_right">
+                      <div className="stock_detail_company_fundamental_main_data_right_arrange_width">
+                        <div className="stock_detail_company_fundamental_main_data_right_ROE">
+                          <span id="fundamental_title_x">ROE</span>
+                          <span id="fundamental_cost_x">-78.43</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_right_EPS">
+                          <span id="fundamental_title_x">EPS(TTM)</span>
+                          <span id="fundamental_cost_x">-32.87</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_right_Dividend_Yield">
+                          <span id="fundamental_title_x">Dividend Yield</span>
+                          <span id="fundamental_cost_x">8.25</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_right_Book_Value">
+                          <span id="fundamental_title_x">Book Value</span>
+                          <span id="fundamental_cost_x">24.05</span>
+                        </div>
+                        <div className="stock_detail_company_fundamental_main_data_right_Face_Value">
+                          <span id="fundamental_title_x">Face Value</span>
+                          <span id="fundamental_cost_x">10.00</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="stock_detail_company_financial_main"></div>
               </div>
               {/* ........... Buy Stock ............... */}
               <div className="stock_detail_buy_stock_main">
                 <div className="stock_detail_buy_stock_main_buy_card_div">
-                  <BuyStockCard companyName={companyName} cost={companyCost} costPerRate={companyCostPerRate}/>
+                  <BuyStockCard
+                    companyName={companyName}
+                    cost={companyCost}
+                    costPerRate={companyCostPerRate}
+                  />
                 </div>
               </div>
             </div>
