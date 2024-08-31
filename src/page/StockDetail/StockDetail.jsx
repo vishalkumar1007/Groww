@@ -299,7 +299,12 @@ const StockDetail = () => {
                     </div>
                   </div>
                 </div>
-                <div className="stock_detail_company_financial_main"></div>
+                <div className="stock_detail_company_financial_main">
+                  <div className="stock_detail_company_financial_main_head">
+                    <span id="stock_detail_company_financial_main_head_title">Financials</span>
+                  </div>
+                  <div className="stock_detail_company_financial_main_"></div>
+                </div>
                 <div className="stock_detail_company_shareholding_pattern_main">
                   <div className="stock_detail_company_shareholding_pattern_title_div">
                     <span id="stock_detail_company_pattern_title_div_title">

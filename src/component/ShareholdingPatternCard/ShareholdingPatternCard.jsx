@@ -6,14 +6,26 @@ const ShareholdingPatternCard = ({title , percentage})=>{
     const [validPercentage , setValidPercentage] = useState(0);
 
     useEffect(()=>{
-        if(percentage>100){
-            setValidPercentage(100);
-        }else if(percentage < 0){
+        if(percentage<0){
             setValidPercentage(0);
-        }else{
-            setValidPercentage(percentage);
+        }
+        else if(percentage>100){
+            setValidPercentage(100)
+        }
+        else{
+            let increase = 0;
+            const interval = setInterval(()=>{
+                increase++;
+                if(increase<=percentage){
+                    setValidPercentage(increase);
+                }else{
+                    clearInterval(interval);
+                }
+            },12)
+            return ()=> clearInterval(interval);
         }
     },[percentage])
+
     return(
         <div className='shareholder_patter_main'>
             <div className="shareholder_patter_head_div">
