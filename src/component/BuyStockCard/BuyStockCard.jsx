@@ -3,6 +3,8 @@ import { useState } from "react";
 
 const BuyStockCard = ({ companyName, cost, costPerRate }) => {
   const [isBuyOption, setIsBuyOption] = useState("buy");
+  const [userInputQytValue, setUserInputQytValue] = useState(0);
+  const [userInputPriceValue, setUserInputPriceValue] = useState(0);
   return (
     <div className="buy_stock_card_main">
       <div className="buy_stock_card_main_title_head">
@@ -50,10 +52,43 @@ const BuyStockCard = ({ companyName, cost, costPerRate }) => {
         </div>
         <div className="buy_stock_card_main_buy_and_sell_chose_rate_main">
           <div className="buy_stock_card_main_buy_and_sell_chose_rate_main_arrange_width">
-            <div className="buy_stock_card_main_buy_and_sell_chose_top"></div>
+            <div className="buy_stock_card_main_buy_and_sell_chose_top">
+              <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_box">
+                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main">
+                  <span id="buy_stock_card_inputs_quality_title">Qty NSE</span>
+                  <input
+                    id="buy_stock_card_inputs_quality_input"
+                    type="number"
+                    min="0"
+                    value={userInputQytValue}
+                    onChange={(e) => {
+                      setUserInputQytValue(
+                        e.target.value === "" ? 0 : e.target.value
+                      );
+                    }}
+                  />
+                </div>
+                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main">
+                  <span id="buy_stock_card_inputs_price_title">
+                    Price Limit
+                  </span>
+                  <input
+                    id="buy_stock_card_inputs_price_input"
+                    type="number"
+                    min="0"
+                    value={userInputPriceValue}
+                    onChange={(e) => {
+                      setUserInputPriceValue(
+                        e.target.value === "" ? 0 : e.target.value
+                      );
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
             <div className="buy_stock_card_main_buy_and_sell_chose_bottom">
               <div className="buy_stock_card_main_buy_and_sell_chose_bottom_notify_box">
-                {isBuyOption==='buy' ? (
+                {isBuyOption === "buy" ? (
                   <span id="buy_stock_card_main_buy_and_sell_chose_bottom_notify_span">
                     Stock is under watch by exchange
                   </span>

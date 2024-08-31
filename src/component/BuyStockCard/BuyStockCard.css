@@ -134,7 +134,69 @@
     width: 100%;
     height: 70%;
 }
+.buy_stock_card_main_buy_and_sell_chose_top_inputs_box{
+    /* background-color: rgb(192, 246, 255); */
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main{
+    /* background-color: #278a3b; */
+    width: 100%;
+    height: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#buy_stock_card_inputs_quality_title{
+    /* background-color: pink; */
+    font-size: 14px;
+}
 
+#buy_stock_card_inputs_quality_input{
+    width: 120px;
+    height: 90%;
+    border: 1.7px solid #f0f0f0df;
+    border-radius: 5px;
+    text-align: end;
+    padding: 0px 8px;
+    font-size: 17px;
+    transition: 0.1s ease-in-out;
+}
+
+#buy_stock_card_inputs_quality_input:focus{
+    border: 1.7px solid #008d6aa6;
+    transition: 0.1s ease-in-out;
+}
+.buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main{
+    /* background-color: #eb5b3c; */
+    width: 100%;
+    height: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#buy_stock_card_inputs_price_title{
+    /* background-color: pink; */
+    font-size: 14px;
+}
+#buy_stock_card_inputs_price_input{
+    width: 120px;
+    height: 90%;
+    border: 1.7px solid #f0f0f0df;
+    border-radius: 5px;
+    text-align: end;
+    padding: 0px 8px;
+    font-size: 17px;
+    transition: 0.1s ease-in-out;
+}
+#buy_stock_card_inputs_price_input:focus{
+    border: 1.7px solid #008d6aa6;
+    transition: 0.1s ease-in-out;
+}
 .buy_stock_card_main_buy_and_sell_chose_bottom{
     /* background-color: slateblue; */
     width: 100%;
