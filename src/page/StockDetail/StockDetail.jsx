@@ -7,6 +7,7 @@ import PageNotFound from "../../component/PageNotFound/PageNotFound";
 import StockData from "../../jsonDummyData/stockData.json";
 import useImage from "../../hooks/useImage";
 import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
+import ShareholdingPatternCard from "../../component/ShareholdingPatternCard/ShareholdingPatternCard";
 
 const StockDetail = () => {
   const location = useLocation();
@@ -16,7 +17,35 @@ const StockDetail = () => {
   const [companyCost, setCompanyCost] = useState("186.37");
   const [companyCostPerRate, setCompanyCostPerRate] = useState("-8.45 (4.34%)");
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
+  const [activeShareholdingPatternDay , setActiveShareholdingPatternDay] = useState('day1');
   const { image } = useImage(companyLogoUrlName);
+
+  const [shareHolderPercentageRange1 , setShareHolderPercentageRange1 ] = useState(0);
+  const [shareHolderPercentageRange2 , setShareHolderPercentageRange2 ] = useState(0);
+  const [shareHolderPercentageRange3 , setShareHolderPercentageRange3 ] = useState(0);
+
+  useEffect(()=>{
+      if(activeShareholdingPatternDay==='day1'){
+        setShareHolderPercentageRange1(32.91);
+        setShareHolderPercentageRange2(72.65);
+        setShareHolderPercentageRange3(42.88);
+      }
+      else if(activeShareholdingPatternDay==='day2'){
+        setShareHolderPercentageRange1(52.72);
+        setShareHolderPercentageRange2(61.81);
+        setShareHolderPercentageRange3(25.72);
+      }
+      else if(activeShareholdingPatternDay==='day3'){
+        setShareHolderPercentageRange1(42.1);
+        setShareHolderPercentageRange2(72.81);
+        setShareHolderPercentageRange3(14.71);
+      }
+      else if(activeShareholdingPatternDay==='day4'){
+        setShareHolderPercentageRange1(82.71);
+        setShareHolderPercentageRange2(32.61);
+        setShareHolderPercentageRange3(49.61);
+      }
+  },[activeShareholdingPatternDay])
 
   const queryParams = new URLSearchParams(location.search);
   const stockName = queryParams.keys().next().value;
@@ -271,6 +300,30 @@ const StockDetail = () => {
                   </div>
                 </div>
                 <div className="stock_detail_company_financial_main"></div>
+                <div className="stock_detail_company_shareholding_pattern_main">
+                  <div className="stock_detail_company_shareholding_pattern_title_div">
+                    <span id="stock_detail_company_pattern_title_div_title">
+                      Shareholding Pattern
+                    </span>
+                  </div>
+                  <div className="stock_detail_company_shareholding_pattern_graph_div">
+                    <div className="stock_detail_company_shareholding_pattern_graph_main">
+                      <div className="stock_detail_company_shareholding_pattern_graph_main_arrange_width">
+                        <div className="stock_detail_company_shareholding_pattern_graph_main_top">
+                          <button id={activeShareholdingPatternDay==='day1'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day1" onClick={()=>{setActiveShareholdingPatternDay('day1')}}>Day 1</button>
+                          <button id={activeShareholdingPatternDay==='day2'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day2" onClick={()=>{setActiveShareholdingPatternDay('day2')}}>Day 2</button>
+                          <button id={activeShareholdingPatternDay==='day3'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day3" onClick={()=>{setActiveShareholdingPatternDay('day3')}}>Day 3</button>
+                          <button id={activeShareholdingPatternDay==='day4'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day4" onClick={()=>{setActiveShareholdingPatternDay('day4')}}>Day 4</button>
+                        </div>
+                        <div className="stock_detail_company_shareholding_pattern_graph_main_bottom">
+                            <ShareholdingPatternCard title={'Promoters'} percentage={shareHolderPercentageRange1}/>
+                            <ShareholdingPatternCard title={'Retail And Others'} percentage={shareHolderPercentageRange2}/>
+                            <ShareholdingPatternCard title={'Other Domestic Industry'} percentage={shareHolderPercentageRange3}/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               {/* ........... Buy Stock ............... */}
               <div className="stock_detail_buy_stock_main">

@@ -678,6 +678,134 @@
 }
 
 
+/* ................. shareholding_pattern ..............  */
+
+
+.stock_detail_company_shareholding_pattern_main{
+  /* background-color: rgba(100, 174, 196, 0.585); */
+  width: 100%;
+  height: 440px;
+  margin-top: 80px;
+}
+
+.stock_detail_company_shareholding_pattern_title_div{
+  /* background-color: rgb(194, 150, 29); */
+  width: 100%;
+  height: 13%;
+}
+#stock_detail_company_pattern_title_div_title{
+  font-size: 20px;
+  color: #44475b;
+  font-weight: 500;
+}
+.stock_detail_company_shareholding_pattern_graph_div{
+  /* background-color: rgb(45, 0, 128); */
+  width: 100%;
+  height: 88%;
+}
+.stock_detail_company_shareholding_pattern_graph_main{
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.stock_detail_company_shareholding_pattern_graph_main_arrange_width{
+  /* background-color: thistle; */
+  width: 90%;
+  height: 100%;
+
+}
+
+.stock_detail_company_shareholding_pattern_graph_main_top{
+  /* background-color: burlywood; */
+  width: 100%;
+  height: 22%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#shareholding_pattern_top_day_active{
+  background-color: #00b38616;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  color: #07b78b;
+  font-weight: 500;
+}
+.stock_detail_company_shareholding_pattern_top_day1{
+  background-color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  color: #979797;
+  cursor:pointer;
+}
+.stock_detail_company_shareholding_pattern_top_day2{
+    background-color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  color: #979797;
+  cursor:pointer;
+}
+.stock_detail_company_shareholding_pattern_top_day3{
+    background-color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  color: #979797;
+  cursor:pointer;
+}
+.stock_detail_company_shareholding_pattern_top_day4{
+    background-color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  color: #979797;
+  cursor:pointer;
+}
+
+.stock_detail_company_shareholding_pattern_graph_main_bottom{
+  /* background-color: skyblue; */
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -703,8 +831,6 @@
     top: 40px;
   z-index: 4;
 }
-
-
 
 
 

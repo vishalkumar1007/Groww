@@ -1,0 +1,62 @@
+.shareholder_patter_main{
+    /* background-color: gray; */
+    width: 100%;
+    height: 70px;
+}
+.shareholder_patter_head_div{
+    /* background-color: burlywood; */
+    width: 100%;
+    height: 35%;
+    display: flex;
+    align-items: start;
+
+}
+#shareholder_patter_head_title{
+    font-size: 16px;
+    color: #44475b;
+    /* font-weight: 500; */
+}
+.shareholder_patter_main_graph_and_rate_percentage{
+    /* background-color: violet; */
+    width: 100%;
+    height: 65%;
+    display: flex;
+}
+.shareholder_patter_main_graph_div{
+    /* background-color: rgb(255, 255, 255); */
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.shareholder_patter_main_graph_fixed_range{
+    width: 100%;
+    background-color: #ececec;
+    height: 1.5px;
+}
+
+.shareholder_patter_main_graph_flexible_show_data{
+    position: absolute;
+    background-color: #00b386;
+    width: 0%;
+    height: 8px;
+    border-radius: 3px;
+    transition: 1s ease-in-out;
+}
+
+.shareholder_patter_rate_percentage{
+    /* background-color: tomato; */
+    width: 20%;
+    min-width: 90px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.shareholder_patter_rate_percentage span{
+    font-size: 17px;
+    font-weight: 500;
+    color: #44475b;
+}
