@@ -121,6 +121,7 @@
   transition: 0.2s ease-in-out;
   border-radius: 7px;
   overflow: hidden;
+  z-index: 5;
 }
 
 .comp_stocks_index_main_right_more_option{

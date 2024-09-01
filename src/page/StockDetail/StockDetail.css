@@ -4,14 +4,15 @@
 }
 
 .stock_detail_main {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  -webkit-user-select: none; 
-  -ms-user-select: none; 
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -186,7 +187,6 @@
   transition: 0.3s ease-in-out;
 }
 
-
 .stock_detail_company_information_head_right_watchlist span {
   /* background-color: #eb5b3c; */
   height: 100%;
@@ -204,40 +204,40 @@
 
 /* ................. graph main section ..............  */
 
-.stock_detail_company_graph_main{
+.stock_detail_company_graph_main {
   /* background-color: rgba(176, 200, 133, 0.585); */
   width: 100%;
   height: 420px;
 }
 /* ................. performance main section ..............  */
 
-.stock_detail_company_performance_main{
+.stock_detail_company_performance_main {
   /* background-color: rgba(106, 75, 197, 0.585); */
   width: 100%;
   height: 500px;
   margin-top: 60px;
 }
 
-.stock_detail_company_performance_low_and_heigh{
+.stock_detail_company_performance_low_and_heigh {
   /* background-color: rgb(112, 144, 116); */
   width: 100%;
   height: 52%;
   /* max-height: 300px; */
   border-bottom: 1px dashed #d5d5d5;
 }
-.stock_detail_company_performance_low_and_heigh_title{
+.stock_detail_company_performance_low_and_heigh_title {
   /* background-color: lightcyan; */
   width: 100%;
   height: 25%;
   max-height: 70px;
 }
-#stock_detail_company_performance_title_span{
+#stock_detail_company_performance_title_span {
   font-size: 20px;
   font-weight: 500;
   color: #44475b;
 }
 
-.stock_detail_company_performance_low_and_heigh_stats{
+.stock_detail_company_performance_low_and_heigh_stats {
   /* background-color: rgba(92, 31, 40, 0.333); */
   width: 100%;
   height: 75%;
@@ -248,13 +248,13 @@
   flex-direction: column;
   gap: 20px;
 }
-.stock_detail_company_performance_low_and_heigh_stats_todays{
+.stock_detail_company_performance_low_and_heigh_stats_todays {
   /* background-color: steelblue; */
   width: 100%;
   height: 48%;
   display: flex;
 }
-.stock_detail_company_performance_low_and_heigh_stats_todays_low{
+.stock_detail_company_performance_low_and_heigh_stats_todays_low {
   /* background-color: violet; */
   width: 15%;
   height: 80%;
@@ -266,29 +266,27 @@
   gap: 10px;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_todays_low_title{
+#stock_detail_company_performance_low_and_heigh_stats_todays_low_title {
   font-size: 14px;
   color: #44475b;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_todays_low_data{
+#stock_detail_company_performance_low_and_heigh_stats_todays_low_data {
   font-size: 16px;
   color: #44475b;
   font-weight: 500;
-
 }
 
-
-.stock_detail_company_performance_low_and_heigh_stats_graph_line{
+.stock_detail_company_performance_low_and_heigh_stats_graph_line {
   /* background-color: sandybrown; */
   width: 75%;
-  height:80%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_graph_line_span_view{
+#stock_detail_company_performance_low_and_heigh_stats_graph_line_span_view {
   background-color: #eeeeee;
   width: 100%;
   height: 6px;
@@ -296,10 +294,10 @@
   border-radius: 10px;
 }
 
-.stock_detail_company_performance_low_and_heigh_stats_todays_high{
+.stock_detail_company_performance_low_and_heigh_stats_todays_high {
   /* background-color: #a0a0de; */
   width: 15%;
-  height:80%;
+  height: 80%;
   max-width: 100px;
   min-width: 85px;
   display: flex;
@@ -309,18 +307,18 @@
   gap: 10px;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_todays_high_title{
+#stock_detail_company_performance_low_and_heigh_stats_todays_high_title {
   font-size: 14px;
   color: #44475b;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_todays_high_data{
+#stock_detail_company_performance_low_and_heigh_stats_todays_high_data {
   font-size: 16px;
   color: #44475b;
   font-weight: 500;
 }
 
-.stock_detail_company_performance_low_and_heigh_stats_52w{
+.stock_detail_company_performance_low_and_heigh_stats_52w {
   /* background-color: pink; */
   width: 100%;
   height: 48%;
@@ -328,7 +326,7 @@
   align-items: end;
 }
 
-.stock_detail_company_performance_low_and_heigh_stats_52w_low{
+.stock_detail_company_performance_low_and_heigh_stats_52w_low {
   /* background-color: violet; */
   width: 15%;
   height: 80%;
@@ -340,29 +338,27 @@
   gap: 10px;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_52w_low_title{
+#stock_detail_company_performance_low_and_heigh_stats_52w_low_title {
   font-size: 14px;
   color: #44475b;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_52w_low_data{
+#stock_detail_company_performance_low_and_heigh_stats_52w_low_data {
   font-size: 16px;
   color: #44475b;
   font-weight: 500;
-
 }
 
-
-.stock_detail_company_performance_low_and_heigh_stats_52w_graph_line{
+.stock_detail_company_performance_low_and_heigh_stats_52w_graph_line {
   /* background-color: sandybrown; */
   width: 75%;
-  height:80%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_52w_graph_line_span_view{
+#stock_detail_company_performance_low_and_heigh_stats_52w_graph_line_span_view {
   background-color: #eeeeee;
   width: 100%;
   height: 6px;
@@ -370,10 +366,10 @@
   border-radius: 10px;
 }
 
-.stock_detail_company_performance_low_and_heigh_stats_52w_high{
+.stock_detail_company_performance_low_and_heigh_stats_52w_high {
   /* background-color: #a0a0de; */
   width: 15%;
-  height:80%;
+  height: 80%;
   max-width: 100px;
   min-width: 85px;
   display: flex;
@@ -383,19 +379,18 @@
   gap: 8px;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_52w_high_title{
+#stock_detail_company_performance_low_and_heigh_stats_52w_high_title {
   font-size: 14px;
   color: #44475b;
 }
 
-#stock_detail_company_performance_low_and_heigh_stats_52w_high_data{
+#stock_detail_company_performance_low_and_heigh_stats_52w_high_data {
   font-size: 16px;
   color: #44475b;
   font-weight: 500;
 }
 
-
-.stock_detail_company_performance_data{
+.stock_detail_company_performance_data {
   /* background-color: #eb4b3c; */
   width: 100%;
   height: 48%;
@@ -403,141 +398,134 @@
   flex-direction: column;
   justify-content: end;
 }
-.stock_detail_company_performance_data_top{
+.stock_detail_company_performance_data_top {
   /* background-color: hotpink; */
   width: 100%;
   height: 38%;
   display: flex;
-  justify-content:space-between;
-
+  justify-content: space-between;
 }
-.stock_detail_company_performance_data_top #perform_title_x{
+.stock_detail_company_performance_data_top #perform_title_x {
   color: #606480;
   font-size: 14px;
 }
-.stock_detail_company_performance_data_top #perform_value_y{
+.stock_detail_company_performance_data_top #perform_value_y {
   color: #44475b;
   font-size: 16px;
   font-weight: 500;
-
 }
 
-#stock_detail_company_performance_data_top_open{
+#stock_detail_company_performance_data_top_open {
   /* background-color: chocolate; */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
 
-#stock_detail_company_performance_data_top_prev{
+#stock_detail_company_performance_data_top_prev {
   /* background-color: #a87755; */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  
 }
 
-#stock_detail_company_performance_data_top_volume{
+#stock_detail_company_performance_data_top_volume {
   /* background-color: rgb(121, 62, 20); */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-
 }
 
-.stock_detail_company_performance_data_bottom{
+.stock_detail_company_performance_data_bottom {
   /* background-color: steelblue; */
   width: 100%;
   height: 38%;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
 }
-.stock_detail_company_performance_data_bottom #perform_title_x{
+.stock_detail_company_performance_data_bottom #perform_title_x {
   color: #606480;
   font-size: 14px;
 }
-.stock_detail_company_performance_data_bottom #perform_value_y{
+.stock_detail_company_performance_data_bottom #perform_value_y {
   color: #44475b;
   font-size: 16px;
   font-weight: 500;
-
 }
 
-#stock_detail_company_performance_data_bottom_tread_value{
+#stock_detail_company_performance_data_bottom_tread_value {
   /* background-color: #9f7fff; */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
 
-#stock_detail_company_performance_data_bottom_upper_circuit{
+#stock_detail_company_performance_data_bottom_upper_circuit {
   /* background-color: #6d50c5; */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  
 }
-#stock_detail_company_performance_data_bottom_lower_circuit{
+#stock_detail_company_performance_data_bottom_lower_circuit {
   /* background-color: #37207a; */
-  height:80%;
+  height: 80%;
   width: 200px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-
 }
 
 /* ................. fundamental main section ..............  */
 
-.stock_detail_company_fundamental_main{
+.stock_detail_company_fundamental_main {
   /* background-color: rgba(100, 196, 180, 0.585); */
   width: 100%;
   height: fit-content;
   margin-top: 80px;
 }
 
-.stock_detail_company_fundamental_main_title{
+.stock_detail_company_fundamental_main_title {
   /* background-color: bisque; */
   width: 100%;
   height: 25%;
   min-height: 70px;
 }
-.stock_detail_company_fundamental_main_title span{
+.stock_detail_company_fundamental_main_title span {
   font-size: 20px;
   color: #44475b;
   font-weight: 500;
 }
 
-.stock_detail_company_fundamental_main_data{
+.stock_detail_company_fundamental_main_data {
   /* background-color: pink; */
   width: 100%;
   height: 75%;
   display: flex;
-}      
+}
 
-.stock_detail_company_fundamental_main_data_left{
+.stock_detail_company_fundamental_main_data_left {
   /* background-color: teal; */
   width: 50%;
   height: 100%;
@@ -547,24 +535,24 @@
   align-items: start;
   gap: 2px;
 }
-.stock_detail_company_fundamental_main_data_left_arrange_width{
+.stock_detail_company_fundamental_main_data_left_arrange_width {
   /* background-color: blue; */
   width: 85%;
   height: 100%;
 }
-.stock_detail_company_fundamental_main_data_left #fundamental_title_x{
+.stock_detail_company_fundamental_main_data_left #fundamental_title_x {
   /* background-color: teal; */
   color: #7c7e8c;
   font-size: 14px;
 }
-.stock_detail_company_fundamental_main_data_left #fundamental_cost_x{
+.stock_detail_company_fundamental_main_data_left #fundamental_cost_x {
   /* background-color: teal; */
   color: #44475b;
   font-size: 16px;
   font-weight: 500;
 }
 
-.stock_detail_company_fundamental_main_data_left_market_cap{
+.stock_detail_company_fundamental_main_data_left_market_cap {
   /* background-color: #eb5b3c; */
   width: 100%;
   height: 40px;
@@ -572,7 +560,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.stock_detail_company_fundamental_main_data_left_pe_ratio{
+.stock_detail_company_fundamental_main_data_left_pe_ratio {
   /* background-color: #be4a30; */
   width: 100%;
   height: 40px;
@@ -580,7 +568,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.stock_detail_company_fundamental_main_data_left_pb_ratio{
+.stock_detail_company_fundamental_main_data_left_pb_ratio {
   /* background-color: #932810; */
   width: 100%;
   height: 40px;
@@ -588,7 +576,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.stock_detail_company_fundamental_main_data_left_industry_pe{
+.stock_detail_company_fundamental_main_data_left_industry_pe {
   /* background-color: #a76657; */
   width: 100%;
   height: 40px;
@@ -596,7 +584,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.stock_detail_company_fundamental_main_data_left_debt_equity{
+.stock_detail_company_fundamental_main_data_left_debt_equity {
   /* background-color: #8a746f; */
   width: 100%;
   height: 40px;
@@ -604,7 +592,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.stock_detail_company_fundamental_main_data_right{
+.stock_detail_company_fundamental_main_data_right {
   /* background-color: chocolate; */
   width: 50%;
   height: 100%;
@@ -613,112 +601,327 @@
   align-items: end;
   gap: 2px;
 }
-.stock_detail_company_fundamental_main_data_right_arrange_width{
+.stock_detail_company_fundamental_main_data_right_arrange_width {
   width: 85%;
   height: 100%;
 }
-.stock_detail_company_fundamental_main_data_right #fundamental_title_x{
+.stock_detail_company_fundamental_main_data_right #fundamental_title_x {
   /* background-color: teal; */
   color: #7c7e8c;
   font-size: 14px;
 }
-.stock_detail_company_fundamental_main_data_right #fundamental_cost_x{
+.stock_detail_company_fundamental_main_data_right #fundamental_cost_x {
   /* background-color: teal; */
   color: #44475b;
   font-size: 16px;
   font-weight: 500;
 }
-.stock_detail_company_fundamental_main_data_right_ROE{
+.stock_detail_company_fundamental_main_data_right_ROE {
   /* background-color: #26584b; */
-  width:100%;
-  height:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.stock_detail_company_fundamental_main_data_right_EPS{
+.stock_detail_company_fundamental_main_data_right_EPS {
   /* background-color: #42b598; */
-  width:100%;
-  height:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.stock_detail_company_fundamental_main_data_right_Dividend_Yield{
+.stock_detail_company_fundamental_main_data_right_Dividend_Yield {
   /* background-color: #acbdb9; */
-  width:100%;
-  height:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.stock_detail_company_fundamental_main_data_right_Book_Value{
+.stock_detail_company_fundamental_main_data_right_Book_Value {
   /* background-color: #586d68; */
-  width:100%;
-  height:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.stock_detail_company_fundamental_main_data_right_Face_Value{
+.stock_detail_company_fundamental_main_data_right_Face_Value {
   /* background-color: #313635; */
-  width:100%;
-  height:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 /* ................. financial main section ..............  */
 
-.stock_detail_company_financial_main{
+.stock_detail_company_financial_main {
   /* background-color: rgba(196, 113, 100, 0.585); */
   width: 100%;
   /* height: 500px; */
   margin-top: 80px;
 }
-.stock_detail_company_financial_main_head{
+.stock_detail_company_financial_main_head {
   /* background-color: pink; */
   width: 100%;
   height: 50px;
 }
-#stock_detail_company_financial_main_head_title{
+#stock_detail_company_financial_main_head_title {
   font-size: 20px;
-  color: #44475b;  
+  color: #44475b;
 }
-.stock_detail_company_financial_main_{
+.stock_detail_company_financial_main_data_visualization {
   /* background-color: rgb(173, 214, 208); */
   width: 100%;
-  height: 400px;
+  height: 500px;
   border: 1.5px solid #e9e9e9ea;
   border-radius: 7px;
+  overflow: hidden;
 }
+
+.stock_detail_company_financial_main_data_visualization_top {
+  /* background-color: pink; */
+  width: 100%;
+  height: 11.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1.5px solid #e9e9e9ea;
+}
+.stock_detail_company_financial_main_data_visualization_top_arrange_width {
+  /* background-color: rgb(166, 101, 73); */
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.stock_detail_company_financial_main_data_visualization_top_title_box {
+  /* background-color: rebeccapurple; */
+  /* width: 100%; */
+  height: 80%;
+  /* width: 200px; */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+#stock_detail_financial_revenue_title {
+  /* background-color: gray; */
+  background-color: transparent;
+  color: #8d8d8d;
+  font-size: 16px;
+  font-weight: 500;
+  width: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 80%;
+  cursor: pointer;
+}
+#stock_detail_financial_profit_title {
+  /* background-color: gray; */
+  background-color: transparent;
+  color: #8d8d8d;
+  font-size: 16px;
+  font-weight: 500;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 80%;
+  cursor: pointer;
+}
+#stock_detail_financial_net_worth_title {
+  /* background-color: gray; */
+  background-color: transparent;
+  color: #8d8d8d;
+  font-size: 16px;
+  font-weight: 500;
+  width: 103px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 80%;
+  cursor: pointer;
+}
+.stock_detail_company_financial_main_data_visualization_top_active_box {
+  /* background-color: #a8b707; */
+  width: 285px;
+  height: 10%;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: end;
+}
+
+
+.stock_detail_data_visualization_active{
+  /* background-color: #0cbe91; */
+  width: 82px;
+  height: 100%;
+  display: flex;
+  border-radius: 7px;
+  position: absolute;
+  position: 0;
+  transition: 0.3s ease-in-out;
+  left: 0;
+}
+
+
+
+#stock_detail_data_visualization_active_revenue {
+  background-color: #0cbe91;
+  width: 82px;
+  height: 75%;
+  display: flex;
+  border-radius: 7px;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+
+}
+#stock_detail_data_visualization_active_profit {
+  background-color: #0cbe91;
+  height: 75%;
+  width: 60px;
+  display: flex;
+  border-radius: 7px;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+  left: 102px;
+}
+#stock_detail_data_visualization_active_net_worth {
+  background-color: #0cbe91;
+  height: 75%;
+  width: 103px;
+  display: flex;
+  border-radius: 7px;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+  left: 182px;
+
+}
+
+
+.stock_detail_company_financial_main_data_visualization_mid {
+  /* background-color: #956e72; */
+  width: 100%;
+  height: 75%;
+}
+
+.stock_detail_company_financial_main_data_visualization_mid_top_notify{
+  /* background-color: lightcyan; */
+  width: 100%;
+  height: 6%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  padding: 0px 20px;
+}
+.stock_detail_company_financial_main_data_visualization_mid_top_notify span{
+  font-size: 13px;
+  font-weight: 500;
+  color: #a6a9c8;
+}
+
+
+
+
+
+
+
+
+
+
+.stock_detail_company_financial_main_data_visualization_bottom {
+  /* background-color: #606480; */
+  width: 100%;
+  height: 13.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stock_detail_company_financial_main_data_visualization_bottom_arrange_width {
+  /* background-color: royalblue; */
+  width: 95%;
+  height: 100%;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.stock_detail_company_financial_main_data_visualization_bottom_title_btn{
+  background-color: #ffffff16;
+  border: none;
+  height: 32px;
+  padding: 0px 14px;
+  padding-bottom: 2px;
+  border-radius: 17px;
+  font-size: 15px;
+  /* font-weight: 500; */
+  color: #b1b1b1;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+}
+
+#stock_detail_company_financial_main_data_visualization_bottom_quarterly{
+  background-color: #00b38616;
+  border: none;
+  height: 32px;
+  padding: 0px 14px;
+  padding-bottom: 2px;
+  border-radius: 17px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #00b386;
+  transition: 0.1s ease-in-out;
+}
+
+#stock_detail_company_financial_main_data_visualization_bottom_yearly{
+  background-color: #00b38616;
+  border: none;
+  height: 32px;
+  padding: 0px 14px;
+  padding-bottom: 2px;
+  border-radius: 17px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #00b386;
+  transition: 0.1s ease-in-out;
+}
+
 
 /* ................. shareholding_pattern ..............  */
 
-
-.stock_detail_company_shareholding_pattern_main{
+.stock_detail_company_shareholding_pattern_main {
   /* background-color: rgba(100, 174, 196, 0.585); */
   width: 100%;
   height: 450px;
   margin-top: 80px;
 }
 
-.stock_detail_company_shareholding_pattern_title_div{
+.stock_detail_company_shareholding_pattern_title_div {
   /* background-color: rgb(194, 150, 29); */
   width: 100%;
   height: 13%;
 }
-#stock_detail_company_pattern_title_div_title{
+#stock_detail_company_pattern_title_div_title {
   font-size: 20px;
   color: #44475b;
   font-weight: 500;
 }
-.stock_detail_company_shareholding_pattern_graph_div{
+.stock_detail_company_shareholding_pattern_graph_div {
   /* background-color: rgb(45, 0, 128); */
   width: 100%;
   height: 88%;
 }
-.stock_detail_company_shareholding_pattern_graph_main{
+.stock_detail_company_shareholding_pattern_graph_main {
   border: 1.5px solid #e9e9e9ea;
   border-radius: 8px;
   width: 100%;
@@ -729,14 +932,13 @@
   flex-direction: column;
   overflow: hidden;
 }
-.stock_detail_company_shareholding_pattern_graph_main_arrange_width{
+.stock_detail_company_shareholding_pattern_graph_main_arrange_width {
   /* background-color: thistle; */
   width: 90%;
   height: 100%;
-
 }
 
-.stock_detail_company_shareholding_pattern_graph_main_top{
+.stock_detail_company_shareholding_pattern_graph_main_top {
   /* background-color: burlywood; */
   width: 100%;
   height: 22%;
@@ -745,7 +947,7 @@
   gap: 5px;
 }
 
-#shareholding_pattern_top_day_active{
+#shareholding_pattern_top_day_active {
   background-color: #00b38616;
   width: 80px;
   height: 30px;
@@ -756,7 +958,7 @@
   color: #07b78b;
   font-weight: 500;
 }
-.stock_detail_company_shareholding_pattern_top_day1{
+.stock_detail_company_shareholding_pattern_top_day1 {
   background-color: white;
   width: 80px;
   height: 30px;
@@ -765,10 +967,10 @@
   font-size: 14px;
   padding-bottom: 2px;
   color: #979797;
-  cursor:pointer;
+  cursor: pointer;
 }
-.stock_detail_company_shareholding_pattern_top_day2{
-    background-color: white;
+.stock_detail_company_shareholding_pattern_top_day2 {
+  background-color: white;
   width: 80px;
   height: 30px;
   border-radius: 15px;
@@ -776,10 +978,10 @@
   font-size: 14px;
   padding-bottom: 2px;
   color: #979797;
-  cursor:pointer;
+  cursor: pointer;
 }
-.stock_detail_company_shareholding_pattern_top_day3{
-    background-color: white;
+.stock_detail_company_shareholding_pattern_top_day3 {
+  background-color: white;
   width: 80px;
   height: 30px;
   border-radius: 15px;
@@ -787,10 +989,10 @@
   font-size: 14px;
   padding-bottom: 2px;
   color: #979797;
-  cursor:pointer;
+  cursor: pointer;
 }
-.stock_detail_company_shareholding_pattern_top_day4{
-    background-color: white;
+.stock_detail_company_shareholding_pattern_top_day4 {
+  background-color: white;
   width: 80px;
   height: 30px;
   border-radius: 15px;
@@ -798,10 +1000,10 @@
   font-size: 14px;
   padding-bottom: 2px;
   color: #979797;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.stock_detail_company_shareholding_pattern_graph_main_bottom{
+.stock_detail_company_shareholding_pattern_graph_main_bottom {
   /* background-color: skyblue; */
   width: 100%;
   height: 70%;
@@ -810,19 +1012,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ................ Buy Stock ...............  */
 
@@ -835,22 +1024,17 @@
   justify-content: center;
   align-items: start;
 }
-.stock_detail_buy_stock_main_buy_card_div{
-    /* background-color: rgba(245, 222, 179, 0.242); */
-    width: 98%;
-    height: 570px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1.5px solid #e9e9e9ea;
-    position: sticky;
-    top: 40px;
+.stock_detail_buy_stock_main_buy_card_div {
+  /* background-color: rgba(245, 222, 179, 0.242); */
+  width: 98%;
+  height: 570px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid #e9e9e9ea;
+  position: sticky;
+  top: 40px;
   z-index: 4;
 }
-
-
-
-
-
 
 @media (max-width: 850px) {
   .stock_detail_company_information_main {
@@ -897,19 +1081,19 @@
     width: 18px;
     height: 18px;
   }
-  .stock_detail_company_fundamental_main_data{
+  .stock_detail_company_fundamental_main_data {
     /* background-color: pink; */
     width: 100%;
     height: 75%;
     display: flex;
     flex-direction: column;
   }
-  .stock_detail_company_fundamental_main_data_left_arrange_width{
+  .stock_detail_company_fundamental_main_data_left_arrange_width {
     /* background-color: blue; */
     width: 100%;
     height: 100%;
   }
-  .stock_detail_company_fundamental_main_data_left{
+  .stock_detail_company_fundamental_main_data_left {
     width: 100%;
     height: auto;
     border-right: none;
@@ -920,14 +1104,13 @@
     gap: 2px;
     padding-bottom: 20px;
   }
-  .stock_detail_company_fundamental_main_data_right{
+  .stock_detail_company_fundamental_main_data_right {
     width: 100%;
     height: auto;
     padding-top: 20px;
   }
-  .stock_detail_company_fundamental_main_data_right_arrange_width{
+  .stock_detail_company_fundamental_main_data_right_arrange_width {
     width: 100%;
     height: 100%;
   }
-  
 }

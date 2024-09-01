@@ -17,35 +17,38 @@ const StockDetail = () => {
   const [companyCost, setCompanyCost] = useState("186.37");
   const [companyCostPerRate, setCompanyCostPerRate] = useState("-8.45 (4.34%)");
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
-  const [activeShareholdingPatternDay , setActiveShareholdingPatternDay] = useState('day1');
+  const [activeShareholdingPatternDay, setActiveShareholdingPatternDay] =
+    useState("day1");
+  const [financialActiveReason, setFinancialActiveReason] = useState("revenue");
+  const [financialActiveQuarterlyOrYearly, setFinancialActiveQuarterlyOrYearly] = useState("quarterly");
   const { image } = useImage(companyLogoUrlName);
 
-  const [shareHolderPercentageRange1 , setShareHolderPercentageRange1 ] = useState(0);
-  const [shareHolderPercentageRange2 , setShareHolderPercentageRange2 ] = useState(0);
-  const [shareHolderPercentageRange3 , setShareHolderPercentageRange3 ] = useState(0);
+  const [shareHolderPercentageRange1, setShareHolderPercentageRange1] =
+    useState(0);
+  const [shareHolderPercentageRange2, setShareHolderPercentageRange2] =
+    useState(0);
+  const [shareHolderPercentageRange3, setShareHolderPercentageRange3] =
+    useState(0);
 
-  useEffect(()=>{
-      if(activeShareholdingPatternDay==='day1'){
-        setShareHolderPercentageRange1(32.91);
-        setShareHolderPercentageRange2(72.65);
-        setShareHolderPercentageRange3(42.88);
-      }
-      else if(activeShareholdingPatternDay==='day2'){
-        setShareHolderPercentageRange1(52.72);
-        setShareHolderPercentageRange2(61.81);
-        setShareHolderPercentageRange3(25.72);
-      }
-      else if(activeShareholdingPatternDay==='day3'){
-        setShareHolderPercentageRange1(42.1);
-        setShareHolderPercentageRange2(72.81);
-        setShareHolderPercentageRange3(14.71);
-      }
-      else if(activeShareholdingPatternDay==='day4'){
-        setShareHolderPercentageRange1(52.71);
-        setShareHolderPercentageRange2(42.61);
-        setShareHolderPercentageRange3(100);
-      }
-  },[activeShareholdingPatternDay])
+  useEffect(() => {
+    if (activeShareholdingPatternDay === "day1") {
+      setShareHolderPercentageRange1(32.91);
+      setShareHolderPercentageRange2(72.65);
+      setShareHolderPercentageRange3(42.88);
+    } else if (activeShareholdingPatternDay === "day2") {
+      setShareHolderPercentageRange1(52.72);
+      setShareHolderPercentageRange2(61.81);
+      setShareHolderPercentageRange3(25.72);
+    } else if (activeShareholdingPatternDay === "day3") {
+      setShareHolderPercentageRange1(42.1);
+      setShareHolderPercentageRange2(72.81);
+      setShareHolderPercentageRange3(14.71);
+    } else if (activeShareholdingPatternDay === "day4") {
+      setShareHolderPercentageRange1(52.71);
+      setShareHolderPercentageRange2(42.61);
+      setShareHolderPercentageRange3(100);
+    }
+  }, [activeShareholdingPatternDay]);
 
   const queryParams = new URLSearchParams(location.search);
   const stockName = queryParams.keys().next().value;
@@ -292,7 +295,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">24.05</span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_right_Face_Value">
-                          <span id="fundamental_title_x">Face Value</span>
+                          <span id="fundamental_title_x"> Face Value</span>
                           <span id="fundamental_cost_x">10.00</span>
                         </div>
                       </div>
@@ -301,9 +304,77 @@ const StockDetail = () => {
                 </div>
                 <div className="stock_detail_company_financial_main">
                   <div className="stock_detail_company_financial_main_head">
-                    <span id="stock_detail_company_financial_main_head_title">Financials</span>
+                    <span id="stock_detail_company_financial_main_head_title">
+                      Financials
+                    </span>
                   </div>
-                  <div className="stock_detail_company_financial_main_"></div>
+                  <div className="stock_detail_company_financial_main_data_visualization">
+                    <div className="stock_detail_company_financial_main_data_visualization_top">
+                      <div className="stock_detail_company_financial_main_data_visualization_top_arrange_width">
+                        <div className="stock_detail_company_financial_main_data_visualization_top_title_box">
+                          <button
+                            id="stock_detail_financial_revenue_title"
+                            style={{
+                              color:
+                                financialActiveReason === "revenue"
+                                  ? "#00b386"
+                                  : null,
+                            }}
+                            onClick={() => {
+                              setFinancialActiveReason("revenue");
+                            }}
+                          >
+                            Revenue
+                          </button>
+                          <button
+                            id="stock_detail_financial_profit_title"
+                            style={{
+                              color:
+                                financialActiveReason === "profit"
+                                  ? "#00b386"
+                                  : null,
+                            }}
+                            onClick={() => {
+                              setFinancialActiveReason("profit");
+                            }}
+                          >
+                            Profit
+                          </button>
+                          <button
+                            id="stock_detail_financial_net_worth_title"
+                            style={{
+                              color:
+                                financialActiveReason === "net_worth"
+                                  ? "#00b386"
+                                  : null,
+                            }}
+                            onClick={() => {
+                              setFinancialActiveReason("net_worth");
+                            }}
+                          >
+                            Net Worth
+                          </button>
+                        </div>
+                        <div className="stock_detail_company_financial_main_data_visualization_top_active_box">
+                          <span
+                            className={`stock_detail_data_visualization_active`}
+                            id={`stock_detail_data_visualization_active_${financialActiveReason}`}
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="stock_detail_company_financial_main_data_visualization_mid">
+                      <div className="stock_detail_company_financial_main_data_visualization_mid_top_notify">
+                        <span >*All Value are in Rs. Cr</span>
+                      </div>
+                    </div>
+                    <div className="stock_detail_company_financial_main_data_visualization_bottom">
+                      <div className="stock_detail_company_financial_main_data_visualization_bottom_arrange_width">
+                        <button className="stock_detail_company_financial_main_data_visualization_bottom_title_btn" id={financialActiveQuarterlyOrYearly==='quarterly'?"stock_detail_company_financial_main_data_visualization_bottom_quarterly":null} onClick={()=>{setFinancialActiveQuarterlyOrYearly('quarterly')}}>Quarterly</button>
+                        <button className="stock_detail_company_financial_main_data_visualization_bottom_title_btn" id={financialActiveQuarterlyOrYearly==='yearly'?"stock_detail_company_financial_main_data_visualization_bottom_yearly":null} onClick={()=>{setFinancialActiveQuarterlyOrYearly('yearly')}}>Yearly</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="stock_detail_company_shareholding_pattern_main">
                   <div className="stock_detail_company_shareholding_pattern_title_div">
@@ -315,15 +386,72 @@ const StockDetail = () => {
                     <div className="stock_detail_company_shareholding_pattern_graph_main">
                       <div className="stock_detail_company_shareholding_pattern_graph_main_arrange_width">
                         <div className="stock_detail_company_shareholding_pattern_graph_main_top">
-                          <button id={activeShareholdingPatternDay==='day1'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day1" onClick={()=>{setActiveShareholdingPatternDay('day1')}}>Day 1</button>
-                          <button id={activeShareholdingPatternDay==='day2'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day2" onClick={()=>{setActiveShareholdingPatternDay('day2')}}>Day 2</button>
-                          <button id={activeShareholdingPatternDay==='day3'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day3" onClick={()=>{setActiveShareholdingPatternDay('day3')}}>Day 3</button>
-                          <button id={activeShareholdingPatternDay==='day4'?'shareholding_pattern_top_day_active':null} className="stock_detail_company_shareholding_pattern_top_day4" onClick={()=>{setActiveShareholdingPatternDay('day4')}}>Day 4</button>
+                          <button
+                            id={
+                              activeShareholdingPatternDay === "day1"
+                                ? "shareholding_pattern_top_day_active"
+                                : null
+                            }
+                            className="stock_detail_company_shareholding_pattern_top_day1"
+                            onClick={() => {
+                              setActiveShareholdingPatternDay("day1");
+                            }}
+                          >
+                            Day 1
+                          </button>
+                          <button
+                            id={
+                              activeShareholdingPatternDay === "day2"
+                                ? "shareholding_pattern_top_day_active"
+                                : null
+                            }
+                            className="stock_detail_company_shareholding_pattern_top_day2"
+                            onClick={() => {
+                              setActiveShareholdingPatternDay("day2");
+                            }}
+                          >
+                            Day 2
+                          </button>
+                          <button
+                            id={
+                              activeShareholdingPatternDay === "day3"
+                                ? "shareholding_pattern_top_day_active"
+                                : null
+                            }
+                            className="stock_detail_company_shareholding_pattern_top_day3"
+                            onClick={() => {
+                              setActiveShareholdingPatternDay("day3");
+                            }}
+                          >
+                            Day 3
+                          </button>
+                          <button
+                            id={
+                              activeShareholdingPatternDay === "day4"
+                                ? "shareholding_pattern_top_day_active"
+                                : null
+                            }
+                            className="stock_detail_company_shareholding_pattern_top_day4"
+                            onClick={() => {
+                              setActiveShareholdingPatternDay("day4");
+                            }}
+                          >
+                            Day 4
+                          </button>
                         </div>
                         <div className="stock_detail_company_shareholding_pattern_graph_main_bottom">
-                            <ShareholdingPatternCard title={'Promoters'} percentage={shareHolderPercentageRange1}/>
-                            <ShareholdingPatternCard title={'Retail And Others'} percentage={shareHolderPercentageRange2}/>
-                            <ShareholdingPatternCard title={'Other Domestic Industry'} percentage={shareHolderPercentageRange3}/>
+                          <ShareholdingPatternCard
+                            title={"Promoters"}
+                            percentage={shareHolderPercentageRange1}
+                          />
+                          <ShareholdingPatternCard
+                            title={"Retail And Others"}
+                            percentage={shareHolderPercentageRange2}
+                          />
+                          <ShareholdingPatternCard
+                            title={"Other Domestic Industry"}
+                            percentage={shareHolderPercentageRange3}
+                          />
                         </div>
                       </div>
                     </div>
