@@ -8,6 +8,7 @@ import StockData from "../../jsonDummyData/stockData.json";
 import useImage from "../../hooks/useImage";
 import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
 import ShareholdingPatternCard from "../../component/ShareholdingPatternCard/ShareholdingPatternCard";
+import FinancialGraph from "../../StockDetailComponents/FinancialGraph/FinancialGraph";
 
 const StockDetail = () => {
   const location = useLocation();
@@ -20,7 +21,10 @@ const StockDetail = () => {
   const [activeShareholdingPatternDay, setActiveShareholdingPatternDay] =
     useState("day1");
   const [financialActiveReason, setFinancialActiveReason] = useState("revenue");
-  const [financialActiveQuarterlyOrYearly, setFinancialActiveQuarterlyOrYearly] = useState("quarterly");
+  const [
+    financialActiveQuarterlyOrYearly,
+    setFinancialActiveQuarterlyOrYearly,
+  ] = useState("quarterly");
   const { image } = useImage(companyLogoUrlName);
 
   const [shareHolderPercentageRange1, setShareHolderPercentageRange1] =
@@ -365,13 +369,119 @@ const StockDetail = () => {
                     </div>
                     <div className="stock_detail_company_financial_main_data_visualization_mid">
                       <div className="stock_detail_company_financial_main_data_visualization_mid_top_notify">
-                        <span >*All Value are in Rs. Cr</span>
+                        <span>*All Value are in Rs. Cr</span>
+                      </div>
+                      <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show">
+                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_top">
+                          {financialActiveReason === "revenue" ? (
+                            financialActiveQuarterlyOrYearly==='quarterly'?
+                            <>
+                              <FinancialGraph value="221" bar_percentage={71}/>
+                              <FinancialGraph value="41" bar_percentage={62} />
+                              <FinancialGraph value="71" bar_percentage={53} />
+                              <FinancialGraph value="111" bar_percentage={76} />
+                              <FinancialGraph value="-921" bar_percentage={45} />
+                            </>:
+                            <>
+                            <FinancialGraph value="-121" bar_percentage={31}/>
+                            <FinancialGraph value="-41" bar_percentage={42} />
+                            <FinancialGraph value="71" bar_percentage={53} />
+                            <FinancialGraph value="921" bar_percentage={85} />
+                            <FinancialGraph value="111" bar_percentage={66} />
+                          </>
+                          ) : null
+                          }
+
+                          {
+                              financialActiveReason === "profit" ? (
+                                financialActiveQuarterlyOrYearly==='quarterly'?
+                                <>
+                                  <FinancialGraph value="41" bar_percentage={71}/>
+                                  <FinancialGraph value="-21" bar_percentage={42} />
+                                  <FinancialGraph value="671" bar_percentage={33} />
+                                  <FinancialGraph value="311" bar_percentage={86} />
+                                  <FinancialGraph value="91" bar_percentage={95} />
+                                </>:
+                                <>
+                                <FinancialGraph value="11" bar_percentage={81}/>
+                                <FinancialGraph value="41" bar_percentage={42} />
+                                <FinancialGraph value="-81" bar_percentage={23} />
+                                <FinancialGraph value="-88" bar_percentage={31} />
+                                <FinancialGraph value="321" bar_percentage={75} />
+                              </>
+                              ) : null
+                          }
+
+                          {
+                              financialActiveReason === "net_worth" ? (
+                                financialActiveQuarterlyOrYearly==='quarterly'?
+                                <>
+                                  <FinancialGraph value="-31" bar_percentage={61}/>
+                                  <FinancialGraph value="21" bar_percentage={49} />
+                                  <FinancialGraph value="571" bar_percentage={73} />
+                                  <FinancialGraph value="21" bar_percentage={59} />
+                                  <FinancialGraph value="111" bar_percentage={95} />
+                                </>:
+                                <>
+                                <FinancialGraph value="11" bar_percentage={61}/>
+                                <FinancialGraph value="-11" bar_percentage={52} />
+                                <FinancialGraph value="81" bar_percentage={73} />
+                                <FinancialGraph value="71" bar_percentage={81} />
+                                <FinancialGraph value="-21" bar_percentage={90} />
+                              </>
+                              ) : null
+                          }
+                        </div>
+                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid">
+                          <div id="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid_line_id"></div>
+                        </div>
+                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom">
+                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                            Jun'23
+                          </span>
+                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                            Nov'23
+                          </span>
+                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                            Feb'24
+                          </span>
+                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                            July'24
+                          </span>
+                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                            sep'24
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div className="stock_detail_company_financial_main_data_visualization_bottom">
                       <div className="stock_detail_company_financial_main_data_visualization_bottom_arrange_width">
-                        <button className="stock_detail_company_financial_main_data_visualization_bottom_title_btn" id={financialActiveQuarterlyOrYearly==='quarterly'?"stock_detail_company_financial_main_data_visualization_bottom_quarterly":null} onClick={()=>{setFinancialActiveQuarterlyOrYearly('quarterly')}}>Quarterly</button>
-                        <button className="stock_detail_company_financial_main_data_visualization_bottom_title_btn" id={financialActiveQuarterlyOrYearly==='yearly'?"stock_detail_company_financial_main_data_visualization_bottom_yearly":null} onClick={()=>{setFinancialActiveQuarterlyOrYearly('yearly')}}>Yearly</button>
+                        <button
+                          className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
+                          id={
+                            financialActiveQuarterlyOrYearly === "quarterly"
+                              ? "stock_detail_company_financial_main_data_visualization_bottom_quarterly"
+                              : null
+                          }
+                          onClick={() => {
+                            setFinancialActiveQuarterlyOrYearly("quarterly");
+                          }}
+                        >
+                          Quarterly
+                        </button>
+                        <button
+                          className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
+                          id={
+                            financialActiveQuarterlyOrYearly === "yearly"
+                              ? "stock_detail_company_financial_main_data_visualization_bottom_yearly"
+                              : null
+                          }
+                          onClick={() => {
+                            setFinancialActiveQuarterlyOrYearly("yearly");
+                          }}
+                        >
+                          Yearly
+                        </button>
                       </div>
                     </div>
                   </div>
