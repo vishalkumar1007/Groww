@@ -35,6 +35,9 @@ const AllStocksFilter = () => {
     setPaginationActivePage(activePage);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
 
