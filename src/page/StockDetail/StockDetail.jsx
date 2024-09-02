@@ -9,6 +9,21 @@ import useImage from "../../hooks/useImage";
 import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
 import ShareholdingPatternCard from "../../component/ShareholdingPatternCard/ShareholdingPatternCard";
 import FinancialGraph from "../../StockDetailComponents/FinancialGraph/FinancialGraph";
+import StockCard from "../../component/StockCard/StockCard";
+// ............... image ..................
+
+import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
+import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
+import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
+import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
+
+import ola_logo from "../../assets/svg/ola_logo.svg";
+import GTL_logo from "../../assets/svg/GTL_logo.webp";
+import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
+import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
+
+import profit_graph_image from "../../assets/img/profit_graph.png";
+import loss_graph_image from "../../assets/img/loss_graph.png";
 
 const StockDetail = () => {
   const location = useLocation();
@@ -33,6 +48,11 @@ const StockDetail = () => {
     useState(0);
   const [shareHolderPercentageRange3, setShareHolderPercentageRange3] =
     useState(0);
+
+
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[companyName])
 
   useEffect(() => {
     if (activeShareholdingPatternDay === "day1") {
@@ -167,7 +187,15 @@ const StockDetail = () => {
                     </button>
                   </div>
                 </div>
-                <div className="stock_detail_company_graph_main"></div>
+                <div className="stock_detail_company_graph_main">
+                  <div className="stock_detail_company_graph_main_image_box">
+                    {isCostPerRateNegative ? (
+                      <img src={loss_graph_image} alt="" />
+                    ) : (
+                      <img src={profit_graph_image} alt="" />
+                    )}
+                  </div>
+                </div>
                 <div className="stock_detail_company_performance_main">
                   <div className="stock_detail_company_performance_low_and_heigh">
                     <div className="stock_detail_company_performance_low_and_heigh_title">
@@ -374,63 +402,154 @@ const StockDetail = () => {
                       <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show">
                         <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_top">
                           {financialActiveReason === "revenue" ? (
-                            financialActiveQuarterlyOrYearly==='quarterly'?
-                            <>
-                              <FinancialGraph value="221" bar_percentage={71}/>
-                              <FinancialGraph value="41" bar_percentage={62} />
-                              <FinancialGraph value="71" bar_percentage={53} />
-                              <FinancialGraph value="111" bar_percentage={76} />
-                              <FinancialGraph value="-921" bar_percentage={45} />
-                            </>:
-                            <>
-                            <FinancialGraph value="-121" bar_percentage={31}/>
-                            <FinancialGraph value="-41" bar_percentage={42} />
-                            <FinancialGraph value="71" bar_percentage={53} />
-                            <FinancialGraph value="921" bar_percentage={85} />
-                            <FinancialGraph value="111" bar_percentage={66} />
-                          </>
-                          ) : null
-                          }
-
-                          {
-                              financialActiveReason === "profit" ? (
-                                financialActiveQuarterlyOrYearly==='quarterly'?
-                                <>
-                                  <FinancialGraph value="41" bar_percentage={71}/>
-                                  <FinancialGraph value="-21" bar_percentage={42} />
-                                  <FinancialGraph value="671" bar_percentage={33} />
-                                  <FinancialGraph value="311" bar_percentage={86} />
-                                  <FinancialGraph value="91" bar_percentage={95} />
-                                </>:
-                                <>
-                                <FinancialGraph value="11" bar_percentage={81}/>
-                                <FinancialGraph value="41" bar_percentage={42} />
-                                <FinancialGraph value="-81" bar_percentage={23} />
-                                <FinancialGraph value="-88" bar_percentage={31} />
-                                <FinancialGraph value="321" bar_percentage={75} />
+                            financialActiveQuarterlyOrYearly === "quarterly" ? (
+                              <>
+                                <FinancialGraph
+                                  value="221"
+                                  bar_percentage={71}
+                                />
+                                <FinancialGraph
+                                  value="41"
+                                  bar_percentage={62}
+                                />
+                                <FinancialGraph
+                                  value="71"
+                                  bar_percentage={53}
+                                />
+                                <FinancialGraph
+                                  value="111"
+                                  bar_percentage={76}
+                                />
+                                <FinancialGraph
+                                  value="-921"
+                                  bar_percentage={45}
+                                />
                               </>
-                              ) : null
-                          }
-
-                          {
-                              financialActiveReason === "net_worth" ? (
-                                financialActiveQuarterlyOrYearly==='quarterly'?
-                                <>
-                                  <FinancialGraph value="-31" bar_percentage={61}/>
-                                  <FinancialGraph value="21" bar_percentage={49} />
-                                  <FinancialGraph value="571" bar_percentage={73} />
-                                  <FinancialGraph value="21" bar_percentage={59} />
-                                  <FinancialGraph value="111" bar_percentage={95} />
-                                </>:
-                                <>
-                                <FinancialGraph value="11" bar_percentage={61}/>
-                                <FinancialGraph value="-11" bar_percentage={52} />
-                                <FinancialGraph value="81" bar_percentage={73} />
-                                <FinancialGraph value="71" bar_percentage={81} />
-                                <FinancialGraph value="-21" bar_percentage={90} />
+                            ) : (
+                              <>
+                                <FinancialGraph
+                                  value="-121"
+                                  bar_percentage={31}
+                                />
+                                <FinancialGraph
+                                  value="-41"
+                                  bar_percentage={42}
+                                />
+                                <FinancialGraph
+                                  value="71"
+                                  bar_percentage={53}
+                                />
+                                <FinancialGraph
+                                  value="921"
+                                  bar_percentage={85}
+                                />
+                                <FinancialGraph
+                                  value="111"
+                                  bar_percentage={66}
+                                />
                               </>
-                              ) : null
-                          }
+                            )
+                          ) : null}
+
+                          {financialActiveReason === "profit" ? (
+                            financialActiveQuarterlyOrYearly === "quarterly" ? (
+                              <>
+                                <FinancialGraph
+                                  value="41"
+                                  bar_percentage={71}
+                                />
+                                <FinancialGraph
+                                  value="-21"
+                                  bar_percentage={42}
+                                />
+                                <FinancialGraph
+                                  value="671"
+                                  bar_percentage={33}
+                                />
+                                <FinancialGraph
+                                  value="311"
+                                  bar_percentage={86}
+                                />
+                                <FinancialGraph
+                                  value="91"
+                                  bar_percentage={95}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <FinancialGraph
+                                  value="11"
+                                  bar_percentage={81}
+                                />
+                                <FinancialGraph
+                                  value="41"
+                                  bar_percentage={42}
+                                />
+                                <FinancialGraph
+                                  value="-81"
+                                  bar_percentage={23}
+                                />
+                                <FinancialGraph
+                                  value="-88"
+                                  bar_percentage={31}
+                                />
+                                <FinancialGraph
+                                  value="321"
+                                  bar_percentage={75}
+                                />
+                              </>
+                            )
+                          ) : null}
+
+                          {financialActiveReason === "net_worth" ? (
+                            financialActiveQuarterlyOrYearly === "quarterly" ? (
+                              <>
+                                <FinancialGraph
+                                  value="-31"
+                                  bar_percentage={61}
+                                />
+                                <FinancialGraph
+                                  value="21"
+                                  bar_percentage={49}
+                                />
+                                <FinancialGraph
+                                  value="571"
+                                  bar_percentage={73}
+                                />
+                                <FinancialGraph
+                                  value="21"
+                                  bar_percentage={59}
+                                />
+                                <FinancialGraph
+                                  value="111"
+                                  bar_percentage={95}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <FinancialGraph
+                                  value="11"
+                                  bar_percentage={61}
+                                />
+                                <FinancialGraph
+                                  value="-11"
+                                  bar_percentage={52}
+                                />
+                                <FinancialGraph
+                                  value="81"
+                                  bar_percentage={73}
+                                />
+                                <FinancialGraph
+                                  value="71"
+                                  bar_percentage={81}
+                                />
+                                <FinancialGraph
+                                  value="-21"
+                                  bar_percentage={90}
+                                />
+                              </>
+                            )
+                          ) : null}
                         </div>
                         <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid">
                           <div id="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid_line_id"></div>
@@ -565,6 +684,72 @@ const StockDetail = () => {
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div className="stock_detail_company_similar_stock">
+                  <div className="stock_detail_company_similar_stock_title">
+                    <span id="stock_detail_company_similar_stock_title_id">
+                      Similar Stocks
+                    </span>
+                  </div>
+                  <div className="stock_detail_company_similar_stock_comp">
+                    <StockCard
+                      logoUrl={pnbHouse}
+                      title="PNB Housing Finance"
+                      cost="892.21"
+                      costPerRate="17.21 (0.61%)"
+                    />
+                    <StockCard
+                      logoUrl={castrolIndia}
+                      title="Castrol India"
+                      cost="268.90"
+                      costPerRate="17.80 (7.10%)"
+                    />
+                    <StockCard
+                      logoUrl={aloakIndustries}
+                      title="Alok Industries"
+                      cost="28.32"
+                      costPerRate="2.10 (10.7%)"
+                    />
+                    <StockCard
+                      logoUrl={centuryTextile}
+                      title="Century Textiles"
+                      cost="2,300.10"
+                      costPerRate="152.66 (7.91%)"
+                    />
+                  </div>
+                </div>
+                <div className="stock_detail_company_recently_viewed">
+                  <div className="stock_detail_company_recently_viewed_title">
+                    <span id="stock_detail_company_recently_viewed_title_id">
+                      Recently Viewed
+                    </span>
+                  </div>
+                  <div className="stock_detail_company_recently_viewed_comp">
+                    <StockCard
+                      logoUrl={ola_logo}
+                      title="Ola Electric Mobility"
+                      cost="2.77"
+                      costPerRate="0.26 (0.19%)"
+                    />
+                    <StockCard
+                      logoUrl={GTL_logo}
+                      title="GTL Infrastructure"
+                      cost="123.19"
+                      costPerRate="-0.04 (1.42%)"
+                    />
+                    <StockCard
+                      logoUrl={MD_ship_logo}
+                      title="Mazagon Dock Ship"
+                      cost="4,539.65"
+                      costPerRate="240.1 (5.52%)"
+                    />
+                    <StockCard
+                      logoUrl={Angel_one_logo}
+                      title="Angel One"
+                      cost="2,699.90"
+                      costPerRate="-3.00 (0.11%)"
+                    />
                   </div>
                 </div>
               </div>

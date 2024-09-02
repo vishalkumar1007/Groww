@@ -10,16 +10,17 @@ import Credit_building from "../../assets/img/creditBuilding.c26d1ba5.webp";
 import Personal_loan from "../../assets/img/personalLoan.9d5e746c.webp";
 import General_store from "../../assets/img/generalStore.ab44242a.webp";
 import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
-import google_play_logo from "../../assets/img/google-play-badge.webp";
-import app_store_logo from "../../assets/img/app-store-logo.webp";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
 
 const Home = () => {
   const navigate = useNavigate();
   const [menuActive, setMenuActive] = useState(false);
-
+  
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
   return (
     <>
       <div className="HomeMain">

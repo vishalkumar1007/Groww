@@ -1,5 +1,5 @@
 import StocksIndex from "../../component/StockIndex/StockIndex";
-import StocksCard from "../../component/StockCard/StockCard";
+import StockCard from "../../component/StockCard/StockCard";
 import ola_logo from "../../assets/svg/ola_logo.svg";
 import GTL_logo from "../../assets/svg/GTL_logo.webp";
 import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
@@ -69,6 +69,11 @@ const Stocks = () => {
     setPaginationCurrentActivePage(activePage);
   };
 
+  
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
+
   useEffect(() => {
     const endIndex = ((paginationChunk * paginationCurrentActivePage)>marketCapData.length ? marketCapData.length : (paginationChunk * paginationCurrentActivePage));
     const startIndex = endIndex - ((endIndex===marketCapData.length ? ((endIndex%10)+paginationChunk === paginationChunk?paginationChunk:(endIndex%10)):(paginationChunk)));
@@ -127,25 +132,25 @@ const Stocks = () => {
               <span>Most Bought on Groww</span>
             </div>
             <div className="stock_left_most_bought_on_groww_component">
-              <StocksCard
+              <StockCard
                 logoUrl={ola_logo}
                 title="Ola Electric Mobility"
                 cost="2.77"
                 costPerRate="0.26 (0.19%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={GTL_logo}
                 title="GTL Infrastructure"
                 cost="123.19"
                 costPerRate="-0.04 (1.42%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={MD_ship_logo}
                 title="Mazagon Dock Ship"
                 cost="4,539.65"
                 costPerRate="240.1 (5.52%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={Angel_one_logo}
                 title="Angel One"
                 cost="2,699.90"
@@ -218,25 +223,25 @@ const Stocks = () => {
             <div className="stocks_left_top_gainers_card_component">
               {topGainActive === "large" ? (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={diviLabs}
                     title="Divi's Labs"
                     cost="4,980.80"
                     costPerRate="177.65 (3.76%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={varunBeverages}
                     title="Varun Beverages"
                     cost="1,546.10"
                     costPerRate="54.50 (4.69%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={titan}
                     title="Titan"
                     cost="3,560.88"
                     costPerRate="85.26 (2.16%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={sbiLife}
                     title="SBI Life Insurance"
                     cost="1,800.60"
@@ -245,25 +250,25 @@ const Stocks = () => {
                 </>
               ) : topGainActive === "mid" ? (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={nykaa}
                     title="Nykaa"
                     cost="210.39"
                     costPerRate="18.17 (9.48%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={mazagonShip}
                     title="Mazagon Dock Ship"
                     cost="4,593.2"
                     costPerRate="240.12 (5.52%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={patanjaliFood}
                     title="Patanjali Foods"
                     cost="1,901.32"
                     costPerRate="79.04 (4.36%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={bandhanBank}
                     title="Bandhan Bank"
                     cost="203.77"
@@ -272,25 +277,25 @@ const Stocks = () => {
                 </>
               ) : (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={aloakIndustries}
                     title="Alok Industries"
                     cost="28.32"
                     costPerRate="2.10 (10.7%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={pnbHouse}
                     title="PNB Housing Finance"
                     cost="892.21"
                     costPerRate="17.21 (0.61%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={centuryTextile}
                     title="Century Textiles"
                     cost="2,300.10"
                     costPerRate="152.66 (7.91%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={castrolIndia}
                     title="Castrol India"
                     cost="268.90"
@@ -327,25 +332,25 @@ const Stocks = () => {
               </button>
             </div>
             <div className="stocks_left_in_news_card_component">
-              <StocksCard
+              <StockCard
                 logoUrl={zomato}
                 title="Zomato"
                 cost="42.77"
                 costPerRate="-1.21 (0.29%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={Dwarikesh_Sugar}
                 title="Dwarikesh Sugar"
                 cost="828.77"
                 costPerRate="12.26 (23.19%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={tata_motors}
                 title="Tata Motors"
                 cost="1070.76"
                 costPerRate="14.08 (1.39%)"
               />
-              <StocksCard
+              <StockCard
                 logoUrl={geojit}
                 title="Geojit Financial Services"
                 cost="212.12"
@@ -406,25 +411,25 @@ const Stocks = () => {
             <div className="stocks_left_top_losers_card_component">
               {topLosersActive === "large" ? (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={adani}
                     title="Adani"
                     cost="2,212.80"
                     costPerRate="-177.65 (13.76%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={firstsource_soln}
                     title="Firstsource Soln"
                     cost="546.10"
                     costPerRate="-52.50 (4.69%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={SJVN}
                     title="SJVN"
                     cost="260.88"
                     costPerRate="-85.26 (2.16%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={cholamandalam_invest}
                     title="Cholamandalam Invest"
                     cost="200.60"
@@ -433,25 +438,25 @@ const Stocks = () => {
                 </>
               ) : topLosersActive === "mid" ? (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={cyient}
                     title="Cyient"
                     cost="310.39"
                     costPerRate="-18.17 (9.48%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={gland}
                     title="Gland"
                     cost="693.2"
                     costPerRate="-240.12 (5.52%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={jsw_energy}
                     title="JWS Energy"
                     cost="101.32"
                     costPerRate="-29.04 (4.36%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={bandhanBank}
                     title="Bandhan Bank"
                     cost="203.77"
@@ -460,25 +465,25 @@ const Stocks = () => {
                 </>
               ) : (
                 <>
-                  <StocksCard
+                  <StockCard
                     logoUrl={mahanagar_gas}
                     title="Mahanagar Gas"
                     cost="28.32"
                     costPerRate="-22.10 (10.7%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={pnbHouse}
                     title="PNB Housing Finance"
                     cost="392.21"
                     costPerRate="-17.21 (0.61%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={mahindra}
                     title="Century Textiles"
                     cost="990.10"
                     costPerRate="-252.66 (7.91%)"
                   />
-                  <StocksCard
+                  <StockCard
                     logoUrl={tata}
                     title="Tata Motors"
                     cost="1,128.90"
