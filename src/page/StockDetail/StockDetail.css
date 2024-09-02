@@ -1183,6 +1183,7 @@ position: relative;
   border: 1px solid #616161d9;
   cursor: pointer;
   box-shadow: 0px 0px 15px #d4d4d4;
+  z-index: 21;
 }
 
 .stock_detail_buy_stock_on_mobile_main span{
@@ -1215,7 +1216,7 @@ position: relative;
   display: none;
   justify-content: center;
   align-items: center;
-  /* z-index: 10; */
+  z-index: 20;
 }
 
 .buy_and_sell_option_open_in_mobile_view_main_div_arrange_width{
