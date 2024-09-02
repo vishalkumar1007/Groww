@@ -15,7 +15,6 @@ const Wallet = () => {
       const height =
         transactionDataHeight.current.getBoundingClientRect().height;
       setTransactionHeight(height);
-      console.log(height);
     }
   }, []);
 
