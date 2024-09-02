@@ -40,6 +40,9 @@ const StockDetail = () => {
     financialActiveQuarterlyOrYearly,
     setFinancialActiveQuarterlyOrYearly,
   ] = useState("quarterly");
+
+  const [isBuyAndSellOpenInMobile, setIsBuyAndSellOpenInMobile] =
+    useState(false);
   const { image } = useImage(companyLogoUrlName);
 
   const [shareHolderPercentageRange1, setShareHolderPercentageRange1] =
@@ -49,10 +52,9 @@ const StockDetail = () => {
   const [shareHolderPercentageRange3, setShareHolderPercentageRange3] =
     useState(0);
 
-
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[companyName])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [companyName]);
 
   useEffect(() => {
     if (activeShareholdingPatternDay === "day1") {
@@ -763,8 +765,40 @@ const StockDetail = () => {
                   />
                 </div>
               </div>
+              {/* ........... Buy Stock on mobile ............... */}
+
+              <button
+                className="stock_detail_buy_stock_on_mobile_main"
+                onClick={() => {
+                  setIsBuyAndSellOpenInMobile(!isBuyAndSellOpenInMobile);
+                }}
+              >
+                {
+                  isBuyAndSellOpenInMobile?
+                  <>
+                  {/* <span id="stock_detail_buy_stock_on_mobile_main_buy">Close option</span> */}
+                  <span id="stock_detail_buy_stock_on_mobile_main_sell" style={{fontSize:'12px'}}>Close</span>
+                  </>
+                  :
+                  <><span id="stock_detail_buy_stock_on_mobile_main_buy">Buy </span>
+                  <span id="stock_detail_buy_stock_on_mobile_main_X">/</span>
+                  <span id="stock_detail_buy_stock_on_mobile_main_sell">Sell</span></>
+                }
+              </button>
             </div>
+
             <Footer />
+            {isBuyAndSellOpenInMobile ? (
+              <div className="buy_and_sell_option_open_in_mobile_view_main_div">
+                <div className="buy_and_sell_option_open_in_mobile_view_main_div_arrange_width">
+                  <BuyStockCard
+                    companyName={companyName}
+                    cost={companyCost}
+                    costPerRate={companyCostPerRate}
+                  />
+                </div>
+              </div>
+            ) : null}
           </div>
         </>
       )}

@@ -3,27 +3,31 @@
   height: 100dvh;
 }
 
-.stock_detail_main {
+
+.stock_detail_main{
+  /* background-color: pink; */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  /* height: 200px; */
+display: flex;
+/* justify-content: center; */
+align-items: center;
+flex-direction: column;
+-webkit-user-select: none;
+-ms-user-select: none;
+user-select: none;
+position: relative;
 }
 
 .stock_detail_main_arrange_width {
   width: 95%;
   max-width: 1230px;
-  /* height: 1200px; */
   /* background-color: rgba(95, 158, 160, 0.577); */
   margin: 45px 0px 150px 0px;
   display: flex;
   gap: 30px;
+  position: relative;
 }
 
 /* ................. Company Info ..............  */
@@ -38,7 +42,7 @@
   gap: 10px;
 }
 .stock_detail_company_information_head {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(182, 108, 108); */
   width: 100%;
   height: 160px;
   display: flex;
@@ -1159,6 +1163,85 @@
   top: 40px;
   z-index: 4;
 }
+/* ................ Buy Stock on mobile ...............  */
+
+.stock_detail_buy_stock_on_mobile_main{
+  position: fixed;
+  bottom: 30px; 
+  right: 30px;  
+  /* width: 60px; */
+  /* height: 40px; */
+  z-index: 4;
+  border-radius: 4px;
+  display: none;
+  box-sizing: border-box;
+  background-color: #b7ecdf;
+  background: linear-gradient(to right,#c1faed,#ffcabf);
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid #616161d9;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px #d4d4d4;
+}
+
+.stock_detail_buy_stock_on_mobile_main span{
+  font-size: 12px;
+}
+#stock_detail_buy_stock_on_mobile_main_buy{
+  color: #0ca57e;
+  font-weight: 500;
+  
+}
+#stock_detail_buy_stock_on_mobile_main_X{
+  color: gray;
+  font-weight: 500;
+}
+#stock_detail_buy_stock_on_mobile_main_sell{
+  color: #eb5b3c;
+  font-weight: 500;
+}
+
+
+.buy_and_sell_option_open_in_mobile_view_main_div{
+  /* background-color: rgb(82, 94, 198); */
+  /* background-color: #0ca57e; */
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  min-width: 280px;
+  height: 100dvh;
+  /* z-index:  */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 10; */
+}
+
+.buy_and_sell_option_open_in_mobile_view_main_div_arrange_width{
+  background-color: rgb(255, 255, 255);
+  width: 92%;
+  height: 80%;
+  max-width: 500px;
+  max-height: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #cbcbcb;
+  box-shadow: 0px 0px 20px #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 850px) {
   .stock_detail_company_information_main {
@@ -1166,6 +1249,13 @@
   }
   .stock_detail_buy_stock_main {
     display: none;
+  }
+  .stock_detail_buy_stock_on_mobile_main{
+    display: flex;
+
+  }
+  .buy_and_sell_option_open_in_mobile_view_main_div{
+    display: flex;
   }
 }
 
