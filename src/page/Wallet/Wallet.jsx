@@ -7,8 +7,10 @@ const Wallet = () => {
   const transactionDataHeight = useRef(0);
   const [isTransactionOpen, setIsTransactionOpen] = useState(false);
   const [transactionHeight, setTransactionHeight] = useState(0);
-  const [paymentDepositOrWithdraw, setPaymentDepositOrWithdraw] = useState('deposit');
-  const [depositInputMoneyValue , setDepositInputMoneyValue] = useState(0);
+  const [paymentDepositOrWithdraw, setPaymentDepositOrWithdraw] =
+    useState("deposit");
+  const [depositInputMoneyValue, setDepositInputMoneyValue] = useState(0);
+  const [withdrawInputMoneyValue, setWithdrawInputMoneyValue] = useState(0);
 
   useEffect(() => {
     if (transactionDataHeight.current) {
@@ -17,6 +19,7 @@ const Wallet = () => {
       setTransactionHeight(height);
     }
   }, []);
+
 
   return (
     <div className="wallet_main">
@@ -30,7 +33,7 @@ const Wallet = () => {
                   For stocks, F&O
                 </div>
                 <div id="wallet_main_wallet_card_main_for_stock_balance_left_money">
-                  <span id="wallet_main_stock_balance_large">₹0</span>
+                  <span id="wallet_main_stock_balance_large">₹203</span>
                   <span id="wallet_main_stock_balance_small">.00</span>
                 </div>
               </div>
@@ -60,7 +63,7 @@ const Wallet = () => {
                   User balance
                 </span>
                 <span id="wallet_main_wallet_card_main_user_balance_money_view">
-                  ₹0.00
+                  ₹203.00
                 </span>
               </div>
             </div>
@@ -106,27 +109,27 @@ const Wallet = () => {
                   <>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">17 July 2023</span>
-                      <span id="money">₹213</span>
+                      <span id="money">+ ₹213</span>
                     </div>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">27 July 2023</span>
-                      <span id="money">₹103</span>
+                      <span id="money">- ₹103</span>
                     </div>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">1 aug 2023</span>
-                      <span id="money">₹4213</span>
+                      <span id="money">+ ₹4213</span>
                     </div>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">15 aug 2023</span>
-                      <span id="money">₹5513</span>
+                      <span id="money">+ ₹5513</span>
                     </div>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">27 sep 2023</span>
-                      <span id="money">₹513</span>
+                      <span id="money">+ ₹513</span>
                     </div>
                     <div className="wallet_main_wallet_card_main_all_transaction_show_on_open_div">
                       <span id="date">24 des 2023</span>
-                      <span id="money">₹2113</span>
+                      <span id="money">- ₹2113</span>
                     </div>
                   </>
                 </div>
@@ -135,33 +138,115 @@ const Wallet = () => {
           </div>
         </div>
         <div className="wallet_main_arrange_width_deposit_money_main">
-            <div className="wallet_main_arrange_width_deposit_money_main_top">
-                <div className="wallet_main_arrange_width_deposit_money_main_top_arrange_width">
-                    <div className="wallet_main_arrange_width_deposit_money_main_top_title">
-                        <span id="wallet_main_money_main_top_title_deposit" style={{color:paymentDepositOrWithdraw==='deposit'?'#00b386':null}} onClick={()=>{setPaymentDepositOrWithdraw('deposit')}}>DEPOSIT</span>
-                        <span id="wallet_main_money_main_top_title_withdraw" style={{color:paymentDepositOrWithdraw==='withdraw'?'#00b386':null}} onClick={()=>{setPaymentDepositOrWithdraw('withdraw')}}>WITHDRAW</span>
-                    </div>
-                    <div className="wallet_main_arrange_width_deposit_money_main_top_animation_scroll">
-                        <span className="animation_move_payment_option" id={paymentDepositOrWithdraw==='deposit'?'move_to_option_deposit':'move_to_option_withdraw'}></span>
-                    </div> 
-                </div>
+          <div className="wallet_main_arrange_width_deposit_money_main_top">
+            <div className="wallet_main_arrange_width_deposit_money_main_top_arrange_width">
+              <div className="wallet_main_arrange_width_deposit_money_main_top_title">
+                <span
+                  id="wallet_main_money_main_top_title_deposit"
+                  style={{
+                    color:
+                      paymentDepositOrWithdraw === "deposit" ? "#00b386" : null,
+                  }}
+                  onClick={() => {
+                    setPaymentDepositOrWithdraw("deposit");
+                  }}
+                >
+                  DEPOSIT
+                </span>
+                <span
+                  id="wallet_main_money_main_top_title_withdraw"
+                  style={{
+                    color:
+                      paymentDepositOrWithdraw === "withdraw"
+                        ? "#eb5b3c"
+                        : null,
+                  }}
+                  onClick={() => {
+                    setPaymentDepositOrWithdraw("withdraw");
+                  }}
+                >
+                  WITHDRAW
+                </span>
+              </div>
+              <div className="wallet_main_arrange_width_deposit_money_main_top_animation_scroll">
+                <span
+                  className="animation_move_payment_option"
+                  id={
+                    paymentDepositOrWithdraw === "deposit"
+                      ? "move_to_option_deposit"
+                      : "move_to_option_withdraw"
+                  }
+                ></span>
+              </div>
             </div>
-            <div className="wallet_main_arrange_width_deposit_money_main_bottom">
-                <div className="wallet_main_arrange_width_deposit_money_main_bottom_arrange_width">
-                    <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_main">
-                        <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_title_box">
-                            <span>Enter Amount</span>
-                        </div>
-                        <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_input_box">
-                            <input type="number" value={depositInputMoneyValue} onChange={(e)=>{setDepositInputMoneyValue(e.target.value<0?0:e.target.value)}}/>
-                            <span>₹</span>
-                        </div>
-                    </div>
-                    <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_button_main_div">
-                        <button id="wallet_main_arrange_width_deposit_money_main_bottom_deposit_button">Deposit Money</button>
-                    </div>
+          </div>
+          <div className="wallet_main_arrange_width_deposit_money_main_bottom">
+            {
+              paymentDepositOrWithdraw==='deposit'?
+              <div className="wallet_main_arrange_width_deposit_money_main_bottom_arrange_width">
+                
+                <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_main">
+                  <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_title_box">
+                    <span>Enter Amount</span>
+                  </div>
+                  <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_input_box">
+                    <input
+                      type="number"
+                      value={depositInputMoneyValue}
+                      onChange={(e) => {
+                        setDepositInputMoneyValue(
+                          e.target.value < 0 ? 0 : e.target.value
+                        );
+                      }}
+                    />
+                    <span>₹</span>
+                  </div>
                 </div>
-            </div>
+                <div className="wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option">
+                  <button id="wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option_100" onClick={()=>{setDepositInputMoneyValue((pvr)=>pvr+100)}}>+100</button>
+                  <button id="wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option_500" onClick={()=>{setDepositInputMoneyValue((pvr)=>pvr+500)}}>+500</button>
+                </div>
+                <div className="wallet_main_arrange_width_deposit_money_main_bottom_deposit_button_main_div">
+                  <button id="wallet_main_arrange_width_deposit_money_main_bottom_deposit_button">
+                    DEPOSIT MONEY
+                  </button>
+                </div>
+              </div>
+              :
+              <div className="wallet_main_arrange_width_withdraw_money_main_bottom_arrange_width">
+                <div className="wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_or_not">
+                  <span id="wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_title">Withdrawable</span>
+                  <span id="wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_money">₹203.00</span>
+                </div>
+                <div className="wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_main">
+                  <div className="wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_title_box">
+                    <span>Enter Amount</span>
+                  </div>
+                  <div className="wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_input_box">
+                    <input
+                      type="number"
+                      value={withdrawInputMoneyValue}
+                      onChange={(e) => {
+                        setWithdrawInputMoneyValue(
+                          e.target.value < 0 ? 0 : e.target.value
+                        );
+                      }}
+                    />
+                    <span>₹</span>
+                  </div>
+                </div>
+                <div className="wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option">
+                  <button id="wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option_100" onClick={()=>{setWithdrawInputMoneyValue((pvr)=>pvr+100)}}>+100</button>
+                  <button id="wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option_500" onClick={()=>{setWithdrawInputMoneyValue((pvr)=>pvr+500)}}>+500</button>
+                </div>
+                <div className="wallet_main_arrange_width_withdraw_money_main_bottom_deposit_button_main_div">
+                  <button id="wallet_main_arrange_width_withdraw_money_main_bottom_deposit_button">
+                    WITHDRAW MONEY
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
         </div>
       </div>
       <Footer />
