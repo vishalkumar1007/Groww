@@ -167,7 +167,31 @@
   gap: 8px;
 }
 
-.ied_center_sign_up {
+.ied_center_sign_up_first_name {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  /* display: flex;
+    justify-content: center;
+    align-items: end; */
+}
+.ied_center_sign_up_second_name {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  /* display: flex;
+    justify-content: center;
+    align-items: end; */
+}
+.ied_center_sign_up_email_add {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  /* display: flex;
+    justify-content: center;
+    align-items: end; */
+}
+.ied_center_sign_up_enter_pass {
   width: 100%;
   height: 30px;
   position: relative;
@@ -217,7 +241,40 @@
 }
 
 
-.placeholder_static_sign_up {
+.placeholder_static_sign_up_first_name {
+  /* background-color: brown; */
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_static_sign_up_second_name {
+  /* background-color: brown; */
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_static_sign_up_email_add {
+  /* background-color: brown; */
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_static_sign_up_enter_pss {
   /* background-color: brown; */
   position: absolute;
   top: 7px;
@@ -229,19 +286,89 @@
   transition: 0.3s ease-in-out;
 }
 
-.email_error_div_sign_up {
+.email_error_div_sign_up_first_name {
   /* background-color: pink; */
   position: absolute;
   overflow: hidden;
+  top: 30px;
 }
-.email_error_div_sign_up label {
+.email_error_div_sign_up_first_name label {
+  font-size: 10px;
+  font-family: sans-serif;
+  color: #c60b0b;
+  /* color: #39ac13; */
+}
+.email_error_div_sign_up_second_name {
+  /* background-color: pink; */
+  position: absolute;
+  overflow: hidden;
+  top: 30px;
+}
+.email_error_div_sign_up_second_name label {
+  font-size: 10px;
+  font-family: sans-serif;
+  color: #c60b0b;
+  /* color: #39ac13; */
+}
+.email_error_div_sign_up_email_add {
+  /* background-color: pink; */
+  position: absolute;
+  overflow: hidden;
+  top: 30px;
+}
+.email_error_div_sign_up_email_add label {
+  font-size: 10px;
+  font-family: sans-serif;
+  color: #c60b0b;
+  /* color: #39ac13; */
+}
+.email_error_div_sign_up__enter_pass {
+  /* background-color: pink; */
+  position: absolute;
+  overflow: hidden;
+  top: 30px;
+}
+.email_error_div_sign_up__enter_pass label {
   font-size: 10px;
   font-family: sans-serif;
   color: #c60b0b;
   /* color: #39ac13; */
 }
 
-.placeholder_move_sign_up {
+.placeholder_move_sign_up_first_name {
+  /* background-color: brown; */
+  position: absolute;
+  top: -15px;
+  left: 1px;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #00b386;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_move_sign_up_second_name {
+  /* background-color: brown; */
+  position: absolute;
+  top: -15px;
+  left: 1px;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #00b386;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_move_sign_up_email_add {
+  /* background-color: brown; */
+  position: absolute;
+  top: -15px;
+  left: 1px;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #00b386;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.placeholder_move_sign_up_enter_pss {
   /* background-color: brown; */
   position: absolute;
   top: -15px;
@@ -254,6 +381,8 @@
 }
 
 .input_email_div_sign_up input {
+  background-color: transparent;
+  position: absolute;
   width: 100%;
   height: 30px;
   border: none;
@@ -265,14 +394,40 @@
   z-index: 2;
 }
 
-.inputActive {
+.inputActive_first_name {
   border-bottom: 1.5px solid #00b386;
   transition: width 0.4s ease-in-out;
 }
-.inputDeactivate {
+.inputActive_second_name {
+  border-bottom: 1.5px solid #00b386;
+  transition: width 0.4s ease-in-out;
+}
+.inputActive_email_add {
+  border-bottom: 1.5px solid #00b386;
+  transition: width 0.4s ease-in-out;
+}
+.inputActive_enter_pass {
+  border-bottom: 1.5px solid #00b386;
+  transition: width 0.4s ease-in-out;
+}
+
+.inputDeactivate_first_name {
   border-bottom: 1.4px solid #cdcdcd;
   transition: 0.4s ease-in-out;
 }
+.inputDeactivate_second_name {
+  border-bottom: 1.4px solid #cdcdcd;
+  transition: 0.4s ease-in-out;
+}
+.inputDeactivate_email_add {
+  border-bottom: 1.4px solid #cdcdcd;
+  transition: 0.4s ease-in-out;
+}
+.inputDeactivate_enter_pass {
+  border-bottom: 1.4px solid #cdcdcd;
+  transition: 0.4s ease-in-out;
+}
+
 
 textarea:focus,
 input:focus {

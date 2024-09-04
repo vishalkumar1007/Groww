@@ -157,12 +157,12 @@ const SignUp = () => {
 
                 <div className="sign_up_with_id">
                   <div className="input_email_div_sign_up">
-                    <div className="ied_center_sign_up">
+                    <div className="ied_center_sign_up_first_name">
                       <label
                         className={
                           inputActiveFirstName
-                            ? "placeholder_move_sign_up"
-                            : "placeholder_static_sign_up"
+                            ? "placeholder_move_sign_up_first_name"
+                            : "placeholder_static_sign_up_first_name"
                         }
                       >
                         First Name
@@ -170,8 +170,8 @@ const SignUp = () => {
                       <input
                         className={
                           inputActiveFirstName
-                            ? "inputActive"
-                            : "inputDeactivate"
+                            ? "inputActive_first_name"
+                            : "inputDeactivate_first_name"
                         }
                         type="name"
                         onFocus={() => {
@@ -181,21 +181,24 @@ const SignUp = () => {
                         onChange={(e) => {
                           setUserFirstName(e.target.value);
                         }}
+                        value={userFirstName}
                       />
-                      <div className="email_error_div_sign_up">
+                      {/* <div className="email_error_div_sign_up"> */}
+                      <div className="email_error_div_sign_up_first_name">
                         {firstNameInputError !== "" ? (
-                          <label id="error_sign_up_label">
+                          // <label id="error_sign_up_label">
+                          <label id="error_sign_up_label_first_name">
                             {firstNameInputError}
                           </label>
                         ) : null}
                       </div>
                     </div>
-                    <div className="ied_center_sign_up">
+                    <div className="ied_center_sign_up_second_name">
                       <label
                         className={
                           inputActiveLastName
-                            ? "placeholder_move_sign_up"
-                            : "placeholder_static_sign_up"
+                            ? "placeholder_move_sign_up_second_name"
+                            : "placeholder_static_sign_up_second_name"
                         }
                       >
                         Last Name
@@ -203,8 +206,8 @@ const SignUp = () => {
                       <input
                         className={
                           inputActiveLastName
-                            ? "inputActive"
-                            : "inputDeactivate"
+                            ? "inputActive_second_name"
+                            : "inputDeactivate_second_name"
                         }
                         type="name"
                         onFocus={() => {
@@ -214,28 +217,29 @@ const SignUp = () => {
                         onChange={(e) => {
                           setUserLastName(e.target.value);
                         }}
+                        value={userLastName}
                       />
-                      <div className="email_error_div_sign_up">
+                      <div className="email_error_div_sign_up_second_name">
                         {lastNameInputError !== "" ? (
-                          <label id="error_sign_up_label">
+                          <label id="error_sign_up_label_second_name">
                             {lastNameInputError}
                           </label>
                         ) : null}
                       </div>
                     </div>
-                    <div className="ied_center_sign_up">
+                    <div className="ied_center_sign_up_email_add">
                       <label
                         className={
                           inputActiveEmailId
-                            ? "placeholder_move_sign_up"
-                            : "placeholder_static_sign_up"
+                            ? "placeholder_move_sign_up_email_add"
+                            : "placeholder_static_sign_up_email_add"
                         }
                       >
                         Email Address
                       </label>
                       <input
                         className={
-                          inputActiveEmailId ? "inputActive" : "inputDeactivate"
+                          inputActiveEmailId ? "inputActive_email_add" : "inputDeactivate_email_add"
                         }
                         type="email"
                         onFocus={() => {
@@ -245,21 +249,22 @@ const SignUp = () => {
                         onChange={(e) => {
                           setUserEmailId(e.target.value);
                         }}
+                        value={userEmailId}
                       />
-                      <div className="email_error_div_sign_up">
+                      <div className="email_error_div_sign_up_email_add">
                         {emailInputError !== "" ? (
-                          <label id="error_sign_up_label">
+                          <label id="error_sign_up_label_email_add">
                             {emailInputError}
                           </label>
                         ) : null}
                       </div>
                     </div>
-                    <div className="ied_center_sign_up">
+                    <div className="ied_center_sign_up_enter_pass">
                       <label
                         className={
                           inputActivePassword
-                            ? "placeholder_move_sign_up"
-                            : "placeholder_static_sign_up"
+                            ? "placeholder_move_sign_up_enter_pss"
+                            : "placeholder_static_sign_up_enter_pss"
                         }
                       >
                         Enter Password
@@ -267,10 +272,10 @@ const SignUp = () => {
                       <input
                         className={
                           inputActivePassword
-                            ? "inputActive"
-                            : "inputDeactivate"
+                            ? "inputActive_enter_pass"
+                            : "inputDeactivate_enter_pass"
                         }
-                        type={isSignUpPasswordHide?"password":"text"}
+                        type={isSignUpPasswordHide ? "password" : "text"}
                         onFocus={() => {
                           setInputActivePassword(true);
                         }}
@@ -278,6 +283,7 @@ const SignUp = () => {
                         onChange={(e) => {
                           setUserPassword(e.target.value);
                         }}
+                        value={userPassword}
                       />
                       <div
                         className="ied_center_sign_up_password_hide_and_view"
@@ -294,9 +300,9 @@ const SignUp = () => {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1.2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="lucide lucide-eye"
                           >
                             <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
@@ -311,9 +317,9 @@ const SignUp = () => {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1.2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="lucide lucide-eye-off"
                           >
                             <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
@@ -324,9 +330,9 @@ const SignUp = () => {
                         )}
                       </div>
 
-                      <div className="email_error_div_sign_up">
+                      <div className="email_error_div_sign_up__enter_pass">
                         {passwordInputError ? (
-                          <label id="error_sign_up_label">
+                          <label id="error_sign_up_label__enter_pass">
                             {passwordInputError}
                           </label>
                         ) : null}
