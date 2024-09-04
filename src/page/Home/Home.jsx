@@ -366,7 +366,6 @@ const Home = () => {
             </div>
           </div>
           <div className="Home_body_section_5">
-            {/* footer  */}
             <Footer />
           </div>
         </div>
