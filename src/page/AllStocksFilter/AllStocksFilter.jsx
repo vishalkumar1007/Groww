@@ -2,8 +2,10 @@ import { useState ,useEffect } from "react";
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
 import Pagination from "../../component/Pagination/Pagination";
-import SelectCategory from "../../AllStockFilterComponents/SelectCategory/SelectCategory";
-import marketCapData from "../../jsonDummyData/marketCapData.json";
+// import SelectCategory from "../../AllStockFilterComponents/SelectCategory/SelectCategory";
+import SelectCategory from "../../component/AllStockFilterComponents/SelectCategory/SelectCategory";
+// import marketCapData from "../../jsonDummyData/marketCapData.json";
+import marketCapData from "../../utils/marketCapData.json";
 import "./AllStocksFilter.css";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 

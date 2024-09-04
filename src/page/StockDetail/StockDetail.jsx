@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./StockDetail.css";
+// ............... hooks ..................
+import useImage from "../../hooks/useImage";
+// ............... components ..................
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
 import PageNotFound from "../../component/PageNotFound/PageNotFound";
-import StockData from "../../jsonDummyData/stockData.json";
-import useImage from "../../hooks/useImage";
 import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
 import ShareholdingPatternCard from "../../component/ShareholdingPatternCard/ShareholdingPatternCard";
-import FinancialGraph from "../../StockDetailComponents/FinancialGraph/FinancialGraph";
+import FinancialGraph from "../../component/StockDetailComponents/FinancialGraph/FinancialGraph";
 import StockCard from "../../component/StockCard/StockCard";
+// ............... json data ..................
+import StockData from "../../utils/stockData.json";
 // ............... image ..................
-
 import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
 import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
 import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
 import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
-
 import ola_logo from "../../assets/svg/ola_logo.svg";
 import GTL_logo from "../../assets/svg/GTL_logo.webp";
 import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
 import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
-
 import profit_graph_image from "../../assets/img/profit_graph.png";
 import loss_graph_image from "../../assets/img/loss_graph.png";
 

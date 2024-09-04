@@ -1,5 +1,21 @@
+// ............. state and css ............
+import { useEffect, useState } from "react";
+import "./Stocks.css";
+
+// ............. json data ............
+import marketCapData from "../../utils/marketCapData.json";
+
+// ...... component .......
 import StocksIndex from "../../component/StockIndex/StockIndex";
+import StockWatchListCard from "../../component/StockWatchListCard/StockWatchListCard";
 import StockCard from "../../component/StockCard/StockCard";
+import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
+import TopSector from "../../component/TopSector/TopSector";
+import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
+import Pagination from "../../component/Pagination/Pagination";
+
+
+// ...... icons .......
 import ola_logo from "../../assets/svg/ola_logo.svg";
 import GTL_logo from "../../assets/svg/GTL_logo.webp";
 import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
@@ -44,17 +60,6 @@ import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
 import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
 import tata from "../../assets/img/top_looser/tata_icon.webp";
 
-// .........imp / comp .............
-import "./Stocks.css";
-import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
-import TopSector from "../../component/TopSector/TopSector";
-import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
-import Pagination from "../../component/Pagination/Pagination";
-import { useEffect, useState } from "react";
-
-// ............. json data ............
-import marketCapData from "../../jsonDummyData/marketCapData.json";
-import StockWatchListCard from "../../component/StockWatchListCard/StockWatchListCard";
 
 const Stocks = () => {
   const [topGainActive, setTopGainActive] = useState("large");

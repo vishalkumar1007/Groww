@@ -19,9 +19,11 @@ import sip_calculator from "../../assets/img/Mutual_Fund/quick_access/calculator
 
 
 import "./MutualFund.css";
-import MutualFundCard from "../../MutualFundComponents/MutualFundCard/MutualFundCard";
-import MutualFundCollectionCard from "../../MutualFundComponents/MutualFundCollectionCard/MutualFundCollectionCard";
-import QuicksAccess from "../../MutualFundComponents/QuicksAccess/QuicksAccess";
+// import MutualFundCard from "../../MutualFundComponents/MutualFundCard/MutualFundCard";
+import MutualFundCard from "../../component/MutualFundComponents/MutualFundCard/MutualFundCard";
+// import MutualFundCollectionCard from "../../MutualFundComponents/MutualFundCollectionCard/MutualFundCollectionCard";
+import MutualFundCollectionCard from "../../component/MutualFundComponents/MutualFundCollectionCard/MutualFundCollectionCard";
+import QuicksAccess from "../../component/MutualFundComponents/QuicksAccess/QuicksAccess";
 
 const MutualFund = () => {
   return (

@@ -3,7 +3,7 @@ import "./StockWatchListCard.css";
 
 // ............. data ...........
 
-import watchListData from "../../jsonDummyData/watchlistItemData.json";
+import watchListData from "../../utils/watchlistItemData.json";
 
 const StockWatchListCard = ({ watchlistTitle = "dummy" }) => {
   const getWatchlistHiddenBoxHeight = useRef(0);
