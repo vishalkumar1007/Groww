@@ -464,8 +464,8 @@
 }
 /* .........end ......... */
 .Home_body_section_5 {
-  background-color: rgb(247, 247, 247);
-  background-color: red;
+  background-color: rgb(149, 30, 30);
+  /* background-color: red; */
   width: 100%;
   /* height: 900px; */
   display: flex;
@@ -474,16 +474,17 @@
   /* border-top: 2px solid rgba(230, 230, 230, 0.47); */
 }
 
-.Home_body_section_5_end{
-  /* background-color: wheat; */
+
+/* .Home_body_section_5_end{
   width: 80%;
   height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-}
-.Home_body_section_5_end_left{
+} */
+
+/* .Home_body_section_5_end_left{
   height: 50px;
 }
 .Home_body_section_5_end_right{
@@ -499,19 +500,11 @@
 .Home_body_section_5_end_right img{
   width: 100%;
   height: 100%;
-}
+} */
 
 
 /* ...............  */
 
-.Home_footer {
-}
-
-.Home_footer_main {
-}
-
-.Home_footer_build_with_love {
-}
 
 .Home_three_menu_bar{
   display: none;
@@ -730,16 +723,16 @@
     /* background-color: red; */
     height: 100%;
     min-height: 95%;
-
+    width: 420px;
   }
-  .Home_body_section_5_end_left{
+  /* .Home_body_section_5_end_left{
     height: 40px;
   }
   .Home_body_section_5_end_right{
     height: 40px;
     display: flex;
     gap: 10px;
-  }
+  } */
 
 }
 
@@ -847,14 +840,14 @@
     min-height: 95%;
 
   }
-  .Home_body_section_5_end_left{
+  /* .Home_body_section_5_end_left{
     height: 35px;
   }
   .Home_body_section_5_end_right{
     height: 35px;
     display: flex;
     gap: 10px;
-  }
+  } */
 }
 
 @media only screen and (max-width: 500px) {
@@ -1040,6 +1033,13 @@
     width: 100%;
     height: 900px;
   }
+  #hbs4M_p2_img_div{
+    /* background-color: red; */
+    height: 100%;
+    min-height: 95%;
+    min-width: 370px;
+
+  }
   
 }
 
@@ -1149,13 +1149,20 @@
     align-items: end;
 
   }
-  .Home_body_section_5_end_left{
+  /* .Home_body_section_5_end_left{
     height: 22px;
   }
   .Home_body_section_5_end_right{
     height: 22px;
     display: flex;
     gap: 10px;
+  } */
+
+  #hbs4M_p2_img_div{
+    /* background-color: red; */
+    height: 90%;
+    min-height: 95%;
+    min-width: 200px;
   }
 }
 @media only screen and (max-width: 310px) {
@@ -1250,7 +1257,8 @@
     width: 100%;
     height: 650px;
   }
-  .Home_body_section_5_end_left{
+  /* .Home_body_section_5_end_left{
+    background-color: pink;
     height: 18px;
   }
   .Home_body_section_5_end_right{
@@ -1260,6 +1268,12 @@
   }
   .Home_body_section_5{
     height: 100px;
+  } */
+  #hbs4M_p2_img_div{
+    /* background-color: red; */
+    height: 80%;
+    min-height: 95%;
+
   }
 }
 @media only screen and (max-width: 264px) {
