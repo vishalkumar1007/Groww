@@ -370,10 +370,6 @@ const Home = () => {
             <Footer />
           </div>
         </div>
-        <div className="Home_footer">
-          <div className="Home_footer_main"></div>
-          <div className="Home_footer_build_with_love"></div>
-        </div>
       </div>
     </>
   );
