@@ -1,17 +1,43 @@
 import { useEffect, useState } from "react";
 import "./StocksCard.css";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+} from "../../features/userWatchlist/userWatchlistSlice";
+import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
 const StocksCard = ({
   logoUrl = "",
   title = "",
   cost = "",
   costPerRate = "",
 }) => {
+  const dispatch = useDispatch();
+  const user_watchlist_data = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
-  const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState('');
+  const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
+
+  const  HandelAddCardToWatchList=()=>{
+    if(isCardAddToWatchList){
+      dispatch(removeFromWatchlist({title}));
+      setIsCardAddToWatchList(false);
+    }else{
+      dispatch(addToWatchlist({title,cost,costPerRate,logoUrl}));
+    }
+  }
+
+  useEffect(() => {
+    for(let i=0;i<user_watchlist_data.length;i++){
+      if(user_watchlist_data[i].title === title){
+        setIsCardAddToWatchList(true);
+        break;
+      }
+    }
+  }, [title, user_watchlist_data]);
+
 
   useEffect(() => {
     if (costPerRate.length > 0) {
@@ -30,30 +56,33 @@ const StocksCard = ({
     let updatedTitle = title;
     for (let i = 0; i < updatedTitle.length; i++) {
       if (updatedTitle[i] === " ") {
-        updatedTitle = updatedTitle.substring(0, i) + '-' + updatedTitle.substring(i + 1);
-      }
-      if(/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])){
-        updatedTitle = updatedTitle.substring(0, i) + '' + updatedTitle.substring(i + 1);
-      }
-      if (updatedTitle.charCodeAt(i) >= 65 && updatedTitle.charCodeAt(i) <= 90) {
         updatedTitle =
-        updatedTitle.substring(0, i) +
-        updatedTitle[i].toLowerCase() +
-        updatedTitle.substring(i + 1);
+          updatedTitle.substring(0, i) + "-" + updatedTitle.substring(i + 1);
+      }
+      if (/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])) {
+        updatedTitle =
+          updatedTitle.substring(0, i) + "" + updatedTitle.substring(i + 1);
+      }
+      if (
+        updatedTitle.charCodeAt(i) >= 65 &&
+        updatedTitle.charCodeAt(i) <= 90
+      ) {
+        updatedTitle =
+          updatedTitle.substring(0, i) +
+          updatedTitle[i].toLowerCase() +
+          updatedTitle.substring(i + 1);
       }
     }
     setUpdatedTitleForUrl(updatedTitle);
   }, [title]);
-  
+
   return (
-    <div
-      className="stocksCard_main"
-     
-    >
+    <div className="stocksCard_main">
       <div className="stocksCard_main_top">
-        <div className="stocksCard_main_top_logo_and_add" >
-          <div className="stocksCard_main_top_logo"
-             onClick={() => {
+        <div className="stocksCard_main_top_logo_and_add">
+          <div
+            className="stocksCard_main_top_logo"
+            onClick={() => {
               navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
             }}
           >
@@ -64,7 +93,7 @@ const StocksCard = ({
               <button
                 className="stocksCard_main_top_add_circle"
                 onClick={() => {
-                  setIsCardAddToWatchList(!isCardAddToWatchList);
+                  HandelAddCardToWatchList();
                 }}
               >
                 {isCardAddToWatchList ? (
@@ -107,16 +136,18 @@ const StocksCard = ({
             </div>
           </div>
         </div>
-        <div className="stocksCard_main_top_left_title" 
-             onClick={() => {
-              navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
-            }}
-          >
+        <div
+          className="stocksCard_main_top_left_title"
+          onClick={() => {
+            navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+          }}
+        >
           {title || "Stock Title"}
         </div>
       </div>
-      <div className="stocksCard_main_bottom"  
-         onClick={() => {
+      <div
+        className="stocksCard_main_bottom"
+        onClick={() => {
           navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
         }}
       >

@@ -118,3 +118,13 @@
     font-size: 14px;
     font-weight: 500;
 }
+
+@media (max-width:500px){
+    .stocksCard_main_top_add{
+        width: 30px;
+        height: 30px;
+        display: block;
+        transition: 0.15s ease-in-out;
+        z-index: 5;
+    }
+}

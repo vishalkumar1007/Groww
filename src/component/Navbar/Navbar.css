@@ -191,11 +191,31 @@
     border-radius: 50%;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-    
+    position: relative;
 }
 .Navbar_activity_shop:hover{
     background-color: #ecececda;
 }
+
+.navbar_cart_count_div_main{
+    position: absolute;
+    background-color: #e93a231a;
+    width: 16.5px;
+    height: 16.5px;
+    top: -4.5px;
+    right: -6px;
+    font-size: 13.5px;
+    font-weight:500;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eb150a;
+    border: 0.5px solid #eb211729;
+    padding-bottom: 2px;
+}
+
+
 .Navbar_activity_profile{
     /* background-color: seagreen; */
     display: flex;
@@ -349,6 +369,7 @@
     align-items: center;
     transition: 0.2s ease-in-out;
     cursor: pointer;
+    /* background-color: red; */
 }
 .Navbar_user_Profile_section_service_arrange_pointer_allOrder:hover{
     background-color: #f4f4f4;
@@ -474,6 +495,7 @@
     justify-content: space-between;
     align-items: center;
     width: 85%;
+    position: relative;
 }
 .Navbar_user_Profile_section_service_customerSupport_title p{
     color: #6d6d6d;
@@ -481,7 +503,24 @@
     font-weight: 500;
 }
 
+#user_order_card_counter_ui{
+    position: absolute;
+    background-color: #e93a231a;
+    width: 20px;
+    height: 20px;
+    top: 15px;
+    left: 80px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eb150a;
+    border: 0.5px solid #eb221762;
+    /* padding-bottom: 2px; */
 
+}
 
 
 .Navbar_user_Profile_section_feature{

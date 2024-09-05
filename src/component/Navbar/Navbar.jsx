@@ -2,8 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import CompanyLogo from "../../assets/svg/groww-logo-light.svg";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
 
 const Navbar = () => {
+  const userWatchListCount = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("Explore");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -109,7 +112,12 @@ const Navbar = () => {
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
             </svg>
           </div>
-          <div className="Navbar_activity_wallet" onClick={()=>{navigate('/wallet')}}>
+          <div
+            className="Navbar_activity_wallet"
+            onClick={() => {
+              navigate("/wallet");
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -126,7 +134,12 @@ const Navbar = () => {
               <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
             </svg>
           </div>
-          <div className="Navbar_activity_shop" onClick={()=>{navigate('/shop_cart')}}>
+          <div
+            className="Navbar_activity_shop"
+            onClick={() => {
+              navigate("/shop_cart");
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -143,6 +156,11 @@ const Navbar = () => {
               <circle cx="19" cy="21" r="1" />
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>
+            {userWatchListCount.length === 0 ? null : (
+              <div className="navbar_cart_count_div_main">
+                {userWatchListCount.length}
+              </div>
+            )}
           </div>
           <div
             className="Navbar_activity_profile"
@@ -253,7 +271,12 @@ const Navbar = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="Navbar_user_Profile_section_service_arrange_pointer_bankDetail" onClick={()=>{navigate('/wallet')}}>
+                  <div
+                    className="Navbar_user_Profile_section_service_arrange_pointer_bankDetail"
+                    onClick={() => {
+                      navigate("/wallet");
+                    }}
+                  >
                     <div className="Navbar_user_Profile_section_service_bankDetail">
                       <div className="Navbar_user_Profile_section_service_bankDetail_icon">
                         <svg
@@ -272,7 +295,7 @@ const Navbar = () => {
                           <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
                         </svg>
                       </div>
-                      <div className="Navbar_user_Profile_section_service_bankDetail_title" >
+                      <div className="Navbar_user_Profile_section_service_bankDetail_title">
                         <p>Wallet</p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -290,7 +313,12 @@ const Navbar = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="Navbar_user_Profile_section_service_arrange_pointer_customerSupport" onClick={()=>{navigate('/shop_cart')}}>
+                  <div
+                    className="Navbar_user_Profile_section_service_arrange_pointer_customerSupport"
+                    onClick={() => {
+                      navigate("/shop_cart");
+                    }}
+                  >
                     <div className="Navbar_user_Profile_section_service_customerSupport">
                       <div className="Navbar_user_Profile_section_service_customerSupport_icon">
                         <svg
@@ -312,6 +340,11 @@ const Navbar = () => {
                       </div>
                       <div className="Navbar_user_Profile_section_service_customerSupport_title">
                         <p>Order Item</p>
+                        {userWatchListCount.length === 0 ? null : (
+                        <p id="user_order_card_counter_ui">
+                          {userWatchListCount.length}
+                        </p>
+                      )}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="18"
@@ -358,6 +391,7 @@ const Navbar = () => {
                     </div>
                     <div className="Navbar_user_Profile_section_service_allOrder_title">
                       <p>All Orders</p>
+                      
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -476,13 +510,13 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="Navbar_user_Profile_section_footer_arrange_logout">
-                    <p
-                      onClick={() => {
-                        navigate("/");
-                      }}
-                    >
-                      Log out
-                    </p>
+                  <p
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                  >
+                    Log out
+                  </p>
                 </div>
               </div>
             </div>
