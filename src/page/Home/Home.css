@@ -4,7 +4,6 @@
 }
 
 .HomeMain {
-  /* background-color: rgb(197, 197, 197); */
   width: 100%;
   height: 100dvh;
   /* prevent to select text  */
@@ -28,16 +27,10 @@
   align-items: center;
   width: 20%;
   height: 100%;
-  /* max-width: 150px; */
-  /* max-height: 50px; */
-  /* min-width: 122px; */
   box-sizing: border-box;
   /* margin-left: -45px; */
 }
 .Home_nav_logo_handel {
-  /* background-color: pink; */
-  /* margin-left: -50px; */
-  /* min-width: 120px; */
   width: 150px;
   /* min-width: 120.88px; */
   height: 100%;
