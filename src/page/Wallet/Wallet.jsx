@@ -193,11 +193,9 @@ const Wallet = () => {
                     <input
                       type="number"
                       value={depositInputMoneyValue}
-                      onChange={(e) => {
-                        setDepositInputMoneyValue(
-                          e.target.value < 0 ? 0 : e.target.value
-                        );
-                      }}
+                      onChange={(e) => {setDepositInputMoneyValue(
+                        +(e.target.value < 0 ? 0 : e.target.value)
+                      )}}
                     />
                     <span>₹</span>
                   </div>
@@ -228,7 +226,7 @@ const Wallet = () => {
                       value={withdrawInputMoneyValue}
                       onChange={(e) => {
                         setWithdrawInputMoneyValue(
-                          e.target.value < 0 ? 0 : e.target.value
+                          +(e.target.value < 0 ? 0 : e.target.value)
                         );
                       }}
                     />
