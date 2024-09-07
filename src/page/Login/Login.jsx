@@ -15,6 +15,7 @@ const Login = () => {
     useState(false);
   const [passwordErrorAlert, setPasswordErrorAlert] = useState("");
   const [isLoginPasswordHide, setIsLoginPasswordHide] = useState(true);
+  const [animationTextChangeLogin , setAnimationTextChangeLogin] = useState('Mutual Funds');
 
   const checkInputFocus = () => {
     setInputActive(true);
@@ -24,6 +25,26 @@ const Login = () => {
       setInputActive(false);
     }
   };
+
+  useState(()=>{
+    const interval = setInterval(() => {
+      setAnimationTextChangeLogin((pvrState)=>{
+        if(pvrState==='Mutual Funds'){
+          return 'Stocks'
+        }else if(pvrState==='Stocks'){
+          return "EFT's"
+        }else{
+          return 'Mutual Funds'
+        }
+      });
+
+    }, 3000);
+
+    return()=>{clearInterval(interval)};
+
+  },[]);
+
+
 
   useEffect(() => {
     if (inputActive) {
@@ -83,8 +104,8 @@ const Login = () => {
                   <p id="left_tagline_top_text">Investing.</p>
                 </div>
                 <div className="left_tagline_bottom">
-                  <div id="interval"></div>
-                  <p id="left_tagline_bottom_text">Mutual Funds</p>
+                  <div id="interval_login"></div>
+                  <p id="left_tagline_bottom_text">{animationTextChangeLogin}</p>
                 </div>
               </div>
             </div>

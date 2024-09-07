@@ -26,6 +26,25 @@ const Login = () => {
 
     const [isUpdatePassHide, setIsUpdatePassHide] = useState(true);
     const [isUpdateConfPassHide, setIsUpdateConfPassHide] = useState(true);
+    const [animationTextChangeForget , setAnimationTextChangeForget] = useState('Mutual Funds');
+    useState(()=>{
+        const interval2 = setInterval(() => {
+          setAnimationTextChangeForget((pvrState)=>{
+            if(pvrState==='Mutual Funds'){
+              return 'Stocks'
+            }else if(pvrState==='Stocks'){
+              return "EFT's"
+            }else{
+              return 'Mutual Funds'
+            }
+          });
+    
+        }, 3000);
+    
+        return()=>{clearInterval(interval2)};
+    
+    },[]);
+
 
     const checkInputFocus = () => {
         setF_inputActive(true);
@@ -159,8 +178,8 @@ const Login = () => {
                                     <p id="left_tagline_top_forget_text">Investing.</p>
                                 </div>
                                 <div className="left_tagline_bottom_forget">
-                                    <div id="interval"></div>
-                                    <p id="left_tagline_bottom_forget_text">Mutual Funds</p>
+                                <div id="interval_forget"></div>
+                                <p id="left_tagline_bottom_text">{animationTextChangeForget}</p>
                                 </div>
                             </div>
                         </div>

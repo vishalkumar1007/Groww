@@ -17,6 +17,7 @@ const SignUp = () => {
   const [emailInputError, setEmailInputError] = useState("");
   const [passwordInputError, setPasswordInputError] = useState("");
   const [isSignUpPasswordHide, setIsSignUpPasswordHide] = useState(true);
+  const [animationTextChangeSignUp , setAnimationTextChangeSignUp] = useState('Mutual Funds');
 
   const handleBlurFirstName = (event) => {
     if (event.target.value === "") {
@@ -38,6 +39,24 @@ const SignUp = () => {
       setInputActivePassword(false);
     }
   };
+
+  useState(()=>{
+    const interval2 = setInterval(() => {
+      setAnimationTextChangeSignUp((pvrState)=>{
+        if(pvrState==='Mutual Funds'){
+          return 'Stocks'
+        }else if(pvrState==='Stocks'){
+          return "EFT's"
+        }else{
+          return 'Mutual Funds'
+        }
+      });
+
+    }, 3000);
+
+    return()=>{clearInterval(interval2)};
+
+  },[]);
 
   useEffect(() => {
     if (inputActiveFirstName) {
@@ -142,8 +161,8 @@ const SignUp = () => {
                   <p id="left_tagline_top_sign_up_text">Investing.</p>
                 </div>
                 <div className="left_tagline_bottom_sign_up">
-                  <div id="interval"></div>
-                  <p id="left_tagline_bottom_sign_up_text">Mutual Funds</p>
+                <div id="interval_signUp"></div>
+                <p id="left_tagline_bottom_text">{animationTextChangeSignUp}</p>
                 </div>
               </div>
             </div>
