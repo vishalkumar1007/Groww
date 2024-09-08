@@ -1,9 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-    value:[],
-    loading:false,
-    error:null
+    value:[]
 }
 
 
@@ -12,11 +10,9 @@ const userWatchlistSlice = createSlice({
     initialState ,
     reducers:{
         addToWatchlist:(state,action)=>{
-            // console.log('Adding to watchlist:', action.payload);
             state.value.push(action.payload);
         },
-        removeFromWatchlist:(state,action   )=>{
-            // console.log('Removing from watchlist:', action.payload);
+        removeFromWatchlist:(state,action)=>{
             state.value = state.value.filter(item=>item.title !== action.payload.title);
         },
     }
