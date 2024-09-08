@@ -7,8 +7,10 @@ import youtube_logo from '../../assets/svg/yt_icon_groww.svg';
 import googlePlay_icon from '../../assets/img/google-play-badge.webp';
 import appStore_icon from '../../assets/img/app-store-logo.webp';
 import './Footer.css';          
+import {useNavigate} from "react-router-dom";
 
 const Footer = ()=>{
+    const navigate = useNavigate();
     return(
         <div className='footerMain'>
             <div className='footerMain_screen_range'>
@@ -32,15 +34,15 @@ const Footer = ()=>{
                         </div>
                     </div>
                     <div className='footer_content_main_products'>
-                        <div className='footer_content_main_products_heading'>
-                            <p>PRODUCTS</p>
+                        <div className='footer_content_main_products_heading' >
+                            <p >PRODUCTS</p>
                         </div>
                         <div className='footer_content_main_products_links'>
                             <div className='footer_content_main_products_links_Stocks'>
-                                <p>Stocks</p>
+                                <p onClick={()=>{navigate("dashboard")}}>Dashboard</p>
                             </div>
                             <div className='footer_content_main_products_links_futureAndOptions'>
-                                <p>Future & Options</p>
+                                <p onClick={()=>{navigate("dashboard")}}>Stocks</p>
                             </div>
                             <div className='footer_content_main_products_links_IPO'>
                                 <p>IPO</p>
