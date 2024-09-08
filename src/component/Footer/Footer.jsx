@@ -39,10 +39,10 @@ const Footer = ()=>{
                         </div>
                         <div className='footer_content_main_products_links'>
                             <div className='footer_content_main_products_links_Stocks'>
-                                <p onClick={()=>{navigate("dashboard")}}>Dashboard</p>
+                                <p onClick={()=>{navigate("/dashboard")}}>Dashboard</p>
                             </div>
                             <div className='footer_content_main_products_links_futureAndOptions'>
-                                <p onClick={()=>{navigate("dashboard")}}>Stocks</p>
+                                <p onClick={()=>{navigate("/dashboard")}}>Stocks</p>
                             </div>
                             <div className='footer_content_main_products_links_IPO'>
                                 <p>IPO</p>
