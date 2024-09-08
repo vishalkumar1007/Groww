@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[9270],{9270:(c,e,p)=>{c.exports=p.p+"static/media/GSTK513375_company_icon_CUMI.951d3c3a828959fc0f5f.webp"}}]);

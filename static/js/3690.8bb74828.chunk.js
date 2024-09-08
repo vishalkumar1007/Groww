@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[3690],{3690:(e,c,p)=>{e.exports=p.p+"static/media/GSTK532775_company_icon.cf9bf8be71ac617798fb.webp"}}]);

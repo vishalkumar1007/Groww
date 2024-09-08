@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[8581],{8581:(s,w,e)=>{s.exports=e.p+"static/media/yt_icon_groww.d836cf7a01d0371371a9.svg"}}]);

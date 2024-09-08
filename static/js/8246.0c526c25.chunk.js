@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[8246],{8246:(a,s,e)=>{a.exports=e.p+"static/media/instagram_icon_groww.070c0a68f7de44b4aa4c.svg"}}]);

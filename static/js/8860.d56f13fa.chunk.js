@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[8860],{8860:(s,e,p)=>{s.exports=p.p+"static/media/ipo.b0fc244852bb75664088.svg"}}]);

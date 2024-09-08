@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[1762],{1762:(e,s,w)=>{e.exports=w.p+"static/media/linkedin_icon_groww.f5a0b4e462a38d4c37be.svg"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[3698],{3698:(e,s,a)=>{e.exports=a.p+"static/media/event.a2a1abef2e57634d8639.svg"}}]);

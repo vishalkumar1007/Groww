@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[3471],{3471:(s,e,t)=>{s.exports=t.p+"static/media/ipo_mint_light.b0fc244852bb75664088.svg"}}]);

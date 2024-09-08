@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[2797],{2797:(c,e,s)=>{c.exports=s.p+"static/media/mid_cap.2c5c081dce1970556125.svg"}}]);

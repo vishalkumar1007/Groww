@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[2804],{2804:(a,s,e)=>{a.exports=e.p+"static/media/intraday.a60429581671d721c0a9.svg"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[1005],{1005:(e,a,s)=>{e.exports=s.p+"static/media/calendar_mint_light.a2a1abef2e57634d8639.svg"}}]);

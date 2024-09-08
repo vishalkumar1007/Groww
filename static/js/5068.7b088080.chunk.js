@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[5068],{5068:(a,e,s)=>{a.exports=s.p+"static/media/calculator.58c6dd8a5f67a77e4806.svg"}}]);

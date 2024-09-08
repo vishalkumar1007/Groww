@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[4718],{4718:(s,e,o)=>{s.exports=o.p+"static/media/Forgot-password-amico.603f04966b0ee860128b.svg"}}]);

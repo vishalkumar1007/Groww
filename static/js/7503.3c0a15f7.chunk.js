@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[7503],{7503:(a,e,s)=>{a.exports=s.p+"static/media/calendar_mint_dark.053d04f50bda023f7078.svg"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[6802],{4421:(s,e,p)=>{s.exports=p.p+"static/media/import_funds.cb02ba438e40191d6fd6.svg"}}]);
