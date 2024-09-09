@@ -154,7 +154,7 @@ const Home = () => {
                       <div className="Home_body_section_2_left_contain_stock_option_1">
                         <div className="Home_body_section_2_left_contain_stock_option_1_div">
                           <button className="Home_body_section_2_left_contain_stock_option_1_div_btn">
-                            <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrange">
+                            <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrange" onClick={()=>{navigate("dashboard")}}>
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_icon">
                                 <img src={Stocks_icon} alt="" />
                               </div>
@@ -189,7 +189,7 @@ const Home = () => {
                                 <img src={Mutual_icon} alt="" />
                               </div>
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_title">
-                                <p>Stocks & Intraday</p>
+                                <p>Mutual funds & SIPs</p>
                               </div>
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrow">
                                 <svg
@@ -219,7 +219,7 @@ const Home = () => {
                                 <img src={Future_icon} alt="" />
                               </div>
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_title">
-                                <p>Stocks & Intraday</p>
+                                <p>Futures & Options</p>
                               </div>
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrow">
                                 <svg
