@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Groww/static/css/main.0c4fcded.css",
-    "main.js": "/Groww/static/js/main.92cb370d.js",
+    "main.js": "/Groww/static/js/main.6e21162e.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -176,11 +176,11 @@
     "static/media/import_funds.svg": "/Groww/static/media/import_funds.cb02ba438e40191d6fd66b6ead33fea0.svg",
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg",
     "main.0c4fcded.css.map": "/Groww/static/css/main.0c4fcded.css.map",
-    "main.92cb370d.js.map": "/Groww/static/js/main.92cb370d.js.map",
+    "main.6e21162e.js.map": "/Groww/static/js/main.6e21162e.js.map",
     "6453.cbd43e81.chunk.js.map": "/Groww/static/js/6453.cbd43e81.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0c4fcded.css",
-    "static/js/main.92cb370d.js"
+    "static/js/main.6e21162e.js"
   ]
 }
