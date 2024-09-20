@@ -18,13 +18,33 @@ import IntroAlert from "../../component/IntroAlert/IntroAlert";
 const Home = () => {
   const navigate = useNavigate();
   const [menuActive, setMenuActive] = useState(false);
-  const [isShowAlertOption , setIsShowAlertOption] = useState(true);
+  const [isShowAlertOption , setIsShowAlertOption] = useState(false);
+  const [popUpInterval , setPopUpInterval] = useState(5000);
+
+
+
 
   const requestToClose = (value)=>{
     if(value){
       setIsShowAlertOption(false);
     }
   }
+  
+  useEffect(()=>{
+    let timeInterval ;
+    if(!isShowAlertOption){
+      timeInterval = setTimeout(()=>{
+        setIsShowAlertOption(true);
+        console.log('true...');
+        setPopUpInterval((pvrPopUpValue)=>{return Math.min(pvrPopUpValue*2,120_000)});
+      },popUpInterval);
+    }
+    console.log('PASS...');
+
+    return ()=> clearTimeout(timeInterval);
+  },[popUpInterval,isShowAlertOption])
+
+
 
   useEffect(()=>{
     window.scrollTo(0,0);
