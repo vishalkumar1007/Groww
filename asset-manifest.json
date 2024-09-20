@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.0c4fcded.css",
-    "main.js": "/Groww/static/js/main.be93eca1.js",
+    "main.css": "/Groww/static/css/main.eb785acd.css",
+    "main.js": "/Groww/static/js/main.c5b230bc.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -31,6 +31,8 @@
     "static/js/7559.fa0861d8.chunk.js": "/Groww/static/js/7559.fa0861d8.chunk.js",
     "static/js/6725.e155647f.chunk.js": "/Groww/static/js/6725.e155647f.chunk.js",
     "static/js/4142.55769265.chunk.js": "/Groww/static/js/4142.55769265.chunk.js",
+    "static/js/6918.06dd6576.chunk.js": "/Groww/static/js/6918.06dd6576.chunk.js",
+    "static/js/2226.f464136e.chunk.js": "/Groww/static/js/2226.f464136e.chunk.js",
     "static/js/625.57900305.chunk.js": "/Groww/static/js/625.57900305.chunk.js",
     "static/js/8376.f00e6f73.chunk.js": "/Groww/static/js/8376.f00e6f73.chunk.js",
     "static/js/7437.fe825f03.chunk.js": "/Groww/static/js/7437.fe825f03.chunk.js",
@@ -90,6 +92,7 @@
     "static/media/mid_mazagon_ship_icon.webp": "/Groww/static/media/mid_mazagon_ship_icon.ff8dbc3d34665c305d57.webp",
     "static/media/personalLoan.9d5e746c.webp": "/Groww/static/media/personalLoan.9d5e746c.ee125e93a34e17735d17.webp",
     "static/media/Firstsource_Soln_icon.webp": "/Groww/static/media/Firstsource_Soln_icon.aec10a96b400710f6b4e.webp",
+    "static/media/Hello-pana-with-flower.svg": "/Groww/static/media/Hello-pana-with-flower.a0e19ac70eaf47d5240bde9ad3c8c595.svg",
     "static/media/titan_icon.webp": "/Groww/static/media/titan_icon.198e0504f26f651d06f4.webp",
     "static/media/GSTK532775_company_icon.webp": "/Groww/static/media/GSTK532775_company_icon.cf9bf8be71ac617798fb.webp",
     "static/media/GTL_logo.webp": "/Groww/static/media/GTL_logo.cf9bf8be71ac617798fb.webp",
@@ -101,6 +104,7 @@
     "static/media/screener_mint_light.svg": "/Groww/static/media/screener_mint_light.d99d4583523acc150b20.svg",
     "static/media/GSTK500420_company_icon_Torrent.webp": "/Groww/static/media/GSTK500420_company_icon_Torrent.47b08784cda491da0b53.webp",
     "static/media/GSTK500830_company_icon.webp": "/Groww/static/media/GSTK500830_company_icon.6628c8034bc0ca078fe7.webp",
+    "static/media/Hello-user.svg": "/Groww/static/media/Hello-user.edfca8b2030fac6407d7.svg",
     "static/media/SJVN_icon.webp": "/Groww/static/media/SJVN_icon.ff54e84c52aed7a729b4.webp",
     "static/media/GSTK542649_company_icon.webp": "/Groww/static/media/GSTK542649_company_icon.57148c5011637badc9c1.webp",
     "static/media/mid_nykaa_icon.webp": "/Groww/static/media/mid_nykaa_icon.58646eaf0dd5d7dc0852.webp",
@@ -175,12 +179,12 @@
     "static/media/fb_icon_groww.svg": "/Groww/static/media/fb_icon_groww.99a9d51576652b160edaa2fe6c61da5d.svg",
     "static/media/import_funds.svg": "/Groww/static/media/import_funds.cb02ba438e40191d6fd66b6ead33fea0.svg",
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg",
-    "main.0c4fcded.css.map": "/Groww/static/css/main.0c4fcded.css.map",
-    "main.be93eca1.js.map": "/Groww/static/js/main.be93eca1.js.map",
+    "main.eb785acd.css.map": "/Groww/static/css/main.eb785acd.css.map",
+    "main.c5b230bc.js.map": "/Groww/static/js/main.c5b230bc.js.map",
     "6453.cbd43e81.chunk.js.map": "/Groww/static/js/6453.cbd43e81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0c4fcded.css",
-    "static/js/main.be93eca1.js"
+    "static/css/main.eb785acd.css",
+    "static/js/main.c5b230bc.js"
   ]
 }
