@@ -13,16 +13,30 @@ import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
+import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
 const Home = () => {
   const navigate = useNavigate();
   const [menuActive, setMenuActive] = useState(false);
-  
+  const [isShowAlertOption , setIsShowAlertOption] = useState(true);
+
+  const requestToClose = (value)=>{
+    if(value){
+      setIsShowAlertOption(false);
+    }
+  }
+
   useEffect(()=>{
     window.scrollTo(0,0);
   },[])
   return (
     <>
+      {
+        isShowAlertOption?
+        <div className="HomeMain_alert_show">
+        <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
+      </div>:null
+      }
       <div className="HomeMain">
         <div className="Home_navbar">
           <div className="Home_nav_logo">
