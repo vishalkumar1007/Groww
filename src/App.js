@@ -12,7 +12,7 @@ import ComingSoon from './component/ComingSoon/ComingSoon';
 import Wallet from './page/Wallet/Wallet';
 import ShopCart from './page/ShopCart/ShopCart.jsx';
 import StockDetail from './page/StockDetail/StockDetail.jsx';
-import IntroAlert from './component/IntroAlert/IntroAlert.jsx';
+// import IntroAlert from './component/IntroAlert/IntroAlert.jsx';
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
         <Route path='wallet' element={<Wallet/>} errorElement={<Error/>}/>
         <Route path='shop_cart' element={<ShopCart/>} errorElement={<Error/>}/>
         <Route path='stock_detail' element={<StockDetail/>} errorElement={<Error/>} />
-        <Route path='introAlert' element={<IntroAlert/>} errorElement={<Error/>} />
+        {/* <Route path='introAlert' element={<IntroAlert/>} errorElement={<Error/>} /> */}
       </Routes>
     </BrowserRouter>
 
