@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
+import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [inputActiveFirstName, setInputActiveFirstName] = useState(false);
   const [inputActiveLastName, setInputActiveLastName] = useState(false);
   const [inputActiveEmailId, setInputActiveEmailId] = useState(false);
@@ -17,7 +20,118 @@ const SignUp = () => {
   const [emailInputError, setEmailInputError] = useState("");
   const [passwordInputError, setPasswordInputError] = useState("");
   const [isSignUpPasswordHide, setIsSignUpPasswordHide] = useState(true);
-  const [animationTextChangeSignUp , setAnimationTextChangeSignUp] = useState('Mutual Funds');
+  const [animationTextChangeSignUp, setAnimationTextChangeSignUp] =
+    useState("Mutual Funds");
+
+  const [showMsg, setShowMsg] = useState(false);
+  const [successMsgStatus, setSuccessMsgStatus] = useState(true);
+  const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
+
+  const [isValidForm, SetIsValidForm] = useState(true);
+
+  useEffect(() => {
+    if (
+      !(
+        userFirstName.length &&
+        userLastName.length &&
+        userEmailId.length &&
+        userPassword.length
+      )
+    ) {
+      SetIsValidForm(false);
+      return;
+    }
+
+    if (
+      firstNameInputError.length > 0 ||
+      lastNameInputError.length > 0 ||
+      emailInputError.length > 0 ||
+      passwordInputError.length > 0
+    ) {
+      SetIsValidForm(false);
+      return;
+    }
+    SetIsValidForm(true);
+  }, [
+    userFirstName,
+    userLastName,
+    userEmailId,
+    userPassword,
+    firstNameInputError,
+    lastNameInputError,
+    emailInputError,
+    passwordInputError,
+  ]);
+
+  const submitForm = async () => {
+    if (
+      !(
+        userFirstName.length &&
+        userLastName.length &&
+        userEmailId.length &&
+        userPassword.length
+      )
+    ) {
+      userFirstName.length > 0
+        ? setFirstNameError("")
+        : setFirstNameError("Enter your first name");
+      userLastName.length > 0
+        ? setLastNameError("")
+        : setLastNameError("Enter your last name");
+      userEmailId.length > 0
+        ? setEmailInputError("")
+        : setEmailInputError("Enter email id");
+      userPassword.length > 0
+        ? setPasswordInputError("")
+        : setPasswordInputError("Create Your password");
+      return;
+    }
+
+    if (
+      firstNameInputError.length > 0 ||
+      lastNameInputError.length > 0 ||
+      emailInputError.length > 0 ||
+      passwordInputError.length > 0
+    ) {
+      return;
+    }
+
+    const userSignUpData = {
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmailId,
+      password: userPassword,
+    };
+    const API = "http://localhost:8080/api/user/signup";
+    fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userSignUpData),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          // const errorData = await response.json();
+          // console.log(errorData);
+          ShowQuickMsg(response.status);
+        }
+        ShowQuickMsg(response.status);
+      })
+      .catch((err) => {
+        ShowQuickMsg(500);
+        console.log("error on POST request", err);
+      });
+
+    setUserFirstName("");
+    setInputActiveFirstName(false);
+    setUserLastName("");
+    setInputActiveLastName(false);
+    setUserEmailId("");
+    setInputActiveEmailId(false);
+    setUserPassword("");
+    setInputActivePassword(false);
+  };
 
   const handleBlurFirstName = (event) => {
     if (event.target.value === "") {
@@ -40,23 +154,23 @@ const SignUp = () => {
     }
   };
 
-  useState(()=>{
+  useState(() => {
     const interval2 = setInterval(() => {
-      setAnimationTextChangeSignUp((pvrState)=>{
-        if(pvrState==='Mutual Funds'){
-          return 'Stocks'
-        }else if(pvrState==='Stocks'){
-          return "EFT's"
-        }else{
-          return 'Mutual Funds'
+      setAnimationTextChangeSignUp((pvrState) => {
+        if (pvrState === "Mutual Funds") {
+          return "Stocks";
+        } else if (pvrState === "Stocks") {
+          return "EFT's";
+        } else {
+          return "Mutual Funds";
         }
       });
-
     }, 3000);
 
-    return()=>{clearInterval(interval2)};
-
-  },[]);
+    return () => {
+      clearInterval(interval2);
+    };
+  }, []);
 
   useEffect(() => {
     if (inputActiveFirstName) {
@@ -144,8 +258,45 @@ const SignUp = () => {
     }
   }, [inputActiveEmailId, userEmailId]);
 
+  const ShowQuickMsg = async (statusCode) => {
+    if (statusCode === 401) {
+      setSuccessMsgStatus(false);
+      setMsgContent("All Field Require");
+    } else if (statusCode === 409) {
+      setSuccessMsgStatus(false);
+      setMsgContent("User Already Registered , Login please");
+    } else if (statusCode === 201) {
+      setSuccessMsgStatus(true);
+      setMsgContent("User SignUp Successful");
+    } else if (statusCode === 400) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Verify Your Input Again");
+    } else if (statusCode === 500) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Server Error");
+    }
+
+    let timeOut;
+    if (!showMsg) {
+      timeOut = setShowMsg(true);
+      setTimeout(() => {
+        if (statusCode === 201) {
+          navigate("/login");
+        }
+        setShowMsg(false);
+      }, 5000);
+    }
+
+    return clearTimeout(timeOut);
+  };
+
   return (
     <div className="main_view_sign_up">
+      {showMsg ? (
+        <div className="msg_pop_up">
+          <MessagePopUp isSuccess={successMsgStatus} message={msgContent} />
+        </div>
+      ) : null}
       <div className="main_center_element_sign_up">
         <div className="top_element_sign_up">
           <div className="logo_icon_sign_up">
@@ -161,8 +312,10 @@ const SignUp = () => {
                   <p id="left_tagline_top_sign_up_text">Investing.</p>
                 </div>
                 <div className="left_tagline_bottom_sign_up">
-                <div id="interval_signUp"></div>
-                <p id="left_tagline_bottom_text">{animationTextChangeSignUp}</p>
+                  <div id="interval_signUp"></div>
+                  <p id="left_tagline_bottom_text">
+                    {animationTextChangeSignUp}
+                  </p>
                 </div>
               </div>
             </div>
@@ -258,7 +411,9 @@ const SignUp = () => {
                       </label>
                       <input
                         className={
-                          inputActiveEmailId ? "inputActive_email_add" : "inputDeactivate_email_add"
+                          inputActiveEmailId
+                            ? "inputActive_email_add"
+                            : "inputDeactivate_email_add"
                         }
                         type="email"
                         onFocus={() => {
@@ -360,7 +515,18 @@ const SignUp = () => {
                   </div>
 
                   <div className="continue_btn_div_sign_up">
-                    <button id="cnt_btn">Sign up</button>
+                    <button
+                      id="cnt_btn"
+                      onClick={() => {
+                        submitForm();
+                      }}
+                      style={{
+                        backgroundColor: isValidForm ? null : "#22b892cf",
+                        cursor: isValidForm ? null : "no-drop",
+                      }}
+                    >
+                      Sign up
+                    </button>
                   </div>
                   <div className="company_terms_div_sign_up">
                     <p>

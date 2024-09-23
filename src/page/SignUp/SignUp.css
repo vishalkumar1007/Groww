@@ -11,10 +11,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   /* prevent to select text  */
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  position: relative;
+}
+.msg_pop_up{
+  /* background-color: #9e8888; */
+  position: absolute;
+  top: 20px;
+  right:20px;
 }
 .main_center_element_sign_up {
   /* background-color: rgba(94, 15, 28, 0.385); */

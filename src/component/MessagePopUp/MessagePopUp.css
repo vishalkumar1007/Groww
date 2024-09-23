@@ -1,0 +1,86 @@
+.messagePopUp_hide_div{
+    /* background-color: #8a2be2; */
+    overflow: hidden;
+    position: relative;
+}
+
+.msg_poop_up_main {
+  background-color: #374c35e8;
+  /* width: 300px; */
+  height: 45px;
+  border-radius: 5px;
+  border: 2.5px solid #65c85e4e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px 0px 5px;
+  gap: 7px;
+  position: relative;
+  
+  animation: appear 1s forwards, disappear 1s forwards 4s;
+}
+
+@keyframes appear {
+  0% { right: -100%; top: 0px; }
+  100% { right: 0px; top: 0px; }
+}
+
+@keyframes disappear {
+  0% { right: 0px; top: 0px; }
+  100% { right: -100%; top: 0px; }
+}
+/* @keyframes successAnimation {
+    0% { right: -100%; top: 0px; }
+    100% {right: 0px; top: 0px; }
+} */
+
+.msg_poop_up_main_status_icon {
+  /* background-color: pink; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.msg_poop_up_main_status_text {
+  /* background-color: lightskyblue; */
+  font-size: 16px;
+  font-weight: 500;
+  color: #87db80;
+}
+
+.msg_poop_up_main_err {
+  background-color: #422624;
+  /* width: 300px; */
+  height: 44px;
+  border-radius: 5px;
+  border: 2.5px solid #ed433738;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px 0px 10px;
+  gap: 7px;
+  position: relative;
+  animation: errappear 1s forwards, errdisappear 1s forwards 4s;
+}
+
+@keyframes errappear {
+  0% { right: -100%; top: 0px; }
+  100% { right: 0px; top: 0px; }
+}
+
+@keyframes errdisappear {
+  0% { right: 0px; top: 0px; }
+  100% { right: -100%; top: 0px; }
+}
+.msg_poop_up_main_status_icon_err {
+  /* background-color: pink; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.msg_poop_up_main_status_text_err {
+  font-size: 16px;
+  font-weight: 500;
+  color: #de6158;
+}
+
