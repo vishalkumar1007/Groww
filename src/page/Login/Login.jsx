@@ -45,8 +45,7 @@ const Login = () => {
       return;
     }
 
-    // const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
-    const EmailValidationApi = `https://groww-backend-omega.vercel.app/api/user/emailVerification?email=${userEmailId}`;
+    const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
 
     fetch(EmailValidationApi,{
       method:'GET',
@@ -88,8 +87,8 @@ const Login = () => {
       return;
     }
 
-    // const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
-    const LoginAPI = `https://groww-backend-omega.vercel.app/api/user/login?email=${userEmailId}&password=${userPassword}`;
+    const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
+
 
     fetch(LoginAPI,{
       method:'GET',
