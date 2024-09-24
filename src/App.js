@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter , Routes ,Route} from 'react-router-dom';
 import Login from './page/Login/Login';
-import ForgetPassword from './page/ForgetPassword/ForgetPassword';
+import ForgotPassword from './page/ForgotPassword/ForgotPassword.jsx';
 import Home from './page/Home/Home';
 import SignUp from './page/SignUp/SignUp';
 import Dashboard from './page/Dashboard/Dashboard';
@@ -22,7 +22,7 @@ function App() {
         <Route path='*' element={<PageNotFound/>} errorElement={<Error/>}/>
         <Route path='/' element={<Home/>} errorElement={<Error/>}/>
         <Route path='login' element={<Login/>} errorElement={<Error/>}/>
-        <Route path='forget' element={<ForgetPassword/>} errorElement={<Error/>}/>
+        <Route path='forgot' element={<ForgotPassword/>} errorElement={<Error/>}/>
         <Route path='signup' element={<SignUp/>} errorElement={<Error/>}/>
         <Route path='dashboard' element={<Dashboard/>} errorElement={<Error/>}/>
         <Route path='all_stocks_filter' element={<AllStocksFilter/>} errorElement={<Error/>}/>

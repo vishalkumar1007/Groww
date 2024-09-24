@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./ForgetPassword.css";
+import "./ForgotPassword.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
-import Forget_amico from "../../assets/svg/Forgot-password-bro-groww.svg";
+import forgot_amico from "../../assets/svg/Forgot-password-bro-groww.svg";
 import Create_password_amico from "../../assets/img/Create_password_icon_amico.png";
 
 const Login = () => {
@@ -26,10 +26,10 @@ const Login = () => {
 
     const [isUpdatePassHide, setIsUpdatePassHide] = useState(true);
     const [isUpdateConfPassHide, setIsUpdateConfPassHide] = useState(true);
-    const [animationTextChangeForget , setAnimationTextChangeForget] = useState('Mutual Funds');
+    const [animationTextChangeforgot , setAnimationTextChangeforgot] = useState('Mutual Funds');
     useState(()=>{
         const interval2 = setInterval(() => {
-          setAnimationTextChangeForget((pvrState)=>{
+          setAnimationTextChangeforgot((pvrState)=>{
             if(pvrState==='Mutual Funds'){
               return 'Stocks'
             }else if(pvrState==='Stocks'){
@@ -162,46 +162,46 @@ const Login = () => {
     }, [f_inputActive, f_userEmailId]);
 
     return (
-        <div className="main_view_forget">
-            <div className="main_center_element_forget">
-                <div className="top_element_forget">
-                    <div className="logo_icon_forget">
+        <div className="main_view_forgot">
+            <div className="main_center_element_forgot">
+                <div className="top_element_forgot">
+                    <div className="logo_icon_forgot">
                         <img src={Logo_dark} alt="" />
                     </div>
                 </div>
-                <div className="bottom_element_forget">
-                    <div className="login_box_forget">
-                        <div className="login_left_forget">
-                            <div className="login_left_forget_inter">
-                                <div className="left_tagline_top_forget">
-                                    <p id="left_tagline_top_forget_text">Simple, Free</p>
-                                    <p id="left_tagline_top_forget_text">Investing.</p>
+                <div className="bottom_element_forgot">
+                    <div className="login_box_forgot">
+                        <div className="login_left_forgot">
+                            <div className="login_left_forgot_inter">
+                                <div className="left_tagline_top_forgot">
+                                    <p id="left_tagline_top_forgot_text">Simple, Free</p>
+                                    <p id="left_tagline_top_forgot_text">Investing.</p>
                                 </div>
-                                <div className="left_tagline_bottom_forget">
-                                <div id="interval_forget"></div>
-                                <p id="left_tagline_bottom_text">{animationTextChangeForget}</p>
+                                <div className="left_tagline_bottom_forgot">
+                                <div id="interval_forgot"></div>
+                                <p id="left_tagline_bottom_text">{animationTextChangeforgot}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="login_right_forget">
+                        <div className="login_right_forgot">
                             {!f_isChangePasswordSectionOpen ? (
-                                <div className="login_right_forget_arrange">
-                                    <div className="login_with_forget">
-                                        <div className="lwg_title_forget">
-                                            <p>Forget Password</p>
+                                <div className="login_right_forgot_arrange">
+                                    <div className="login_with_forgot">
+                                        <div className="lwg_title_forgot">
+                                            <p>Forgot Password</p>
                                         </div>
-                                        <div className="lwg_box_forget">
-                                            <div className="lwg_wrap_image_forget">
-                                                <img src={Forget_amico} alt="icon" />
+                                        <div className="lwg_box_forgot">
+                                            <div className="lwg_wrap_image_forgot">
+                                                <img src={forgot_amico} alt="icon" />
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* ............ */}
                                     {!f_emailValidFromDataBase ? (
-                                        <div className="login_with_id_forget_email">
-                                            <div className="input_email_div_forget_email">
-                                                <div className="ied_center_forget_email">
+                                        <div className="login_with_id_forgot_email">
+                                            <div className="input_email_div_forgot_email">
+                                                <div className="ied_center_forgot_email">
                                                     <label
                                                         id={
                                                             f_inputActive
@@ -229,7 +229,7 @@ const Login = () => {
                                                     />
                                                     <div className="email_error_div">
                                                         {f_incorrectEmail ? (
-                                                            <label id="email_incorrect_error_forget">
+                                                            <label id="email_incorrect_error_forgot">
                                                                 Incorrect email
                                                             </label>
                                                         ) : (
@@ -247,7 +247,7 @@ const Login = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="continue_btn_div_forget">
+                                            <div className="continue_btn_div_forgot">
                                                 <button
                                                     id="cnt_btn"
                                                     onClick={() => {
@@ -260,7 +260,7 @@ const Login = () => {
                                                     Send OTP
                                                 </button>
                                             </div>
-                                            <div className="company_terms_div_forget">
+                                            <div className="company_terms_div_forgot">
                                                 <p>
                                                     Opps, i just remind my password ?{" "}
                                                     <Link to="/login">Login Account</Link>{" "}
@@ -268,9 +268,9 @@ const Login = () => {
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="login_with_id_forget_otp">
-                                            <div className="input_email_div_forget_otp">
-                                                <div className="ied_center_forget_otp">
+                                        <div className="login_with_id_forgot_otp">
+                                            <div className="input_email_div_forgot_otp">
+                                                <div className="ied_center_forgot_otp">
                                                     <label
                                                         id={
                                                             f_inputActive
@@ -320,7 +320,7 @@ const Login = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="continue_btn_div_forget">
+                                            <div className="continue_btn_div_forgot">
                                                 <button
                                                     id="cnt_btn"
                                                     onClick={() => {
@@ -332,7 +332,7 @@ const Login = () => {
                                                     Validate
                                                 </button>
                                             </div>
-                                            <div className="company_terms_div_forget">
+                                            <div className="company_terms_div_forgot">
                                                 <p>
                                                     {" "}
                                                     Still not getting OTP ?{" "}
@@ -343,7 +343,7 @@ const Login = () => {
                                     )}
                                 </div>
                             ) : (
-                                <div className="login_right_forget_arrange">
+                                <div className="login_right_forgot_arrange">
                                     <div className="cretePass_heading">
                                         <div className="cp_title">
                                             <p>Create Password</p>
@@ -357,7 +357,7 @@ const Login = () => {
 
                                     <div className="Create_password_section">
                                         <div className="input_createPass_div">
-                                            <div className="ied_center_forget_set_pass">
+                                            <div className="ied_center_forgot_set_pass">
                                                 <label
                                                     id={
                                                         f_inputActiveEP
@@ -386,14 +386,14 @@ const Login = () => {
                                                 {/* .........  */}
 
                                                 <div
-                                                    className="ied_center_forget_set_pass_password_hide_and_view"
+                                                    className="ied_center_forgot_set_pass_password_hide_and_view"
                                                     onClick={() => {
                                                         setIsUpdatePassHide(!isUpdatePassHide);
                                                     }}
                                                 >
                                                     {!isUpdatePassHide ? (
                                                         <svg
-                                                            id="ied_center_forget_set_pass_password_hide_and_view_svg_see"
+                                                            id="ied_center_forgot_set_pass_password_hide_and_view_svg_see"
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             width="17"
                                                             height="17"
@@ -410,7 +410,7 @@ const Login = () => {
                                                         </svg>
                                                     ) : (
                                                         <svg
-                                                            id="ied_center_forget_set_pass_password_hide_and_view_svg_notSee"
+                                                            id="ied_center_forgot_set_pass_password_hide_and_view_svg_notSee"
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             width="17"
                                                             height="17"
@@ -434,7 +434,7 @@ const Login = () => {
                                                 <div className="conformPass_error_div_set_pass">
                                                     {
                                                         <label
-                                                            id="email_incorrect_error_forget"
+                                                            id="email_incorrect_error_forgot"
                                                             style={{
                                                                 color:
                                                                     f_errorCIP ===
@@ -448,7 +448,7 @@ const Login = () => {
                                                     }
                                                 </div>
                                             </div>
-                                            <div className="ied_center_forget_conf_pass">
+                                            <div className="ied_center_forgot_conf_pass">
                                                 <label
                                                     id={
                                                         f_inputActiveCP
@@ -478,14 +478,14 @@ const Login = () => {
                                                 {/* ......................  */}
 
                                                 <div
-                                                    className="ied_center_forget_conf_pass_password_hide_and_view"
+                                                    className="ied_center_forgot_conf_pass_password_hide_and_view"
                                                     onClick={() => {
                                                         setIsUpdateConfPassHide(!isUpdateConfPassHide);
                                                     }}
                                                 >
                                                     {!isUpdateConfPassHide ? (
                                                         <svg
-                                                            id="ied_center_forget_conf_pass_password_hide_and_view_svg_see"
+                                                            id="ied_center_forgot_conf_pass_password_hide_and_view_svg_see"
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             width="17"
                                                             height="17"
@@ -502,7 +502,7 @@ const Login = () => {
                                                         </svg>
                                                     ) : (
                                                         <svg
-                                                            id="ied_center_forget_conf_pass_password_hide_and_view_svg_notSee"
+                                                            id="ied_center_forgot_conf_pass_password_hide_and_view_svg_notSee"
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             width="17"
                                                             height="17"
@@ -526,7 +526,7 @@ const Login = () => {
                                                 <div className="conformPass_error_div_conf_pass">
                                                     {
                                                         <label
-                                                            id="email_incorrect_error_forget"
+                                                            id="email_incorrect_error_forgot"
                                                             style={{
                                                                 color:
                                                                     f_errorCICP ===
@@ -542,7 +542,7 @@ const Login = () => {
                                             </div>
                                         </div>
 
-                                        <div className="createPass_continue_btn_div_forget">
+                                        <div className="createPass_continue_btn_div_forgot">
                                             <button
                                                 id="cnt_btn"
                                                 onClick={() => {
@@ -555,11 +555,11 @@ const Login = () => {
                                                 Change
                                             </button>
                                         </div>
-                                        <div className="_createPass_company_terms_div_forget">
+                                        <div className="_createPass_company_terms_div_forgot">
                                             <p>
                                                 Issue in change password ?{" "}
                                                 <Link to="#!" onClick={reloadPage}>
-                                                    Go to Forget
+                                                    Go to Forgot
                                                 </Link>{" "}
                                             </p>
                                         </div>

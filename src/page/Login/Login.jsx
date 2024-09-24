@@ -443,7 +443,7 @@ const Login = () => {
                     <div className="company_terms_div">
                       <p>
                         Don't remember Password ?{" "}
-                        <Link to="/forget">Forget Password</Link>
+                        <Link to="/forgot">Forgot Password</Link>
                       </p>
                     </div>
                   </div>
