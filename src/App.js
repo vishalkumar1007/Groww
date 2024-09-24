@@ -17,7 +17,7 @@ import StockDetail from './page/StockDetail/StockDetail.jsx';
 function App() {
   return (
     // basename="/Groww" // for production ---------------
-    <BrowserRouter>
+    <BrowserRouter >
       <Routes>
         <Route path='*' element={<PageNotFound/>} errorElement={<Error/>}/>
         <Route path='/' element={<Home/>} errorElement={<Error/>}/>

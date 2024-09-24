@@ -103,6 +103,7 @@ const SignUp = () => {
       password: userPassword,
     };
     const API = "http://localhost:8080/api/user/signup";
+    
     fetch(API, {
       method: "POST",
       headers: {
