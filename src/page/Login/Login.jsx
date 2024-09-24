@@ -3,19 +3,184 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import google_svg from "../../assets/svg/google.icon.svg";
+import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [inputActive, setInputActive] = useState(false);
   const [userEmailId, setUserEmailId] = useState("");
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
   const [userPassword, setUserPassword] = useState("");
   const [emailNotFoundError, setEmailNotFoundError] = useState(false);
-  const [incorrectEmail, setIncorrectEmail] = useState(false);
   const [emailValidFromDataBase, setEmailValidFromDataBase] = useState(false);
   const [passwordValidFromDataBase, setPasswordValidFromDataBase] =
-    useState(false);
-  const [passwordErrorAlert, setPasswordErrorAlert] = useState("");
+    useState(true);
+  const [passwordErrorAlert, setPasswordErrorAlert] = useState(false);
   const [isLoginPasswordHide, setIsLoginPasswordHide] = useState(true);
   const [animationTextChangeLogin , setAnimationTextChangeLogin] = useState('Mutual Funds');
+
+  const [allowContinueEmailVerify , setAllowContinueEmailVerify] = useState(true);
+  const [showMsg, setShowMsg] = useState(false);
+  const [successMsgStatus, setSuccessMsgStatus] = useState(true);
+  const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
+  const [allowToLogin , setAllowToLogin] = useState(true);
+
+
+  useEffect(()=>{
+    if(!(userEmailId.length>0)){
+      setAllowContinueEmailVerify(false);
+      return;
+    }
+
+    if(incorrectEmail){
+      setAllowContinueEmailVerify(false);
+      return;
+    }
+    setAllowContinueEmailVerify(true);
+  },[incorrectEmail, userEmailId])
+
+  const handelEmailValidation = async()=>{
+    if(!allowContinueEmailVerify){
+      return;
+    }
+
+    // const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
+    const EmailValidationApi = `https://groww-backend-omega.vercel.app/api/user/emailVerification?email=${userEmailId}`;
+
+    fetch(EmailValidationApi,{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+    })
+    .then((response)=>{
+      if(!response.ok){
+        // console.log('response not ok',response);
+        ShowQuickMsgForEmailValidation(response.status);
+      }
+      ShowQuickMsgForEmailValidation(response.status);
+      
+    })
+    .catch((err)=>{
+      console.log('error ', err);
+    })
+  }
+
+  // PASSWORD
+  useEffect(()=>{
+    if(!(userPassword.length>0)){
+      setAllowToLogin(false);
+      return;
+    }
+
+    if(passwordErrorAlert){
+      setAllowToLogin(false);
+      return;
+    }
+    setAllowToLogin(true);
+  },[passwordErrorAlert, userPassword.length])
+
+  
+
+  const handelLoginValidation = async()=>{
+    if(!allowToLogin){
+      return;
+    }
+
+    // const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
+    const LoginAPI = `https://groww-backend-omega.vercel.app/api/user/login?email=${userEmailId}&password=${userPassword}`;
+
+    fetch(LoginAPI,{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json'
+      },
+    })
+    .then((response)=>{
+      if(!response.ok){
+        // console.log('response not ok',response);
+        ShowQuickMsgForLogin(response.status);
+      }
+      ShowQuickMsgForLogin(response.status);
+      
+    })
+    .catch((err)=>{
+      console.log('error ', err);
+    })
+  }
+
+  const ShowQuickMsgForEmailValidation = async (statusCode) => {
+    if (statusCode === 401) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Unauthorized request 401");
+    } else if (statusCode === 200) { 
+      setSuccessMsgStatus(true);
+      setMsgContent("Validate Success");
+    } else if (statusCode === 404) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Invalid Email id");
+    } else if (statusCode === 500) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Server Error");
+    }
+
+    let timeOut;
+    if (!showMsg) {
+      timeOut = setShowMsg(true);
+      if(statusCode === 404){
+        setEmailNotFoundError(true);
+      }
+      setTimeout(() => {
+        if (statusCode === 200) {
+          setEmailValidFromDataBase(true);
+          setInputActive(false);
+        }
+        setShowMsg(false);
+      }, 4000);
+    }
+
+    return clearTimeout(timeOut);
+  };
+  const ShowQuickMsgForLogin = async (statusCode) => {
+    if (statusCode === 401) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Unauthorized request 401");
+    } else if (statusCode === 400) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Wrong Password Entered");
+    } else if (statusCode === 200) {
+      setSuccessMsgStatus(true);
+      setMsgContent("Login Validation Successful");
+      setUserPassword('');
+    } else if (statusCode === 404) {
+      setSuccessMsgStatus(false);
+      setMsgContent("User not found");
+    } else if (statusCode === 500) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Server Error");
+      setUserPassword('');
+    }
+
+
+    let timeOut;
+    if (!showMsg) {
+      timeOut = setShowMsg(true);
+      if(statusCode === 400){
+        setPasswordValidFromDataBase(false);
+      }
+      setTimeout(() => {
+        if (statusCode === 200) {
+          setInputActive(false);
+          navigate('/dashboard')
+        }
+        setShowMsg(false);
+      }, 5000);
+    }
+
+    return clearTimeout(timeOut);
+  };
+
 
   const checkInputFocus = () => {
     setInputActive(true);
@@ -49,32 +214,10 @@ const Login = () => {
   useEffect(() => {
     if (inputActive) {
       if (userPassword.length < 7 || userPassword.length > 20) {
-        setPasswordErrorAlert("Password length must be between 7 to 20");
-      } else if (
-        ["$", "!", "%", "^", "*", "(", ")", "|"].some((operator) =>
-          userPassword.includes(operator)
-        )
-      ) {
-        setPasswordErrorAlert(
-          "Not allow to use these character $ ! % ^ | ( ) "
-        );
-      } else if (!/\d/.test(userPassword)) {
-        setPasswordErrorAlert("Password must be contain number");
-      } else if (
-        !["@", "#", "-", ".", "/"].some((operator) =>
-          userPassword.includes(operator)
-        )
-      ) {
-        setPasswordErrorAlert("Password must be contain special character");
-      } else if (!/[A-Z]/.test(userPassword)) {
-        setPasswordErrorAlert(
-          "Password must contain at least one capital letter"
-        );
-      } else {
-        setPasswordErrorAlert("Seems Like All Set For Login You Account");
+        setPasswordErrorAlert(true);
+      } else{
+        setPasswordErrorAlert(false);
       }
-    } else if (userPassword === "") {
-      setPasswordErrorAlert("");
     }
   }, [inputActive, userPassword]);
 
@@ -89,6 +232,11 @@ const Login = () => {
 
   return (
     <div className="main_view">
+      {showMsg ? (
+        <div className="msg_pop_up">
+          <MessagePopUp isSuccess={successMsgStatus} message={msgContent} />
+        </div>
+      ) : null}
       <div className="main_center_element">
         <div className="top_element">
           <div className="logo_icon">
@@ -183,12 +331,9 @@ const Login = () => {
                     <div className="continue_btn_div">
                       <button
                         id="cnt_btn"
-                        onClick={() => {
-                          if (!incorrectEmail && userEmailId !== "") {
-                            setInputActive(false);
-                            setEmailValidFromDataBase(true);
-                          }
-                        }}
+                        onClick={() => {handelEmailValidation()}}
+                        disabled={!allowContinueEmailVerify}
+                        style={{backgroundColor:allowContinueEmailVerify?null:'#22b892cf' , cursor:allowContinueEmailVerify?null:'no-drop'}}
                       >
                         Continue
                       </button>
@@ -272,31 +417,29 @@ const Login = () => {
                           </div>
 
                           <div className="email_error_div">
-                            {passwordValidFromDataBase ? (
-                              <label id="email_invalid_error">
-                                Your Password is Incorrect
-                              </label>
-                            ) : (
-                              <label
-                                id="email_incorrect_error"
-                                style={{
-                                  color:
-                                    passwordErrorAlert ===
-                                    "Seems Like All Set For Login You Account"
-                                      ? "#39ac13"
-                                      : "#d50707",
-                                }}
-                              >
-                                {passwordErrorAlert}
-                              </label>
-                            )}
+                            {
+                              passwordValidFromDataBase?
+                              null
+                              :
+                              <lable id="password_invalid_error">Password Incorrect</lable>
+                            }
+                            {
+                              passwordErrorAlert?
+                              <lable id="password_invalid_error">Password length must be between 7 to 20</lable>
+                              :
+                              null
+                            }
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="continue_btn_div">
-                      <button id="cnt_btn">Login</button>
+                      <button id="cnt_btn"
+                        onClick={()=>{handelLoginValidation()}}
+                        disabled={!allowToLogin}
+                        style={{backgroundColor:allowToLogin?null:'#22b892cf' , cursor:allowToLogin?null:'no-drop'}}
+                      >Login</button>
                     </div>
                     <div className="company_terms_div">
                       <p>
