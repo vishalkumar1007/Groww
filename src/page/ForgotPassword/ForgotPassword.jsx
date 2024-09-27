@@ -4,8 +4,11 @@ import "./ForgotPassword.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import forgot_amico from "../../assets/svg/Forgot-password-bro-groww.svg";
 import Create_password_amico from "../../assets/img/Create_password_icon_amico.png";
+import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [f_inputActive, setF_inputActive] = useState(false);
     const [f_inputActiveEP, setF_inputActiveEP] = useState(false);
     const [f_inputActiveCP, setF_inputActiveCP] = useState(false);
@@ -13,20 +16,286 @@ const Login = () => {
     const [f_userInputOtp, setF_userInputOtp] = useState("");
     const [f_emailNotFoundError, setF_emailNotFoundError] = useState(false);
     const [f_incorrectEmail, setF_incorrectEmail] = useState(false);
-    const [f_emailValidFromDataBase, setF_emailValidFromDataBase] =
-        useState(false);
+    const [f_emailValidFromDataBase, setF_emailValidFromDataBase] = useState(false);
     const [f_otpValidFromDataBase, setF_otpValidFromDataBase] = useState(false);
-    const [f_isChangePasswordSectionOpen, setF_isChangePasswordSectionOpen] =
-        useState(false);
     const [f_changeInputPassword, setF_changeInputPassword] = useState("");
     const [f_errorCIP, setF_errorCIP] = useState("");
-    const [f_changeInputConformPassword, setF_changeInputConformPassword] =
-        useState("");
     const [f_errorCICP, setF_errorCICP] = useState("");
+    const [f_changeInputConformPassword, setF_changeInputConformPassword] = useState("");
 
     const [isUpdatePassHide, setIsUpdatePassHide] = useState(true);
     const [isUpdateConfPassHide, setIsUpdateConfPassHide] = useState(true);
     const [animationTextChangeforgot , setAnimationTextChangeforgot] = useState('Mutual Funds');
+
+    const [allowContinueEmailVerify , setAllowContinueEmailVerify] = useState(true);
+
+    // otp
+    const [allowContinueOtpVerify , setAllowContinueOtpVerify] = useState(true);
+    const [successMessageFromDataBaseForOTP , setSuccessMessageFromDataBaseForOTP] = useState(false);
+    const [otpResponseFromDataBase,setF_OtpResponseFromDataBase] = useState(false);
+
+    // update user
+    const [allowContinueUpdatePassword , setAllowContinueUpdatePassword] = useState(true);
+
+    // msg show
+    const [showMsg, setShowMsg] = useState(false);
+    const [successMsgStatus, setSuccessMsgStatus] = useState(true);
+    const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
+
+    // Deactivate err
+    const deactivateAfter2sec = (value)=>{
+        let timeOut;
+        if(value==='email'){
+            timeOut = setTimeout(()=>{
+                setF_incorrectEmail(false);
+            },2000);
+            
+        }else if(value==='otp'){
+            timeOut = setTimeout(()=>{
+                setAllowContinueOtpVerify(true);
+            },2000);
+        }
+        return ()=> clearTimeout(timeOut);
+    }
+    
+
+    // SEND OTP API
+    useEffect(()=>{
+        if(!(f_userEmailId.length>0)){
+          setAllowContinueEmailVerify(false);
+          return;
+        }
+    
+        if(f_incorrectEmail){
+          setAllowContinueEmailVerify(false);
+          return;
+        }
+        setAllowContinueEmailVerify(true);
+    },[f_incorrectEmail, f_userEmailId])
+
+    const handelToSendMailToUserAPI = ()=>{
+        if(!allowContinueEmailVerify){
+            setF_incorrectEmail(true);
+            deactivateAfter2sec();
+            console.log('not allow with user allowContinueEmailVerify');
+            return 
+        }
+
+        const sendOtpApi = `http://localhost:8080/api/user/forgot?email=${f_userEmailId}`;
+        
+        fetch(sendOtpApi , {
+            method:'GET',
+            header: {
+                'content-type':'application/json'
+            }
+        })
+        .then((response)=>{
+            if(!response.ok){
+                console.log('response is not ok', response);
+                ShowQuickMsgForEmail(response.status);
+                return;
+            }
+            ShowQuickMsgForEmail(response.status);
+        })
+        .catch((err)=>{
+            console.log('error while fetching data', err);
+            ShowQuickMsgForEmail(500);
+        })
+
+    }
+
+    const ShowQuickMsgForEmail = async (statusCode) => {
+        if (statusCode === 401) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Unauthorized request 401");
+          } else if (statusCode === 200) { 
+            setSuccessMsgStatus(true);
+            setMsgContent("Validate Success");
+          } else if (statusCode === 404) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Invalid Email id");
+          }else if(statusCode===403){
+            setSuccessMsgStatus(false);
+            setMsgContent("Incorrect OTP");
+          } else if (statusCode === 500) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Server Error");
+          } 
+
+        if (!showMsg) {
+          setShowMsg(true);
+          if(statusCode === 404){
+            setF_emailNotFoundError(true);
+          }
+          const timeOut = setTimeout(() => {
+            if (statusCode === 200) {
+                setF_emailValidFromDataBase(true); // open otp component
+                setF_inputActive(false);
+            }
+            setShowMsg(false);
+          }, 4000);
+
+          return ()=>clearTimeout(timeOut);
+        }
+    
+    };
+
+
+    // OTP VERIFICATION API
+    const handelOtpVerificationAPI = ()=>{
+        if(f_userInputOtp===''){
+            setAllowContinueOtpVerify(false);
+            deactivateAfter2sec('otp');
+            console.log('not allow with null otp');
+            return 
+        }
+
+        const apiForOtpVerify = `http://localhost:8080/api/user/otpVerification?email=${f_userEmailId}&otp=${f_userInputOtp}`;
+
+        fetch(apiForOtpVerify,{
+            method:'GET',
+            headers:{
+                'content-type':'application/json'
+            }
+        })
+        .then((response)=>{
+            if(!response.ok){
+                console.log('response is not ok', response);
+                ShowQuickMsgForOtpSend(response.status);
+                return;
+            }
+            ShowQuickMsgForOtpSend(response.status);
+        })
+        .catch((err)=>{
+            ShowQuickMsgForOtpSend(500);
+            console.log('error while fetching data', err);
+        })
+    }
+
+
+    const ShowQuickMsgForOtpSend = async (statusCode) => {
+        if (statusCode === 401) {
+            setF_OtpResponseFromDataBase(false);
+            setSuccessMsgStatus(false);
+            setMsgContent("Unauthorized request 401");
+          } else if (statusCode === 200) { 
+            setSuccessMsgStatus(true);
+            setF_OtpResponseFromDataBase(true);
+            setSuccessMessageFromDataBaseForOTP(true);
+            setMsgContent("Otp Verify SuccessFul");
+          } else if (statusCode === 404) {
+            setF_OtpResponseFromDataBase(false);
+            setSuccessMsgStatus(false);
+            setMsgContent("Invalid Email id");
+          }else if(statusCode===403){
+            setSuccessMsgStatus(false);
+            setF_OtpResponseFromDataBase(true);
+            setSuccessMessageFromDataBaseForOTP(false);
+            setMsgContent("Incorrect OTP");
+          } else if (statusCode === 500) {
+            setF_OtpResponseFromDataBase(false);
+            setSuccessMsgStatus(false);
+            setMsgContent("Server Error");
+          } 
+
+        if (!showMsg) {
+          setShowMsg(true);
+          const timeOut = setTimeout(() => {
+            if (statusCode === 200) {
+                setF_otpValidFromDataBase(true); // open change pass component
+                setF_inputActive(false);
+            }
+            setShowMsg(false);
+          }, 4000);
+
+          return ()=>clearTimeout(timeOut);
+        }
+    
+    };
+    
+
+    // Update password
+    useEffect(()=>{
+        if(!(f_changeInputPassword.length>0 && f_changeInputConformPassword.length>0)){
+            setAllowContinueUpdatePassword(false);
+            return;
+        }
+
+        if(!(f_errorCIP==="Seems Like All Set For Update Password" && f_errorCICP==="Seems Like All Set For Update Password")){
+            setAllowContinueUpdatePassword(false);
+            return;
+        }
+        setAllowContinueUpdatePassword(true);
+    },[f_changeInputConformPassword.length, f_changeInputPassword.length, f_errorCICP, f_errorCIP])
+
+    const handelToUpdatePassword = ()=>{
+        if(!allowContinueUpdatePassword){
+            ShowQuickMsgForUpdatePassword(888);
+            console.log('input null error');
+            return;
+        }
+
+        const updatePasswordAPI = 'http://localhost:8080/api/user/updatePassword';
+        const UpdateData = {
+            email:f_userEmailId,
+            password:f_changeInputPassword
+        }
+        fetch(updatePasswordAPI,{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(UpdateData)
+        })
+        .then((response)=>{
+            if(!response.ok){
+                console.log(' response not ok while update pass', response);
+                ShowQuickMsgForUpdatePassword(response.status);
+                return
+            }
+            ShowQuickMsgForUpdatePassword(response.status);
+        })
+        .catch((err)=>{
+            ShowQuickMsgForUpdatePassword(500);
+            console.log('server error while update data', err);
+        })
+
+
+    }
+
+    const ShowQuickMsgForUpdatePassword = async (statusCode) => {
+        if (statusCode === 401) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Unauthorized request 401");
+          } else if (statusCode === 200) { 
+            setSuccessMsgStatus(true);
+            setMsgContent("Your Password Changed Successfully");
+          } else if (statusCode === 404) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Invalid Email id");
+          } else if (statusCode === 500) {
+            setSuccessMsgStatus(false);
+            setMsgContent("Server Error");
+          } else if(statusCode === 888){
+            setSuccessMsgStatus(false);
+            setMsgContent("Invalid Input Or Null Error");
+          }
+
+        if (!showMsg) {
+          setShowMsg(true);
+          const timeOut = setTimeout(() => {
+            if (statusCode === 200) {
+                navigate('/login') // redirect to login
+                setF_inputActive(false);
+            }
+            setShowMsg(false);
+          }, 4000);
+
+          return ()=>clearTimeout(timeOut);
+        }
+    
+    };
+
     useState(()=>{
         const interval2 = setInterval(() => {
           setAnimationTextChangeforgot((pvrState)=>{
@@ -44,7 +313,6 @@ const Login = () => {
         return()=>{clearInterval(interval2)};
     
     },[]);
-
 
     const checkInputFocus = () => {
         setF_inputActive(true);
@@ -101,7 +369,7 @@ const Login = () => {
             } else if (!/[A-Z]/.test(f_changeInputPassword)) {
                 setF_errorCIP("Password must contain at least one capital letter");
             } else {
-                setF_errorCIP("Seems Like All Set For Login You Account");
+                setF_errorCIP("Seems Like All Set For Update Password");
             }
         } else if (f_changeInputPassword === "") {
             setF_errorCIP("");
@@ -134,23 +402,14 @@ const Login = () => {
             } else if (f_changeInputPassword !== f_changeInputConformPassword) {
                 setF_errorCICP("Password Not Same");
             } else {
-                setF_errorCICP("Seems Like All Set For Login You Account");
+                setF_errorCICP("Seems Like All Set For Update Password");
             }
         } else if (f_changeInputConformPassword === "") {
             setF_errorCICP("");
         }
     }, [f_inputActiveCP, f_changeInputConformPassword, f_changeInputPassword]);
 
-    useEffect(() => {
-        if (f_otpValidFromDataBase) {
-            setTimeout(() => {
-                setF_isChangePasswordSectionOpen(true);
-            }, 1500);
-        }
-        //  else {
-        //     setIsChangePasswordSectionOpen(false);
-        // }
-    }, [f_otpValidFromDataBase]);
+
 
     useEffect(() => {
         if (f_inputActive) {
@@ -163,6 +422,11 @@ const Login = () => {
 
     return (
         <div className="main_view_forgot">
+            {showMsg ? (
+                <div className="msg_pop_up">
+                    <MessagePopUp isSuccess={successMsgStatus} message={msgContent} />
+                </div>
+            ) : null}
             <div className="main_center_element_forgot">
                 <div className="top_element_forgot">
                     <div className="logo_icon_forgot">
@@ -184,7 +448,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="login_right_forgot">
-                            {!f_isChangePasswordSectionOpen ? (
+                            {!f_otpValidFromDataBase ? (
                                 <div className="login_right_forgot_arrange">
                                     <div className="login_with_forgot">
                                         <div className="lwg_title_forgot">
@@ -251,10 +515,7 @@ const Login = () => {
                                                 <button
                                                     id="cnt_btn"
                                                     onClick={() => {
-                                                        if (!f_incorrectEmail && f_userEmailId !== "") {
-                                                            setF_inputActive(false);
-                                                            setF_emailValidFromDataBase(true);
-                                                        }
+                                                        handelToSendMailToUserAPI();
                                                     }}
                                                 >
                                                     Send OTP
@@ -262,7 +523,7 @@ const Login = () => {
                                             </div>
                                             <div className="company_terms_div_forgot">
                                                 <p>
-                                                    Opps, i just remind my password ?{" "}
+                                                    i just remind my password ?{" "}
                                                     <Link to="/login">Login Account</Link>{" "}
                                                 </p>
                                             </div>
@@ -296,27 +557,25 @@ const Login = () => {
                                                         }}
                                                         value={f_userInputOtp}
                                                     />
-                                                    {f_otpValidFromDataBase ? (
+                                                    {allowContinueOtpVerify ? (
                                                         <div className="email_error_div">
-                                                            {f_otpValidFromDataBase ? (
-                                                                f_otpValidFromDataBase ? (
+                                                            {
+                                                                otpResponseFromDataBase ? (
                                                                     <label
                                                                         id="email_invalid_error"
-                                                                        style={{ color: "green" }}
+                                                                        style={{ color: successMessageFromDataBaseForOTP? "green":"red" }}
                                                                     >
-                                                                        OTP Verified Successfully
+                                                                        {successMessageFromDataBaseForOTP ? "OTP Verify Successfully":"OTP Incorrect"}
                                                                     </label>
                                                                 ) : (
                                                                     ""
                                                                 )
-                                                            ) : (
-                                                                <label id="email_invalid_error">
-                                                                    Incorrect Input OTP
-                                                                </label>
-                                                            )}
+                                                            }
                                                         </div>
                                                     ) : (
-                                                        ""
+                                                        <label id="email_invalid_error">
+                                                            OTP does not to be null
+                                                        </label>
                                                     )}
                                                 </div>
                                             </div>
@@ -324,9 +583,7 @@ const Login = () => {
                                                 <button
                                                     id="cnt_btn"
                                                     onClick={() => {
-                                                        if (f_userInputOtp !== "") {
-                                                            setF_otpValidFromDataBase(true);
-                                                        }
+                                                        handelOtpVerificationAPI();
                                                     }}
                                                 >
                                                     Validate
@@ -438,7 +695,7 @@ const Login = () => {
                                                             style={{
                                                                 color:
                                                                     f_errorCIP ===
-                                                                        "Seems Like All Set For Login You Account"
+                                                                        "Seems Like All Set For Update Password"
                                                                         ? "#39ac13"
                                                                         : "#d50707",
                                                             }}
@@ -530,7 +787,7 @@ const Login = () => {
                                                             style={{
                                                                 color:
                                                                     f_errorCICP ===
-                                                                        "Seems Like All Set For Login You Account"
+                                                                        "Seems Like All Set For Update Password"
                                                                         ? "#39ac13"
                                                                         : "#d50707",
                                                             }}
@@ -546,10 +803,7 @@ const Login = () => {
                                             <button
                                                 id="cnt_btn"
                                                 onClick={() => {
-                                                    if (!f_incorrectEmail && f_userEmailId !== "") {
-                                                        setF_inputActive(false);
-                                                        setF_emailValidFromDataBase(true);
-                                                    }
+                                                    handelToUpdatePassword();
                                                 }}
                                             >
                                                 Change

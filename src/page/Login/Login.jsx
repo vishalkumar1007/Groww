@@ -45,7 +45,8 @@ const Login = () => {
       return;
     }
 
-    const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
+    // const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
+    const EmailValidationApi = `https://groww-backend-omega.vercel.app/api/user/emailVerification?email=${userEmailId}`;
 
     fetch(EmailValidationApi,{
       method:'GET',
@@ -57,6 +58,7 @@ const Login = () => {
       if(!response.ok){
         // console.log('response not ok',response);
         ShowQuickMsgForEmailValidation(response.status);
+        return;
       }
       ShowQuickMsgForEmailValidation(response.status);
       
@@ -65,6 +67,39 @@ const Login = () => {
       console.log('error ', err);
     })
   }
+
+
+  const ShowQuickMsgForEmailValidation = async (statusCode) => {
+    if (statusCode === 401) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Unauthorized request 401");
+    } else if (statusCode === 200) { 
+      setSuccessMsgStatus(true);
+      setMsgContent("Validate Success");
+    } else if (statusCode === 404) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Invalid Email id");
+    } else if (statusCode === 500) {
+      setSuccessMsgStatus(false);
+      setMsgContent("Server Error");
+    }
+
+    if (!showMsg) {
+      setShowMsg(true);
+      if(statusCode === 404){
+        setEmailNotFoundError(true);
+      }
+      const timeOut = setTimeout(() => {
+        if (statusCode === 200) {
+          setEmailValidFromDataBase(true);
+          setInputActive(false);
+        }
+        setShowMsg(false);
+      }, 4000);
+
+      return ()=> clearTimeout(timeOut);
+    }
+  };
 
   // PASSWORD
   useEffect(()=>{
@@ -87,7 +122,8 @@ const Login = () => {
       return;
     }
 
-    const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
+    // const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
+    const LoginAPI = `https://groww-backend-omega.vercel.app/api/user/login?email=${userEmailId}&password=${userPassword}`;
 
 
     fetch(LoginAPI,{
@@ -100,6 +136,7 @@ const Login = () => {
       if(!response.ok){
         // console.log('response not ok',response);
         ShowQuickMsgForLogin(response.status);
+        return;
       }
       ShowQuickMsgForLogin(response.status);
       
@@ -109,38 +146,8 @@ const Login = () => {
     })
   }
 
-  const ShowQuickMsgForEmailValidation = async (statusCode) => {
-    if (statusCode === 401) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Unauthorized request 401");
-    } else if (statusCode === 200) { 
-      setSuccessMsgStatus(true);
-      setMsgContent("Validate Success");
-    } else if (statusCode === 404) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Invalid Email id");
-    } else if (statusCode === 500) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Server Error");
-    }
 
-    let timeOut;
-    if (!showMsg) {
-      timeOut = setShowMsg(true);
-      if(statusCode === 404){
-        setEmailNotFoundError(true);
-      }
-      setTimeout(() => {
-        if (statusCode === 200) {
-          setEmailValidFromDataBase(true);
-          setInputActive(false);
-        }
-        setShowMsg(false);
-      }, 4000);
-    }
 
-    return clearTimeout(timeOut);
-  };
   const ShowQuickMsgForLogin = async (statusCode) => {
     if (statusCode === 401) {
       setSuccessMsgStatus(false);
@@ -151,33 +158,30 @@ const Login = () => {
     } else if (statusCode === 200) {
       setSuccessMsgStatus(true);
       setMsgContent("Login Validation Successful");
-      setUserPassword('');
     } else if (statusCode === 404) {
       setSuccessMsgStatus(false);
       setMsgContent("User not found");
     } else if (statusCode === 500) {
       setSuccessMsgStatus(false);
       setMsgContent("Server Error");
-      setUserPassword('');
     }
 
-
-    let timeOut;
     if (!showMsg) {
-      timeOut = setShowMsg(true);
+      setShowMsg(true);
       if(statusCode === 400){
         setPasswordValidFromDataBase(false);
       }
-      setTimeout(() => {
+      const timeOut = setTimeout(() => {
         if (statusCode === 200) {
           setInputActive(false);
           navigate('/dashboard')
         }
         setShowMsg(false);
       }, 5000);
+      
+      return ()=>clearTimeout(timeOut);
     }
 
-    return clearTimeout(timeOut);
   };
 
 
@@ -420,11 +424,11 @@ const Login = () => {
                               passwordValidFromDataBase?
                               null
                               :
-                              <lable id="password_invalid_error">Password Incorrect</lable>
+                              <label id="password_invalid_error">Password Incorrect</label>
                             }
                             {
                               passwordErrorAlert?
-                              <lable id="password_invalid_error">Password length must be between 7 to 20</lable>
+                              <label id="password_invalid_error">Password length must be between 7 to 20</label>
                               :
                               null
                             }

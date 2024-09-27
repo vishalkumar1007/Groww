@@ -102,8 +102,9 @@ const SignUp = () => {
       email: userEmailId,
       password: userPassword,
     };
-    const API = "http://localhost:8080/api/user/signup";
-    
+    // const API = "http://localhost:8080/api/user/signup";
+    const API = "https://groww-backend-omega.vercel.app/api/user/signup";
+
     fetch(API, {
       method: "POST",
       headers: {
@@ -116,6 +117,7 @@ const SignUp = () => {
           // const errorData = await response.json();
           // console.log(errorData);
           ShowQuickMsg(response.status);
+          return;
         }
         ShowQuickMsg(response.status);
       })
@@ -282,7 +284,7 @@ const SignUp = () => {
       timeOut = setShowMsg(true);
       setTimeout(() => {
         if (statusCode === 201) {
-          navigate("/login");
+          navigate("/Dashboard");
         }
         setShowMsg(false);
       }, 5000);
