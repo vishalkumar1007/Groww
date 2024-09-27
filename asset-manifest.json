@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.335046a7.css",
-    "main.js": "/Groww/static/js/main.e1d0e051.js",
+    "main.css": "/Groww/static/css/main.54e9d9d0.css",
+    "main.js": "/Groww/static/js/main.8b9ae247.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -179,12 +179,12 @@
     "static/media/fb_icon_groww.svg": "/Groww/static/media/fb_icon_groww.99a9d51576652b160edaa2fe6c61da5d.svg",
     "static/media/import_funds.svg": "/Groww/static/media/import_funds.cb02ba438e40191d6fd66b6ead33fea0.svg",
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg",
-    "main.335046a7.css.map": "/Groww/static/css/main.335046a7.css.map",
-    "main.e1d0e051.js.map": "/Groww/static/js/main.e1d0e051.js.map",
+    "main.54e9d9d0.css.map": "/Groww/static/css/main.54e9d9d0.css.map",
+    "main.8b9ae247.js.map": "/Groww/static/js/main.8b9ae247.js.map",
     "6453.cbd43e81.chunk.js.map": "/Groww/static/js/6453.cbd43e81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.335046a7.css",
-    "static/js/main.e1d0e051.js"
+    "static/css/main.54e9d9d0.css",
+    "static/js/main.8b9ae247.js"
   ]
 }
