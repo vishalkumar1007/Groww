@@ -5,6 +5,7 @@ import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import google_svg from "../../assets/svg/google.icon.svg";
 import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../component/LoaderComponent/Loader";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,74 +19,80 @@ const Login = () => {
     useState(true);
   const [passwordErrorAlert, setPasswordErrorAlert] = useState(false);
   const [isLoginPasswordHide, setIsLoginPasswordHide] = useState(true);
-  const [animationTextChangeLogin , setAnimationTextChangeLogin] = useState('Mutual Funds');
+  const [animationTextChangeLogin, setAnimationTextChangeLogin] =
+    useState("Mutual Funds");
 
-  const [allowContinueEmailVerify , setAllowContinueEmailVerify] = useState(true);
+  const [allowContinueEmailVerify, setAllowContinueEmailVerify] =
+    useState(true);
   const [showMsg, setShowMsg] = useState(false);
   const [successMsgStatus, setSuccessMsgStatus] = useState(true);
   const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
-  const [allowToLogin , setAllowToLogin] = useState(true);
+  const [allowToLogin, setAllowToLogin] = useState(true);
 
+  const [loaderActive, setLoaderActive] = useState(false);
 
-  useEffect(()=>{
-    if(!(userEmailId.length>0)){
+  useEffect(() => {
+    if (!(userEmailId.length > 0)) {
       setAllowContinueEmailVerify(false);
       return;
     }
 
-    if(incorrectEmail){
+    if (incorrectEmail) {
       setAllowContinueEmailVerify(false);
       return;
     }
     setAllowContinueEmailVerify(true);
-  },[incorrectEmail, userEmailId])
+  }, [incorrectEmail, userEmailId]);
 
-  const handelEmailValidation = async()=>{
-    if(!allowContinueEmailVerify){
+  const handelEmailValidation = async () => {
+    if (!allowContinueEmailVerify) {
       return;
     }
+    setLoaderActive(true);
 
     const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
 
-    fetch(EmailValidationApi,{
-      method:'GET',
-      headers:{
-        'Content-Type':'application/json'
+    fetch(EmailValidationApi, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
     })
-    .then((response)=>{
-      if(!response.ok){
-        // console.log('response not ok',response);
+      .then((response) => {
+        if (!response.ok) {
+          console.log("response not ok", response);
+          ShowQuickMsgForEmailValidation(response.status);
+          setLoaderActive(false);
+          return;
+        }
         ShowQuickMsgForEmailValidation(response.status);
-        return;
-      }
-      ShowQuickMsgForEmailValidation(response.status);
-      
-    })
-    .catch((err)=>{
-      console.log('error ', err);
-    })
-  }
-
+        setLoaderActive(false);
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForEmailValidation(500);
+        setLoaderActive(false);
+      });
+  };
 
   const ShowQuickMsgForEmailValidation = async (statusCode) => {
     if (statusCode === 401) {
       setSuccessMsgStatus(false);
-      setMsgContent("Unauthorized request 401");
-    } else if (statusCode === 200) { 
+      setMsgContent("Authorization failed. Please try again.");
+    } else if (statusCode === 200) {
       setSuccessMsgStatus(true);
-      setMsgContent("Validate Success");
+      setMsgContent("Validation successful.");
     } else if (statusCode === 404) {
       setSuccessMsgStatus(false);
-      setMsgContent("Invalid Email id");
+      setMsgContent("Email not found.");
     } else if (statusCode === 500) {
       setSuccessMsgStatus(false);
-      setMsgContent("Server Error");
+      setMsgContent("Server error. Try again later.");
     }
 
     if (!showMsg) {
       setShowMsg(true);
-      if(statusCode === 404){
+      if (statusCode === 404) {
         setEmailNotFoundError(true);
       }
       const timeOut = setTimeout(() => {
@@ -96,92 +103,88 @@ const Login = () => {
         setShowMsg(false);
       }, 4000);
 
-      return ()=> clearTimeout(timeOut);
+      return () => clearTimeout(timeOut);
     }
   };
 
   // PASSWORD
-  useEffect(()=>{
-    if(!(userPassword.length>0)){
+  useEffect(() => {
+    if (!(userPassword.length > 0)) {
       setAllowToLogin(false);
       return;
     }
 
-    if(passwordErrorAlert){
+    if (passwordErrorAlert) {
       setAllowToLogin(false);
       return;
     }
     setAllowToLogin(true);
-  },[passwordErrorAlert, userPassword.length])
+  }, [passwordErrorAlert, userPassword.length]);
 
-  
-
-  const handelLoginValidation = async()=>{
-    if(!allowToLogin){
+  const handelLoginValidation = async () => {
+    if (!allowToLogin) {
       return;
     }
-
+    setLoaderActive(true);
     const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
 
-
-    fetch(LoginAPI,{
-      method:'GET',
-      headers:{
-        'Content-Type':'application/json'
+    fetch(LoginAPI, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
     })
-    .then((response)=>{
-      if(!response.ok){
-        // console.log('response not ok',response);
+      .then((response) => {
+        if (!response.ok) {
+          // console.log('response not ok',response);
+          ShowQuickMsgForLogin(response.status);
+          setLoaderActive(false);
+          return;
+        }
         ShowQuickMsgForLogin(response.status);
-        return;
-      }
-      ShowQuickMsgForLogin(response.status);
-      
-    })
-    .catch((err)=>{
-      console.log('error ', err);
-    })
-  }
-
-
+        setLoaderActive(false);
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForLogin(500);
+        setLoaderActive(false);
+      });
+  };
 
   const ShowQuickMsgForLogin = async (statusCode) => {
     if (statusCode === 401) {
       setSuccessMsgStatus(false);
-      setMsgContent("Unauthorized request 401");
+      setMsgContent("Unauthorized request. Please log in.");
     } else if (statusCode === 400) {
       setSuccessMsgStatus(false);
-      setMsgContent("Wrong Password Entered");
+      setMsgContent("Incorrect password. Please try again.");
     } else if (statusCode === 200) {
       setSuccessMsgStatus(true);
-      setMsgContent("Login Validation Successful");
+      setMsgContent("Login validation successful. Welcome!");
     } else if (statusCode === 404) {
       setSuccessMsgStatus(false);
-      setMsgContent("User not found");
+      setMsgContent("User not found. Check your credentials.");
     } else if (statusCode === 500) {
       setSuccessMsgStatus(false);
-      setMsgContent("Server Error");
+      setMsgContent("Server error. Please try later.");
     }
 
     if (!showMsg) {
       setShowMsg(true);
-      if(statusCode === 400){
+      if (statusCode === 400) {
         setPasswordValidFromDataBase(false);
       }
       const timeOut = setTimeout(() => {
         if (statusCode === 200) {
           setInputActive(false);
-          navigate('/dashboard')
+          navigate("/dashboard");
         }
         setShowMsg(false);
       }, 5000);
-      
-      return ()=>clearTimeout(timeOut);
+
+      return () => clearTimeout(timeOut);
     }
-
   };
-
 
   const checkInputFocus = () => {
     setInputActive(true);
@@ -192,31 +195,29 @@ const Login = () => {
     }
   };
 
-  useState(()=>{
+  useState(() => {
     const interval = setInterval(() => {
-      setAnimationTextChangeLogin((pvrState)=>{
-        if(pvrState==='Mutual Funds'){
-          return 'Stocks'
-        }else if(pvrState==='Stocks'){
-          return "EFT's"
-        }else{
-          return 'Mutual Funds'
+      setAnimationTextChangeLogin((pvrState) => {
+        if (pvrState === "Mutual Funds") {
+          return "Stocks";
+        } else if (pvrState === "Stocks") {
+          return "EFT's";
+        } else {
+          return "Mutual Funds";
         }
       });
-
     }, 3000);
 
-    return()=>{clearInterval(interval)};
-
-  },[]);
-
-
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     if (inputActive) {
       if (userPassword.length < 7 || userPassword.length > 20) {
         setPasswordErrorAlert(true);
-      } else{
+      } else {
         setPasswordErrorAlert(false);
       }
     }
@@ -254,7 +255,9 @@ const Login = () => {
                 </div>
                 <div className="left_tagline_bottom">
                   <div id="interval_login"></div>
-                  <p id="left_tagline_bottom_text">{animationTextChangeLogin}</p>
+                  <p id="left_tagline_bottom_text">
+                    {animationTextChangeLogin}
+                  </p>
                 </div>
               </div>
             </div>
@@ -332,11 +335,18 @@ const Login = () => {
                     <div className="continue_btn_div">
                       <button
                         id="cnt_btn"
-                        onClick={() => {handelEmailValidation()}}
+                        onClick={() => {
+                          handelEmailValidation();
+                        }}
                         disabled={!allowContinueEmailVerify}
-                        style={{backgroundColor:allowContinueEmailVerify?null:'#22b892cf' , cursor:allowContinueEmailVerify?null:'no-drop'}}
+                        style={{
+                          backgroundColor: allowContinueEmailVerify
+                            ? null
+                            : "#22b892cf",
+                          cursor: allowContinueEmailVerify ? null : "no-drop",
+                        }}
                       >
-                        Continue
+                        {loaderActive ? <Loader /> : <p>Continue</p>}
                       </button>
                     </div>
                     <div className="company_terms_div">
@@ -418,29 +428,35 @@ const Login = () => {
                           </div>
 
                           <div className="email_error_div">
-                            {
-                              passwordValidFromDataBase?
-                              null
-                              :
-                              <label id="password_invalid_error">Password Incorrect</label>
-                            }
-                            {
-                              passwordErrorAlert?
-                              <label id="password_invalid_error">Password length must be between 7 to 20</label>
-                              :
-                              null
-                            }
+                            {passwordValidFromDataBase ? null : (
+                              <label id="password_invalid_error">
+                                Password Incorrect
+                              </label>
+                            )}
+                            {passwordErrorAlert ? (
+                              <label id="password_invalid_error">
+                                Password length must be between 7 to 20
+                              </label>
+                            ) : null}
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="continue_btn_div">
-                      <button id="cnt_btn"
-                        onClick={()=>{handelLoginValidation()}}
+                      <button
+                        id="cnt_btn"
+                        onClick={() => {
+                          handelLoginValidation();
+                        }}
                         disabled={!allowToLogin}
-                        style={{backgroundColor:allowToLogin?null:'#22b892cf' , cursor:allowToLogin?null:'no-drop'}}
-                      >Login</button>
+                        style={{
+                          backgroundColor: allowToLogin ? null : "#22b892cf",
+                          cursor: allowToLogin ? null : "no-drop",
+                        }}
+                      >
+                        {loaderActive ? <Loader /> : <p>Login</p>}
+                      </button>
                     </div>
                     <div className="company_terms_div">
                       <p>

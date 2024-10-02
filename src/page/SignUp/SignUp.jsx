@@ -4,6 +4,7 @@ import "./SignUp.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../component/LoaderComponent/Loader";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const SignUp = () => {
   const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
 
   const [isValidForm, SetIsValidForm] = useState(true);
+  const [loaderActive, setLoaderActive] = useState(false);
 
   useEffect(() => {
     if (
@@ -96,15 +98,18 @@ const SignUp = () => {
       return;
     }
 
+    setLoaderActive(true);
+
     const userSignUpData = {
       firstName: userFirstName,
       lastName: userLastName,
       email: userEmailId,
       password: userPassword,
     };
-    const API = "http://localhost:8080/api/user/signup";
 
-    fetch(API, {
+    const SignUpAPI = "http://localhost:8080/api/user/signup";
+
+    fetch(SignUpAPI, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -116,11 +121,14 @@ const SignUp = () => {
           // const errorData = await response.json();
           // console.log(errorData);
           ShowQuickMsg(response.status);
+          setLoaderActive(false);
           return;
         }
         ShowQuickMsg(response.status);
+        setLoaderActive(false);
       })
       .catch((err) => {
+        setLoaderActive(false);
         ShowQuickMsg(500);
         console.log("error on POST request", err);
       });
@@ -263,19 +271,19 @@ const SignUp = () => {
   const ShowQuickMsg = async (statusCode) => {
     if (statusCode === 401) {
       setSuccessMsgStatus(false);
-      setMsgContent("All Field Require");
+      setMsgContent("All fields are required.");
     } else if (statusCode === 409) {
       setSuccessMsgStatus(false);
-      setMsgContent("User Already Registered , Login please");
+      setMsgContent("User already registered. Please log in.");
     } else if (statusCode === 201) {
       setSuccessMsgStatus(true);
-      setMsgContent("User SignUp Successful");
+      setMsgContent("User sign-up successful.");
     } else if (statusCode === 400) {
       setSuccessMsgStatus(false);
-      setMsgContent("Verify Your Input Again");
+      setMsgContent("Please verify your input.");
     } else if (statusCode === 500) {
       setSuccessMsgStatus(false);
-      setMsgContent("Server Error");
+      setMsgContent("Server error. Please try again later.");
     }
 
     let timeOut;
@@ -527,7 +535,7 @@ const SignUp = () => {
                         cursor: isValidForm ? null : "no-drop",
                       }}
                     >
-                      Sign up
+                      {loaderActive ? <Loader /> : <p>Sign Up</p>}
                     </button>
                   </div>
                   <div className="company_terms_div_sign_up">
