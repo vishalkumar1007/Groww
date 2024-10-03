@@ -13,37 +13,40 @@ import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
-import IntroAlert from "../../component/IntroAlert/IntroAlert";
+// import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
 const Home = () => {
   const navigate = useNavigate();
   const [menuActive, setMenuActive] = useState(false);
-  const [isShowAlertOption , setIsShowAlertOption] = useState(false);
-  const [popUpInterval , setPopUpInterval] = useState(5000);
 
-
-
-
-  const requestToClose = (value)=>{
-    if(value){
-      setIsShowAlertOption(false);
-    }
-  }
+  /* alert popup  */
+    
+  /*
   
-  useEffect(()=>{
-    let timeInterval ;
-    if(!isShowAlertOption){
-      timeInterval = setTimeout(()=>{
-        setIsShowAlertOption(true);
-        console.log('true...');
-        setPopUpInterval((pvrPopUpValue)=>{return Math.min(pvrPopUpValue*2,120_000)});
-      },popUpInterval);
+    const [isShowAlertOption , setIsShowAlertOption] = useState(false);
+    const [popUpInterval , setPopUpInterval] = useState(5000);
+
+    const requestToClose = (value)=>{
+      if(value){
+        setIsShowAlertOption(false);
+      }
     }
-    console.log('PASS...');
 
-    return ()=> clearTimeout(timeInterval);
-  },[popUpInterval,isShowAlertOption])
+    useEffect(()=>{
+      let timeInterval ;
+      if(!isShowAlertOption){
+        timeInterval = setTimeout(()=>{
+          setIsShowAlertOption(true);
+          console.log('true...');
+          setPopUpInterval((pvrPopUpValue)=>{return Math.min(pvrPopUpValue*2,120_000)});
+        },popUpInterval);
+      }
+      console.log('PASS...');
 
+      return ()=> clearTimeout(timeInterval);
+    },[popUpInterval,isShowAlertOption]);
+
+  */
 
 
   useEffect(()=>{
@@ -52,10 +55,10 @@ const Home = () => {
   return (
     <>
       {
-        isShowAlertOption?
-        <div className="HomeMain_alert_show">
-        <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
-      </div>:null
+      //   isShowAlertOption?
+      //   <div className="HomeMain_alert_show">
+      //   <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
+      // </div>:null
       }
       <div className="HomeMain">
         <div className="Home_navbar">

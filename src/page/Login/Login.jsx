@@ -60,7 +60,7 @@ const Login = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("response not ok", response);
+          console.log("response not ok", response.status);
           ShowQuickMsgForEmailValidation(response.status);
           setLoaderActive(false);
           return;
@@ -91,16 +91,19 @@ const Login = () => {
     }
 
     if (!showMsg) {
-      setShowMsg(true);
+      setShowMsg(true); // enable popup message
+      setAllowContinueEmailVerify(false); // disable continue button
       if (statusCode === 404) {
-        setEmailNotFoundError(true);
+        setEmailNotFoundError(true); // enable create account msg
       }
       const timeOut = setTimeout(() => {
         if (statusCode === 200) {
-          setEmailValidFromDataBase(true);
-          setInputActive(false);
+          setEmailValidFromDataBase(true); // open password section if true
+          setInputActive(false); //  deactivate input field
         }
-        setShowMsg(false);
+        setShowMsg(false); // disable popup message
+        setAllowContinueEmailVerify(true); // enable continue button
+        setEmailNotFoundError(false); // disable create account msg after interval
       }, 4000);
 
       return () => clearTimeout(timeOut);
@@ -134,21 +137,21 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        if (!response.ok) {
-          // console.log('response not ok',response);
-          ShowQuickMsgForLogin(response.status);
-          setLoaderActive(false);
-          return;
-        }
+    .then((response) => {
+      if (!response.ok) {
+        console.log('response not ok',response.status);
         ShowQuickMsgForLogin(response.status);
         setLoaderActive(false);
-      })
-      .catch((err) => {
-        console.log("error ", err);
-        ShowQuickMsgForLogin(500);
-        setLoaderActive(false);
-      });
+        return;
+      }
+      ShowQuickMsgForLogin(response.status);
+      setLoaderActive(false);
+    })
+    .catch((err) => {
+      console.log("error ", err);
+      ShowQuickMsgForLogin(500);
+      setLoaderActive(false);
+    });
   };
 
   const ShowQuickMsgForLogin = async (statusCode) => {
@@ -171,6 +174,7 @@ const Login = () => {
 
     if (!showMsg) {
       setShowMsg(true);
+      setAllowToLogin(false);
       if (statusCode === 400) {
         setPasswordValidFromDataBase(false);
       }
@@ -180,6 +184,7 @@ const Login = () => {
           navigate("/dashboard");
         }
         setShowMsg(false);
+        setAllowToLogin(true);
       }, 5000);
 
       return () => clearTimeout(timeOut);

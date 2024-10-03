@@ -34,6 +34,9 @@ const Login = () => {
   const [allowContinueEmailVerify, setAllowContinueEmailVerify] =
     useState(true);
 
+  // activate button
+  const [isActivateButton, setIsActivateButton] = useState(true);
+
   // otp
   const [allowContinueOtpVerify, setAllowContinueOtpVerify] = useState(true);
   const [
@@ -100,7 +103,7 @@ const Login = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("response is not ok", response);
+          console.log("response is not ok");
           ShowQuickMsgForEmail(response.status);
           setLoaderActive(false);
           return;
@@ -109,7 +112,7 @@ const Login = () => {
         setLoaderActive(false);
       })
       .catch((err) => {
-        console.log("error while fetching data", err);
+        console.log("error while fetching data");
         ShowQuickMsgForEmail(500);
         setLoaderActive(false);
       });
@@ -118,23 +121,25 @@ const Login = () => {
   const ShowQuickMsgForEmail = async (statusCode) => {
     if (statusCode === 401) {
         setSuccessMsgStatus(false);
-        setMsgContent("Unauthorized request. Please log in.");
-    } else if (statusCode === 200) {
+        setMsgContent("Unauthorized request. check credential");
+      } else if (statusCode === 200) {
         setSuccessMsgStatus(true);
-        setMsgContent("Validation successful.");
-    } else if (statusCode === 404) {
+        setMsgContent("Successfully OTP send to registered email");
+      } else if (statusCode === 404) {
         setSuccessMsgStatus(false);
         setMsgContent("Invalid email. Please check.");
-    } else if (statusCode === 403) {
+      } else if (statusCode === 500) {
         setSuccessMsgStatus(false);
-        setMsgContent("Incorrect OTP. Please try again.");
-    } else if (statusCode === 500) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Server error. Try again later.");
-    }    
-
+        setMsgContent("Server error. Report and Try again later.");
+      }    
+      else if (statusCode === 400) {
+          setSuccessMsgStatus(false);
+          setMsgContent("OTP duplicate , Try again after 2 min");
+      }    
+      
     if (!showMsg) {
       setShowMsg(true);
+      setIsActivateButton(false);
       if (statusCode === 404) {
         setF_emailNotFoundError(true);
       }
@@ -144,6 +149,7 @@ const Login = () => {
           setF_inputActive(false);
         }
         setShowMsg(false);
+        setIsActivateButton(true);
       }, 4000);
 
       return () => clearTimeout(timeOut);
@@ -169,7 +175,7 @@ const Login = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("response is not ok", response);
+          console.log("response is not ok");
           ShowQuickMsgForOtpSend(response.status);
           setLoaderActive(false);
           return;
@@ -179,7 +185,7 @@ const Login = () => {
       })
       .catch((err) => {
         ShowQuickMsgForOtpSend(500);
-        console.log("error while fetching data", err);
+        console.log("error while fetching data");
         setLoaderActive(false);
       });
   };
@@ -188,7 +194,7 @@ const Login = () => {
     if (statusCode === 401) {
         setF_OtpResponseFromDataBase(false);
         setSuccessMsgStatus(false);
-        setMsgContent("Unauthorized request. Please log in.");
+        setMsgContent("Unauthorized request. check your credential");
     } else if (statusCode === 200) {
         setSuccessMsgStatus(true);
         setF_OtpResponseFromDataBase(true);
@@ -197,7 +203,7 @@ const Login = () => {
     } else if (statusCode === 404) {
         setF_OtpResponseFromDataBase(false);
         setSuccessMsgStatus(false);
-        setMsgContent("Invalid email. Please check.");
+        setMsgContent("Invalid OTP , try agin this process");
     } else if (statusCode === 403) {
         setSuccessMsgStatus(false);
         setF_OtpResponseFromDataBase(true);
@@ -211,12 +217,14 @@ const Login = () => {
 
     if (!showMsg) {
       setShowMsg(true);
+      setIsActivateButton(false)
       const timeOut = setTimeout(() => {
         if (statusCode === 200) {
-          setF_otpValidFromDataBase(true); // open change pass component
+          setF_otpValidFromDataBase(true); // open change password component
           setF_inputActive(false);
         }
         setShowMsg(false);
+        setIsActivateButton(true)
       }, 4000);
 
       return () => clearTimeout(timeOut);
@@ -274,7 +282,7 @@ const Login = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(" response not ok while update pass", response);
+          console.log(" response not ok while update pass");
           ShowQuickMsgForUpdatePassword(response.status);
           setLoaderActive(false);
           return;
@@ -284,7 +292,7 @@ const Login = () => {
       })
       .catch((err) => {
         ShowQuickMsgForUpdatePassword(500);
-        console.log("server error while update data", err);
+        console.log("server error while update data");
         setLoaderActive(false);
       });
   };
@@ -309,12 +317,14 @@ const Login = () => {
 
     if (!showMsg) {
       setShowMsg(true);
+      setIsActivateButton(false);
       const timeOut = setTimeout(() => {
         if (statusCode === 200) {
           navigate("/login"); // redirect to login
           setF_inputActive(false);
         }
         setShowMsg(false);
+        setIsActivateButton(true);
       }, 4000);
 
       return () => clearTimeout(timeOut);
@@ -539,8 +549,13 @@ const Login = () => {
                       <div className="continue_btn_div_forgot">
                         <button
                           id="cnt_btn"
+                          disabled={!isActivateButton}
                           onClick={() => {
                             handelToSendMailToUserAPI();
+                          }}
+                          style={{
+                            backgroundColor: isActivateButton ? null : "#22b892cf" ,
+                            cursor: isActivateButton ? null : "no-drop" ,
                           }}
                         >
                           {loaderActive ? <Loader /> : <p>Send OTP</p>}
@@ -611,6 +626,11 @@ const Login = () => {
                       <div className="continue_btn_div_forgot">
                         <button
                           id="cnt_btn"
+                          disabled={!isActivateButton}
+                          style={{
+                            backgroundColor: isActivateButton ?null : "#22b892cf" ,
+                            cursor: isActivateButton ? null : "no-drop" ,
+                          }}
                           onClick={() => {
                             handelOtpVerificationAPI();
                           }}
@@ -831,6 +851,11 @@ const Login = () => {
                     <div className="createPass_continue_btn_div_forgot">
                       <button
                         id="cnt_btn"
+                        disabled={!isActivateButton}
+                        style={{
+                          backgroundColor: isActivateButton ?null : "#22b892cf" ,
+                          cursor: isActivateButton ? null : "no-drop" ,
+                        }}
                         onClick={() => {
                           handelToUpdatePassword();
                         }}
