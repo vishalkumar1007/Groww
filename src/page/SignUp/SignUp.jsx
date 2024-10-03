@@ -288,12 +288,14 @@ const SignUp = () => {
 
     let timeOut;
     if (!showMsg) {
+      SetIsValidForm(false);
       timeOut = setShowMsg(true);
       setTimeout(() => {
         if (statusCode === 201) {
           navigate("/Dashboard");
         }
         setShowMsg(false);
+        SetIsValidForm(true);
       }, 5000);
     }
 
