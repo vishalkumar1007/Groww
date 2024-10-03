@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.89dad250.css",
-    "main.js": "/Groww/static/js/main.7689bba8.js",
+    "main.css": "/Groww/static/css/main.7187c8ae.css",
+    "main.js": "/Groww/static/js/main.85b0e2a1.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -92,7 +92,7 @@
     "static/media/mid_mazagon_ship_icon.webp": "/Groww/static/media/mid_mazagon_ship_icon.ff8dbc3d34665c305d57.webp",
     "static/media/personalLoan.9d5e746c.webp": "/Groww/static/media/personalLoan.9d5e746c.ee125e93a34e17735d17.webp",
     "static/media/Firstsource_Soln_icon.webp": "/Groww/static/media/Firstsource_Soln_icon.aec10a96b400710f6b4e.webp",
-    "static/media/Hello-pana-with-flower.svg": "/Groww/static/media/Hello-pana-with-flower.a0e19ac70eaf47d5240bde9ad3c8c595.svg",
+    "static/media/Hello-pana-with-flower.svg": "/Groww/static/media/Hello-pana-with-flower.a0e19ac70eaf47d5240b.svg",
     "static/media/titan_icon.webp": "/Groww/static/media/titan_icon.198e0504f26f651d06f4.webp",
     "static/media/GSTK532775_company_icon.webp": "/Groww/static/media/GSTK532775_company_icon.cf9bf8be71ac617798fb.webp",
     "static/media/GTL_logo.webp": "/Groww/static/media/GTL_logo.cf9bf8be71ac617798fb.webp",
@@ -179,12 +179,12 @@
     "static/media/fb_icon_groww.svg": "/Groww/static/media/fb_icon_groww.99a9d51576652b160edaa2fe6c61da5d.svg",
     "static/media/import_funds.svg": "/Groww/static/media/import_funds.cb02ba438e40191d6fd66b6ead33fea0.svg",
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg",
-    "main.89dad250.css.map": "/Groww/static/css/main.89dad250.css.map",
-    "main.7689bba8.js.map": "/Groww/static/js/main.7689bba8.js.map",
+    "main.7187c8ae.css.map": "/Groww/static/css/main.7187c8ae.css.map",
+    "main.85b0e2a1.js.map": "/Groww/static/js/main.85b0e2a1.js.map",
     "6453.cbd43e81.chunk.js.map": "/Groww/static/js/6453.cbd43e81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.89dad250.css",
-    "static/js/main.7689bba8.js"
+    "static/css/main.7187c8ae.css",
+    "static/js/main.85b0e2a1.js"
   ]
 }
