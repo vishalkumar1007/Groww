@@ -137,13 +137,19 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     })
-    .then((response) => {
+    .then(async (response) => {
       if (!response.ok) {
         console.log('response not ok',response.status);
         ShowQuickMsgForLogin(response.status);
         setLoaderActive(false);
         return;
       }
+
+      if(response.status === 200){
+        const data = await response.json();
+        localStorage.setItem('token' , data.token);
+      }
+
       ShowQuickMsgForLogin(response.status);
       setLoaderActive(false);
     })
@@ -180,6 +186,7 @@ const Login = () => {
       }
       const timeOut = setTimeout(() => {
         if (statusCode === 200) {
+
           setInputActive(false);
           navigate("/dashboard");
         }

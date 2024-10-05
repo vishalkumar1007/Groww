@@ -19,6 +19,42 @@ const Home = () => {
   const navigate = useNavigate();
   const [menuActive, setMenuActive] = useState(false);
 
+
+  useEffect(()=>{
+    const localStorageToken = localStorage.getItem('token');
+
+    if(localStorageToken){
+      const api = 'http://localhost:8080/api/user/verify/token';
+  
+      fetch(api , {
+        method:'GET',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${localStorageToken}`
+        }
+      })
+      .then(async (response)=>{
+        if(!response.ok){
+          console.log('response is not ok');
+          return await response.json();
+        }
+
+        if(response.status===200){
+          navigate('/dashboard');
+        }
+        console.log('Auto login declined with status', response.status);
+      })
+      .then((data)=>{
+          // save data to redux
+      })
+      .catch((err)=>{
+        console.log('Error on fetching auto login' , err);
+      })
+
+    }
+
+  },[navigate])
+
   /* alert popup  */
     
   /*

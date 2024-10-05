@@ -12,6 +12,12 @@ const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   // const [screenWidthUpdate, setScreenWidthUpdate] = useState(true);
   // const [screenWidthUpdateLong, setScreenWidthUpdateLong] = useState(null);
+  
+  const handelToRemoveJWTFromLocalStorage = async()=>{
+    localStorage.removeItem('token');
+  }
+  
+  
   const profileSectionRef = useRef(null);
 
   useEffect(() => {
@@ -512,6 +518,7 @@ const Navbar = () => {
                 <div className="Navbar_user_Profile_section_footer_arrange_logout">
                   <p
                     onClick={() => {
+                      handelToRemoveJWTFromLocalStorage();
                       navigate("/");
                     }}
                   >
