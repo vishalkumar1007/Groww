@@ -6,9 +6,12 @@ import google_svg from "../../assets/svg/google.icon.svg";
 import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
+// import { useDispatch } from "react-redux";
+// import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
 const Login = () => {
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const [inputActive, setInputActive] = useState(false);
   const [userEmailId, setUserEmailId] = useState("");
   const [incorrectEmail, setIncorrectEmail] = useState(false);
@@ -148,6 +151,8 @@ const Login = () => {
       if(response.status === 200){
         const data = await response.json();
         localStorage.setItem('token' , data.token);
+        // dispatch(removeUserInformation());
+        // dispatch(addUserInformation(data.payLoad));
       }
 
       ShowQuickMsgForLogin(response.status);

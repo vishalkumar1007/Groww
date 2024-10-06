@@ -4,14 +4,15 @@ import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
-import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
+// import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
 
 const Navbar = () => {
   const userWatchListCount = useSelector(selectUserWatchlistValue);
-  const userInformationData = useSelector(selectUserInformationValue);
+  // const userInformationData = useSelector(selectUserInformationValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("Explore");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [userTokenData , setUserTokenData] = useState();
   // const [screenWidthUpdate, setScreenWidthUpdate] = useState(true);
   // const [screenWidthUpdateLong, setScreenWidthUpdateLong] = useState(null);
   
@@ -19,6 +20,25 @@ const Navbar = () => {
     localStorage.removeItem('token');
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login')
+      return;
+    }
+    const base64Url = token.split('.')[1]; 
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const data = JSON.parse(window.atob(base64));
+    setUserTokenData(data);
+    
+  }, [navigate]);
+
+  // useEffect(()=>{
+  //   if(userTokenData){
+
+  //     console.log(userTokenData);
+  //   }
+  // },[userTokenData])
 
   // const generateRandomColor = ()=>{
   //   let color = '';
@@ -27,10 +47,7 @@ const Navbar = () => {
 
   //   }
   // }
-  
-  useEffect(()=>{
-    console.log('user data : ',userInformationData)
-  },[userInformationData])
+
 
   
   const profileSectionRef = useRef(null);
@@ -189,10 +206,10 @@ const Navbar = () => {
               setIsProfileOpen(!isProfileOpen);
             }}
           >
-            <div className="Navbar_activity_profile_image" >
+            <div className="Navbar_activity_profile_image" style={{backgroundColor:userTokenData?userTokenData.userColorCode : null}}>
               <p>
                 {
-                  userInformationData.length>0?userInformationData[0].decode.userFirstName[0]:'X'
+                  userTokenData?userTokenData.userFirstName[0]:'X'
                 }
               </p>
             </div>
@@ -230,12 +247,12 @@ const Navbar = () => {
                 <div className="Navbar_user_Profile_section_user_about_arrange_user_data">
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_name">
                     {
-                      userInformationData.length>0?`${userInformationData[0].decode.userFirstName} ${userInformationData[0].decode.userLastName}`:'User Name'
+                      userTokenData?`${userTokenData.userFirstName} ${userTokenData.userLastName}`:'User Name'
                     }
                   </p>
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_email">
                     {
-                      userInformationData.length>0?`${userInformationData[0].decode.userEmail}`:'user@gmail.com'
+                      userTokenData?`${userTokenData.userEmail}`:'user@gmail.com'
                     }
                   </p>
                 </div>
