@@ -31,12 +31,12 @@ const StocksCard = ({
 
   useEffect(() => {
     for(let i=0;i<user_watchlist_data.length;i++){
-      if(user_watchlist_data[i].title === title){
+      if(user_watchlist_data[i].title === title && user_watchlist_data[i].logoUrl===logoUrl){
         setIsCardAddToWatchList(true);
         break;
       }
     }
-  }, [title, user_watchlist_data]);
+  }, [logoUrl, title, user_watchlist_data]);
 
 
   useEffect(() => {

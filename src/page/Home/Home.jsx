@@ -15,8 +15,13 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
+
+import { useDispatch} from "react-redux";
+import { addUserInformation } from "../../features/userInformation/userInformationSlice";
+
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
 
 
@@ -36,16 +41,17 @@ const Home = () => {
       .then(async (response)=>{
         if(!response.ok){
           console.log('response is not ok');
-          return await response.json();
         }
-
+        
         if(response.status===200){
           navigate('/dashboard');
+          return await response.json();
         }
         console.log('Auto login declined with status', response.status);
       })
       .then((data)=>{
           // save data to redux
+          dispatch(addUserInformation(data))
       })
       .catch((err)=>{
         console.log('Error on fetching auto login' , err);
@@ -53,7 +59,7 @@ const Home = () => {
 
     }
 
-  },[navigate])
+  },[dispatch, navigate])
 
   /* alert popup  */
     

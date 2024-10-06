@@ -4,9 +4,11 @@ import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
+import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
 
 const Navbar = () => {
   const userWatchListCount = useSelector(selectUserWatchlistValue);
+  const userInformationData = useSelector(selectUserInformationValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("Explore");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -16,7 +18,20 @@ const Navbar = () => {
   const handelToRemoveJWTFromLocalStorage = async()=>{
     localStorage.removeItem('token');
   }
+
+
+  // const generateRandomColor = ()=>{
+  //   let color = '';
+  //   const randomDecision = Math.random();
+  //   for(let i=1;i<=6;i++){
+
+  //   }
+  // }
   
+  useEffect(()=>{
+    console.log('user data : ',userInformationData)
+  },[userInformationData])
+
   
   const profileSectionRef = useRef(null);
 
@@ -174,8 +189,12 @@ const Navbar = () => {
               setIsProfileOpen(!isProfileOpen);
             }}
           >
-            <div className="Navbar_activity_profile_image">
-              <p>V</p>
+            <div className="Navbar_activity_profile_image" >
+              <p>
+                {
+                  userInformationData.length>0?userInformationData[0].decode.userFirstName[0]:'X'
+                }
+              </p>
             </div>
             <div
               className="Navbar_activity_profile_activate_deactivate_icon"
@@ -210,10 +229,14 @@ const Navbar = () => {
               <div className="Navbar_user_Profile_section_user_about_arrange">
                 <div className="Navbar_user_Profile_section_user_about_arrange_user_data">
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_name">
-                    Vishal Kumar
+                    {
+                      userInformationData.length>0?`${userInformationData[0].decode.userFirstName} ${userInformationData[0].decode.userLastName}`:'User Name'
+                    }
                   </p>
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_email">
-                    vishalkumarnke93@gmail.com
+                    {
+                      userInformationData.length>0?`${userInformationData[0].decode.userEmail}`:'user@gmail.com'
+                    }
                   </p>
                 </div>
                 <div className="Navbar_user_Profile_section_user_about_setting">
