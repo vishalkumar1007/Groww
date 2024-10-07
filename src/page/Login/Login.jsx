@@ -306,7 +306,14 @@ const Login = () => {
                 </div>
 
                 {!emailValidFromDataBase ? (
-                  <div className="login_with_id">
+                  <div className="login_with_id"
+                    onKeyDown={(e)=>{
+                      if(e.key==='Enter'){
+                        e.preventDefault();
+                        handelEmailValidation();
+                      }
+                    }}
+                  >
                     <div className="input_email_div">
                       <div className="ied_center">
                         <label
@@ -374,7 +381,14 @@ const Login = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="login_with_id">
+                  <div className="login_with_id"
+                    onKeyDown={(e)=>{
+                      if(e.key === 'Enter'){
+                        e.preventDefault();
+                        handelLoginValidation();
+                      }
+                    }}
+                  >
                     <div className="input_email_div">
                       <div className="input_email_div">
                         <div className="ied_center">

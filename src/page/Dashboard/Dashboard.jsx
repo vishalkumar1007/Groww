@@ -4,8 +4,38 @@ import Stocks from "../Stocks/Stocks";
 import MutualFund from "../MutualFund/MutualFund";
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [optionActive, setOptionActive] = useState("stocks");
+
+  useEffect(()=>{
+    const localStorageToken = localStorage.getItem('token');
+
+    if(localStorageToken){
+      const api = 'http://localhost:8080/api/user/verify/token';
+  
+      fetch(api , {
+        method:'GET',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${localStorageToken}`
+        }
+      })
+      .then(async (response)=>{
+        if(!response.ok){
+          console.log('response is not ok');
+          navigate('/');
+        }
+      })
+      .catch((err)=>{
+        console.log('Error on fetching auto login' , err);
+      })
+
+    }
+
+  },[navigate])
+
 
   useEffect(() => {
     window.scrollTo(0, 0);

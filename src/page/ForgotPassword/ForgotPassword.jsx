@@ -498,7 +498,14 @@ const Login = () => {
 
                   {/* ............ */}
                   {!f_emailValidFromDataBase ? (
-                    <div className="login_with_id_forgot_email">
+                    <div className="login_with_id_forgot_email"
+                      onKeyDown={(e)=>{
+                        if(e.key === 'Enter'){
+                          e.preventDefault();
+                          handelToSendMailToUserAPI();
+                        }
+                      }}
+                    >
                       <div className="input_email_div_forgot_email">
                         <div className="ied_center_forgot_email">
                           <label
@@ -569,7 +576,14 @@ const Login = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="login_with_id_forgot_otp">
+                    <div className="login_with_id_forgot_otp"
+                      onKeyDown={(e)=>{
+                        if(e.key === 'Enter'){
+                          e.preventDefault();
+                          handelOtpVerificationAPI();
+                        }
+                      }}
+                    >
                       <div className="input_email_div_forgot_otp">
                         <div className="ied_center_forgot_otp">
                           <label
@@ -661,7 +675,14 @@ const Login = () => {
                     </div>
                   </div>
 
-                  <div className="Create_password_section">
+                  <div className="Create_password_section"
+                    onKeyDown={(e)=>{
+                      if(e.key === 'Enter'){
+                        e.preventDefault();
+                        handelToUpdatePassword();
+                      }
+                    }}
+                  >
                     <div className="input_createPass_div">
                       <div className="ied_center_forgot_set_pass">
                         <label

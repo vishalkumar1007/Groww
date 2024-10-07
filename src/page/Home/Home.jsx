@@ -40,7 +40,6 @@ const Home = () => {
       })
       .then(async (response)=>{
         if(!response.ok){
-          console.log('response is not ok');
           return await response.json();
         }
         

@@ -339,214 +339,227 @@ const SignUp = () => {
                   </div>
                 </div>
 
-                <div className="sign_up_with_id">
-                  <div className="input_email_div_sign_up">
-                    <div className="ied_center_sign_up_first_name">
-                      <label
-                        className={
-                          inputActiveFirstName
-                            ? "placeholder_move_sign_up_first_name"
-                            : "placeholder_static_sign_up_first_name"
-                        }
-                      >
-                        First Name
-                      </label>
-                      <input
-                        className={
-                          inputActiveFirstName
-                            ? "inputActive_first_name"
-                            : "inputDeactivate_first_name"
-                        }
-                        type="name"
-                        onFocus={() => {
-                          setInputActiveFirstName(true);
-                        }}
-                        onBlur={handleBlurFirstName}
-                        onChange={(e) => {
-                          setUserFirstName(e.target.value);
-                        }}
-                        value={userFirstName}
-                      />
-                      {/* <div className="email_error_div_sign_up"> */}
-                      <div className="email_error_div_sign_up_first_name">
-                        {firstNameInputError !== "" ? (
-                          // <label id="error_sign_up_label">
-                          <label id="error_sign_up_label_first_name">
-                            {firstNameInputError}
-                          </label>
-                        ) : null}
+                  <div className="sign_up_with_id"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault(); 
+                        submitForm(); 
+                      }
+                    }}
+                  
+                  >
+                    <div className="input_email_div_sign_up">
+                      <div className="ied_center_sign_up_first_name">
+                        <label
+                          className={
+                            inputActiveFirstName
+                              ? "placeholder_move_sign_up_first_name"
+                              : "placeholder_static_sign_up_first_name"
+                          }
+                        >
+                          First Name
+                        </label>
+                        <input
+                          className={
+                            inputActiveFirstName
+                              ? "inputActive_first_name"
+                              : "inputDeactivate_first_name"
+                          }
+                          type="name"
+                          onFocus={() => {
+                            setInputActiveFirstName(true);
+                          }}
+                          onBlur={handleBlurFirstName}
+                          onChange={(e) => {
+                            setUserFirstName(e.target.value);
+                          }}
+                          value={userFirstName}
+                        />
+                        {/* <div className="email_error_div_sign_up"> */}
+                        <div className="email_error_div_sign_up_first_name">
+                          {firstNameInputError !== "" ? (
+                            // <label id="error_sign_up_label">
+                            <label id="error_sign_up_label_first_name">
+                              {firstNameInputError}
+                            </label>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="ied_center_sign_up_second_name">
+                        <label
+                          className={
+                            inputActiveLastName
+                              ? "placeholder_move_sign_up_second_name"
+                              : "placeholder_static_sign_up_second_name"
+                          }
+                        >
+                          Last Name
+                        </label>
+                        <input
+                          className={
+                            inputActiveLastName
+                              ? "inputActive_second_name"
+                              : "inputDeactivate_second_name"
+                          }
+                          type="name"
+                          onFocus={() => {
+                            setInputActiveLastName(true);
+                          }}
+                          onBlur={handleBlurLastName}
+                          onChange={(e) => {
+                            setUserLastName(e.target.value);
+                          }}
+                          value={userLastName}
+                        />
+                        <div className="email_error_div_sign_up_second_name">
+                          {lastNameInputError !== "" ? (
+                            <label id="error_sign_up_label_second_name">
+                              {lastNameInputError}
+                            </label>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="ied_center_sign_up_email_add">
+                        <label
+                          className={
+                            inputActiveEmailId
+                              ? "placeholder_move_sign_up_email_add"
+                              : "placeholder_static_sign_up_email_add"
+                          }
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          className={
+                            inputActiveEmailId
+                              ? "inputActive_email_add"
+                              : "inputDeactivate_email_add"
+                          }
+                          type="email"
+                          onFocus={() => {
+                            setInputActiveEmailId(true);
+                          }}
+                          onBlur={handleBlurEmail}
+                          onChange={(e) => {
+                            setUserEmailId(e.target.value);
+                          }}
+                          value={userEmailId}
+                        />
+                        <div className="email_error_div_sign_up_email_add">
+                          {emailInputError !== "" ? (
+                            <label id="error_sign_up_label_email_add">
+                              {emailInputError}
+                            </label>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="ied_center_sign_up_enter_pass">
+                        <label
+                          className={
+                            inputActivePassword
+                              ? "placeholder_move_sign_up_enter_pss"
+                              : "placeholder_static_sign_up_enter_pss"
+                          }
+                        >
+                          Enter Password
+                        </label>
+                        <input
+                          className={
+                            inputActivePassword
+                              ? "inputActive_enter_pass"
+                              : "inputDeactivate_enter_pass"
+                          }
+                          type={isSignUpPasswordHide ? "password" : "text"}
+                          onFocus={() => {
+                            setInputActivePassword(true);
+                          }}
+                          onBlur={handleBlurPassword}
+                          onChange={(e) => {
+                            setUserPassword(e.target.value);
+                          }}
+                          value={userPassword}
+                        />
+                        <div
+                          className="ied_center_sign_up_password_hide_and_view"
+                          onClick={() => {
+                            setIsSignUpPasswordHide(!isSignUpPasswordHide);
+                          }}
+                        >
+                          {!isSignUpPasswordHide ? (
+                            <svg
+                              id="ied_center_sign_up_password_hide_and_view_svg_see"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="17"
+                              height="17"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-eye"
+                            >
+                              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                              <circle cx="12" cy="12" r="3" />
+                            </svg>
+                          ) : (
+                            <svg
+                              id="ied_center_sign_up_password_hide_and_view_svg_notSee"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="17"
+                              height="17"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-eye-off"
+                            >
+                              <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                              <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                              <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                              <path d="m2 2 20 20" />
+                            </svg>
+                          )}
+                        </div>
+
+                        <div className="email_error_div_sign_up__enter_pass">
+                          {passwordInputError ? (
+                            <label id="error_sign_up_label__enter_pass">
+                              {passwordInputError}
+                            </label>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                    <div className="ied_center_sign_up_second_name">
-                      <label
-                        className={
-                          inputActiveLastName
-                            ? "placeholder_move_sign_up_second_name"
-                            : "placeholder_static_sign_up_second_name"
-                        }
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        className={
-                          inputActiveLastName
-                            ? "inputActive_second_name"
-                            : "inputDeactivate_second_name"
-                        }
-                        type="name"
-                        onFocus={() => {
-                          setInputActiveLastName(true);
-                        }}
-                        onBlur={handleBlurLastName}
-                        onChange={(e) => {
-                          setUserLastName(e.target.value);
-                        }}
-                        value={userLastName}
-                      />
-                      <div className="email_error_div_sign_up_second_name">
-                        {lastNameInputError !== "" ? (
-                          <label id="error_sign_up_label_second_name">
-                            {lastNameInputError}
-                          </label>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="ied_center_sign_up_email_add">
-                      <label
-                        className={
-                          inputActiveEmailId
-                            ? "placeholder_move_sign_up_email_add"
-                            : "placeholder_static_sign_up_email_add"
-                        }
-                      >
-                        Email Address
-                      </label>
-                      <input
-                        className={
-                          inputActiveEmailId
-                            ? "inputActive_email_add"
-                            : "inputDeactivate_email_add"
-                        }
-                        type="email"
-                        onFocus={() => {
-                          setInputActiveEmailId(true);
-                        }}
-                        onBlur={handleBlurEmail}
-                        onChange={(e) => {
-                          setUserEmailId(e.target.value);
-                        }}
-                        value={userEmailId}
-                      />
-                      <div className="email_error_div_sign_up_email_add">
-                        {emailInputError !== "" ? (
-                          <label id="error_sign_up_label_email_add">
-                            {emailInputError}
-                          </label>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="ied_center_sign_up_enter_pass">
-                      <label
-                        className={
-                          inputActivePassword
-                            ? "placeholder_move_sign_up_enter_pss"
-                            : "placeholder_static_sign_up_enter_pss"
-                        }
-                      >
-                        Enter Password
-                      </label>
-                      <input
-                        className={
-                          inputActivePassword
-                            ? "inputActive_enter_pass"
-                            : "inputDeactivate_enter_pass"
-                        }
-                        type={isSignUpPasswordHide ? "password" : "text"}
-                        onFocus={() => {
-                          setInputActivePassword(true);
-                        }}
-                        onBlur={handleBlurPassword}
-                        onChange={(e) => {
-                          setUserPassword(e.target.value);
-                        }}
-                        value={userPassword}
-                      />
-                      <div
-                        className="ied_center_sign_up_password_hide_and_view"
+
+                    <div className="continue_btn_div_sign_up">
+                      <button
+                        id="cnt_btn"
                         onClick={() => {
-                          setIsSignUpPasswordHide(!isSignUpPasswordHide);
+                          submitForm();
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            console.log("ok dev");
+                          }
+                        }}
+                        style={{
+                          backgroundColor: isValidForm ? null : "#22b892cf",
+                          cursor: isValidForm ? null : "no-drop",
                         }}
                       >
-                        {!isSignUpPasswordHide ? (
-                          <svg
-                            id="ied_center_sign_up_password_hide_and_view_svg_see"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="17"
-                            height="17"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-eye"
-                          >
-                            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-                            <circle cx="12" cy="12" r="3" />
-                          </svg>
-                        ) : (
-                          <svg
-                            id="ied_center_sign_up_password_hide_and_view_svg_notSee"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="17"
-                            height="17"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-eye-off"
-                          >
-                            <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
-                            <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
-                            <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
-                            <path d="m2 2 20 20" />
-                          </svg>
-                        )}
-                      </div>
-
-                      <div className="email_error_div_sign_up__enter_pass">
-                        {passwordInputError ? (
-                          <label id="error_sign_up_label__enter_pass">
-                            {passwordInputError}
-                          </label>
-                        ) : null}
-                      </div>
+                        {loaderActive ? <Loader /> : <p>Sign Up</p>}
+                      </button>
+                    </div>
+                    <div className="company_terms_div_sign_up">
+                      <p>
+                        Have already account ?{" "}
+                        <Link to={"/login"}>Login account</Link>
+                      </p>
                     </div>
                   </div>
-
-                  <div className="continue_btn_div_sign_up">
-                    <button
-                      id="cnt_btn"
-                      onClick={() => {
-                        submitForm();
-                      }}
-                      style={{
-                        backgroundColor: isValidForm ? null : "#22b892cf",
-                        cursor: isValidForm ? null : "no-drop",
-                      }}
-                    >
-                      {loaderActive ? <Loader /> : <p>Sign Up</p>}
-                    </button>
-                  </div>
-                  <div className="company_terms_div_sign_up">
-                    <p>
-                      Have already account ?{" "}
-                      <Link to={"/login"}>Login account</Link>
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
