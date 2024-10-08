@@ -24,14 +24,41 @@ const Home = () => {
   // const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
 
+  useEffect(()=>{
+    const localStorageData = localStorage.getItem('existenceKey');
+
+    if(!localStorageData){
+
+      const userVisitApi = 'http://localhost:8080/api/activity/newVisit';
+
+      fetch(userVisitApi,{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json',
+          'secretkeyauth' : 'authActivityNewVisit07'
+        }
+      })
+      .then(async(response)=>{
+        if(response.status === 200){
+          const data =  await response.json();
+          const localData = data.existenceKey;
+          localStorage.setItem('existenceKey',localData);
+        }
+      })
+      .catch((err)=>{
+        console.log('Error on visit' , err);
+      })
+    }
+    
+  },[])
 
   useEffect(()=>{
     const localStorageToken = localStorage.getItem('token');
 
     if(localStorageToken){
-      const api = 'http://localhost:8080/api/user/verify/token';
+      const tokenVerifyApi = 'http://localhost:8080/api/user/verify/token';
   
-      fetch(api , {
+      fetch(tokenVerifyApi , {
         method:'GET',
         headers: {
           'Content-Type':'application/json',
