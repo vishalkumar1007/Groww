@@ -28,7 +28,7 @@ const Home = () => {
     const localStorageData = localStorage.getItem('existenceKey');
 
     if(!localStorageData){
-
+      // Don't change api localhost url to live api url -*
       const userVisitApi = 'http://localhost:8080/api/activity/newVisit';
 
       fetch(userVisitApi,{
@@ -56,7 +56,7 @@ const Home = () => {
     const localStorageToken = localStorage.getItem('token');
 
     if(localStorageToken){
-      const tokenVerifyApi = 'http://localhost:8080/api/user/verify/token';
+      const tokenVerifyApi = 'https://groww-backend-omega.vercel.app/api/user/verify/token';
   
       fetch(tokenVerifyApi , {
         method:'GET',
