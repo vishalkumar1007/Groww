@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Groww/static/css/main.0871c33f.css",
-    "main.js": "/Groww/static/js/main.fb0c5273.js",
+    "main.js": "/Groww/static/js/main.39b09c51.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -182,6 +182,6 @@
   },
   "entrypoints": [
     "static/css/main.0871c33f.css",
-    "static/js/main.fb0c5273.js"
+    "static/js/main.39b09c51.js"
   ]
 }
