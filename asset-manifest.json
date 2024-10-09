@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.7187c8ae.css",
-    "main.js": "/Groww/static/js/main.60856c83.js",
+    "main.css": "/Groww/static/css/main.0871c33f.css",
+    "main.js": "/Groww/static/js/main.fb0c5273.js",
     "static/js/1015.adf87b05.chunk.js": "/Groww/static/js/1015.adf87b05.chunk.js",
     "static/js/6903.3b5b85e2.chunk.js": "/Groww/static/js/6903.3b5b85e2.chunk.js",
     "static/js/2244.f3479c37.chunk.js": "/Groww/static/js/2244.f3479c37.chunk.js",
@@ -66,7 +66,7 @@
     "static/js/9931.cdd66657.chunk.js": "/Groww/static/js/9931.cdd66657.chunk.js",
     "static/js/7969.e9650d16.chunk.js": "/Groww/static/js/7969.e9650d16.chunk.js",
     "static/js/8581.812cf155.chunk.js": "/Groww/static/js/8581.812cf155.chunk.js",
-    "static/js/6453.cbd43e81.chunk.js": "/Groww/static/js/6453.cbd43e81.chunk.js",
+    "static/js/8206.42281177.chunk.js": "/Groww/static/js/8206.42281177.chunk.js",
     "static/media/home_image_intro.png": "/Groww/static/media/home_image_intro.3958dff1d1d716870cab.png",
     "static/media/Create_password_icon_amico.png": "/Groww/static/media/Create_password_icon_amico.83935fcd4f3f0c06a36e.png",
     "static/media/green_background.svg": "/Groww/static/media/green_background.3b482b81fc5aa905d868.svg",
@@ -178,13 +178,10 @@
     "static/media/ola_logo.svg": "/Groww/static/media/ola_logo.674579db7075424dde177c3afec3b09c.svg",
     "static/media/fb_icon_groww.svg": "/Groww/static/media/fb_icon_groww.99a9d51576652b160edaa2fe6c61da5d.svg",
     "static/media/import_funds.svg": "/Groww/static/media/import_funds.cb02ba438e40191d6fd66b6ead33fea0.svg",
-    "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg",
-    "main.7187c8ae.css.map": "/Groww/static/css/main.7187c8ae.css.map",
-    "main.60856c83.js.map": "/Groww/static/js/main.60856c83.js.map",
-    "6453.cbd43e81.chunk.js.map": "/Groww/static/js/6453.cbd43e81.chunk.js.map"
+    "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg"
   },
   "entrypoints": [
-    "static/css/main.7187c8ae.css",
-    "static/js/main.60856c83.js"
+    "static/css/main.0871c33f.css",
+    "static/js/main.fb0c5273.js"
   ]
 }
