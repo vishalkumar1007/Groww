@@ -56,7 +56,7 @@ const Home = () => {
     const localStorageToken = localStorage.getItem('token');
 
     if(localStorageToken){
-      const tokenVerifyApi = 'https://groww-backend-omega.vercel.app/api/user/verify/token';
+      const tokenVerifyApi = 'http://localhost:8080/api/user/verify/token';
   
       fetch(tokenVerifyApi , {
         method:'GET',
