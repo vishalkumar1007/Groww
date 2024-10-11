@@ -123,12 +123,12 @@ const Stocks = () => {
               <StocksIndex
                 title="MIDCPNIFTY"
                 valueNo="11,105.21"
-                valuePercentage="734.76 (0.56%)"
+                valuePercentage="-734.76 (0.56%)"
               />
               <StocksIndex
                 title="BANKEX"
                 valueNo="54,135.51"
-                valuePercentage="114.45 (0.16%)"
+                valuePercentage="-114.45 (0.16%)"
               />
             </div>
           </div>

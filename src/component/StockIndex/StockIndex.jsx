@@ -4,6 +4,9 @@ import "./StockIndex.css";
 const StockIndex = ({title,valueNo,valuePercentage}) => {
 
   const [isValuePercentage , setIsValuePercentage] = useState(false);
+  const [exactCost , setExactCost] = useState('');
+  const [costPerRate , setCostPerRate] = useState('');
+  const [costPerPercent , setCostPerPercent] = useState('');
 
   useEffect(()=>{
       if(valuePercentage.length>0){
@@ -18,6 +21,23 @@ const StockIndex = ({title,valueNo,valuePercentage}) => {
       }
   },[valuePercentage]);
 
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+
+      const decimalControl = 100;
+      const randomExactCost = Math.floor(Math.random() * 1000_000)/decimalControl;
+      const randomCostPerRate = Math.floor(Math.random() * 100_000)/decimalControl;
+      const randomCostPerPercent = Math.floor(Math.random() * 100)/decimalControl;
+      
+      setExactCost(randomExactCost);
+      setCostPerRate(randomCostPerRate);
+      setCostPerPercent(randomCostPerPercent);
+    },[1500]);
+
+    return ()=> clearInterval(interval);
+
+  },[exactCost])
+
 
   return (
     <div className="comp_stocks_index_main">
@@ -27,10 +47,10 @@ const StockIndex = ({title,valueNo,valuePercentage}) => {
         </div>
         <div className="comp_stocks_index_main_left_value">
           <div className="comp_stocks_index_main_left_value_number">
-            <span>{valueNo || '00,000.00'}</span>
+            <span>{exactCost || '00,000.00'}</span>
           </div>
           <div className="comp_stocks_index_main_left_value_percent">
-            <span style={{color:isValuePercentage?'#EB5B3C':(valuePercentage===''?'#4a4a4a':'#00B386')}}>{valuePercentage || '0.00 (0.00%)'}</span>
+            <span style={{color:isValuePercentage?'#EB5B3C':(valuePercentage===''?'#4a4a4a':'#00B386')}}>{`${isValuePercentage?'-':''} ${costPerRate} (${costPerPercent}%)` || '0.00 (0.00%)'}</span>
           </div>
         </div>
       </div>
