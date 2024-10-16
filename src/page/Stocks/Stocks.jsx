@@ -14,12 +14,11 @@ import TopSector from "../../component/TopSector/TopSector";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 import Pagination from "../../component/Pagination/Pagination";
 
-
 // ...... icons .......
-import ola_logo from "../../assets/svg/ola_logo.svg";
-import GTL_logo from "../../assets/svg/GTL_logo.webp";
-import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
-import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
+// import ola_logo from "../../assets/svg/ola_logo.svg";
+// import GTL_logo from "../../assets/svg/GTL_logo.webp";
+// import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
+// import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
 
 // ...... product and tool .......
 import fAndO_icon from "../../assets/svg/product_and_tool/F&O.svg";
@@ -60,8 +59,18 @@ import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
 import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
 import tata from "../../assets/img/top_looser/tata_icon.webp";
 
+// redux
+import { useDispatch, useSelector } from "react-redux";
+// import {useSelector } from "react-redux";
+import {
+  fetchMostBoughtStockThunk,
+  selectMostBoughtStockData,
+  selectMostBoughtStockLoading,
+  selectMostBoughtStockError,
+} from "../../features/api_lab/mostBoughtStocksApiData/centralExportMostBoughtStocks";
 
 const Stocks = () => {
+  const dispatch = useDispatch();
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
   const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
@@ -70,19 +79,43 @@ const Stocks = () => {
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
   const paginationChunk = 10;
 
+  // api data state
+  
+  // handel to calling mostBoughStock api in redux
+  const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
+  const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
+  const mostBoughtStocksApiError = useSelector(selectMostBoughtStockError);
+
+  useEffect(() => {
+    if(mostBoughtStocksApiData.length===0){
+      dispatch(fetchMostBoughtStockThunk());
+    }
+  }, [dispatch, mostBoughtStocksApiData]);
+
+
+  // pagination on market cap
+
   const currentActivePage = (activePage) => {
     setPaginationCurrentActivePage(activePage);
   };
 
-  
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
-    const endIndex = ((paginationChunk * paginationCurrentActivePage)>marketCapData.length ? marketCapData.length : (paginationChunk * paginationCurrentActivePage));
-    const startIndex = endIndex - ((endIndex===marketCapData.length ? ((endIndex%10)+paginationChunk === paginationChunk?paginationChunk:(endIndex%10)):(paginationChunk)));
-    
+    const endIndex =
+      paginationChunk * paginationCurrentActivePage > marketCapData.length
+        ? marketCapData.length
+        : paginationChunk * paginationCurrentActivePage;
+    const startIndex =
+      endIndex -
+      (endIndex === marketCapData.length
+        ? (endIndex % 10) + paginationChunk === paginationChunk
+          ? paginationChunk
+          : endIndex % 10
+        : paginationChunk);
+
     setPaginationStartIndex(startIndex);
     setPaginationEndIndex(endIndex);
   }, [paginationCurrentActivePage]);
@@ -137,30 +170,16 @@ const Stocks = () => {
               <span>Most Bought on Groww</span>
             </div>
             <div className="stock_left_most_bought_on_groww_component">
-              <StockCard
-                logoUrl={ola_logo}
-                title="Ola Electric Mobility"
-                cost="2.77"
-                costPerRate="0.26 (0.19%)"
-              />
-              <StockCard
-                logoUrl={GTL_logo}
-                title="GTL Infrastructure"
-                cost="123.19"
-                costPerRate="-0.04 (1.42%)"
-              />
-              <StockCard
-                logoUrl={MD_ship_logo}
-                title="Mazagon Dock Ship"
-                cost="4,539.65"
-                costPerRate="240.1 (5.52%)"
-              />
-              <StockCard
-                logoUrl={Angel_one_logo}
-                title="Angel One"
-                cost="2,699.90"
-                costPerRate="-3.00 (0.11%)"
-              />
+              {mostBoughtStocksApiData &&
+                mostBoughtStocksApiData.map((data) => (
+                  <StockCard
+                    key={data._id}
+                    logoUrl={data.logoUrl}
+                    title={data.name}
+                    cost={data.stockCost}
+                    costPerRate={data.stockCostPerRate}
+                  />
+                ))}
             </div>
           </div>
           <div className="stocks_left_product_and_tools">
@@ -168,14 +187,34 @@ const Stocks = () => {
               <span>Products & tools</span>
             </div>
             <div className="stocks_left_product_and_tools_card_section">
-              <StockToolsCard iconUrl={fAndO_icon} title="F&O" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={event_icon} title="Event" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={intraday_icon} title="Intraday" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={ipo_icon} title="IPO" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={screener_icon} title="Screener"  redirect="/all_stocks_filter"/>
+              <StockToolsCard
+                iconUrl={fAndO_icon}
+                title="F&O"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={event_icon}
+                title="Event"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={intraday_icon}
+                title="Intraday"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={ipo_icon}
+                title="IPO"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={screener_icon}
+                title="Screener"
+                redirect="/all_stocks_filter"
+              />
             </div>
           </div>
-          <div className="stocks_left_top_gainers" >
+          <div className="stocks_left_top_gainers">
             <div className="stocks_left_top_gainers_heading">
               <span className="stocks_left_top_gainers_heading_title">
                 Top Gainer
@@ -610,29 +649,29 @@ const Stocks = () => {
             </div>
             <div className="stocks_content_right_watchLists_card_main">
               <div className="stocks_content_right_watchLists_card_main_comp">
-                <StockWatchListCard watchlistTitle='vishal'/>
-                <StockWatchListCard watchlistTitle='shubham'/>
+                <StockWatchListCard watchlistTitle="vishal" />
+                <StockWatchListCard watchlistTitle="shubham" />
               </div>
               <div className="stocks_content_right_watchLists_card_main_add_box">
                 <div className="stocks_content_right_watchLists_card_main_add_box_arrange_width">
                   <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    id="svg_add"
-                    width="23"
-                    height="23"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#00B386"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-circle-plus"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M8 12h8" />
-                    <path d="M12 8v8" />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      id="svg_add"
+                      width="23"
+                      height="23"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#00B386"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-plus"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M8 12h8" />
+                      <path d="M12 8v8" />
+                    </svg>
                   </span>
                   <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_title">
                     Create New Watchlist

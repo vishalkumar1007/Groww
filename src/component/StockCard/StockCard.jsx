@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToWatchlist,
   removeFromWatchlist,
-} from "../../features/userWatchlist/userWatchlistSlice";
-import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
+  selectUserWatchlistValue
+} from "../../features/userWatchlist/centralExportUserWatchlist";
+
 const StocksCard = ({
   logoUrl = "",
   title = "",
@@ -28,7 +29,7 @@ const StocksCard = ({
       dispatch(addToWatchlist({title,cost,costPerRate,logoUrl}));
     }
   }
-
+  
   useEffect(() => {
     for(let i=0;i<user_watchlist_data.length;i++){
       if(user_watchlist_data[i].title === title && user_watchlist_data[i].logoUrl===logoUrl){

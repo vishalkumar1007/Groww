@@ -1,10 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import userWatchlistReducer from '../features/userWatchlist/userWatchlistSlice';
-import userInformationReducer from '../features/userInformation/userInformationSlice';
+import mostBoughtStockReducer from '../features/api_lab/mostBoughtStocksApiData/mostBoughtStocksSlice';
 
 const rootReducer = combineReducers({
     userWatchlist:userWatchlistReducer,
-    userInformation:userInformationReducer
+    mostBoughtStock:mostBoughtStockReducer
 });
 
 export default rootReducer;
