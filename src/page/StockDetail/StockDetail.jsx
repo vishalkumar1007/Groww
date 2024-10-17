@@ -63,7 +63,9 @@ const StockDetail = () => {
   const queryParams = new URLSearchParams(location.search);
   const stockName = queryParams.keys().next().value;
 
+  
   // API call
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,11 +81,18 @@ const StockDetail = () => {
 
         if (!response.ok) {
           console.log("Api error in stockDetail ", await response.json());
+          setCheckForPageFound(true);
           return;
         }
         const jsonData = await response.json();
+
+        //  what if not found data
+        if(jsonData.length===0){
+          setCheckForPageFound(false);
+          return;
+        }
+
         // adding data into useState variable
-        // console.log(jsonData[0].logoUrl);
         setCompanyLogoUrlName(jsonData[0].logoUrl);
         setCompanyName(jsonData[0].name);
         setCompanyCost(jsonData[0].stockCost);
@@ -92,6 +101,8 @@ const StockDetail = () => {
         //
         setAPIStockData(jsonData);
       } catch (error) {
+        //  what if not found data
+        setCheckForPageFound(false);
         console.log("error while fetching stockData ", error);
       }
     };
