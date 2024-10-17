@@ -77,6 +77,14 @@ import {
   // selectTopGainerStockErrorMessage,
 } from "../../features/api_lab/topGainerStockApiData/centralExportTopGainer";
 
+import {
+  fetchStockNewsApiThunk,
+  selectStockNewsApiData,
+  // selectStockNewsApiLoading,
+  // selectStockNewsApiError,
+  // selectStockNewsApiErrorMsg,
+} from "../../features/api_lab/stockNewsApiData/centralExportStockNewsApiData";
+
 const Stocks = () => {
   const dispatch = useDispatch();
   const [topGainActive, setTopGainActive] = useState("large");
@@ -89,7 +97,7 @@ const Stocks = () => {
 
   // api data state
 
-  // handel to calling mostBoughStock api in redux ---
+  // handel to calling mostBoughStock api in redux -----------------
 
   const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
   // const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
@@ -101,7 +109,7 @@ const Stocks = () => {
     }
   }, [dispatch, mostBoughtStocksApiData]);
 
-  // handel to calling mostBoughStock api in redux ---
+  // handel to calling topGainerStock api in redux ------------------
 
   const topGainerStockApiData = useSelector(selectTopGainerStockData);
   // const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
@@ -114,17 +122,22 @@ const Stocks = () => {
     }
   }, [dispatch, topGainerStockApiData]);
 
+  // handel to calling mostBoughStock api in redux ----------------
 
-  
+  const stockNewsApiData = useSelector(selectStockNewsApiData);
+  // const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
+  // const stockNewsApiError = useSelector(selectStockNewsApiError);
+  // const stockNewsApiErrorMessage = useSelector(selectStockNewsApiErrorMsg);
+
+  useEffect(() => {
+    if (stockNewsApiData.length === 0) {
+      console.log("stockNewsApiData api call");
+      dispatch(fetchStockNewsApiThunk());
+    }
+  }, [dispatch, stockNewsApiData]);
 
 
-
-
-
-
-
-
-  // pagination on market cap
+  // pagination on market cap >>>>>>>>>>>>>>
 
   const currentActivePage = (activePage) => {
     setPaginationCurrentActivePage(activePage);
@@ -365,30 +378,16 @@ const Stocks = () => {
               </button>
             </div>
             <div className="stocks_left_in_news_card_component">
-              <StockCard
-                logoUrl={zomato}
-                title="Zomato"
-                cost="42.77"
-                costPerRate="-1.21 (0.29%)"
-              />
-              <StockCard
-                logoUrl={Dwarikesh_Sugar}
-                title="Dwarikesh Sugar"
-                cost="828.77"
-                costPerRate="12.26 (23.19%)"
-              />
-              <StockCard
-                logoUrl={tata_motors}
-                title="Tata Motors"
-                cost="1070.76"
-                costPerRate="14.08 (1.39%)"
-              />
-              <StockCard
-                logoUrl={geojit}
-                title="Geojit Financial Services"
-                cost="212.12"
-                costPerRate="-4.26 (2.31%)"
-              />
+              {stockNewsApiData &&
+                stockNewsApiData.map((data) => (
+                  <StockCard
+                    key={data._id}
+                    logoUrl={data.logoUrl}
+                    title={data.name}
+                    cost={data.stockCost}
+                    costPerRate={data.stockCostPerRate}
+                  />
+                ))}
             </div>
           </div>
           <div className="stocks_left_top_losers">
