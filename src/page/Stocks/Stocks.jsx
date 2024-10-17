@@ -42,10 +42,10 @@ import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.w
 // import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
 
 //.......... stock news ...........
-import zomato from "../../assets/img/news_stock/zomato_icon.webp";
-import Dwarikesh_Sugar from "../../assets/img/news_stock/Dwarikesh_Sugar_icon.webp";
-import tata_motors from "../../assets/img/news_stock/tata_moters_icon.webp";
-import geojit from "../../assets/img/news_stock/geojit_icon.webp";
+// import zomato from "../../assets/img/news_stock/zomato_icon.webp";
+// import Dwarikesh_Sugar from "../../assets/img/news_stock/Dwarikesh_Sugar_icon.webp";
+// import tata_motors from "../../assets/img/news_stock/tata_moters_icon.webp";
+// import geojit from "../../assets/img/news_stock/geojit_icon.webp";
 
 // ............. top gainers .........
 import cholamandalam_invest from "../../assets/img/top_looser/Cholamandalam_Invest_icon.webp";
@@ -85,6 +85,14 @@ import {
   // selectStockNewsApiErrorMsg,
 } from "../../features/api_lab/stockNewsApiData/centralExportStockNewsApiData";
 
+import {
+  fetchTopLoserStockThunk,
+  selectorTopLoserStockData,
+  // selectorTopLoserStockLoading,
+  // selectorTopLoserStockError,
+  // selectorTopLoserStockErrorMsg,
+} from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
+
 const Stocks = () => {
   const dispatch = useDispatch();
   const [topGainActive, setTopGainActive] = useState("large");
@@ -122,7 +130,7 @@ const Stocks = () => {
     }
   }, [dispatch, topGainerStockApiData]);
 
-  // handel to calling mostBoughStock api in redux ----------------
+  // handel to calling stockNewsApiData api in redux ----------------
 
   const stockNewsApiData = useSelector(selectStockNewsApiData);
   // const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
@@ -135,6 +143,20 @@ const Stocks = () => {
       dispatch(fetchStockNewsApiThunk());
     }
   }, [dispatch, stockNewsApiData]);
+  
+  // handel to calling topLoserStockApiData api in redux ----------------
+
+  const topLoserStockApiData = useSelector(selectorTopLoserStockData);
+  // const topLoserStockApiLoading = useSelector(selectorTopLoserStockLoading);
+  // const topLoserStockApiError = useSelector(selectorTopLoserStockError);
+  // const topLoserStockApiErrorMessage = useSelector(selectorTopLoserStockErrorMsg);
+  
+  useEffect(() => {
+    if (topLoserStockApiData.length === 0) {
+      console.log("topLoserStockApiData api call");
+      dispatch(fetchTopLoserStockThunk());
+    }
+  }, [dispatch, topLoserStockApiData]);
 
 
   // pagination on market cap >>>>>>>>>>>>>>
@@ -443,84 +465,42 @@ const Stocks = () => {
             <div className="stocks_left_top_losers_card_component">
               {topLosersActive === "large" ? (
                 <>
-                  <StockCard
-                    logoUrl={adani}
-                    title="Adani"
-                    cost="2,212.80"
-                    costPerRate="-177.65 (13.76%)"
-                  />
-                  <StockCard
-                    logoUrl={firstsource_soln}
-                    title="Firstsource Soln"
-                    cost="546.10"
-                    costPerRate="-52.50 (4.69%)"
-                  />
-                  <StockCard
-                    logoUrl={SJVN}
-                    title="SJVN"
-                    cost="260.88"
-                    costPerRate="-85.26 (2.16%)"
-                  />
-                  <StockCard
-                    logoUrl={cholamandalam_invest}
-                    title="Cholamandalam Invest"
-                    cost="200.60"
-                    costPerRate="-69.3 (2.24%)"
-                  />
+                  {topLoserStockApiData &&
+                    topLoserStockApiData.map((data) => (
+                      <StockCard
+                        key={data._id}
+                        logoUrl={data.logoUrl}
+                        title={data.name}
+                        cost={data.stockCost}
+                        costPerRate={data.stockCostPerRate}
+                      />
+                    ))}
                 </>
               ) : topLosersActive === "mid" ? (
                 <>
-                  <StockCard
-                    logoUrl={cyient}
-                    title="Cyient"
-                    cost="310.39"
-                    costPerRate="-18.17 (9.48%)"
-                  />
-                  <StockCard
-                    logoUrl={gland}
-                    title="Gland"
-                    cost="693.2"
-                    costPerRate="-240.12 (5.52%)"
-                  />
-                  <StockCard
-                    logoUrl={jsw_energy}
-                    title="JWS Energy"
-                    cost="101.32"
-                    costPerRate="-29.04 (4.36%)"
-                  />
-                  <StockCard
-                    logoUrl={bandhanBank}
-                    title="Bandhan Bank"
-                    cost="203.77"
-                    costPerRate="-43.84 (3.42%)"
-                  />
+                  {topLoserStockApiData &&
+                    topLoserStockApiData.map((data) => (
+                      <StockCard
+                        key={data._id}
+                        logoUrl={data.logoUrl}
+                        title={data.name}
+                        cost={data.stockCost}
+                        costPerRate={data.stockCostPerRate}
+                      />
+                    ))}
                 </>
               ) : (
                 <>
-                  <StockCard
-                    logoUrl={mahanagar_gas}
-                    title="Mahanagar Gas"
-                    cost="28.32"
-                    costPerRate="-22.10 (10.7%)"
-                  />
-                  <StockCard
-                    logoUrl={pnbHouse}
-                    title="PNB Housing Finance"
-                    cost="392.21"
-                    costPerRate="-17.21 (0.61%)"
-                  />
-                  <StockCard
-                    logoUrl={mahindra}
-                    title="Century Textiles"
-                    cost="990.10"
-                    costPerRate="-252.66 (7.91%)"
-                  />
-                  <StockCard
-                    logoUrl={tata}
-                    title="Tata Motors"
-                    cost="1,128.90"
-                    costPerRate="-57.80 (7.10%)"
-                  />
+                  {topLoserStockApiData &&
+                    topLoserStockApiData.map((data) => (
+                      <StockCard
+                        key={data._id}
+                        logoUrl={data.logoUrl}
+                        title={data.name}
+                        cost={data.stockCost}
+                        costPerRate={data.stockCostPerRate}
+                      />
+                    ))}
                 </>
               )}
             </div>
