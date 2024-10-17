@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[7969],{7969:(e,w,s)=>{e.exports=s.p+"static/media/twitter_icon_groww.3e431d962dd810c86815.svg"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[44],{44:(e,s,c)=>{e.exports=c.p+"static/media/screener_mint_light.d99d4583523acc150b20.svg"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[7559],{7559:(s,w,e)=>{s.exports=e.p+"static/media/Forgot-password-bro-groww.c170dc16fa7febdf3249.svg"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[2226],{2226:(e,s,a)=>{e.exports=a.p+"static/media/Hello-user.edfca8b2030fac6407d7.svg"}}]);

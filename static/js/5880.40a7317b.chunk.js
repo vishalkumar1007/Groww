@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[5880],{5880:(e,s,w)=>{e.exports=w.p+"static/media/groww-logo-light.882918a345ca4369394e.svg"}}]);

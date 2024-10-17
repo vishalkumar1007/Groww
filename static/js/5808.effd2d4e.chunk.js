@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[5808],{5808:(s,e,f)=>{s.exports=f.p+"static/media/compare_funds.f490760f545d8b2ffa42.svg"}}]);

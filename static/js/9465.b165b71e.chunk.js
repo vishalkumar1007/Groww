@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[9465],{9465:(s,a,e)=>{s.exports=e.p+"static/media/sip_with_500.8a7564b27c7a9d030a7d.svg"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[6299],{6299:(e,s,o)=>{e.exports=o.p+"static/media/ola_logo.674579db7075424dde17.svg"}}]);

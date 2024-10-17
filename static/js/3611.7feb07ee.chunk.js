@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[3611],{3611:(e,s,c)=>{e.exports=c.p+"static/media/screener.d99d4583523acc150b20.svg"}}]);

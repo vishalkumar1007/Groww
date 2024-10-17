@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[9931],{9931:(e,s,w)=>{e.exports=w.p+"static/media/telegram_icon_groww.781008004f8751fed344.svg"}}]);

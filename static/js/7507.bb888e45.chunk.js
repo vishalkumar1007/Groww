@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[7507],{7507:(e,s,a)=>{e.exports=a.p+"static/media/green_background.3b482b81fc5aa905d868.svg"}}]);

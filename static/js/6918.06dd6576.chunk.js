@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgroww=self.webpackChunkgroww||[]).push([[6918],{6918:(e,a,s)=>{e.exports=s.p+"static/media/Hello-pana-with-flower.a0e19ac70eaf47d5240b.svg"}}]);
