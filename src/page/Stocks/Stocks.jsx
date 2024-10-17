@@ -14,11 +14,6 @@ import TopSector from "../../component/TopSector/TopSector";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 import Pagination from "../../component/Pagination/Pagination";
 
-// ...... icons .......
-// import ola_logo from "../../assets/svg/ola_logo.svg";
-// import GTL_logo from "../../assets/svg/GTL_logo.webp";
-// import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
-// import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
 
 // ...... product and tool .......
 import fAndO_icon from "../../assets/svg/product_and_tool/F&O.svg";
@@ -27,37 +22,7 @@ import intraday_icon from "../../assets/svg/product_and_tool/intraday.svg";
 import ipo_icon from "../../assets/svg/product_and_tool/ipo.svg";
 import screener_icon from "../../assets/svg/product_and_tool/screener.svg";
 
-// ............. top gainers .........
-import bandhanBank from "../../assets/img/top_gainer/mid_bandhan_bank_icon.webp";
-import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
-// import diviLabs from "../../assets/img/top_gainer/divis_lab_icon.webp";
-// import varunBeverages from "../../assets/img/top_gainer/varun_beverages_icon.webp";
-// import titan from "../../assets/img/top_gainer/titan_icon.webp";
-// import sbiLife from "../../assets/img/top_gainer/sbi_icon.webp";
-// import nykaa from "../../assets/img/top_gainer/mid_nykaa_icon.webp";
-// import mazagonShip from "../../assets/img/top_gainer/mid_mazagon_ship_icon.webp";
-// import patanjaliFood from "../../assets/img/top_gainer/mid_patanjali_food_icon.webp";
-// import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
-// import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
-// import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
 
-//.......... stock news ...........
-// import zomato from "../../assets/img/news_stock/zomato_icon.webp";
-// import Dwarikesh_Sugar from "../../assets/img/news_stock/Dwarikesh_Sugar_icon.webp";
-// import tata_motors from "../../assets/img/news_stock/tata_moters_icon.webp";
-// import geojit from "../../assets/img/news_stock/geojit_icon.webp";
-
-// ............. top gainers .........
-import cholamandalam_invest from "../../assets/img/top_looser/Cholamandalam_Invest_icon.webp";
-import firstsource_soln from "../../assets/img/top_looser/Firstsource_Soln_icon.webp";
-import SJVN from "../../assets/img/top_looser/SJVN_icon.webp";
-import adani from "../../assets/img/top_looser/adani_icon.webp";
-import cyient from "../../assets/img/top_looser/cyient_icon.webp";
-import gland from "../../assets/img/top_looser/gland_icon.webp";
-import jsw_energy from "../../assets/img/top_looser/jsw_energy_icon.webp";
-import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
-import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
-import tata from "../../assets/img/top_looser/tata_icon.webp";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -112,7 +77,7 @@ const Stocks = () => {
   // const mostBoughtStocksApiError = useSelector(selectMostBoughtStockError);
   useEffect(() => {
     if (mostBoughtStocksApiData.length === 0) {
-      console.log("mostBoughtStockData api call");
+      // console.log("mostBoughtStockData api call");
       dispatch(fetchMostBoughtStockThunk());
     }
   }, [dispatch, mostBoughtStocksApiData]);
@@ -125,7 +90,7 @@ const Stocks = () => {
   // const topGainerStockApiErrorMessage = useSelector(selectTopGainerStockErrorMessage);
   useEffect(() => {
     if (topGainerStockApiData.length === 0) {
-      console.log("topGainStockData api call");
+      // console.log("topGainStockData api call");
       dispatch(fetchTopGainerStockThunk());
     }
   }, [dispatch, topGainerStockApiData]);
@@ -139,7 +104,7 @@ const Stocks = () => {
 
   useEffect(() => {
     if (stockNewsApiData.length === 0) {
-      console.log("stockNewsApiData api call");
+      // console.log("stockNewsApiData api call");
       dispatch(fetchStockNewsApiThunk());
     }
   }, [dispatch, stockNewsApiData]);
@@ -153,7 +118,7 @@ const Stocks = () => {
   
   useEffect(() => {
     if (topLoserStockApiData.length === 0) {
-      console.log("topLoserStockApiData api call");
+      // console.log("topLoserStockApiData api call");
       dispatch(fetchTopLoserStockThunk());
     }
   }, [dispatch, topLoserStockApiData]);
@@ -240,6 +205,8 @@ const Stocks = () => {
                 mostBoughtStocksApiData.map((data) => (
                   <StockCard
                     key={data._id}
+                    uniqueId = {data._id}
+                    stockId={data.stock_id}
                     logoUrl={data.logoUrl}
                     title={data.name}
                     cost={data.stockCost}
@@ -334,9 +301,11 @@ const Stocks = () => {
               {topGainActive === "large" ? (
                 <>
                   {topGainerStockApiData &&
-                    topGainerStockApiData.map((data) => (
+                    topGainerStockApiData.slice(0,4).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}
@@ -347,9 +316,11 @@ const Stocks = () => {
               ) : topGainActive === "mid" ? (
                 <>
                   {topGainerStockApiData &&
-                    topGainerStockApiData.map((data) => (
+                    topGainerStockApiData.slice(4,8).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}
@@ -360,9 +331,11 @@ const Stocks = () => {
               ) : (
                 <>
                   {topGainerStockApiData &&
-                    topGainerStockApiData.map((data) => (
+                    topGainerStockApiData.slice(8,12).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}
@@ -404,6 +377,8 @@ const Stocks = () => {
                 stockNewsApiData.map((data) => (
                   <StockCard
                     key={data._id}
+                    uniqueId = {data._id}
+                    stockId={data.stock_id}
                     logoUrl={data.logoUrl}
                     title={data.name}
                     cost={data.stockCost}
@@ -466,9 +441,11 @@ const Stocks = () => {
               {topLosersActive === "large" ? (
                 <>
                   {topLoserStockApiData &&
-                    topLoserStockApiData.map((data) => (
+                    topLoserStockApiData.slice(0,4).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}
@@ -479,9 +456,11 @@ const Stocks = () => {
               ) : topLosersActive === "mid" ? (
                 <>
                   {topLoserStockApiData &&
-                    topLoserStockApiData.map((data) => (
+                    topLoserStockApiData.slice(4,8).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}
@@ -492,9 +471,11 @@ const Stocks = () => {
               ) : (
                 <>
                   {topLoserStockApiData &&
-                    topLoserStockApiData.map((data) => (
+                    topLoserStockApiData.slice(8,12).map((data) => (
                       <StockCard
                         key={data._id}
+                        uniqueId = {data._id}
+                        stockId={data.stock_id}
                         logoUrl={data.logoUrl}
                         title={data.name}
                         cost={data.stockCost}

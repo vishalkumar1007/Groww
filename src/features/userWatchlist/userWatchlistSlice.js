@@ -13,7 +13,7 @@ const userWatchlistSlice = createSlice({
             state.value.push(action.payload);
         },
         removeFromWatchlist:(state,action)=>{
-            state.value = state.value.filter(item=>item.title !== action.payload.title);
+            state.value = state.value.filter(item=>item.stockId !== action.payload.stockId);
         },
     }
 });

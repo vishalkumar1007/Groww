@@ -9,35 +9,39 @@ import {
 } from "../../features/userWatchlist/centralExportUserWatchlist";
 
 const StocksCard = ({
+  uniqueId="",
+  stockId = "",
   logoUrl = "",
   title = "",
   cost = "",
-  costPerRate = "",
+  costPerRate = ""
 }) => {
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
-  const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
+  // const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
 
   const  HandelAddCardToWatchList=()=>{
     if(isCardAddToWatchList){
-      dispatch(removeFromWatchlist({title}));
+      dispatch(removeFromWatchlist({stockId}));
       setIsCardAddToWatchList(false);
     }else{
-      dispatch(addToWatchlist({title,cost,costPerRate,logoUrl}));
+      dispatch(addToWatchlist({uniqueId,stockId,title,cost,costPerRate,logoUrl}));
     }
   }
-  
+
+
+
   useEffect(() => {
     for(let i=0;i<user_watchlist_data.length;i++){
-      if(user_watchlist_data[i].title === title && user_watchlist_data[i].logoUrl===logoUrl){
+      if(user_watchlist_data[i].stockId === stockId ){
         setIsCardAddToWatchList(true);
         break;
       }
     }
-  }, [logoUrl, title, user_watchlist_data]);
+  }, [stockId, user_watchlist_data]);
 
 
   useEffect(() => {
@@ -53,29 +57,29 @@ const StocksCard = ({
     }
   }, [costPerRate]);
 
-  useEffect(() => {
-    let updatedTitle = title;
-    for (let i = 0; i < updatedTitle.length; i++) {
-      if (updatedTitle[i] === " ") {
-        updatedTitle =
-          updatedTitle.substring(0, i) + "-" + updatedTitle.substring(i + 1);
-      }
-      if (/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])) {
-        updatedTitle =
-          updatedTitle.substring(0, i) + "" + updatedTitle.substring(i + 1);
-      }
-      if (
-        updatedTitle.charCodeAt(i) >= 65 &&
-        updatedTitle.charCodeAt(i) <= 90
-      ) {
-        updatedTitle =
-          updatedTitle.substring(0, i) +
-          updatedTitle[i].toLowerCase() +
-          updatedTitle.substring(i + 1);
-      }
-    }
-    setUpdatedTitleForUrl(updatedTitle);
-  }, [title]);
+  // useEffect(() => {
+  //   let updatedTitle = title;
+  //   for (let i = 0; i < updatedTitle.length; i++) {
+  //     if (updatedTitle[i] === " ") {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) + "-" + updatedTitle.substring(i + 1);
+  //     }
+  //     if (/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])) {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) + "" + updatedTitle.substring(i + 1);
+  //     }
+  //     if (
+  //       updatedTitle.charCodeAt(i) >= 65 &&
+  //       updatedTitle.charCodeAt(i) <= 90
+  //     ) {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) +
+  //         updatedTitle[i].toLowerCase() +
+  //         updatedTitle.substring(i + 1);
+  //     }
+  //   }
+  //   setUpdatedTitleForUrl(updatedTitle);
+  // }, [title]);
 
   return (
     <div className="stocksCard_main">
@@ -84,7 +88,7 @@ const StocksCard = ({
           <div
             className="stocksCard_main_top_logo"
             onClick={() => {
-              navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+              navigate(`/stock_detail?${stockId}`);
             }}
           >
             <img src={logoUrl} alt="" />
@@ -140,7 +144,7 @@ const StocksCard = ({
         <div
           className="stocksCard_main_top_left_title"
           onClick={() => {
-            navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+            navigate(`/stock_detail?${stockId}`);
           }}
         >
           {title || "Stock Title"}
@@ -149,7 +153,7 @@ const StocksCard = ({
       <div
         className="stocksCard_main_bottom"
         onClick={() => {
-          navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+          navigate(`/stock_detail?${stockId}`);
         }}
       >
         <div className="stocksCard_main_bottom_cost">₹{cost || "000.00"}</div>

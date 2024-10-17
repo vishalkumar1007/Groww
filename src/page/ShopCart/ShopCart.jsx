@@ -8,7 +8,7 @@ import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatch
 
 const ShopCart = () => {
   const WatchlistData = useSelector(selectUserWatchlistValue);
-  console.log(WatchlistData);
+  // console.log('in shop card - - - - -',WatchlistData);
   return (
     <>
       <Navbar />
@@ -25,13 +25,16 @@ const ShopCart = () => {
                   <span>Empty Stock Collection</span>
                 </div>
               ) : (
-                WatchlistData.map((stock, index) => (
+                WatchlistData.map((data, index) => (
+                  
                   <StockCard
                     key={index}
-                    logoUrl={stock.logoUrl}
-                    title={stock.title}
-                    cost={stock.cost}
-                    costPerRate={stock.costPerRate}
+                    uniqueId={data.uniqueId}
+                    stockId={data.stockId}
+                    title={data.title}
+                    cost={data.cost}
+                    costPerRate={data.costPerRate}
+                    logoUrl={data.logoUrl}
                   />
                 ))
               )}

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMostBoughtStockThunk = createAsyncThunk('fetchMostBoughtStock', async ()=>{
-    const api = 'http://localhost:8080/api/specific/stock/mostBoughtOnGrowwStocks';
-    const response = await fetch(api,{
+    const mostBoughtOnGrowwStocksAPi = 'http://localhost:8080/api/specific/stock/mostBoughtOnGrowwStocks';
+    const response = await fetch(mostBoughtOnGrowwStocksAPi,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
