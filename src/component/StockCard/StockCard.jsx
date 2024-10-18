@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToWatchlist,
   removeFromWatchlist,
-  selectUserWatchlistValue
+  selectUserWatchlistValue,
 } from "../../features/userWatchlist/centralExportUserWatchlist";
 
 const StocksCard = ({
-  uniqueId="",
+  uniqueId = "",
   stockId = "",
   logoUrl = "",
   title = "",
   cost = "",
-  costPerRate = ""
+  costPerRate = "",
 }) => {
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserWatchlistValue);
@@ -23,26 +23,25 @@ const StocksCard = ({
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
   // const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
 
-  const  HandelAddCardToWatchList=()=>{
-    if(isCardAddToWatchList){
-      dispatch(removeFromWatchlist({stockId}));
+  const HandelAddCardToWatchList = () => {
+    if (isCardAddToWatchList) {
+      dispatch(removeFromWatchlist({ stockId }));
       setIsCardAddToWatchList(false);
-    }else{
-      dispatch(addToWatchlist({uniqueId,stockId,title,cost,costPerRate,logoUrl}));
+    } else {
+      dispatch(
+        addToWatchlist({ uniqueId, stockId, title, cost, costPerRate, logoUrl })
+      );
     }
-  }
-
-
+  };
 
   useEffect(() => {
-    for(let i=0;i<user_watchlist_data.length;i++){
-      if(user_watchlist_data[i].stockId === stockId ){
+    for (let i = 0; i < user_watchlist_data.length; i++) {
+      if (user_watchlist_data[i].stockId === stockId) {
         setIsCardAddToWatchList(true);
         break;
       }
     }
   }, [stockId, user_watchlist_data]);
-
 
   useEffect(() => {
     if (costPerRate.length > 0) {

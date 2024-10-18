@@ -13,7 +13,7 @@ import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
 import TopSector from "../../component/TopSector/TopSector";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 import Pagination from "../../component/Pagination/Pagination";
-
+import StockCardLoader from "../../component/Loaders_Components/StockCardLoader/StockCardLoader";
 
 // ...... product and tool .......
 import fAndO_icon from "../../assets/svg/product_and_tool/F&O.svg";
@@ -22,22 +22,20 @@ import intraday_icon from "../../assets/svg/product_and_tool/intraday.svg";
 import ipo_icon from "../../assets/svg/product_and_tool/ipo.svg";
 import screener_icon from "../../assets/svg/product_and_tool/screener.svg";
 
-
-
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // import {useSelector } from "react-redux";
 import {
   fetchMostBoughtStockThunk,
   selectMostBoughtStockData,
-  // selectMostBoughtStockLoading,
+  selectMostBoughtStockLoading,
   // selectMostBoughtStockError,
 } from "../../features/api_lab/mostBoughtStocksApiData/centralExportMostBoughtStocks";
 
 import {
   fetchTopGainerStockThunk,
   selectTopGainerStockData,
-  // selectTopGainerStockLoading,
+  selectTopGainerStockLoading,
   // selectTopGainerStockError,
   // selectTopGainerStockErrorMessage,
 } from "../../features/api_lab/topGainerStockApiData/centralExportTopGainer";
@@ -45,7 +43,7 @@ import {
 import {
   fetchStockNewsApiThunk,
   selectStockNewsApiData,
-  // selectStockNewsApiLoading,
+  selectStockNewsApiLoading,
   // selectStockNewsApiError,
   // selectStockNewsApiErrorMsg,
 } from "../../features/api_lab/stockNewsApiData/centralExportStockNewsApiData";
@@ -53,7 +51,7 @@ import {
 import {
   fetchTopLoserStockThunk,
   selectorTopLoserStockData,
-  // selectorTopLoserStockLoading,
+  selectorTopLoserStockLoading,
   // selectorTopLoserStockError,
   // selectorTopLoserStockErrorMsg,
 } from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
@@ -73,7 +71,7 @@ const Stocks = () => {
   // handel to calling mostBoughStock api in redux -----------------
 
   const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
-  // const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
+  const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
   // const mostBoughtStocksApiError = useSelector(selectMostBoughtStockError);
   useEffect(() => {
     if (mostBoughtStocksApiData.length === 0) {
@@ -85,7 +83,7 @@ const Stocks = () => {
   // handel to calling topGainerStock api in redux ------------------
 
   const topGainerStockApiData = useSelector(selectTopGainerStockData);
-  // const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
+  const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
   // const topGainerStockApiError = useSelector(selectTopGainerStockError);
   // const topGainerStockApiErrorMessage = useSelector(selectTopGainerStockErrorMessage);
   useEffect(() => {
@@ -98,7 +96,7 @@ const Stocks = () => {
   // handel to calling stockNewsApiData api in redux ----------------
 
   const stockNewsApiData = useSelector(selectStockNewsApiData);
-  // const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
+  const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
   // const stockNewsApiError = useSelector(selectStockNewsApiError);
   // const stockNewsApiErrorMessage = useSelector(selectStockNewsApiErrorMsg);
 
@@ -108,21 +106,20 @@ const Stocks = () => {
       dispatch(fetchStockNewsApiThunk());
     }
   }, [dispatch, stockNewsApiData]);
-  
+
   // handel to calling topLoserStockApiData api in redux ----------------
 
   const topLoserStockApiData = useSelector(selectorTopLoserStockData);
-  // const topLoserStockApiLoading = useSelector(selectorTopLoserStockLoading);
+  const topLoserStockApiLoading = useSelector(selectorTopLoserStockLoading);
   // const topLoserStockApiError = useSelector(selectorTopLoserStockError);
   // const topLoserStockApiErrorMessage = useSelector(selectorTopLoserStockErrorMsg);
-  
+
   useEffect(() => {
     if (topLoserStockApiData.length === 0) {
       // console.log("topLoserStockApiData api call");
       dispatch(fetchTopLoserStockThunk());
     }
   }, [dispatch, topLoserStockApiData]);
-
 
   // pagination on market cap >>>>>>>>>>>>>>
 
@@ -201,18 +198,26 @@ const Stocks = () => {
               <span>Most Bought on Groww</span>
             </div>
             <div className="stock_left_most_bought_on_groww_component">
-              {mostBoughtStocksApiData &&
+              {mostBoughtStocksApiLoading ? (
+                <>
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                </>
+              ) : (
                 mostBoughtStocksApiData.map((data) => (
                   <StockCard
                     key={data._id}
-                    uniqueId = {data._id}
+                    uniqueId={data._id}
                     stockId={data.stock_id}
                     logoUrl={data.logoUrl}
                     title={data.name}
                     cost={data.stockCost}
                     costPerRate={data.stockCostPerRate}
                   />
-                ))}
+                ))
+              )}
             </div>
           </div>
           <div className="stocks_left_product_and_tools">
@@ -300,48 +305,81 @@ const Stocks = () => {
             <div className="stocks_left_top_gainers_card_component">
               {topGainActive === "large" ? (
                 <>
-                  {topGainerStockApiData &&
-                    topGainerStockApiData.slice(0,4).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(0, 4)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : topGainActive === "mid" ? (
                 <>
-                  {topGainerStockApiData &&
-                    topGainerStockApiData.slice(4,8).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(4, 8)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : (
                 <>
-                  {topGainerStockApiData &&
-                    topGainerStockApiData.slice(8,12).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(8, 12)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               )}
             </div>
@@ -373,18 +411,26 @@ const Stocks = () => {
               </button>
             </div>
             <div className="stocks_left_in_news_card_component">
-              {stockNewsApiData &&
+              {stockNewsApiLoading ? (
+                <>
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                </>
+              ) : (
                 stockNewsApiData.map((data) => (
                   <StockCard
                     key={data._id}
-                    uniqueId = {data._id}
+                    uniqueId={data._id}
                     stockId={data.stock_id}
                     logoUrl={data.logoUrl}
                     title={data.name}
                     cost={data.stockCost}
                     costPerRate={data.stockCostPerRate}
                   />
-                ))}
+                ))
+              )}
             </div>
           </div>
           <div className="stocks_left_top_losers">
@@ -440,48 +486,81 @@ const Stocks = () => {
             <div className="stocks_left_top_losers_card_component">
               {topLosersActive === "large" ? (
                 <>
-                  {topLoserStockApiData &&
-                    topLoserStockApiData.slice(0,4).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(0, 4)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : topLosersActive === "mid" ? (
                 <>
-                  {topLoserStockApiData &&
-                    topLoserStockApiData.slice(4,8).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(4, 8)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : (
                 <>
-                  {topLoserStockApiData &&
-                    topLoserStockApiData.slice(8,12).map((data) => (
-                      <StockCard
-                        key={data._id}
-                        uniqueId = {data._id}
-                        stockId={data.stock_id}
-                        logoUrl={data.logoUrl}
-                        title={data.name}
-                        cost={data.stockCost}
-                        costPerRate={data.stockCostPerRate}
-                      />
-                    ))}
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(8,12)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          uniqueId={data._id}
+                          stockId={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          title={data.name}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               )}
             </div>
