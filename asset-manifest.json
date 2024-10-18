@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.0871c33f.css",
-    "main.js": "/Groww/static/js/main.c72b13b4.js",
+    "main.css": "/Groww/static/css/main.c19599c3.css",
+    "main.js": "/Groww/static/js/main.39aa0be5.js",
     "static/js/206.9e4368c2.chunk.js": "/Groww/static/js/206.9e4368c2.chunk.js",
     "static/media/home_image_intro.png": "/Groww/static/media/home_image_intro.3958dff1d1d716870cab.png",
     "static/media/Create_password_icon_amico.png": "/Groww/static/media/Create_password_icon_amico.83935fcd4f3f0c06a36e.png",
@@ -63,7 +63,7 @@
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg"
   },
   "entrypoints": [
-    "static/css/main.0871c33f.css",
-    "static/js/main.c72b13b4.js"
+    "static/css/main.c19599c3.css",
+    "static/js/main.39aa0be5.js"
   ]
 }
