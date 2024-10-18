@@ -1008,12 +1008,11 @@ position: relative;
   height: 22%;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 
 #shareholding_pattern_top_day_active {
   background-color: #00b38616;
-  width: 80px;
   height: 30px;
   border-radius: 15px;
   border: none;
@@ -1023,45 +1022,45 @@ position: relative;
   font-weight: 500;
 }
 .stock_detail_company_shareholding_pattern_top_day1 {
-  background-color: white;
-  width: 80px;
+  background-color: #ffffff;
   height: 30px;
   border-radius: 15px;
   border: none;
   font-size: 14px;
+  padding:0px 15px;
   padding-bottom: 2px;
   color: #979797;
   cursor: pointer;
 }
 .stock_detail_company_shareholding_pattern_top_day2 {
   background-color: white;
-  width: 80px;
   height: 30px;
   border-radius: 15px;
   border: none;
   font-size: 14px;
+  padding:0px 15px;
   padding-bottom: 2px;
   color: #979797;
   cursor: pointer;
 }
 .stock_detail_company_shareholding_pattern_top_day3 {
   background-color: white;
-  width: 80px;
   height: 30px;
   border-radius: 15px;
   border: none;
   font-size: 14px;
+  padding:0px 15px;
   padding-bottom: 2px;
   color: #979797;
   cursor: pointer;
 }
 .stock_detail_company_shareholding_pattern_top_day4 {
   background-color: white;
-  width: 80px;
   height: 30px;
   border-radius: 15px;
   border: none;
   font-size: 14px;
+  padding:0px 15px;
   padding-bottom: 2px;
   color: #979797;
   cursor: pointer;
