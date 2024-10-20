@@ -21,14 +21,17 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    setActiveFeture(localStorage.getItem("navActiveExploreOrInvestments"));
+    const localStorageDataActiveSectionData = localStorage.getItem("navActiveExploreOrInvestments");
+    setActiveFeture(localStorageDataActiveSectionData);
   }, []);
 
   const openNavSection = (data) => {
     if (data === "Explore") {
       navigate("/dashboard");
+      setActiveFeture('Explore');
     } else {
       navigate("/user/investments");
+      setActiveFeture('Investments');
     }
   };
 
