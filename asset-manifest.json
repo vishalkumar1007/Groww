@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Groww/static/css/main.c19599c3.css",
-    "main.js": "/Groww/static/js/main.39aa0be5.js",
+    "main.css": "/Groww/static/css/main.f2678bbf.css",
+    "main.js": "/Groww/static/js/main.c43cc873.js",
     "static/js/206.9e4368c2.chunk.js": "/Groww/static/js/206.9e4368c2.chunk.js",
     "static/media/home_image_intro.png": "/Groww/static/media/home_image_intro.3958dff1d1d716870cab.png",
     "static/media/Create_password_icon_amico.png": "/Groww/static/media/Create_password_icon_amico.83935fcd4f3f0c06a36e.png",
@@ -19,6 +19,7 @@
     "static/media/stocksBuy.5382418f.webp": "/Groww/static/media/stocksBuy.5382418f.a0fe6bbe16978f40f7f6.webp",
     "static/media/GSTK_logo.webp": "/Groww/static/media/GSTK_logo.ff8dbc3d34665c305d57.webp",
     "static/media/personalLoan.9d5e746c.webp": "/Groww/static/media/personalLoan.9d5e746c.ee125e93a34e17735d17.webp",
+    "static/media/Hello-pana-with-flower.svg": "/Groww/static/media/Hello-pana-with-flower.a0e19ac70eaf47d5240bde9ad3c8c595.svg",
     "static/media/GTL_logo.webp": "/Groww/static/media/GTL_logo.cf9bf8be71ac617798fb.webp",
     "static/media/generalStore.ab44242a.webp": "/Groww/static/media/generalStore.ab44242a.1885273a2b12887beb62.webp",
     "static/media/screener.svg": "/Groww/static/media/screener.d99d4583523acc150b20c92b7570fa70.svg",
@@ -63,7 +64,7 @@
     "static/media/compare_funds.svg": "/Groww/static/media/compare_funds.f490760f545d8b2ffa425c0aff34f3cd.svg"
   },
   "entrypoints": [
-    "static/css/main.c19599c3.css",
-    "static/js/main.39aa0be5.js"
+    "static/css/main.f2678bbf.css",
+    "static/js/main.c43cc873.js"
   ]
 }
