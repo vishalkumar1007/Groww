@@ -52,7 +52,7 @@ const AllStocksFilter = () => {
 
   return (
     <div className="all_stock_main">
-      <Navbar />
+      <Navbar callFrom = 'Dashboard'/>
       {/* ...............  */}
 
       <div className="all_stock_main_container">

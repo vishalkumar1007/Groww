@@ -7,7 +7,7 @@ import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatch
 // import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
 import AlertConfig from "../AlertConfig/AlertConfig";
 
-const Navbar = () => {
+const Navbar = ({callFrom=""}) => {
   const userWatchListCount = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("");
@@ -17,21 +17,22 @@ const Navbar = () => {
 
   const removeActivePagePreview = () => {
     setActiveFeture("");
-    localStorage.setItem("navActiveExploreOrInvestments", "");
   };
 
-  useEffect(() => {
-    const localStorageDataActiveSectionData = localStorage.getItem("navActiveExploreOrInvestments");
-    setActiveFeture(localStorageDataActiveSectionData);
-  }, []);
+  useEffect(()=>{
+    if(callFrom==='Dashboard'){
+      setActiveFeture('Explore');
+    }else{
+      setActiveFeture(callFrom);
+    }
+  },[callFrom])
+
 
   const openNavSection = (data) => {
     if (data === "Explore") {
       navigate("/dashboard");
-      setActiveFeture('Explore');
     } else {
       navigate("/user/investments");
-      setActiveFeture('Investments');
     }
   };
 

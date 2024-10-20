@@ -173,7 +173,7 @@ const StockDetail = () => {
       ) : (
         <>
           <div className="stock_detail_main">
-            <Navbar />
+          <Navbar callFrom = 'Dashboard'/>
             <div className="stock_detail_main_arrange_width">
               <div className="stock_detail_company_information_main">
                 {/* ........... company Head ............... */}

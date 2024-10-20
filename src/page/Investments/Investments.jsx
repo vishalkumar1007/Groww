@@ -2,19 +2,19 @@ import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
 import "./Investments.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ComingSoonWithTitle from "../../component/ComingSoonWithProps/ComingSoonWithProps";
 
 
 const Investments = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [optionActive, setOptionActive] = useState("Investments_stocks");
   
 
   // make nav bar active section to Investments with give data to local storage
-  useEffect(()=>{
-    localStorage.setItem('navActiveExploreOrInvestments','Investments')
-  },[])
+  // useEffect(()=>{
+  //   localStorage.setItem('navActiveExploreOrInvestments','Investments')
+  // },[])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,7 +22,7 @@ const Investments = () => {
 
   return (
     <div className="Investments_main">
-      <Navbar/>
+      <Navbar callFrom="Investments"/>
       <div className="Investments_option_main_stock_and_mutualFund">
         <div className="Investments_option_main_stock_and_mutualFund_Range_fixed">
           <div

@@ -10,9 +10,9 @@ const Dashboard = () => {
   const [optionActive, setOptionActive] = useState("stocks");
 
   // make nav bar active section to dashboard with give data to local storage
-  useEffect(()=>{
-    localStorage.setItem('navActiveExploreOrInvestments','Explore')
-  },[])
+  // useEffect(()=>{
+  //   localStorage.setItem('navActiveExploreOrInvestments','Explore')
+  // },[])
 
   useEffect(()=>{
     const localStorageToken = localStorage.getItem('token');
@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   return (
     <div className="Dashboard_main">
-      <Navbar />
+      <Navbar callFrom = 'Dashboard'/>
       <div className="option_main_stock_and_mutualFund">
         <div className="option_main_stock_and_mutualFund_Range_fixed">
           <div
