@@ -106,9 +106,9 @@ const Home = () => {
     }
 
     useEffect(()=>{
-      let timeInterval ;
+      let timeout ;
       if(!isShowAlertOption){
-        timeInterval = setTimeout(()=>{
+        timeout = setTimeout(()=>{
           setIsShowAlertOption(true);
           console.log('true...');
           setPopUpInterval((pvrPopUpValue)=>{return Math.min(pvrPopUpValue*2,120_000)});
@@ -116,7 +116,7 @@ const Home = () => {
       }
       console.log('PASS...');
 
-      return ()=> clearTimeout(timeInterval);
+      return ()=> clearTimeout(timeout);
     },[popUpInterval,isShowAlertOption]);
 
   */
