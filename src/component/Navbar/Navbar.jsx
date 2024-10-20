@@ -8,48 +8,44 @@ import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatch
 
 const Navbar = () => {
   const userWatchListCount = useSelector(selectUserWatchlistValue);
-  // const userInformationData = useSelector(selectUserInformationValue);
   const navigate = useNavigate();
-  const [activeFeture, setActiveFeture] = useState("Explore");
+  const [activeFeture, setActiveFeture] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [userTokenData , setUserTokenData] = useState();
-  // const [screenWidthUpdate, setScreenWidthUpdate] = useState(true);
-  // const [screenWidthUpdateLong, setScreenWidthUpdateLong] = useState(null);
-  
-  const handelToRemoveJWTFromLocalStorage = async()=>{
-    localStorage.removeItem('token');
-  }
+  const [userTokenData, setUserTokenData] = useState();
+
+  const removeActivePagePreview = () => {
+    setActiveFeture("");
+    localStorage.setItem("navActiveExploreOrInvestments", "");
+  };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    setActiveFeture(localStorage.getItem("navActiveExploreOrInvestments"));
+  }, []);
+
+  const openNavSection = (data) => {
+    if (data === "Explore") {
+      navigate("/dashboard");
+    } else {
+      navigate("/user/investments");
+    }
+  };
+
+  const handelToRemoveJWTFromLocalStorage = async () => {
+    localStorage.removeItem("token");
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login')
+      navigate("/login");
       return;
     }
-    const base64Url = token.split('.')[1]; 
+    const base64Url = token.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const data = JSON.parse(window.atob(base64));
     setUserTokenData(data);
-    
   }, [navigate]);
 
-  // useEffect(()=>{
-  //   if(userTokenData){
-
-  //     console.log(userTokenData);
-  //   }
-  // },[userTokenData])
-
-  // const generateRandomColor = ()=>{
-  //   let color = '';
-  //   const randomDecision = Math.random();
-  //   for(let i=1;i<=6;i++){
-
-  //   }
-  // }
-
-
-  
   const profileSectionRef = useRef(null);
 
   useEffect(() => {
@@ -81,6 +77,7 @@ const Navbar = () => {
               }}
               onClick={() => {
                 setActiveFeture("Explore");
+                openNavSection("Explore");
               }}
             >
               Explore
@@ -93,6 +90,7 @@ const Navbar = () => {
               }}
               onClick={() => {
                 setActiveFeture("Investments");
+                openNavSection("Investments");
               }}
             >
               Investments
@@ -154,6 +152,7 @@ const Navbar = () => {
             className="Navbar_activity_wallet"
             onClick={() => {
               navigate("/wallet");
+              removeActivePagePreview();
             }}
           >
             <svg
@@ -176,6 +175,7 @@ const Navbar = () => {
             className="Navbar_activity_shop"
             onClick={() => {
               navigate("/shop_cart");
+              removeActivePagePreview();
             }}
           >
             <svg
@@ -206,12 +206,15 @@ const Navbar = () => {
               setIsProfileOpen(!isProfileOpen);
             }}
           >
-            <div className="Navbar_activity_profile_image" style={{backgroundColor:userTokenData?userTokenData.userColorCode : null}}>
-              <p>
-                {
-                  userTokenData?userTokenData.userFirstName[0]:'X'
-                }
-              </p>
+            <div
+              className="Navbar_activity_profile_image"
+              style={{
+                backgroundColor: userTokenData
+                  ? userTokenData.userColorCode
+                  : null,
+              }}
+            >
+              <p>{userTokenData ? userTokenData.userFirstName[0] : "X"}</p>
             </div>
             <div
               className="Navbar_activity_profile_activate_deactivate_icon"
@@ -246,14 +249,14 @@ const Navbar = () => {
               <div className="Navbar_user_Profile_section_user_about_arrange">
                 <div className="Navbar_user_Profile_section_user_about_arrange_user_data">
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_name">
-                    {
-                      userTokenData?`${userTokenData.userFirstName} ${userTokenData.userLastName}`:'User Name'
-                    }
+                    {userTokenData
+                      ? `${userTokenData.userFirstName} ${userTokenData.userLastName}`
+                      : "User Name"}
                   </p>
                   <p id="Navbar_user_Profile_section_user_about_arrange_user_data_email">
-                    {
-                      userTokenData?`${userTokenData.userEmail}`:'user@gmail.com'
-                    }
+                    {userTokenData
+                      ? `${userTokenData.userEmail}`
+                      : "user@gmail.com"}
                   </p>
                 </div>
                 <div className="Navbar_user_Profile_section_user_about_setting">
@@ -387,10 +390,10 @@ const Navbar = () => {
                       <div className="Navbar_user_Profile_section_service_customerSupport_title">
                         <p>Order Item</p>
                         {userWatchListCount.length === 0 ? null : (
-                        <p id="user_order_card_counter_ui">
-                          {userWatchListCount.length}
-                        </p>
-                      )}
+                          <p id="user_order_card_counter_ui">
+                            {userWatchListCount.length}
+                          </p>
+                        )}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="18"
@@ -437,7 +440,7 @@ const Navbar = () => {
                     </div>
                     <div className="Navbar_user_Profile_section_service_allOrder_title">
                       <p>All Orders</p>
-                      
+
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -454,7 +457,11 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-                <div className="Navbar_user_Profile_section_service_arrange_pointer_bankDetail">
+                <div className="Navbar_user_Profile_section_service_arrange_pointer_bankDetail"
+                  onClick={() => {
+                    navigate("/dashboard");
+                  }}
+                >
                   <div className="Navbar_user_Profile_section_service_bankDetail">
                     <div className="Navbar_user_Profile_section_service_bankDetail_icon">
                       <svg
@@ -467,17 +474,16 @@ const Navbar = () => {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        className="lucide lucide-layout-dashboard"
                       >
-                        <line x1="3" x2="21" y1="22" y2="22" />
-                        <line x1="6" x2="6" y1="18" y2="11" />
-                        <line x1="10" x2="10" y1="18" y2="11" />
-                        <line x1="14" x2="14" y1="18" y2="11" />
-                        <line x1="18" x2="18" y1="18" y2="11" />
-                        <polygon points="12 2 20 7 4 7" />
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
                       </svg>
                     </div>
                     <div className="Navbar_user_Profile_section_service_bankDetail_title">
-                      <p>Bank Details</p>
+                      <p>Dashboard</p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -494,21 +500,25 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-                <div className="Navbar_user_Profile_section_service_arrange_pointer_customerSupport">
+                <div className="Navbar_user_Profile_section_service_arrange_pointer_customerSupport"
+                  onClick={() => {
+                    navigate("/user/investments");
+                  }}
+                >
                   <div className="Navbar_user_Profile_section_service_customerSupport">
                     <div className="Navbar_user_Profile_section_service_customerSupport_icon">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        height="23px"
+                        height="25px"
                         viewBox="0 -960 960 960"
-                        width="24px"
+                        width="25px"
                         fill="#6d6d6d"
                       >
-                        <path d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z" />
+                        <path d="M660-570q-25 0-42.5-17.5T600-630q0-25 17.5-42.5T660-690q25 0 42.5 17.5T720-630q0 25-17.5 42.5T660-570Zm-360 0q-25 0-42.5-17.5T240-630q0-25 17.5-42.5T300-690q25 0 42.5 17.5T360-630q0 25-17.5 42.5T300-570Zm180 110q-25 0-42.5-17.5T420-520q0-25 17.5-42.5T480-580q25 0 42.5 17.5T540-520q0 25-17.5 42.5T480-460Zm0-220q-25 0-42.5-17.5T420-740q0-25 17.5-42.5T480-800q25 0 42.5 17.5T540-740q0 25-17.5 42.5T480-680Zm0 520q-20 0-40.5-3t-39.5-8v-143q0-35 23.5-60.5T480-400q33 0 56.5 25.5T560-314v143q-19 5-39.5 8t-40.5 3Zm-140-32q-20-8-38.5-18T266-232q-28-20-44.5-52T205-352q0-26-5.5-48.5T180-443q-10-13-37.5-39.5T92-532q-11-11-11-28t11-28q11-11 28-11t28 11l153 145q20 18 29.5 42.5T340-350v158Zm280 0v-158q0-26 10-51t29-42l153-145q12-11 28.5-11t27.5 11q11 11 11 28t-11 28q-23 23-50.5 49T780-443q-14 20-19.5 42.5T755-352q0 36-16.5 68.5T693-231q-16 11-34.5 21T620-192Z" />
                       </svg>
                     </div>
                     <div className="Navbar_user_Profile_section_service_customerSupport_title">
-                      <p>24 x 7 Customer Support</p>
+                      <p>Investments</p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -531,7 +541,7 @@ const Navbar = () => {
             <div className="Navbar_user_Profile_section_footer">
               <div className="Navbar_user_Profile_section_footer_arrange">
                 <div className="Navbar_user_Profile_section_footer_arrange_Darkmode">
-                  <div className="Navbar_user_Profile_section_footer_arrange_Darkmode_svg_div">
+                  {/* <div className="Navbar_user_Profile_section_footer_arrange_Darkmode_svg_div">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -553,7 +563,7 @@ const Navbar = () => {
                       <path d="m6.34 17.66-1.41 1.41" />
                       <path d="m19.07 4.93-1.41 1.41" />
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="Navbar_user_Profile_section_footer_arrange_logout">
                   <p
