@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
-import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
 import { useDispatch } from "react-redux";
