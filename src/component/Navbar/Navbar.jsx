@@ -91,7 +91,7 @@ const Navbar = ({ callFrom = "" }) => {
             userTokenData ? `Hey, ${userTokenData.userFirstName}` : "User"
           }
           msgText="Are you sure you want to log out your account ?"
-          extraInfoText="Thank you , hope you like my work if you facing any issue please report us ..."
+          extraInfoText="Thank you , Hope you like this Groww , if you are facing any issue please report us..."
         />
       ) : null}
       <div className="Navbar_main">
