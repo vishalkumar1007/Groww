@@ -249,7 +249,7 @@ const Navbar = ({ callFrom = "" }) => {
                     : null,
                 }}
               >
-                <p>{userTokenData ? userTokenData.userFirstName[0] : "X"}</p>
+                <p>{userTokenData ? (userTokenData.userFirstName[0]).toUpperCase() : "X"}</p>
               </div>
               <div
                 className="Navbar_activity_profile_activate_deactivate_icon"
