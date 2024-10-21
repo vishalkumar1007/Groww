@@ -34,6 +34,7 @@ const StocksCard = ({
     }
   };
 
+
   useEffect(() => {
     for (let i = 0; i < user_watchlist_data.length; i++) {
       if (user_watchlist_data[i].stockId === stockId) {

@@ -56,8 +56,11 @@ import {
   // selectorTopLoserStockErrorMsg,
 } from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
 
+import { useNavigate } from "react-router-dom";
+
 const Stocks = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
   const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
@@ -645,7 +648,7 @@ const Stocks = () => {
             <div className="stocks_content_right_yourInvestments_title_head">
               <span id="scry_title_text">Your Investments</span>
               <span id="scry_more">
-                <button>Dashboard</button>
+                <button onClick={()=>{navigate('/user/investments')}}>Dashboard</button>
               </span>
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
@@ -673,12 +676,11 @@ const Stocks = () => {
           <div className="stocks_content_right_watchLists">
             <div className="stocks_content_right_watchLists_title_head">
               <span id="scrw_title_text">All watchlists</span>
-              <span id="scrw_more">View all</span>
+              <span id="scrw_more" onClick={()=>{navigate('/dashboard/watchlist')}}>View all</span>
             </div>
             <div className="stocks_content_right_watchLists_card_main">
               <div className="stocks_content_right_watchLists_card_main_comp">
-                <StockWatchListCard watchlistTitle="vishal" />
-                <StockWatchListCard watchlistTitle="shubham" />
+                <StockWatchListCard watchlistTitle="vishal"/>
               </div>
               <div className="stocks_content_right_watchLists_card_main_add_box">
                 <div className="stocks_content_right_watchLists_card_main_add_box_arrange_width">

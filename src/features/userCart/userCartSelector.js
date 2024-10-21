@@ -1,0 +1,1 @@
+export const selectUserCartValue = (state)=> state.userCartData.data;

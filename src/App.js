@@ -14,6 +14,7 @@ import ShopCart from './page/ShopCart/ShopCart.jsx';
 import StockDetail from './page/StockDetail/StockDetail.jsx';
 // import IntroAlert from './component/IntroAlert/IntroAlert.jsx';  
 import Investments from './page/Investments/Investments.jsx';
+import Watchlist from './page/Watchlist/Watchlist.jsx';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='stock_detail' element={<StockDetail/>} errorElement={<Error/>} />
         <Route path='/user/investments' element={<Investments/>} errorElement={<Error/>} />
         {/* <Route path='/IntroAlert' element={<IntroAlert/>} errorElement={<Error/>} /> */}
+        <Route path='/dashboard/watchlist' element={<Watchlist/>} errorElement={<Error/>} />
       </Routes>
     </BrowserRouter>
 

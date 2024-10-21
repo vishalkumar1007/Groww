@@ -5,7 +5,8 @@ import topGainerStockReducer from '../features/api_lab/topGainerStockApiData/top
 import stockNewsApiDataReducer from '../features/api_lab/stockNewsApiData/stockNewsApiDataSlice';
 import topLoserStockReducer from '../features/api_lab/topLosersStockApiData/topLosersStockSlice';
 import msgPopUpReducer from '../features/msgPopUpHandel/msgPopUpHandelSlice';
-
+import userCartReducer from '../features/userCart/userCartSlice';
+import userProfileReducer from '../features/userProfileData/userProfileDataSlice.js'
 
 const rootReducer = combineReducers({
     userWatchlist:userWatchlistReducer,
@@ -13,7 +14,9 @@ const rootReducer = combineReducers({
     topGainerStock:topGainerStockReducer,
     stockNewsData:stockNewsApiDataReducer,
     topLoserStockData:topLoserStockReducer,
-    handelMsgPopUp:msgPopUpReducer
+    handelMsgPopUp:msgPopUpReducer,
+    userCartData:userCartReducer,
+    userProfileData:userProfileReducer
 });
 
 export default rootReducer;

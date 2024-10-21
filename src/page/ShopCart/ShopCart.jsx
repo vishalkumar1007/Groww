@@ -4,10 +4,11 @@ import "./ShopCart.css";
 import EmptyDataSvg from "../../assets/svg/am_icon/Empty_data_bro.svg";
 import { useSelector } from "react-redux";
 import StockCard from "../../component/StockCard/StockCard";
-import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
+// import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
+import {selectUserCartValue} from "../../features/userCart/centralExportUserCart"
 
 const ShopCart = () => {
-  const WatchlistData = useSelector(selectUserWatchlistValue);
+  const userCardData = useSelector(selectUserCartValue);
   // console.log('in shop card - - - - -',WatchlistData);
   return (
     <>
@@ -15,17 +16,17 @@ const ShopCart = () => {
       <div className="shop_cart_main">
         <div className="shop_cart_main_arrange_width">
           <div className="shop_cart_main_left">
-            <div className="shop_cart_main_left_head" style={{display:WatchlistData.length===0?'none':'block'}}>
+            <div className="shop_cart_main_left_head" style={{display:userCardData.length===0?'none':'block'}}>
               <span>Your All Stock Collection</span>
             </div>
             <div className="shop_cart_main_left_all_stock_add_card">
-              {WatchlistData.length === 0 ? (
+              {userCardData.length === 0 ? (
                 <div className="shop_cart_main_left_all_stock_add_card_svg">
                   <img src={EmptyDataSvg} alt="" />
                   <span>Empty Stock Collection</span>
                 </div>
               ) : (
-                WatchlistData.map((data, index) => (
+                userCardData.map((data, index) => (
                   
                   <StockCard
                     key={index}

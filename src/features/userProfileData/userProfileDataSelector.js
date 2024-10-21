@@ -1,0 +1,1 @@
+export const selectUserProfileData = (state)=>state.userProfileData.data;

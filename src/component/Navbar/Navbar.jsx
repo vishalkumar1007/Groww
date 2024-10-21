@@ -4,13 +4,13 @@ import AlertConfig from "../AlertConfig/AlertConfig";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
-// import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
+import { selectUserCartValue } from "../../features/userCart/centralExportUserCart";
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
+import {addUserDetail} from "../../features/userProfileData/centralExportUserProfileData";
 
 const Navbar = ({ callFrom = "" }) => {
   const dispatch = useDispatch();
-  const userWatchListCount = useSelector(selectUserWatchlistValue);
+  const userCardCount = useSelector(selectUserCartValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -68,7 +68,9 @@ const Navbar = ({ callFrom = "" }) => {
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const data = JSON.parse(window.atob(base64));
     setUserTokenData(data);
-  }, [navigate]);
+    dispatch(addUserDetail(data))
+  }, [dispatch, navigate]);
+
 
   const profileSectionRef = useRef(null);
 
@@ -229,9 +231,9 @@ const Navbar = ({ callFrom = "" }) => {
                 <circle cx="19" cy="21" r="1" />
                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
               </svg>
-              {userWatchListCount.length === 0 ? null : (
+              {userCardCount.length === 0 ? null : (
                 <div className="navbar_cart_count_div_main">
-                  {userWatchListCount.length}
+                  {userCardCount.length}
                 </div>
               )}
             </div>
@@ -249,7 +251,11 @@ const Navbar = ({ callFrom = "" }) => {
                     : null,
                 }}
               >
-                <p>{userTokenData ? (userTokenData.userFirstName[0]).toUpperCase() : "X"}</p>
+                <p>
+                  {userTokenData
+                    ? userTokenData.userFirstName[0].toUpperCase()
+                    : "X"}
+                </p>
               </div>
               <div
                 className="Navbar_activity_profile_activate_deactivate_icon"
@@ -426,9 +432,9 @@ const Navbar = ({ callFrom = "" }) => {
                         </div>
                         <div className="Navbar_user_Profile_section_service_customerSupport_title">
                           <p>Order Item</p>
-                          {userWatchListCount.length === 0 ? null : (
+                          {userCardCount.length === 0 ? null : (
                             <p id="user_order_card_counter_ui">
-                              {userWatchListCount.length}
+                              {userCardCount.length}
                             </p>
                           )}
                           <svg
@@ -453,7 +459,11 @@ const Navbar = ({ callFrom = "" }) => {
                 {/* .....................  */}
 
                 <div className="Navbar_user_Profile_section_service_arrange">
-                  <div className="Navbar_user_Profile_section_service_arrange_pointer_allOrder">
+                  <div className="Navbar_user_Profile_section_service_arrange_pointer_allOrder"
+                    onClick={() => {
+                      navigate("/dashboard/watchlist");
+                    }}
+                  >
                     <div className="Navbar_user_Profile_section_service_allOrder">
                       <div className="Navbar_user_Profile_section_service_allOrder_icon">
                         <svg
@@ -467,16 +477,16 @@ const Navbar = ({ callFrom = "" }) => {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <line x1="10" x2="21" y1="6" y2="6" />
-                          <line x1="10" x2="21" y1="12" y2="12" />
-                          <line x1="10" x2="21" y1="18" y2="18" />
-                          <path d="M4 6h1v4" />
-                          <path d="M4 10h2" />
-                          <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
+                          <rect width="7" height="7" x="3" y="3" rx="1" />
+                          <rect width="7" height="7" x="3" y="14" rx="1" />
+                          <path d="M14 4h7" />
+                          <path d="M14 9h7" />
+                          <path d="M14 15h7" />
+                          <path d="M14 20h7" />
                         </svg>
                       </div>
                       <div className="Navbar_user_Profile_section_service_allOrder_title">
-                        <p>All Orders</p>
+                        <p>Watchlist</p>
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
