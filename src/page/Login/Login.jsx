@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import google_svg from "../../assets/svg/google.icon.svg";
-import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
+// import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [inputActive, setInputActive] = useState(false);
   const [userEmailId, setUserEmailId] = useState("");
   const [incorrectEmail, setIncorrectEmail] = useState(false);
@@ -27,9 +28,6 @@ const Login = () => {
 
   const [allowContinueEmailVerify, setAllowContinueEmailVerify] =
     useState(true);
-  const [showMsg, setShowMsg] = useState(false);
-  const [successMsgStatus, setSuccessMsgStatus] = useState(true);
-  const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
   const [allowToLogin, setAllowToLogin] = useState(true);
 
   const [loaderActive, setLoaderActive] = useState(false);
@@ -63,7 +61,6 @@ const Login = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("response not ok", response.status);
           ShowQuickMsgForEmailValidation(response.status);
           setLoaderActive(false);
           return;
@@ -80,35 +77,58 @@ const Login = () => {
 
   const ShowQuickMsgForEmailValidation = async (statusCode) => {
     if (statusCode === 401) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Authorization failed. Please try again.");
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Authorization failed. Please try again.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
     } else if (statusCode === 200) {
-      setSuccessMsgStatus(true);
-      setMsgContent("Validation successful.");
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Validation successful.",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //..... fn
+      setEmailValidFromDataBase(true); // open password section if true
+      setInputActive(false); //  deactivate input field
+
     } else if (statusCode === 404) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Email not found.");
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Email not found.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      //... fn
+      setEmailNotFoundError(true); // enable create account msg
     } else if (statusCode === 500) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Server error. Try again later.");
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Try again later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
     }
 
-    if (!showMsg) {
-      setShowMsg(true); // enable popup message
+    if(statusCode !== 200){
       setAllowContinueEmailVerify(false); // disable continue button
-      if (statusCode === 404) {
-        setEmailNotFoundError(true); // enable create account msg
-      }
       const timeOut = setTimeout(() => {
-        if (statusCode === 200) {
-          setEmailValidFromDataBase(true); // open password section if true
-          setInputActive(false); //  deactivate input field
+        if (statusCode === 404) {
+          setEmailNotFoundError(false); // disable create account msg after interval
         }
-        setShowMsg(false); // disable popup message
         setAllowContinueEmailVerify(true); // enable continue button
-        setEmailNotFoundError(false); // disable create account msg after interval
       }, 4000);
-
+  
       return () => clearTimeout(timeOut);
     }
   };
@@ -140,68 +160,100 @@ const Login = () => {
         "Content-Type": "application/json",
       },
     })
-    .then(async (response) => {
-      if (!response.ok) {
-        console.log('response not ok',response.status);
+      .then(async (response) => {
+        if (!response.ok) {
+          console.log("response not ok", response.status);
+          ShowQuickMsgForLogin(response.status);
+          setLoaderActive(false);
+          return;
+        }
+
+        if (response.status === 200) {
+          const data = await response.json();
+          localStorage.setItem("token", data.token);
+        }
+
         ShowQuickMsgForLogin(response.status);
         setLoaderActive(false);
-        return;
-      }
-
-      if(response.status === 200){
-        const data = await response.json();
-        localStorage.setItem('token' , data.token);
-        // dispatch(removeUserInformation());
-        // dispatch(addUserInformation(data.payLoad));
-      }
-
-      ShowQuickMsgForLogin(response.status);
-      setLoaderActive(false);
-    })
-    .catch((err) => {
-      console.log("error ", err);
-      ShowQuickMsgForLogin(500);
-      setLoaderActive(false);
-    });
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForLogin(500);
+        setLoaderActive(false);
+      });
   };
 
   const ShowQuickMsgForLogin = async (statusCode) => {
     if (statusCode === 401) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Unauthorized request. Please log in.");
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Unauthorized request. Please log in.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
     } else if (statusCode === 400) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Incorrect password. Please try again.");
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Incorrect password. Please try again.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      //....fn
+      setPasswordValidFromDataBase(false);
+
     } else if (statusCode === 200) {
-      setSuccessMsgStatus(true);
-      setMsgContent("Login validation successful. Welcome!");
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Login validation successful. Welcome!",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //.... fn
+      setInputActive(false);
+      navigate("/dashboard");
+
     } else if (statusCode === 404) {
-      setSuccessMsgStatus(false);
-      setMsgContent("User not found. Check your credentials.");
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "User not found. Check your credentials.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+
+      
     } else if (statusCode === 500) {
-      setSuccessMsgStatus(false);
-      setMsgContent("Server error. Please try later.");
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Please try later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
     }
 
-    if (!showMsg) {
-      setShowMsg(true);
+    if(statusCode !== 200){
       setAllowToLogin(false);
-      if (statusCode === 400) {
-        setPasswordValidFromDataBase(false);
-      }
       const timeOut = setTimeout(() => {
-        if (statusCode === 200) {
-
-          setInputActive(false);
-          navigate("/dashboard");
-        }
-        setShowMsg(false);
         setAllowToLogin(true);
-      }, 5000);
-
+      }, 4000);
+  
       return () => clearTimeout(timeOut);
     }
+
   };
+
+
+
+  // ........ input focus 
 
   const checkInputFocus = () => {
     setInputActive(true);
@@ -251,11 +303,6 @@ const Login = () => {
 
   return (
     <div className="main_view">
-      {showMsg ? (
-        <div className="msg_pop_up">
-          <MessagePopUp isSuccess={successMsgStatus} message={msgContent} />
-        </div>
-      ) : null}
       <div className="main_center_element">
         <div className="top_element">
           <div className="logo_icon">
@@ -306,9 +353,10 @@ const Login = () => {
                 </div>
 
                 {!emailValidFromDataBase ? (
-                  <div className="login_with_id"
-                    onKeyDown={(e)=>{
-                      if(e.key==='Enter'){
+                  <div
+                    className="login_with_id"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
                         e.preventDefault();
                         handelEmailValidation();
                       }
@@ -381,9 +429,10 @@ const Login = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="login_with_id"
-                    onKeyDown={(e)=>{
-                      if(e.key === 'Enter'){
+                  <div
+                    className="login_with_id"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
                         e.preventDefault();
                         handelLoginValidation();
                       }

@@ -5,17 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import MessagePopUp from './component/MessagePopUp/MessagePopUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    {/* <React.StrictMode> */}
+      <div className="messagePopUpHome">
+        <div className='makeStickyMessagePopUp_Index'>
+          <MessagePopUp/> 
+        </div>
+      </div>
       <App />
-    {/* </React.StrictMode> */}
+
   </Provider>
 );
 
 reportWebVitals();
+
+/* <React.StrictMode> */
+/* </React.StrictMode> */
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

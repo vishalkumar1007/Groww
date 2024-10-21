@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import CompanyLogo from "../../assets/svg/groww-logo-light.svg";
+import AlertConfig from "../AlertConfig/AlertConfig";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
 // import { selectUserInformationValue } from "../../features/userInformation/userInformationSelector";
-import AlertConfig from "../AlertConfig/AlertConfig";
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 
-const Navbar = ({callFrom=""}) => {
+const Navbar = ({ callFrom = "" }) => {
+  const dispatch = useDispatch();
   const userWatchListCount = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("");
@@ -19,14 +21,13 @@ const Navbar = ({callFrom=""}) => {
     setActiveFeture("");
   };
 
-  useEffect(()=>{
-    if(callFrom==='Dashboard'){
-      setActiveFeture('Explore');
-    }else{
+  useEffect(() => {
+    if (callFrom === "Dashboard") {
+      setActiveFeture("Explore");
+    } else {
       setActiveFeture(callFrom);
     }
-  },[callFrom])
-
+  }, [callFrom]);
 
   const openNavSection = (data) => {
     if (data === "Explore") {
@@ -36,15 +37,22 @@ const Navbar = ({callFrom=""}) => {
     }
   };
 
-  const userActionOnLogOut=(userResponse)=>{
-    if(userResponse){
+  const userActionOnLogOut = (userResponse) => {
+    if (userResponse) {
       setOpenAlertConfig(false);
       handelToRemoveJWTFromLocalStorage();
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "user log out successful",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
       navigate("/");
-    }else{
+    } else {
       setOpenAlertConfig(false);
     }
-  }
+  };
 
   const handelToRemoveJWTFromLocalStorage = async () => {
     localStorage.removeItem("token");
@@ -76,7 +84,16 @@ const Navbar = ({callFrom=""}) => {
 
   return (
     <>
-      {openAlertConfig?<AlertConfig requestToClose={(userResponse)=>userActionOnLogOut(userResponse)} headText={userTokenData ? `Hey, ${userTokenData.userFirstName}` : "User"} msgText='Are you sure you want to log out your account ?' extraInfoText='Thank you , hope you like my work if you facing any issue please report us ...'/> : null}
+      {openAlertConfig ? (
+        <AlertConfig
+          requestToClose={(userResponse) => userActionOnLogOut(userResponse)}
+          headText={
+            userTokenData ? `Hey, ${userTokenData.userFirstName}` : "User"
+          }
+          msgText="Are you sure you want to log out your account ?"
+          extraInfoText="Thank you , hope you like my work if you facing any issue please report us ..."
+        />
+      ) : null}
       <div className="Navbar_main">
         <div className="Navbar_content_limit_width">
           <div className="Navbar_logo">

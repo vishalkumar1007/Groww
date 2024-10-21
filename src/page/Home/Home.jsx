@@ -13,6 +13,7 @@ import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
+import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
 
@@ -133,6 +134,7 @@ const Home = () => {
       //   <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
       // </div>:null
       }
+
       <div className="HomeMain">
         <div className="Home_navbar">
           <div className="Home_nav_logo">

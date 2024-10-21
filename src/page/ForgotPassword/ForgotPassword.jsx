@@ -4,12 +4,14 @@ import "./ForgotPassword.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import forgot_amico from "../../assets/svg/Forgot-password-bro-groww.svg";
 import Create_password_amico from "../../assets/img/Create_password_icon_amico.png";
-import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
+import { useDispatch } from "react-redux";
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [f_inputActive, setF_inputActive] = useState(false);
   const [f_inputActiveEP, setF_inputActiveEP] = useState(false);
   const [f_inputActiveCP, setF_inputActiveCP] = useState(false);
@@ -51,9 +53,6 @@ const Login = () => {
     useState(true);
 
   // msg show
-  const [showMsg, setShowMsg] = useState(false);
-  const [successMsgStatus, setSuccessMsgStatus] = useState(true);
-  const [msgContent, setMsgContent] = useState("OK Checking With Dummy Data");
   const [loaderActive, setLoaderActive] = useState(false);
 
   // Deactivate err
@@ -120,35 +119,60 @@ const Login = () => {
 
   const ShowQuickMsgForEmail = async (statusCode) => {
     if (statusCode === 401) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Unauthorized request. check credential");
-      } else if (statusCode === 200) {
-        setSuccessMsgStatus(true);
-        setMsgContent("Successfully OTP send to registered email");
-      } else if (statusCode === 404) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Invalid email. Please check.");
-      } else if (statusCode === 500) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Server error. Report and Try again later.");
-      }    
-      else if (statusCode === 400) {
-          setSuccessMsgStatus(false);
-          setMsgContent("OTP duplicate , Try again after 2 min");
-      }    
-      
-    if (!showMsg) {
-      setShowMsg(true);
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Unauthorized request. check credential",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 200) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "OTP successfully send to registered email id",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      // .. fn
+      setF_emailValidFromDataBase(true); // open otp component
+      setF_inputActive(false);
+    } else if (statusCode === 404) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Invalid email. Please check.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      //.. fn
+      setF_emailNotFoundError(true);
+    } else if (statusCode === 500) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Report and Try again later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 400) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "OTP duplicate , Try again after 2 min",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+
+    if (statusCode !== 200) {
       setIsActivateButton(false);
-      if (statusCode === 404) {
-        setF_emailNotFoundError(true);
-      }
       const timeOut = setTimeout(() => {
-        if (statusCode === 200) {
-          setF_emailValidFromDataBase(true); // open otp component
-          setF_inputActive(false);
-        }
-        setShowMsg(false);
         setIsActivateButton(true);
       }, 4000);
 
@@ -192,39 +216,71 @@ const Login = () => {
 
   const ShowQuickMsgForOtpSend = async (statusCode) => {
     if (statusCode === 401) {
-        setF_OtpResponseFromDataBase(false);
-        setSuccessMsgStatus(false);
-        setMsgContent("Unauthorized request. check your credential");
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Unauthorized request. check your credential",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      // ... fn
+      setF_OtpResponseFromDataBase(false);
     } else if (statusCode === 200) {
-        setSuccessMsgStatus(true);
-        setF_OtpResponseFromDataBase(true);
-        setSuccessMessageFromDataBaseForOTP(true);
-        setMsgContent("OTP verification successful.");
-    } else if (statusCode === 404) {
-        setF_OtpResponseFromDataBase(false);
-        setSuccessMsgStatus(false);
-        setMsgContent("Invalid OTP , try agin this process");
-    } else if (statusCode === 403) {
-        setSuccessMsgStatus(false);
-        setF_OtpResponseFromDataBase(true);
-        setSuccessMessageFromDataBaseForOTP(false);
-        setMsgContent("Incorrect OTP. Please try again.");
-    } else if (statusCode === 500) {
-        setF_OtpResponseFromDataBase(false);
-        setSuccessMsgStatus(false);
-        setMsgContent("Server error. Try again later.");
-    }    
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "OTP verification successful.",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      // ... fn
+      setF_OtpResponseFromDataBase(true);
+      setSuccessMessageFromDataBaseForOTP(true);
+      setF_otpValidFromDataBase(true); // open change password component
+      setF_inputActive(false);
 
-    if (!showMsg) {
-      setShowMsg(true);
-      setIsActivateButton(false)
+    } else if (statusCode === 404) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Invalid OTP , try agin this process.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      // ... fn
+      setF_OtpResponseFromDataBase(false);
+    } else if (statusCode === 403) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Incorrect OTP. Please try again.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      // ... fn
+      setF_OtpResponseFromDataBase(true);
+      setSuccessMessageFromDataBaseForOTP(false);
+    } else if (statusCode === 500) {
+      setF_OtpResponseFromDataBase(false);
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Try again later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      // ... fn
+    }
+
+    if (statusCode !== 200) {
+      setIsActivateButton(false);
       const timeOut = setTimeout(() => {
-        if (statusCode === 200) {
-          setF_otpValidFromDataBase(true); // open change password component
-          setF_inputActive(false);
-        }
-        setShowMsg(false);
-        setIsActivateButton(true)
+        setIsActivateButton(true);
       }, 4000);
 
       return () => clearTimeout(timeOut);
@@ -299,31 +355,68 @@ const Login = () => {
 
   const ShowQuickMsgForUpdatePassword = async (statusCode) => {
     if (statusCode === 401) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Unauthorized request. Please log in.");
+      // setSuccessMsgStatus(false);
+      // setMsgContent("Unauthorized request. Please log in.");
+      // ... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Unauthorized request. Please log in.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
     } else if (statusCode === 200) {
-        setSuccessMsgStatus(true);
-        setMsgContent("Password changed successfully.");
-    } else if (statusCode === 404) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Invalid email. Please check.");
-    } else if (statusCode === 500) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Server error. Please try later.");
-    } else if (statusCode === 888) {
-        setSuccessMsgStatus(false);
-        setMsgContent("Invalid input or null error.");
-    }    
+      // setSuccessMsgStatus(true);
+      // setMsgContent("Password changed successfully.");
+      // ... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Password changed successfully. login please",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //... fn
+      navigate("/login"); // redirect to login
+      setF_inputActive(false);
 
-    if (!showMsg) {
-      setShowMsg(true);
+    } else if (statusCode === 404) {
+      // setSuccessMsgStatus(false);
+      // setMsgContent("Invalid email. Please check.");
+      // ... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Invalid email. Please check.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 500) {
+      // setSuccessMsgStatus(false);
+      // setMsgContent("Server error. Please try later.");
+      // ... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Please try later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 888) {
+      // setSuccessMsgStatus(false);
+      // setMsgContent("Invalid input or null error.");
+      // ... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Invalid input or null error.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+    if(statusCode!==200){
       setIsActivateButton(false);
       const timeOut = setTimeout(() => {
-        if (statusCode === 200) {
-          navigate("/login"); // redirect to login
-          setF_inputActive(false);
-        }
-        setShowMsg(false);
         setIsActivateButton(true);
       }, 4000);
 
@@ -455,11 +548,6 @@ const Login = () => {
 
   return (
     <div className="main_view_forgot">
-      {showMsg ? (
-        <div className="msg_pop_up">
-          <MessagePopUp isSuccess={successMsgStatus} message={msgContent} />
-        </div>
-      ) : null}
       <div className="main_center_element_forgot">
         <div className="top_element_forgot">
           <div className="logo_icon_forgot">
@@ -498,9 +586,10 @@ const Login = () => {
 
                   {/* ............ */}
                   {!f_emailValidFromDataBase ? (
-                    <div className="login_with_id_forgot_email"
-                      onKeyDown={(e)=>{
-                        if(e.key === 'Enter'){
+                    <div
+                      className="login_with_id_forgot_email"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
                           e.preventDefault();
                           handelToSendMailToUserAPI();
                         }
@@ -561,8 +650,10 @@ const Login = () => {
                             handelToSendMailToUserAPI();
                           }}
                           style={{
-                            backgroundColor: isActivateButton ? null : "#22b892cf" ,
-                            cursor: isActivateButton ? null : "no-drop" ,
+                            backgroundColor: isActivateButton
+                              ? null
+                              : "#22b892cf",
+                            cursor: isActivateButton ? null : "no-drop",
                           }}
                         >
                           {loaderActive ? <Loader /> : <p>Send OTP</p>}
@@ -576,9 +667,10 @@ const Login = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="login_with_id_forgot_otp"
-                      onKeyDown={(e)=>{
-                        if(e.key === 'Enter'){
+                    <div
+                      className="login_with_id_forgot_otp"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
                           e.preventDefault();
                           handelOtpVerificationAPI();
                         }
@@ -642,8 +734,10 @@ const Login = () => {
                           id="cnt_btn"
                           disabled={!isActivateButton}
                           style={{
-                            backgroundColor: isActivateButton ?null : "#22b892cf" ,
-                            cursor: isActivateButton ? null : "no-drop" ,
+                            backgroundColor: isActivateButton
+                              ? null
+                              : "#22b892cf",
+                            cursor: isActivateButton ? null : "no-drop",
                           }}
                           onClick={() => {
                             handelOtpVerificationAPI();
@@ -675,9 +769,10 @@ const Login = () => {
                     </div>
                   </div>
 
-                  <div className="Create_password_section"
-                    onKeyDown={(e)=>{
-                      if(e.key === 'Enter'){
+                  <div
+                    className="Create_password_section"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
                         e.preventDefault();
                         handelToUpdatePassword();
                       }
@@ -874,8 +969,10 @@ const Login = () => {
                         id="cnt_btn"
                         disabled={!isActivateButton}
                         style={{
-                          backgroundColor: isActivateButton ?null : "#22b892cf" ,
-                          cursor: isActivateButton ? null : "no-drop" ,
+                          backgroundColor: isActivateButton
+                            ? null
+                            : "#22b892cf",
+                          cursor: isActivateButton ? null : "no-drop",
                         }}
                         onClick={() => {
                           handelToUpdatePassword();

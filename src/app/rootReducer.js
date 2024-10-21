@@ -4,6 +4,7 @@ import mostBoughtStockReducer from '../features/api_lab/mostBoughtStocksApiData/
 import topGainerStockReducer from '../features/api_lab/topGainerStockApiData/topGainerStocksSlice';
 import stockNewsApiDataReducer from '../features/api_lab/stockNewsApiData/stockNewsApiDataSlice';
 import topLoserStockReducer from '../features/api_lab/topLosersStockApiData/topLosersStockSlice';
+import msgPopUpReducer from '../features/msgPopUpHandel/msgPopUpHandelSlice';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     mostBoughtStock:mostBoughtStockReducer,
     topGainerStock:topGainerStockReducer,
     stockNewsData:stockNewsApiDataReducer,
-    topLoserStockData:topLoserStockReducer
+    topLoserStockData:topLoserStockReducer,
+    handelMsgPopUp:msgPopUpReducer
 });
 
 export default rootReducer;

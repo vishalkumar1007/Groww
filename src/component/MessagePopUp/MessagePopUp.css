@@ -1,15 +1,17 @@
 .messagePopUp_hide_div{
     /* background-color: #8a2be2; */
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
+    z-index: 120;
 }
 
 .msg_poop_up_main {
-  background-color: #374c35e8;
+  background-color: #88ce8337;
+  backdrop-filter: blur(18px);
   /* width: 300px; */
   height: 45px;
   border-radius: 5px;
-  border: 2.5px solid #65c85e4e;
+  border: 2.5px solid #49c83d54;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +19,7 @@
   gap: 7px;
   position: relative;
   
-  animation: appear 1s forwards, disappear 1s forwards 4s;
+  animation: appear 0.5s forwards, disappear 0.5s forwards 3s;
 }
 
 @keyframes appear {
@@ -29,6 +31,8 @@
   0% { right: 0px; top: 0px; }
   100% { right: -100%; top: 0px; }
 }
+
+
 /* @keyframes successAnimation {
     0% { right: -100%; top: 0px; }
     100% {right: 0px; top: 0px; }
@@ -45,22 +49,23 @@
   /* background-color: lightskyblue; */
   font-size: 16px;
   font-weight: 500;
-  color: #87db80;
+  color: #33b929;
 }
 
 .msg_poop_up_main_err {
-  background-color: #422624;
+  background-color: #6a211c2c;
+  backdrop-filter: blur(10px);
   /* width: 300px; */
   height: 44px;
   border-radius: 5px;
-  border: 2.5px solid #ed433738;
+  border: 2.5px solid #ed433745;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 10px 0px 10px;
   gap: 7px;
   position: relative;
-  animation: errappear 1s forwards, errdisappear 1s forwards 4s;
+  animation: errappear 0.5s forwards, errdisappear 0.5s forwards 3s;
 }
 
 @keyframes errappear {
