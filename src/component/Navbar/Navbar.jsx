@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUserCartValue } from "../../features/userCart/centralExportUserCart";
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
-import {addUserDetail} from "../../features/userProfileData/centralExportUserProfileData";
+import { addUserDetail } from "../../features/userProfileData/centralExportUserProfileData";
+import SearchStock from "../SearchStock/SearchStock";
 
 const Navbar = ({ callFrom = "" }) => {
   const dispatch = useDispatch();
@@ -68,9 +69,8 @@ const Navbar = ({ callFrom = "" }) => {
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const data = JSON.parse(window.atob(base64));
     setUserTokenData(data);
-    dispatch(addUserDetail(data))
+    dispatch(addUserDetail(data));
   }, [dispatch, navigate]);
-
 
   const profileSectionRef = useRef(null);
 
@@ -138,31 +138,7 @@ const Navbar = ({ callFrom = "" }) => {
           {/* .......... */}
 
           <div className="Navbar_search">
-            <div className="Navbar_search_action">
-              <div className="Navbar_search_icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#7e7e7e"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-search"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </div>
-              <div className="Navbar_search_action_main">
-                <input
-                  type="text"
-                  placeholder="What are you looking for today?"
-                />
-              </div>
-            </div>
+            <SearchStock />
           </div>
 
           {/* ........... */}
@@ -459,7 +435,8 @@ const Navbar = ({ callFrom = "" }) => {
                 {/* .....................  */}
 
                 <div className="Navbar_user_Profile_section_service_arrange">
-                  <div className="Navbar_user_Profile_section_service_arrange_pointer_allOrder"
+                  <div
+                    className="Navbar_user_Profile_section_service_arrange_pointer_allOrder"
                     onClick={() => {
                       navigate("/dashboard/watchlist");
                     }}

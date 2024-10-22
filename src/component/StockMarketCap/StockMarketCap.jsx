@@ -11,12 +11,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 const StockMarketCap = ({
-  cost="",
-  costPerRate="",
-  stockId="",
-  uniqueId="",
-  title="",
-  logoUrl=""
+  cost = "",
+  costPerRate = "",
+  stockId = "",
+  uniqueId = "",
+  title = "",
+  logoUrl = "",
+  RemoveAddToCardFeature = false,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,15 +27,17 @@ const StockMarketCap = ({
   // handel to add and remove stocks from watchlist using redux
 
   const userWatchlistData = useSelector(selectUserWatchlistValue);
-  
-  const addStockToWatchlist = ()=>{
-    if(isAddToWatchList){
-      dispatch(removeFromWatchlist({stockId}));
+
+  const addStockToWatchlist = () => {
+    if (isAddToWatchList) {
+      dispatch(removeFromWatchlist({ stockId }));
       setIsAddToWatchList(false);
-    }else{
-      dispatch(addToWatchlist({uniqueId, stockId, title, cost, costPerRate, logoUrl}))
+    } else {
+      dispatch(
+        addToWatchlist({ uniqueId, stockId, title, cost, costPerRate, logoUrl })
+      );
     }
-  }
+  };
 
   useEffect(() => {
     for (let i = 0; i < userWatchlistData.length; i++) {
@@ -44,8 +47,6 @@ const StockMarketCap = ({
       }
     }
   }, [stockId, userWatchlistData]);
-
-
 
   // ---------------
 
@@ -77,7 +78,13 @@ const StockMarketCap = ({
           </div>
         </div>
         <div className="stock_market_cap_main_title_section_price_and_watchlist">
-          <div className="stock_market_cap_main_title_section_price_main">
+          <div className="stock_market_cap_main_title_section_price_main"
+            style={{
+              // RemoveAddToCardFeature
+              maxWidth:`${RemoveAddToCardFeature?'95%':'82px'}`,
+              minWidth:`${RemoveAddToCardFeature?'95%':'82px'}`
+            }}
+          >
             <div className="stock_market_cap_main_title_section_price">
               <span id="stock_market_cap_price_value">
                 {cost || "₹0,000.00"}
@@ -97,49 +104,52 @@ const StockMarketCap = ({
               </span>
             </div>
           </div>
-          <div className="stock_market_cap_main_title_section_watchlist">
-            <button
-              onClick={() => {
-                // setIsAddToWatchList(!isAddToWatchList);
-                addStockToWatchlist();
-              }}
-            >
-              {isAddToWatchList ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="27"
-                  height="27"
-                  viewBox="0 0 24 24"
-                  fill="#00B386"
-                  stroke="#ffffff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-circle-check"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-circle-plus"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 12h8" />
-                  <path d="M12 8v8" />
-                </svg>
-              )}
-            </button>
-          </div>
+
+          {RemoveAddToCardFeature ? null : (
+            <div className="stock_market_cap_main_title_section_watchlist">
+              <button
+                onClick={() => {
+                  // setIsAddToWatchList(!isAddToWatchList);
+                  addStockToWatchlist();
+                }}
+              >
+                {isAddToWatchList ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="27"
+                    height="27"
+                    viewBox="0 0 24 24"
+                    fill="#00B386"
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-check"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-plus"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

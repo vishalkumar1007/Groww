@@ -13,6 +13,7 @@ import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
+import SearchStock from '../../component/SearchStock/SearchStock'
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
 // import { useDispatch, useSelector } from "react-redux";
@@ -143,7 +144,8 @@ const Home = () => {
             </div>
           </div>
           <div className="Home_nav_search">
-            <input type="text" placeholder="What are you looking for today" />
+            {/* <input type="text" placeholder="What are you looking for today" /> */}
+            <SearchStock RemoveAddToCardFeature = {true}/>
           </div>
           <div className="Home_nav_register">
             <button
