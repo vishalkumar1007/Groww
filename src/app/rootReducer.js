@@ -7,6 +7,7 @@ import topLoserStockReducer from '../features/api_lab/topLosersStockApiData/topL
 import msgPopUpReducer from '../features/msgPopUpHandel/msgPopUpHandelSlice';
 import userCartReducer from '../features/userCart/userCartSlice';
 import userProfileReducer from '../features/userProfileData/userProfileDataSlice.js'
+import allStockHeadReducer from '../features/api_lab/allStockHeadApiData/allStockHeadApiDataSlice'
 
 const rootReducer = combineReducers({
     userWatchlist:userWatchlistReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     topLoserStockData:topLoserStockReducer,
     handelMsgPopUp:msgPopUpReducer,
     userCartData:userCartReducer,
-    userProfileData:userProfileReducer
+    userProfileData:userProfileReducer,
+    allStockApiData:allStockHeadReducer
 });
 
 export default rootReducer;

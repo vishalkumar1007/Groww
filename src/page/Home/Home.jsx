@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
+// import { useDispatch, useSelector } from "react-redux";
 
 // import { useDispatch} from "react-redux";
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";

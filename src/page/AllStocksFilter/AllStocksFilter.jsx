@@ -1,16 +1,26 @@
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
 import Pagination from "../../component/Pagination/Pagination";
 // import SelectCategory from "../../AllStockFilterComponents/SelectCategory/SelectCategory";
 import SelectCategory from "../../component/AllStockFilterComponents/SelectCategory/SelectCategory";
 // import marketCapData from "../../jsonDummyData/marketCapData.json";
-import marketCapData from "../../utils/marketCapData.json";
+// import marketCapData from "../../utils/marketCapData.json";
 import "./AllStocksFilter.css";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllStockApiThunk,
+  selectorAllStockApiData,
+  selectorAllStockApiIsLoading,
+  // selectorAllStockApiIsError,
+  // selectorAllStockApiErrorMsg
+} from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
+
 
 const AllStocksFilter = () => {
+  const dispatch = useDispatch();
   const [isActiveSector, setIsActiveSector] = useState(false);
   const [isActiveIndex, setIsActiveIndex] = useState(false);
   const [isActiveMarketCap, setIsActiveMarketCap] = useState(false);
@@ -33,6 +43,20 @@ const AllStocksFilter = () => {
   const [paginationEndIndex, setPaginationEndIndex] = useState(0);
   const paginationChunk = 15;
 
+
+  // handel to calling All Head Stock api using redux -------------
+
+  const allHeadStockData = useSelector(selectorAllStockApiData);
+  const allHeadStockLoading = useSelector(selectorAllStockApiIsLoading);
+
+  useEffect(() => {
+    if (allHeadStockData.length === 0) {
+      dispatch(fetchAllStockApiThunk());
+    }
+  }, [allHeadStockData, dispatch]);
+
+  //----------------------------
+
   const currentActivePage = (activePage) => {
     setPaginationActivePage(activePage);
   };
@@ -42,17 +66,25 @@ const AllStocksFilter = () => {
   }, []);
 
   useEffect(() => {
+    if (!allHeadStockLoading) {
+      const endIndex =
+        paginationChunk * paginationActivePage > allHeadStockData.length
+          ? allHeadStockData.length
+          : paginationChunk * paginationActivePage;
+      const startIndex =
+        endIndex -
+        (endIndex === allHeadStockData.length
+          ? allHeadStockData.length - (paginationActivePage - 1) * 15
+          : paginationChunk);
 
-    const endIndex = (((paginationChunk * paginationActivePage)>marketCapData.length)?marketCapData.length:(paginationChunk * paginationActivePage));
-    const startIndex = endIndex - ((endIndex===marketCapData.length)?((marketCapData.length)-((paginationActivePage-1)*15)):paginationChunk);
-
-    setPaginationStartIndex(startIndex);
-    setPaginationEndIndex(endIndex);
-  }, [paginationActivePage]);
+      setPaginationStartIndex(startIndex);
+      setPaginationEndIndex(endIndex);
+    }
+  }, [allHeadStockData, allHeadStockLoading, paginationActivePage]);
 
   return (
     <div className="all_stock_main">
-      <Navbar callFrom = 'Dashboard'/>
+      <Navbar callFrom="Dashboard" />
       {/* ...............  */}
 
       <div className="all_stock_main_container">
@@ -408,26 +440,33 @@ const AllStocksFilter = () => {
                 </div>
                 {/* ......  */}
                 <div className="all_stock_list_pagination_main_box_components">
-                  {marketCapData
-                    .slice(paginationStartIndex, paginationEndIndex)
-                    .map((data) => (
-                      <StockMarketCap
-                        key={data.id}
-                        companyName={data.companyName}
-                        cost={data.cost}
-                        costPerRate={data.costPerRate}
-                      />
-                    ))}
+                  {allHeadStockLoading
+                    ? null
+                    : allHeadStockData
+                        .slice(paginationStartIndex, paginationEndIndex)
+                        .map((data) => (
+                          <StockMarketCap
+                            key={data._id}
+                            cost={data.stockCost}
+                            costPerRate={data.stockCostPerRate}
+                            stockId={data.stock_id}
+                            uniqueId={data._id}
+                            title={data.name}
+                            logoUrl={data.logoUrl}
+                          />
+                        ))}
                 </div>
                 {/* ......  */}
                 <div className="all_stock_list_pagination_main_box_pagination_box">
                   <div className="all_stock_list_pagination_main_box_pagination_box_arrange_width">
-                    <Pagination
-                      totalPage={Math.ceil(marketCapData.length / 15)}
-                      currentActivePage={(activePage) => {
-                        currentActivePage(activePage);
-                      }}
-                    />
+                    {allHeadStockLoading ? null : (
+                      <Pagination
+                        totalPage={Math.ceil(allHeadStockData.length / 15)}
+                        currentActivePage={(activePage) => {
+                          currentActivePage(activePage);
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

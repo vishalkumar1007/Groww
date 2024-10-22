@@ -45,6 +45,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .watchlist_page_stock_container_all_stock_add_card_svg img {
@@ -57,4 +58,5 @@
   font-size: 25px;
   font-weight: 500;
   color: #d1d7d5;
+  text-align: center;
 }
