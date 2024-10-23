@@ -289,12 +289,12 @@ const StockDetail = () => {
                     </button>
                     <button
                       className="stock_detail_company_information_head_right_watchlist"
+                      id={isStockAlreadyInCart?'already_in_stock_adding_id_stock_detail_company_information_head_right_watchlist':'adding_id_stock_detail_company_information_head_right_watchlist'}
                       style={{
                         border: isStockAlreadyInCart
                           ? `1px solid #00b3863d`
                           : null,
                         backgroundColor: isStockAlreadyInCart?'#00b3860d':null,
-                        minWidth:isStockAlreadyInCart?'150px':'120px'
                       }}
                       onClick={() => {
                         addStockToWatchList();
