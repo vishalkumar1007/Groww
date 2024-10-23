@@ -278,7 +278,9 @@ const Navbar = ({ callFrom = "" }) => {
                         : "user@gmail.com"}
                     </p>
                   </div>
-                  <div className="Navbar_user_Profile_section_user_about_setting">
+                  <div className="Navbar_user_Profile_section_user_about_setting"
+                    onClick={()=>{navigate('/user/profile')}}
+                  >
                     <div className="Navbar_user_Profile_section_user_about_setting_main_div">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

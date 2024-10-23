@@ -16,6 +16,7 @@ import StockDetail from './page/StockDetail/StockDetail.jsx';
 import Investments from './page/Investments/Investments.jsx';
 import Watchlist from './page/Watchlist/Watchlist.jsx';
 import SearchStock from './component/SearchStock/SearchStock.jsx';
+import Profile from './page/Profile/Profile.jsx';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         {/* <Route path='/IntroAlert' element={<IntroAlert/>} errorElement={<Error/>} /> */}
         <Route path='/dashboard/watchlist' element={<Watchlist/>} errorElement={<Error/>} />
         <Route path='/searchStocks' element={<SearchStock/>} errorElement={<Error/>} />
+        <Route path='/user/profile' element={<Profile/>} errorElement={<Error/>} />
       </Routes>
     </BrowserRouter>
 
