@@ -115,6 +115,8 @@ const StockDetail = () => {
         if (user_watchlist_data[i].stockId === APIstockData[0].stock_id) {
           setIsStockAlreadyInCart(true);
           break;
+        }else{
+          setIsStockAlreadyInCart(false);
         }
       }
     }
