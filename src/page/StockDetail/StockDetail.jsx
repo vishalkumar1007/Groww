@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./StockDetail.css";
 // ............... hooks ..................
 // import useImage from "../../hooks/useImage";
@@ -33,6 +33,7 @@ import {
 
 
 const StockDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserCartValue);
@@ -65,6 +66,36 @@ const StockDetail = () => {
 
   // add to card section
   const [isStockAlreadyInCart, setIsStockAlreadyInCart] = useState(false);
+
+
+  // auth user token 
+  useEffect(()=>{
+    const localStorageToken = localStorage.getItem('token');
+    if(localStorageToken){
+      const api = 'http://localhost:8080/api/user/verify/token';
+  
+      fetch(api , {
+        method:'GET',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${localStorageToken}`
+        }
+      })
+      .then(async (response)=>{
+        if(!response.ok){
+          console.log('response is not ok');
+          navigate('/login');
+        }
+      })
+      .catch((err)=>{
+        console.log('Error on fetching auto login' , err);
+      })
+
+    }
+
+  },[navigate])
+
+
 
   const addStockToWatchList = () => {
     // setIsStockAlreadyInCart(!isStockAlreadyInCart);

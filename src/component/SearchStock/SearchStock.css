@@ -11,6 +11,7 @@
     /* position: absolute; */
     position: relative;
     z-index: 70;
+    min-width: 300px;
 }
 .searchStock_search{
     /* background-color: rgb(119, 27, 180); */
@@ -64,6 +65,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.searchStock_search_result_count_show{
+    background-color: #ffffff;
+    /* width: 60px; */
+    height: 16px;
+    position: absolute;
+    z-index: 70;
+    top: 55px;
+    font-size: 12px;
+    color: #dbdbdb;
 }
 
 /* search result main  */

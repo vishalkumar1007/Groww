@@ -9,7 +9,7 @@ import {
 } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 import StockMarketCap from "../StockMarketCap/StockMarketCap";
 
-const SearchStock = ({RemoveAddToCardFeature=false}) => {
+const SearchStock = ({ RemoveAddToCardFeature = false }) => {
   //   const x =
   const dispatch = useDispatch();
   const [isActiveInputOfSearch, setIsActiveInputOfSearch] = useState(false);
@@ -136,7 +136,7 @@ const SearchStock = ({RemoveAddToCardFeature=false}) => {
           </div>
         ) : null}
       </div>
-
+      {isActiveInputOfSearch?<div className="searchStock_search_result_count_show">{showStockData.length} search result</div>:null}
       <div
         className="searchStock_search_result_main_full_screen"
         onClick={() => {
