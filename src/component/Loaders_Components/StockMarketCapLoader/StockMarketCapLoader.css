@@ -1,0 +1,107 @@
+.stockMarketCapLoader_main{
+    background-color: #fdfdfd;
+    width: 100%;
+    height: 75px;
+    border-bottom: 1.5px solid #e5e5e5;
+    display: flex;
+}
+
+.stockMarketCapLoader_animation_company{
+    /* background-color: gold; */
+    width: 68%;
+    height: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding-left: 2.5%;
+}
+
+.stockMarketCapLoader_animation_marketPrice{
+    /* background-color: rgb(0, 255, 21); */
+    width: 16%;
+    height: 100%;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stockMarketCapLoader_animation_watchlist{
+    /* background-color: rgb(200, 0, 255); */
+    width: 16%;
+    height: 100%;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stockMarketCapLoader_animation_company_title{
+    background-color: #f6f6f6da;
+    width: 95%;
+    height: 20px;
+    border-radius: 5px;
+    max-width: 250px;
+    overflow: hidden;
+    position:relative;
+}   
+
+.stockMarketCapLoader_animation_marketPrice_cost{
+    background-color: #f6f6f6da;
+    width: 90%;
+    height: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    position:relative;
+}
+
+.stockMarketCapLoader_animation_watchlist_add{
+    background-color: #f6f6f6da;
+    /* background-color: #2e8448da; */
+    width: 30%;
+    height: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    position:relative; 
+    margin-left: 25px;
+
+}
+
+.stockMarketCapLoader_main_animation_loader{
+    background-color: #55707220;
+    width: 50px;
+    height: 150%;
+    filter: blur(15px);
+    position: absolute;
+    /* left: -45px; */
+    top: -10px;
+    rotate: 10deg;
+    animation : moveBarAnimation 2s infinite;
+}
+
+@keyframes moveBarAnimation {
+    0%{
+        left: -70px;
+    }
+    100%{
+        left: 105%;
+    }
+}
+
+
+
+@media(max-width:700px){
+    .stockMarketCapLoader_animation_marketPrice{
+        /* background-color: rgb(0, 255, 21); */
+        width: 15%;
+        height: 100%;
+        min-width: 90px;
+    }
+    
+    .stockMarketCapLoader_animation_watchlist{
+        /* background-color: rgb(200, 0, 255); */
+        width: 15%;
+        height: 100%;
+        min-width: 90px;
+    }
+}

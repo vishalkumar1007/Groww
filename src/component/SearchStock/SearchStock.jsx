@@ -4,16 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAllStockApiThunk,
   selectorAllStockApiData,
-  //   selectorAllStockApiIsLoading,
+  selectorAllStockApiIsLoading,
   //   selectorAllStockApiIsError,
 } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 import StockMarketCap from "../StockMarketCap/StockMarketCap";
+import StockMarketCapLoader from "../Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
 
 const SearchStock = ({ RemoveAddToCardFeature = false }) => {
   //   const x =
   const dispatch = useDispatch();
   const [isActiveInputOfSearch, setIsActiveInputOfSearch] = useState(false);
-  const allStockHeadData = useSelector(selectorAllStockApiData);
   const [searchDivHeight, setSearchDivHeight] = useState(0);
   const [constDataOfSearchHeight, setConstDataOfSearchHeight] = useState(0);
   const getHeightOFSearchResult = useRef(0);
@@ -21,11 +21,16 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
     useState("");
   const [showStockData, setShowStockData] = useState([]);
 
+  // handel api call using redux to get allStockHeadData
+
+  const allStockHeadData = useSelector(selectorAllStockApiData);
+  const allStockHeadLoading = useSelector(selectorAllStockApiIsLoading);
   useEffect(() => {
     if (allStockHeadData.length === 0) {
       dispatch(fetchAllStockApiThunk());
     }
   }, [allStockHeadData, dispatch]);
+
 
   useEffect(() => {
     if (getHeightOFSearchResult.current) {
@@ -33,7 +38,7 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
         getHeightOFSearchResult.current.getBoundingClientRect().height;
       setConstDataOfSearchHeight(heightOfDiv);
     }
-  }, [showStockData, allStockHeadData]);
+  }, [showStockData,allStockHeadLoading, allStockHeadData]);
 
   useEffect(() => {
     if (isActiveInputOfSearch) {
@@ -64,6 +69,7 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
       }
     }
   }, [allStockHeadData, userInputStockSearchValue]);
+  
 
   const handelInputActivate = () => {
     setIsActiveInputOfSearch(true);
@@ -136,7 +142,11 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
           </div>
         ) : null}
       </div>
-      {isActiveInputOfSearch?<div className="searchStock_search_result_count_show">{showStockData.length} search result</div>:null}
+      {isActiveInputOfSearch ? (
+        <div className="searchStock_search_result_count_show">
+          {showStockData.length} search result
+        </div>
+      ) : null}
       <div
         className="searchStock_search_result_main_full_screen"
         onClick={() => {
@@ -159,7 +169,14 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
           className="searchStock_search_result_contain_box"
           ref={getHeightOFSearchResult}
         >
-          {showStockData.length > 0 ? (
+          {allStockHeadLoading ? (
+            <>
+              <StockMarketCapLoader RemoveAddToCardFeature={RemoveAddToCardFeature}/>
+              <StockMarketCapLoader RemoveAddToCardFeature={RemoveAddToCardFeature}/>
+              {/* <StockMarketCapLoader RemoveAddToCardFeature={RemoveAddToCardFeature}/> */}
+              {/* <StockMarketCapLoader RemoveAddToCardFeature={RemoveAddToCardFeature}/> */}
+            </>
+          ) : showStockData.length > 0 ? (
             showStockData.map((stockData) => (
               <StockMarketCap
                 key={stockData._id}

@@ -8,6 +8,7 @@ import msgPopUpReducer from '../features/msgPopUpHandel/msgPopUpHandelSlice';
 import userCartReducer from '../features/userCart/userCartSlice';
 import userProfileReducer from '../features/userProfileData/userProfileDataSlice.js'
 import allStockHeadReducer from '../features/api_lab/allStockHeadApiData/allStockHeadApiDataSlice'
+import topMarketCapStockReducer from '../features/api_lab/topMarketCapStockApiData/topMarketCapStockApiDataSlice';
 
 const rootReducer = combineReducers({
     userWatchlist:userWatchlistReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     handelMsgPopUp:msgPopUpReducer,
     userCartData:userCartReducer,
     userProfileData:userProfileReducer,
-    allStockApiData:allStockHeadReducer
+    allStockApiData:allStockHeadReducer,
+    topMarketCapStock:topMarketCapStockReducer
 });
 
 export default rootReducer;

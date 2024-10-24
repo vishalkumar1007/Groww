@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./Stocks.css";
 
 // ............. json data ............
-import marketCapData from "../../utils/marketCapData.json";
+// import marketCapData from "../../utils/marketCapData.json";
 
 // ...... component .......
 import StocksIndex from "../../component/StockIndex/StockIndex";
@@ -56,15 +56,23 @@ import {
   // selectorTopLoserStockErrorMsg,
 } from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
 
+import // fetchAllStockApiThunk,
+// selectorAllStockApiData,
+// selectorAllStockApiIsLoading,
+// selectorAllStockApiIsError,
+// selectorAllStockApiErrorMsg
+"../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
+
 import {
-  // fetchAllStockApiThunk,
-  // selectorAllStockApiData,
-  // selectorAllStockApiIsLoading,
-  // selectorAllStockApiIsError,
-  // selectorAllStockApiErrorMsg
-} from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
+  fetchTopMarketCapStockThunk,
+  selectorTopMarketCapStockData,
+  selectorTopMarketCapStockLoading,
+  // selectorTopMarketCapStockError,
+  // selectorTopMarketCapStockErrorMsg
+} from "../../features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData";
 
 import { useNavigate } from "react-router-dom";
+import StockMarketCapLoader from "../../component/Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
 
 const Stocks = () => {
   const dispatch = useDispatch();
@@ -78,6 +86,24 @@ const Stocks = () => {
   const paginationChunk = 10;
 
   // api data state
+
+  // handel to calling topByMarketCapStock api in redux -----------------
+
+  const topMarketCapStockApiData = useSelector(selectorTopMarketCapStockData);
+  const topMarketCapStockApiLoading = useSelector(
+    selectorTopMarketCapStockLoading
+  );
+
+  useEffect(() => {
+    if (topMarketCapStockApiData.length === 0) {
+      dispatch(fetchTopMarketCapStockThunk());
+    }
+  }, [dispatch, topMarketCapStockApiData]);
+
+  useEffect(() => {
+    console.log(topMarketCapStockApiData);
+    console.log(topMarketCapStockApiLoading);
+  }, [topMarketCapStockApiData,topMarketCapStockApiLoading]);
 
   // handel to calling mostBoughStock api in redux -----------------
 
@@ -143,21 +169,24 @@ const Stocks = () => {
   }, []);
 
   useEffect(() => {
-    const endIndex =
-      paginationChunk * paginationCurrentActivePage > marketCapData.length
-        ? marketCapData.length
-        : paginationChunk * paginationCurrentActivePage;
-    const startIndex =
-      endIndex -
-      (endIndex === marketCapData.length
-        ? (endIndex % 10) + paginationChunk === paginationChunk
-          ? paginationChunk
-          : endIndex % 10
-        : paginationChunk);
+    if (topMarketCapStockApiData.length > 0) {
+      const endIndex =
+        paginationChunk * paginationCurrentActivePage >
+        topMarketCapStockApiData.length
+          ? topMarketCapStockApiData.length
+          : paginationChunk * paginationCurrentActivePage;
+      const startIndex =
+        endIndex -
+        (endIndex === topMarketCapStockApiData.length
+          ? (endIndex % 10) + paginationChunk === paginationChunk
+            ? paginationChunk
+            : endIndex % 10
+          : paginationChunk);
 
-    setPaginationStartIndex(startIndex);
-    setPaginationEndIndex(endIndex);
-  }, [paginationCurrentActivePage]);
+      setPaginationStartIndex(startIndex);
+      setPaginationEndIndex(endIndex);
+    }
+  }, [paginationCurrentActivePage, topMarketCapStockApiData]);
 
   return (
     <div className="stocks_main">
@@ -559,7 +588,7 @@ const Stocks = () => {
                   ) : (
                     topLoserStockApiData &&
                     topLoserStockApiData
-                      .slice(8,12)
+                      .slice(8, 12)
                       .map((data) => (
                         <StockCard
                           key={data._id}
@@ -626,21 +655,32 @@ const Stocks = () => {
                   // ref={PreventScrollMarketCap}
                   // onScroll={handleScrollMarketCap}
                 >
-                  {marketCapData
-                    .slice(paginationStartIndex, paginationEndIndex)
-                    .map((data) => (
-                      <StockMarketCap
-                        key={data.id}
-                        companyName={data.companyName}
-                        cost={data.cost}
-                        costPerRate={data.costPerRate}
-                      />
-                    ))}
+                  {topMarketCapStockApiLoading ? (
+                    <>
+                      <StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader />
+                    </>
+                  ) : (
+                    topMarketCapStockApiData
+                      .slice(paginationStartIndex, paginationEndIndex)
+                      .map((data) => (
+                        <StockMarketCap
+                          key={data._id}
+                          cost={data.stockCost}
+                          costPerRate={data.stockCostPerRate}
+                          stockId={data.stock_id}
+                          uniqueId={data._id}
+                          title={data.name}
+                          logoUrl={data.logoUrl}
+                        />
+                      ))
+                  )}
                 </div>
                 <div className="stocks_left_market_cap_pagination_section">
                   <div className="stocks_left_market_cap_pagination_section_arrange_width">
                     <Pagination
-                      totalPage={Math.ceil(marketCapData.length / 10)}
+                      totalPage={Math.ceil(
+                        topMarketCapStockApiData.length / 10
+                      )}
                       currentActivePage={(activePage) => {
                         currentActivePage(activePage);
                       }}
@@ -656,7 +696,13 @@ const Stocks = () => {
             <div className="stocks_content_right_yourInvestments_title_head">
               <span id="scry_title_text">Your Investments</span>
               <span id="scry_more">
-                <button onClick={()=>{navigate('/user/investments')}}>Dashboard</button>
+                <button
+                  onClick={() => {
+                    navigate("/user/investments");
+                  }}
+                >
+                  Dashboard
+                </button>
               </span>
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
@@ -684,11 +730,18 @@ const Stocks = () => {
           <div className="stocks_content_right_watchLists">
             <div className="stocks_content_right_watchLists_title_head">
               <span id="scrw_title_text">All watchlists</span>
-              <span id="scrw_more" onClick={()=>{navigate('/dashboard/watchlist')}}>View all</span>
+              <span
+                id="scrw_more"
+                onClick={() => {
+                  navigate("/dashboard/watchlist");
+                }}
+              >
+                View all
+              </span>
             </div>
             <div className="stocks_content_right_watchLists_card_main">
               <div className="stocks_content_right_watchLists_card_main_comp">
-                <StockWatchListCard watchlistTitle="vishal"/>
+                <StockWatchListCard watchlistTitle="vishal" />
               </div>
               <div className="stocks_content_right_watchLists_card_main_add_box">
                 <div className="stocks_content_right_watchLists_card_main_add_box_arrange_width">
