@@ -73,7 +73,7 @@
     height: 16px;
     position: absolute;
     z-index: 70;
-    top: 55px;
+    top: 68px;
     font-size: 12px;
     color: #dbdbdb;
 }
@@ -108,7 +108,7 @@
     scrollbar-width: none;
     /* background-color: red; */
     position: absolute;
-    top: 80px;
+    top: 90px;
 }
 
 .searchStock_search_result_contain_box{
