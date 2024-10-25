@@ -99,13 +99,16 @@ const StockDetail = () => {
 
   const addStockToWatchList = () => {
     // setIsStockAlreadyInCart(!isStockAlreadyInCart);
-    if (isStockAlreadyInCart) {
-      dispatch(removeFromCart({ stockId : APIstockData[0].stock_id }));
-      setIsStockAlreadyInCart(false);
-    } else {
-      dispatch(
-        addToCart({ uniqueId : APIstockData[0]._id, stockId : APIstockData[0].stock_id, title : APIstockData[0].name, cost : APIstockData[0].stockCost, costPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
-      );
+    console.log('APIstockData : ',APIstockData);
+    if(APIstockData.length>0){
+      if (isStockAlreadyInCart) {
+        dispatch(removeFromCart({ stockId : APIstockData[0].stock_id }));
+        setIsStockAlreadyInCart(false);
+      } else {
+        dispatch(
+          addToCart({ uniqueId : APIstockData[0]._id, stockId : APIstockData[0].stock_id, title : APIstockData[0].name, cost : APIstockData[0].stockCost, costPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
+        );
+      }
     }
   };
 
