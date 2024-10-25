@@ -11,7 +11,7 @@
     /* position: absolute; */
     position: relative;
     z-index: 70;
-    min-width: 300px;
+    min-width: 240px;
 }
 .searchStock_search{
     /* background-color: rgb(119, 27, 180); */
@@ -95,7 +95,7 @@
     border: 0px solid #e2e2e2e7;
     width: 100%;
     height: 0px;
-    min-width: 265px;
+    min-width: 273px;
     max-width: 456px;
     transition: 0.2s ease-in-out;
     border-radius: 7px;
@@ -149,7 +149,7 @@
 }
 
 .searchStock_search_result_contain_box_close_button{
-    /* background-color: rgb(208, 44, 72); */
+    background-color: #ffffff;
     width: 20px;
     height: 20px;
     position: absolute;    

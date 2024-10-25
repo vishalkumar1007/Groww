@@ -100,10 +100,6 @@ const Stocks = () => {
     }
   }, [dispatch, topMarketCapStockApiData]);
 
-  useEffect(() => {
-    console.log(topMarketCapStockApiData);
-    console.log(topMarketCapStockApiLoading);
-  }, [topMarketCapStockApiData,topMarketCapStockApiLoading]);
 
   // handel to calling mostBoughStock api in redux -----------------
 

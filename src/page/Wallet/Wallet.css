@@ -2,16 +2,23 @@
   /* background-color: pink; */
   width: 100%;
   /* height: 500px; */
+  
+  /* prevent to select text  */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.wallet_main_handel_flex_bug_in_parent{
+  /* background-color: rgba(174, 184, 92, 0.427); */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   min-width: 20px;
-  /* prevent to select text  */
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 .wallet_main_arrange_width {
   /* background-color: gray; */

@@ -8,10 +8,12 @@ import { selectUserCartValue } from "../../features/userCart/centralExportUserCa
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 import { addUserDetail } from "../../features/userProfileData/centralExportUserProfileData";
 import SearchStock from "../SearchStock/SearchStock";
+import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData'
 
 const Navbar = ({ callFrom = "" }) => {
   const dispatch = useDispatch();
   const userCardCount = useSelector(selectUserCartValue);
+  const userProfileData = useSelector(selectUserProfileData);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -21,6 +23,10 @@ const Navbar = ({ callFrom = "" }) => {
   const removeActivePagePreview = () => {
     setActiveFeture("");
   };
+
+  useEffect(()=>{
+    setUserTokenData(userProfileData);
+  },[userProfileData])
 
   useEffect(() => {
     if (callFrom === "Dashboard") {
@@ -65,12 +71,14 @@ const Navbar = ({ callFrom = "" }) => {
       navigate("/login");
       return;
     }
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    const data = JSON.parse(window.atob(base64));
-    setUserTokenData(data);
-    dispatch(addUserDetail(data));
-  }, [dispatch, navigate]);
+
+    if(userProfileData.length===0){
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const data = JSON.parse(window.atob(base64));
+      dispatch(addUserDetail(data));
+    }
+  }, [dispatch, navigate, userProfileData]);
 
   const profileSectionRef = useRef(null);
 

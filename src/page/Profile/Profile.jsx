@@ -1,9 +1,13 @@
 import "./Profile.css";
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+// import {addUserDetail} from '../../features/userProfileData/centralExportUserProfileData'
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
+import { addUserDetail } from "../../features/userProfileData/centralExportUserProfileData";
 
 const Profile = () => {
   const userProfileData = useSelector(selectUserProfileData);
@@ -15,6 +19,10 @@ const Profile = () => {
   const handelProfileActiveFeatureSection = (makeActive) => {
     setProfileViewFeatureSection(makeActive);
   };
+
+  const handelToOpenSection = (section)=>{
+    setProfileViewFeatureSection(section);
+  }
 
   useEffect(() => {
     setUserName(userProfileData.userFirstName);
@@ -30,7 +38,7 @@ const Profile = () => {
             <div className="user_profile_left_image_box_main">
               <div
                 className="user_profile_left_image_circle"
-                style={{ backgroundColor: `${userProfileData?.userColorCode}` }}
+                style={{ backgroundColor: `${userProfileData?.userColorCode || '#47a778'}` }}
               >
                 {userFirstName[0]}
               </div>
@@ -103,7 +111,7 @@ const Profile = () => {
             {profileViewFeatureSection === "basicDetail" ? (
               <BasicDetail userProfileData={userProfileData} />
             ) : (
-              <UpdateProfile userProfileData={userProfileData} />
+              <UpdateProfile userProfileData={userProfileData}  openSection={(section)=>handelToOpenSection(section)} />
             )}
           </div>
         </div>
@@ -253,15 +261,13 @@ const BasicDetail = ({ userProfileData = "" }) => {
               PROFILE COLOR CODE
             </label>
             <div id="basicDetail_name_showData">
-              {
-                userProfileData
+              {userProfileData
                 ? `${
                     userProfileData.userColorCode
                       ? userProfileData.userColorCode
                       : "update now"
                   }`
-                : "#000000"
-              }
+                : "#000000"}
             </div>
           </div>
         </div>
@@ -270,7 +276,242 @@ const BasicDetail = ({ userProfileData = "" }) => {
   );
 };
 
-const UpdateProfile = ({ userProfileData = "" }) => {
+const UpdateProfile = ({ userProfileData = "" , openSection}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [activeUpdateButton, setActiveUpdateButton] = useState(false);
+  const [userCredentialValid, setUserCredentialValid] = useState(false);
+  //
+  const [updateUserFirstName, setUpdateUserFirstName] = useState("");
+  const [updateUserLastName, setUpdateUserLastName] = useState("");
+  const [updateUserDateOfBirth, setUpdateUserDateOfBirth] = useState("");
+  const [updateUserGender, setUpdateUserGender] = useState("");
+  const [updateUserMaritalStatus, setUpdateUserMaritalStatus] = useState("");
+  const [updateUserMobileNumber, setUpdateUserMobileNumber] = useState("");
+  const [updateUserProfileColorCode, setUpdateUserProfileColorCode] =
+    useState("");
+
+
+
+  // handel to update userProfile.
+  const handelToUpdateUserProfile = async () => {
+    // deactivate update btn
+    setActiveUpdateButton(false);
+
+    // updating process start
+    const updatedData = {
+      userColorCode: updateUserProfileColorCode,
+      userEmail: userProfileData.userEmail,
+      userFirstName: updateUserFirstName,
+      userLastName: updateUserLastName,
+      userDateOfBirth: updateUserDateOfBirth,
+      userGender: updateUserGender,
+      userMaritalStatus: updateUserMaritalStatus,
+      userMobileNumber: updateUserMobileNumber,
+    };
+
+    const UpdateProfileApi = "http://localhost:8080/api/user/updateProfile";
+    const response = await fetch(UpdateProfileApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    if (!response.ok) {
+      if (response.status === 404) {
+        dispatch(
+          fireTheMessagePopUp({
+            messageShow: "Not Found 404",
+            positiveResponse: false,
+            makeFire: true,
+          })
+        );
+      } else if (response.status === 401) {
+        dispatch(
+          fireTheMessagePopUp({
+            messageShow: "Credential required 401",
+            positiveResponse: false,
+            makeFire: true,
+          })
+        );
+      } else {
+        dispatch(
+          fireTheMessagePopUp({
+            messageShow: "Server Error, Report Us",
+            positiveResponse: false,
+            makeFire: true,
+          })
+        );
+      }
+    }
+
+    if (response.status === 200) {
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      //---------------
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const dispatchData = JSON.parse(window.atob(base64));
+      dispatch(addUserDetail(dispatchData));
+
+      // -----------------
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Profile Update Successful , Login again",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+
+      //-------- reload the page
+    }
+    // activate update button
+    setActiveUpdateButton(true);
+    openSection('basicDetail')
+    // window.location.reload();
+  };
+
+  // First useEffect to set the values from userProfileData
+  useEffect(() => {
+    setUpdateUserFirstName(userProfileData?.userFirstName ?? "");
+    setUpdateUserLastName(userProfileData?.userLastName ?? "");
+    setUpdateUserDateOfBirth(userProfileData?.userDateOfBirth ?? "");
+    setUpdateUserGender(userProfileData?.userGender ?? "");
+    setUpdateUserMaritalStatus(userProfileData?.userMaritalStatus ?? "");
+    setUpdateUserMobileNumber(userProfileData?.userMobileNumber ?? "");
+    setUpdateUserProfileColorCode(userProfileData?.userColorCode ?? "");
+  }, [userProfileData]);
+
+  // Second useEffect to validate the user inputs
+  useEffect(() => {
+    let isValidUserInputs = true;
+
+    if (
+      updateUserFirstName &&
+      !(updateUserFirstName.length >= 4 && updateUserFirstName.length <= 20)
+    ) {
+      isValidUserInputs = false;
+    } else if (
+      updateUserLastName &&
+      !(updateUserLastName.length > 2 && updateUserLastName.length < 10)
+    ) {
+      isValidUserInputs = false;
+    } else if (
+      updateUserDateOfBirth &&
+      !(updateUserDateOfBirth.length > 4 && updateUserDateOfBirth.length < 20)
+    ) {
+      isValidUserInputs = false;
+    } else if (
+      updateUserGender &&
+      !(updateUserGender.length > 3 && updateUserGender.length < 7)
+    ) {
+      isValidUserInputs = false;
+    } else if (
+      updateUserMaritalStatus &&
+      !(
+        updateUserMaritalStatus.length > 4 &&
+        updateUserMaritalStatus.length < 20
+      )
+    ) {
+      isValidUserInputs = false;
+    } else if (updateUserMobileNumber && updateUserMobileNumber.length !== 10) {
+      isValidUserInputs = false;
+    } else if (
+      updateUserProfileColorCode &&
+      !(
+        updateUserProfileColorCode.startsWith("#") &&
+        updateUserProfileColorCode.length >= 7 &&
+        updateUserProfileColorCode.length <= 9
+      )
+    ) {
+      isValidUserInputs = false;
+    }
+
+    // Update user credential validation status
+    setUserCredentialValid(isValidUserInputs);
+  }, [
+    updateUserFirstName,
+    updateUserLastName,
+    updateUserDateOfBirth,
+    updateUserGender,
+    updateUserMaritalStatus,
+    updateUserMobileNumber,
+    updateUserProfileColorCode,
+  ]);
+
+  useEffect(() => {
+    if (
+      updateUserFirstName !== (userProfileData?.userFirstName ?? "") &&
+      updateUserFirstName !== "" &&
+      userCredentialValid
+    ) {
+
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserLastName !== (userProfileData?.userLastName ?? "") &&
+      updateUserLastName !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserDateOfBirth !== (userProfileData?.userDateOfBirth ?? "") &&
+      updateUserDateOfBirth !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserGender !== (userProfileData?.userGender ?? "") &&
+      updateUserGender !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserMaritalStatus !== (userProfileData?.userMaritalStatus ?? "") &&
+      updateUserMaritalStatus !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserMobileNumber !== (userProfileData?.userMobileNumber ?? "") &&
+      updateUserMobileNumber !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else if (
+      updateUserProfileColorCode !== (userProfileData?.userColorCode ?? "") &&
+      updateUserProfileColorCode !== "" &&
+      userCredentialValid
+    ) {
+      setActiveUpdateButton(true);
+    } else {
+      setActiveUpdateButton(false);
+    }
+  }, [
+    updateUserMaritalStatus,
+    updateUserDateOfBirth,
+    updateUserFirstName,
+    updateUserGender,
+    updateUserLastName,
+    updateUserMobileNumber,
+    updateUserProfileColorCode,
+    userCredentialValid,
+    userProfileData?.userColorCode,
+    userProfileData?.userDateOfBirth,
+    userProfileData?.userFirstName,
+    userProfileData?.userGender,
+    userProfileData?.userLastName,
+    userProfileData?.userMaritalStatus,
+    userProfileData?.userMobileNumber,
+  ]);
+  
+
   return (
     <div className="user_profile_update_profile_component_main">
       <div className="user_profile_update_profile_component_main_design_1"></div>
@@ -282,11 +523,14 @@ const UpdateProfile = ({ userProfileData = "" }) => {
       <div className="user_profile_update_profile_component_main_design_7"></div>
       <button
         className={
-          true
-            ? "user_profile_update_profile_component_update_userData_disable_btn"
-            : "user_profile_update_profile_component_update_userData_enable_btn"
+          activeUpdateButton
+            ? "user_profile_update_profile_component_update_userData_enable_btn"
+            : "user_profile_update_profile_component_update_userData_disable_btn"
         }
-        disabled={true}
+        disabled={!activeUpdateButton}
+        onClick={() => {
+          handelToUpdateUserProfile();
+        }}
       >
         Update
       </button>
@@ -314,6 +558,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "user first name"
                 }
+                onChange={(e) => setUpdateUserFirstName(e.target.value)}
               />
             </div>
           </div>
@@ -339,6 +584,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "user last name"
                 }
+                onChange={(e) => setUpdateUserLastName(e.target.value)}
               />
             </div>
           </div>
@@ -365,6 +611,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "user@gmail.com"
                 }
+                disabled={true}
               />
             </div>
           </div>
@@ -391,6 +638,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "+91 6205594943"
                 }
+                onChange={(e) => setUpdateUserMobileNumber(e.target.value)}
               />
             </div>
           </div>
@@ -419,6 +667,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "17 July 2003"
                 }
+                onChange={(e) => setUpdateUserDateOfBirth(e.target.value)}
               />
             </div>
           </div>
@@ -445,6 +694,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "Male"
                 }
+                onChange={(e) => setUpdateUserGender(e.target.value)}
               />
             </div>
           </div>
@@ -471,6 +721,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "Single"
                 }
+                onChange={(e) => setUpdateUserMaritalStatus(e.target.value)}
               />
             </div>
           </div>
@@ -497,6 +748,7 @@ const UpdateProfile = ({ userProfileData = "" }) => {
                       }`
                     : "#000000"
                 }
+                onChange={(e) => setUpdateUserProfileColorCode(e.target.value)}
               />
             </div>
           </div>
