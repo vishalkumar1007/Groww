@@ -29,7 +29,6 @@ import {
   addToCart,
   removeFromCart,
   selectUserCartValue,
-  selectUserCartIsLoading,
   // selectUserCartIsError
 } from "../../features/userCart/centralExportUserCart";
 
@@ -38,7 +37,7 @@ const StockDetail = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserCartValue);
-  const user_watchlist_loading = useSelector(selectUserCartIsLoading);
+  // const user_watchlist_loading = useSelector(selectUserCartIsLoading);
   const [checkForPageFound, setCheckForPageFound] = useState(true);
   const [companyLogoUrlName, setCompanyLogoUrlName] = useState(null);
   const [companyName, setCompanyName] = useState("Name");
@@ -52,6 +51,9 @@ const StockDetail = () => {
     financialActiveQuarterlyOrYearly,
     setFinancialActiveQuarterlyOrYearly,
   ] = useState("quarterly");
+  const [isStockDetailLoadingStop, setIsStockDetailLoadingStop] = useState(false);
+
+  // console.log("user_watchlist_loading : ", user_watchlist_loading);
 
   const [isBuyAndSellOpenInMobile, setIsBuyAndSellOpenInMobile] =
     useState(false);
@@ -73,7 +75,8 @@ const StockDetail = () => {
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken) {
-      const api = "http://localhost:8080/api/user/verify/token";
+      const api =
+        "http://localhost:8080/api/user/verify/token";
 
       fetch(api, {
         method: "GET",
@@ -159,6 +162,7 @@ const StockDetail = () => {
           setCheckForPageFound(true);
           return;
         }
+
         const jsonData = await response.json();
 
         //  what if not found data
@@ -166,15 +170,15 @@ const StockDetail = () => {
           setCheckForPageFound(false);
           return;
         }
+          // adding data into useState variable
+          setCompanyLogoUrlName(jsonData[0].logoUrl);
+          setCompanyName(jsonData[0].name);
+          setCompanyCost(jsonData[0].stockCost);
+          setCompanyCostPerRate(jsonData[0].stockCostPerRate);
 
-        // adding data into useState variable
-        setCompanyLogoUrlName(jsonData[0].logoUrl);
-        setCompanyName(jsonData[0].name);
-        setCompanyCost(jsonData[0].stockCost);
-        setCompanyCostPerRate(jsonData[0].stockCostPerRate);
-
-        //
-        setAPIStockData(jsonData);
+          //
+          setAPIStockData(jsonData);
+          setIsStockDetailLoadingStop(true);
       } catch (error) {
         //  what if not found data
         setCheckForPageFound(false);
@@ -277,7 +281,7 @@ const StockDetail = () => {
                     <div className="stock_detail_company_information_head_left_logo">
                       <span id="stock_detail_company_logo_span">
                         {/*  */}
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <img src={companyLogoUrlName} alt="logo" />
                         ) : (
                           <div className="stock_detail_loader_on_logo">
@@ -292,7 +296,7 @@ const StockDetail = () => {
                     <div className="stock_detail_company_information_head_left_title_and_cost">
                       <div className="stock_detail_company_information_head_left_title">
                         {/* */}
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <span id="stock_detail_company_name">
                             {companyName || "Company Name"}
                           </span>
@@ -305,7 +309,7 @@ const StockDetail = () => {
                       <div className="stock_detail_company_information_head_left_cost_and_CostPerRate">
                         {/* */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <>
                             <span id="stock_detail_company_information_head_left_cost">
                               ₹{companyCost}
@@ -333,7 +337,7 @@ const StockDetail = () => {
                   <div className="stock_detail_company_information_head_right">
                     <button className="stock_detail_company_information_head_right_alert">
                       {/*  */}
-                      {!user_watchlist_loading ? (
+                      {isStockDetailLoadingStop ? (
                         <>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -382,7 +386,7 @@ const StockDetail = () => {
                     >
                       {/*  */}
 
-                      {!user_watchlist_loading ? (
+                      {isStockDetailLoadingStop ? (
                         <>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -424,7 +428,7 @@ const StockDetail = () => {
                   <div className="stock_detail_company_graph_main_image_box">
                     {/*  */}
 
-                    {!user_watchlist_loading ? (
+                    {isStockDetailLoadingStop ? (
                       <>
                         {isCostPerRateNegative ? (
                           <img src={loss_graph_image} alt="" />
@@ -456,7 +460,7 @@ const StockDetail = () => {
                             Today's Low
                           </span>
                           {/*  */}
-                          {!user_watchlist_loading ? (
+                          {isStockDetailLoadingStop ? (
                             <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_data">
                               {APIstockData[0]?.performance.todayLow ||
                                 "000.00"}
@@ -478,7 +482,7 @@ const StockDetail = () => {
                             Today's High
                           </span>
                           {/*  */}
-                          {!user_watchlist_loading ? (
+                          {isStockDetailLoadingStop ? (
                             <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_data">
                               {APIstockData[0]?.performance.todayHigh ||
                                 "000.00"}
@@ -499,7 +503,7 @@ const StockDetail = () => {
                             52W Low
                           </span>
                           {/*  */}
-                          {!user_watchlist_loading ? (
+                          {isStockDetailLoadingStop ? (
                             <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_data">
                               {APIstockData[0]?.performance.FTW_low || "00.00"}
                             </span>
@@ -521,7 +525,7 @@ const StockDetail = () => {
                           </span>
                           {/*  */}
 
-                          {!user_watchlist_loading ? (
+                          {isStockDetailLoadingStop ? (
                             <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_data">
                               {APIstockData[0]?.performance.FTW_high ||
                                 "000.00"}
@@ -543,7 +547,7 @@ const StockDetail = () => {
                       <span id="stock_detail_company_performance_data_top_open">
                         <p id="perform_title_x">Open</p>
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.open || "000.00"}
                           </p>
@@ -560,7 +564,7 @@ const StockDetail = () => {
                         <p id="perform_title_x">Prev. Close</p>
                         {/*  */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.close || "000.00"}
                           </p>
@@ -577,7 +581,7 @@ const StockDetail = () => {
                         <p id="perform_title_x">Volume</p>
                         {/*  */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.volume || "000.00"}
                           </p>
@@ -596,7 +600,7 @@ const StockDetail = () => {
                         <p id="perform_title_x">Total traded value</p>
                         {/* */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.totalTradeValue ||
                               "000.00 Cr"}
@@ -614,7 +618,7 @@ const StockDetail = () => {
                         <p id="perform_title_x">Upper Circuit</p>
                         {/* */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.upperCircuit ||
                               "000.00"}
@@ -632,7 +636,7 @@ const StockDetail = () => {
                         <p id="perform_title_x">Lower Circuit</p>
                         {/*  */}
 
-                        {!user_watchlist_loading ? (
+                        {isStockDetailLoadingStop ? (
                           <p id="perform_value_y">
                             {APIstockData[0]?.performance.lowerCircuit ||
                               "000.00"}
@@ -661,7 +665,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 ₹
                                 {APIstockData[0]?.fundamentals.marketCap ||
@@ -682,7 +686,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.PE_ratio ||
                                   "000.00"}
@@ -702,7 +706,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.PB_ratio ||
                                   "000.00"}
@@ -722,7 +726,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.Industry ||
                                   "000.00"}
@@ -742,7 +746,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.debtToEquity ||
                                   "000.00"}
@@ -766,7 +770,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/*  */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.ROE || "000.00"}
                               </>
@@ -785,7 +789,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/* */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.EPS || "000.00"}{" "}
                               </>
@@ -804,7 +808,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/* */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {" "}
                                 {APIstockData[0]?.fundamentals.dividendYield ||
@@ -825,7 +829,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/* */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {APIstockData[0]?.fundamentals.bookValue ||
                                   "000.00"}{" "}
@@ -845,7 +849,7 @@ const StockDetail = () => {
                           <span id="fundamental_cost_x">
                             {/* */}
 
-                            {!user_watchlist_loading ? (
+                            {isStockDetailLoadingStop ? (
                               <>
                                 {" "}
                                 {APIstockData[0]?.fundamentals.faceValue ||
@@ -872,7 +876,7 @@ const StockDetail = () => {
                     </span>
                   </div>
                   <div className="stock_detail_company_financial_main_data_visualization">
-                    {!user_watchlist_loading ? (
+                    {isStockDetailLoadingStop ? (
                       <>
                         <div className="stock_detail_company_financial_main_data_visualization_top">
                           <div className="stock_detail_company_financial_main_data_visualization_top_arrange_width">
@@ -1435,7 +1439,7 @@ const StockDetail = () => {
                   </div>
                   <div className="stock_detail_company_shareholding_pattern_graph_div">
                     <div className="stock_detail_company_shareholding_pattern_graph_main">
-                      {!user_watchlist_loading ? (
+                      {isStockDetailLoadingStop ? (
                         <div className="stock_detail_company_shareholding_pattern_graph_main_arrange_width">
                           <div className="stock_detail_company_shareholding_pattern_graph_main_top">
                             <button
@@ -1591,7 +1595,7 @@ const StockDetail = () => {
               {/* ........... Buy Stock ............... */}
               <div className="stock_detail_buy_stock_main">
                 <div className="stock_detail_buy_stock_main_buy_card_div">
-                  {!user_watchlist_loading ? (
+                  {isStockDetailLoadingStop ? (
                     <BuyStockCard
                       companyName={companyName}
                       stockCost={companyCost}
