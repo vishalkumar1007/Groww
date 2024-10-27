@@ -29,14 +29,16 @@ import {
   addToCart,
   removeFromCart,
   selectUserCartValue,
+  selectUserCartIsLoading,
+  // selectUserCartIsError
 } from "../../features/userCart/centralExportUserCart";
-
 
 const StockDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserCartValue);
+  const user_watchlist_loading = useSelector(selectUserCartIsLoading);
   const [checkForPageFound, setCheckForPageFound] = useState(true);
   const [companyLogoUrlName, setCompanyLogoUrlName] = useState(null);
   const [companyName, setCompanyName] = useState("Name");
@@ -56,68 +58,70 @@ const StockDetail = () => {
   // const { image } = useImage(companyLogoUrlName);
 
   const [shareHolderPercentageRange1, setShareHolderPercentageRange1] =
-  useState(0);
+    useState(0);
   const [shareHolderPercentageRange2, setShareHolderPercentageRange2] =
-  useState(0);
+    useState(0);
   const [shareHolderPercentageRange3, setShareHolderPercentageRange3] =
-  useState(0);
+    useState(0);
   // variables of Stock Api data
   const [APIstockData, setAPIStockData] = useState("");
 
   // add to card section
   const [isStockAlreadyInCart, setIsStockAlreadyInCart] = useState(false);
 
+  // auth user token
+  useEffect(() => {
+    const localStorageToken = localStorage.getItem("token");
+    if (localStorageToken) {
+      const api = "http://localhost:8080/api/user/verify/token";
 
-  // auth user token 
-  useEffect(()=>{
-    const localStorageToken = localStorage.getItem('token');
-    if(localStorageToken){
-      const api = 'http://localhost:8080/api/user/verify/token';
-  
-      fetch(api , {
-        method:'GET',
+      fetch(api, {
+        method: "GET",
         headers: {
-          'Content-Type':'application/json',
-          'Authorization':`Bearer ${localStorageToken}`
-        }
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorageToken}`,
+        },
       })
-      .then(async (response)=>{
-        if(!response.ok){
-          console.log('response is not ok');
-          navigate('/login');
-        }
-      })
-      .catch((err)=>{
-        console.log('Error on fetching auto login' , err);
-      })
-
+        .then(async (response) => {
+          if (!response.ok) {
+            console.log("response is not ok");
+            navigate("/login");
+          }
+        })
+        .catch((err) => {
+          console.log("Error on fetching auto login", err);
+        });
     }
-
-  },[navigate])
-
-
+  }, [navigate]);
 
   const addStockToCart = () => {
     // setIsStockAlreadyInCart(!isStockAlreadyInCart);
-    if(APIstockData.length>0){
+    if (APIstockData.length > 0) {
       if (isStockAlreadyInCart) {
-        dispatch(removeFromCart({ stock_id : APIstockData[0].stock_id }));
+        dispatch(removeFromCart({ stock_id: APIstockData[0].stock_id }));
         setIsStockAlreadyInCart(false);
       } else {
         dispatch(
-          addToCart({ _id : APIstockData[0]._id, stock_id : APIstockData[0].stock_id, name : APIstockData[0].name, stockCost : APIstockData[0].stockCost, stockCostPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
+          addToCart({
+            _id: APIstockData[0]._id,
+            stock_id: APIstockData[0].stock_id,
+            name: APIstockData[0].name,
+            stockCost: APIstockData[0].stockCost,
+            stockCostPerRate: APIstockData[0].stockCostPerRate,
+            logoUrl: APIstockData[0].logoUrl,
+          })
         );
       }
     }
   };
 
   useEffect(() => {
-    if(APIstockData.length>0){
+    if (APIstockData.length > 0) {
       for (let i = 0; i < user_watchlist_data.length; i++) {
         if (user_watchlist_data[i].stock_id === APIstockData[0].stock_id) {
           setIsStockAlreadyInCart(true);
           break;
-        }else{
+        } else {
           setIsStockAlreadyInCart(false);
         }
       }
@@ -131,7 +135,6 @@ const StockDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [companyName]);
-
 
   // Get stock name from url
   const queryParams = new URLSearchParams(location.search);
@@ -273,99 +276,169 @@ const StockDetail = () => {
                   <div className="stock_detail_company_information_head_left">
                     <div className="stock_detail_company_information_head_left_logo">
                       <span id="stock_detail_company_logo_span">
-                        <img src={companyLogoUrlName} alt="logo" />
+                        {/*  */}
+                        {!user_watchlist_loading ? (
+                          <img src={companyLogoUrlName} alt="logo" />
+                        ) : (
+                          <div className="stock_detail_loader_on_logo">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="stock_detail_animation_logo_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                     </div>
                     <div className="stock_detail_company_information_head_left_title_and_cost">
                       <div className="stock_detail_company_information_head_left_title">
-                        <span id="stock_detail_company_name">
-                          {companyName || "Company Name"}
-                        </span>
+                        {/* */}
+                        {!user_watchlist_loading ? (
+                          <span id="stock_detail_company_name">
+                            {companyName || "Company Name"}
+                          </span>
+                        ) : (
+                          <div className="stock_detail_loader_cp_name">
+                            <div className="stock_detail_loader_animation"></div>
+                          </div>
+                        )}
                       </div>
                       <div className="stock_detail_company_information_head_left_cost_and_CostPerRate">
-                        <span id="stock_detail_company_information_head_left_cost">
-                          ₹{companyCost}
-                        </span>
-                        <span
-                          id="stock_detail_company_information_head_left_CostPerRate"
-                          style={{
-                            color: isCostPerRateNegative
-                              ? "#EB5B3C"
-                              : "#00B386",
-                          }}
-                        >
-                          {companyCostPerRate}
-                        </span>
+                        {/* */}
+
+                        {!user_watchlist_loading ? (
+                          <>
+                            <span id="stock_detail_company_information_head_left_cost">
+                              ₹{companyCost}
+                            </span>
+                            <span
+                              id="stock_detail_company_information_head_left_CostPerRate"
+                              style={{
+                                color: isCostPerRateNegative
+                                  ? "#EB5B3C"
+                                  : "#00B386",
+                              }}
+                            >
+                              {companyCostPerRate}
+                            </span>
+                          </>
+                        ) : (
+                          <div className="stock_detail_loader_cp_cost">
+                            <div className="stock_detail_loader_animation"></div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
 
                   <div className="stock_detail_company_information_head_right">
                     <button className="stock_detail_company_information_head_right_alert">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="17"
-                        height="17"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="12" cy="13" r="8" />
-                        <path d="M12 9v4l2 2" />
-                        <path d="M5 3 2 6" />
-                        <path d="m22 6-3-3" />
-                        <path d="M6.38 18.7 4 21" />
-                        <path d="M17.64 18.67 20 21" />
-                      </svg>
-                      <span>Create Alert</span>
+                      {/*  */}
+                      {!user_watchlist_loading ? (
+                        <>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="17"
+                            height="17"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <circle cx="12" cy="13" r="8" />
+                            <path d="M12 9v4l2 2" />
+                            <path d="M5 3 2 6" />
+                            <path d="m22 6-3-3" />
+                            <path d="M6.38 18.7 4 21" />
+                            <path d="M17.64 18.67 20 21" />
+                          </svg>
+                          <span>Create Alert</span>
+                        </>
+                      ) : (
+                        <div className="stock_detail_loader_cp_alert">
+                          <div className="stock_detail_loader_animation"></div>
+                        </div>
+                      )}
                     </button>
                     <button
                       className="stock_detail_company_information_head_right_watchlist"
-                      id={isStockAlreadyInCart?'already_in_stock_adding_id_stock_detail_company_information_head_right_watchlist':'adding_id_stock_detail_company_information_head_right_watchlist'}
+                      id={
+                        isStockAlreadyInCart
+                          ? "already_in_stock_adding_id_stock_detail_company_information_head_right_watchlist"
+                          : "adding_id_stock_detail_company_information_head_right_watchlist"
+                      }
                       style={{
                         border: isStockAlreadyInCart
                           ? `1px solid #00b3863d`
                           : null,
-                        backgroundColor: isStockAlreadyInCart?'#00b3860d':null,
+                        backgroundColor: isStockAlreadyInCart
+                          ? "#00b3860d"
+                          : null,
                       }}
                       onClick={() => {
                         addStockToCart();
                       }}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="17"
-                        height="17"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={isStockAlreadyInCart ? "#00b386" : "currentColor"}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="8" cy="21" r="1" />
-                        <circle cx="19" cy="21" r="1" />
-                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                      </svg>
-                      {isStockAlreadyInCart ? (
-                        <span style={{ color: "#00b386" }}>
-                          Remove from cart
-                        </span>
+                      {/*  */}
+
+                      {!user_watchlist_loading ? (
+                        <>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="17"
+                            height="17"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke={
+                              isStockAlreadyInCart ? "#00b386" : "currentColor"
+                            }
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <circle cx="8" cy="21" r="1" />
+                            <circle cx="19" cy="21" r="1" />
+                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                          </svg>
+                          {isStockAlreadyInCart ? (
+                            <span style={{ color: "#00b386" }}>
+                              Remove from cart
+                            </span>
+                          ) : (
+                            <span>Add to cart</span>
+                          )}
+                        </>
                       ) : (
-                        <span>Add to cart</span>
+                        <div className="stock_detail_loader_cp_cart_btn">
+                          <div
+                            className="stock_detail_loader_animation"
+                            id="animation_cart_btn_move_light"
+                          ></div>
+                        </div>
                       )}
                     </button>
                   </div>
                 </div>
                 <div className="stock_detail_company_graph_main">
                   <div className="stock_detail_company_graph_main_image_box">
-                    {isCostPerRateNegative ? (
-                      <img src={loss_graph_image} alt="" />
+                    {/*  */}
+
+                    {!user_watchlist_loading ? (
+                      <>
+                        {isCostPerRateNegative ? (
+                          <img src={loss_graph_image} alt="" />
+                        ) : (
+                          <img src={profit_graph_image} alt="" />
+                        )}
+                      </>
                     ) : (
-                      <img src={profit_graph_image} alt="" />
+                      <div className="stock_detail_loader_cp_graph">
+                        <div
+                          className="stock_detail_loader_animation"
+                          id="animation_graph_move_light"
+                        ></div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -382,9 +455,20 @@ const StockDetail = () => {
                           <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_title">
                             Today's Low
                           </span>
-                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_data">
-                            {APIstockData[0]?.performance.todayLow || "000.00"}
-                          </span>
+                          {/*  */}
+                          {!user_watchlist_loading ? (
+                            <span id="stock_detail_company_performance_low_and_heigh_stats_todays_low_data">
+                              {APIstockData[0]?.performance.todayLow ||
+                                "000.00"}
+                            </span>
+                          ) : (
+                            <div className="stock_detail_loader_performance">
+                              <div
+                                className="stock_detail_loader_animation"
+                                id="animation_performance_move_light"
+                              ></div>
+                            </div>
+                          )}
                         </div>
                         <div className="stock_detail_company_performance_low_and_heigh_stats_graph_line">
                           <span id="stock_detail_company_performance_low_and_heigh_stats_graph_line_span_view"></span>
@@ -393,9 +477,20 @@ const StockDetail = () => {
                           <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_title">
                             Today's High
                           </span>
-                          <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_data">
-                            {APIstockData[0]?.performance.todayHigh || "000.00"}
-                          </span>
+                          {/*  */}
+                          {!user_watchlist_loading ? (
+                            <span id="stock_detail_company_performance_low_and_heigh_stats_todays_high_data">
+                              {APIstockData[0]?.performance.todayHigh ||
+                                "000.00"}
+                            </span>
+                          ) : (
+                            <div className="stock_detail_loader_performance">
+                              <div
+                                className="stock_detail_loader_animation"
+                                id="animation_performance_move_light"
+                              ></div>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="stock_detail_company_performance_low_and_heigh_stats_52w">
@@ -403,9 +498,19 @@ const StockDetail = () => {
                           <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_title">
                             52W Low
                           </span>
-                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_data">
-                            {APIstockData[0]?.performance.FTW_low || "00.00"}
-                          </span>
+                          {/*  */}
+                          {!user_watchlist_loading ? (
+                            <span id="stock_detail_company_performance_low_and_heigh_stats_52w_low_data">
+                              {APIstockData[0]?.performance.FTW_low || "00.00"}
+                            </span>
+                          ) : (
+                            <div className="stock_detail_loader_performance">
+                              <div
+                                className="stock_detail_loader_animation"
+                                id="animation_performance_move_light"
+                              ></div>
+                            </div>
+                          )}
                         </div>
                         <div className="stock_detail_company_performance_low_and_heigh_stats_52w_graph_line">
                           <span id="stock_detail_company_performance_low_and_heigh_stats_52w_graph_line_span_view"></span>
@@ -414,9 +519,21 @@ const StockDetail = () => {
                           <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_title">
                             52W High
                           </span>
-                          <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_data">
-                            {APIstockData[0]?.performance.FTW_high || "000.00"}
-                          </span>
+                          {/*  */}
+
+                          {!user_watchlist_loading ? (
+                            <span id="stock_detail_company_performance_low_and_heigh_stats_52w_high_data">
+                              {APIstockData[0]?.performance.FTW_high ||
+                                "000.00"}
+                            </span>
+                          ) : (
+                            <div className="stock_detail_loader_performance">
+                              <div
+                                className="stock_detail_loader_animation"
+                                id="animation_performance_move_light"
+                              ></div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -425,44 +542,109 @@ const StockDetail = () => {
                     <div className="stock_detail_company_performance_data_top">
                       <span id="stock_detail_company_performance_data_top_open">
                         <p id="perform_title_x">Open</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.open || "000.00"}
-                        </p>
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.open || "000.00"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                       <span id="stock_detail_company_performance_data_top_prev">
                         <p id="perform_title_x">Prev. Close</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.close || "000.00"}
-                        </p>
+                        {/*  */}
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.close || "000.00"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                       <span id="stock_detail_company_performance_data_top_volume">
                         <p id="perform_title_x">Volume</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.volume || "000.00"}
-                        </p>
+                        {/*  */}
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.volume || "000.00"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                     </div>
                     <div className="stock_detail_company_performance_data_bottom">
                       <span id="stock_detail_company_performance_data_bottom_tread_value">
                         <p id="perform_title_x">Total traded value</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.totalTradeValue ||
-                            "000.00 Cr"}
-                        </p>
+                        {/* */}
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.totalTradeValue ||
+                              "000.00 Cr"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                       <span id="stock_detail_company_performance_data_bottom_upper_circuit">
                         <p id="perform_title_x">Upper Circuit</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.upperCircuit ||
-                            "000.00"}
-                        </p>
+                        {/* */}
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.upperCircuit ||
+                              "000.00"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                       <span id="stock_detail_company_performance_data_bottom_lower_circuit">
                         <p id="perform_title_x">Lower Circuit</p>
-                        <p id="perform_value_y">
-                          {APIstockData[0]?.performance.lowerCircuit ||
-                            "000.00"}
-                        </p>
+                        {/*  */}
+
+                        {!user_watchlist_loading ? (
+                          <p id="perform_value_y">
+                            {APIstockData[0]?.performance.lowerCircuit ||
+                              "000.00"}
+                          </p>
+                        ) : (
+                          <div className="stock_detail_loader_performance">
+                            <div
+                              className="stock_detail_loader_animation"
+                              id="animation_performance2_move_light"
+                            ></div>
+                          </div>
+                        )}
                       </span>
                     </div>
                   </div>
@@ -477,34 +659,102 @@ const StockDetail = () => {
                         <div className="stock_detail_company_fundamental_main_data_left_market_cap">
                           <span id="fundamental_title_x">Market Cap</span>
                           <span id="fundamental_cost_x">
-                            ₹
-                            {APIstockData[0]?.fundamentals.marketCap ||
-                              "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                ₹
+                                {APIstockData[0]?.fundamentals.marketCap ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_left_pe_ratio">
                           <span id="fundamental_title_x">P/E Ratio(TTM)</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.PE_ratio || "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.PE_ratio ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_left_pb_ratio">
                           <span id="fundamental_title_x">P/B Ratio</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.PB_ratio || "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.PB_ratio ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_left_industry_pe">
                           <span id="fundamental_title_x">Industry P/E</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.Industry || "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.Industry ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_left_debt_equity">
                           <span id="fundamental_title_x">Debt to Equity</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.debtToEquity ||
-                              "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.debtToEquity ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                       </div>
@@ -514,34 +764,101 @@ const StockDetail = () => {
                         <div className="stock_detail_company_fundamental_main_data_right_ROE">
                           <span id="fundamental_title_x">ROE</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.ROE || "000.00"}
+                            {/*  */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.ROE || "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_right_EPS">
                           <span id="fundamental_title_x">EPS(TTM)</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.EPS || "000.00"}
+                            {/* */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.EPS || "000.00"}{" "}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_right_Dividend_Yield">
                           <span id="fundamental_title_x">Dividend Yield</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.dividendYield ||
-                              "000.00"}
+                            {/* */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {" "}
+                                {APIstockData[0]?.fundamentals.dividendYield ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_right_Book_Value">
                           <span id="fundamental_title_x">Book Value</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.bookValue ||
-                              "000.00"}
+                            {/* */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {APIstockData[0]?.fundamentals.bookValue ||
+                                  "000.00"}{" "}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                         <div className="stock_detail_company_fundamental_main_data_right_Face_Value">
                           <span id="fundamental_title_x"> Face Value</span>
                           <span id="fundamental_cost_x">
-                            {APIstockData[0]?.fundamentals.faceValue ||
-                              "000.00"}
+                            {/* */}
+
+                            {!user_watchlist_loading ? (
+                              <>
+                                {" "}
+                                {APIstockData[0]?.fundamentals.faceValue ||
+                                  "000.00"}
+                              </>
+                            ) : (
+                              <div className="stock_detail_loader_fundamental">
+                                <div
+                                  className="stock_detail_loader_animation"
+                                  id="animation_fundamental2_move_light"
+                                ></div>
+                              </div>
+                            )}
                           </span>
                         </div>
                       </div>
@@ -555,528 +872,559 @@ const StockDetail = () => {
                     </span>
                   </div>
                   <div className="stock_detail_company_financial_main_data_visualization">
-                    <div className="stock_detail_company_financial_main_data_visualization_top">
-                      <div className="stock_detail_company_financial_main_data_visualization_top_arrange_width">
-                        <div className="stock_detail_company_financial_main_data_visualization_top_title_box">
-                          <button
-                            id="stock_detail_financial_revenue_title"
-                            style={{
-                              color:
-                                financialActiveReason === "revenue"
-                                  ? "#00b386"
-                                  : null,
-                            }}
-                            onClick={() => {
-                              setFinancialActiveReason("revenue");
-                            }}
-                          >
-                            Revenue
-                          </button>
-                          <button
-                            id="stock_detail_financial_profit_title"
-                            style={{
-                              color:
-                                financialActiveReason === "profit"
-                                  ? "#00b386"
-                                  : null,
-                            }}
-                            onClick={() => {
-                              setFinancialActiveReason("profit");
-                            }}
-                          >
-                            Profit
-                          </button>
-                          <button
-                            id="stock_detail_financial_net_worth_title"
-                            style={{
-                              color:
-                                financialActiveReason === "net_worth"
-                                  ? "#00b386"
-                                  : null,
-                            }}
-                            onClick={() => {
-                              setFinancialActiveReason("net_worth");
-                            }}
-                          >
-                            Net Worth
-                          </button>
+                    {!user_watchlist_loading ? (
+                      <>
+                        <div className="stock_detail_company_financial_main_data_visualization_top">
+                          <div className="stock_detail_company_financial_main_data_visualization_top_arrange_width">
+                            <div className="stock_detail_company_financial_main_data_visualization_top_title_box">
+                              <button
+                                id="stock_detail_financial_revenue_title"
+                                style={{
+                                  color:
+                                    financialActiveReason === "revenue"
+                                      ? "#00b386"
+                                      : null,
+                                }}
+                                onClick={() => {
+                                  setFinancialActiveReason("revenue");
+                                }}
+                              >
+                                Revenue
+                              </button>
+                              <button
+                                id="stock_detail_financial_profit_title"
+                                style={{
+                                  color:
+                                    financialActiveReason === "profit"
+                                      ? "#00b386"
+                                      : null,
+                                }}
+                                onClick={() => {
+                                  setFinancialActiveReason("profit");
+                                }}
+                              >
+                                Profit
+                              </button>
+                              <button
+                                id="stock_detail_financial_net_worth_title"
+                                style={{
+                                  color:
+                                    financialActiveReason === "net_worth"
+                                      ? "#00b386"
+                                      : null,
+                                }}
+                                onClick={() => {
+                                  setFinancialActiveReason("net_worth");
+                                }}
+                              >
+                                Net Worth
+                              </button>
+                            </div>
+                            <div className="stock_detail_company_financial_main_data_visualization_top_active_box">
+                              <span
+                                className={`stock_detail_data_visualization_active`}
+                                id={`stock_detail_data_visualization_active_${financialActiveReason}`}
+                              ></span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="stock_detail_company_financial_main_data_visualization_top_active_box">
-                          <span
-                            className={`stock_detail_data_visualization_active`}
-                            id={`stock_detail_data_visualization_active_${financialActiveReason}`}
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="stock_detail_company_financial_main_data_visualization_mid">
-                      <div className="stock_detail_company_financial_main_data_visualization_mid_top_notify">
-                        <span>*All Value are in Rs. Cr</span>
-                      </div>
-                      <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show">
-                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_top">
-                          {financialActiveReason === "revenue" ? (
-                            financialActiveQuarterlyOrYearly === "quarterly" ? (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .quarterly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.revenueGraph
-                                      .yearly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            )
-                          ) : null}
+                        <div className="stock_detail_company_financial_main_data_visualization_mid">
+                          <div className="stock_detail_company_financial_main_data_visualization_mid_top_notify">
+                            <span>*All Value are in Rs. Cr</span>
+                          </div>
+                          <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show">
+                            <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_top">
+                              {financialActiveReason === "revenue" ? (
+                                financialActiveQuarterlyOrYearly ===
+                                "quarterly" ? (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .quarterly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.revenueGraph
+                                          .yearly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                )
+                              ) : null}
 
-                          {financialActiveReason === "profit" ? (
-                            financialActiveQuarterlyOrYearly === "quarterly" ? (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .quarterly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.profitGraph
-                                      .yearly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            )
-                          ) : null}
+                              {financialActiveReason === "profit" ? (
+                                financialActiveQuarterlyOrYearly ===
+                                "quarterly" ? (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .quarterly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.profitGraph
+                                          .yearly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                )
+                              ) : null}
 
-                          {financialActiveReason === "net_worth" ? (
-                            financialActiveQuarterlyOrYearly === "quarterly" ? (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .quarterly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph1.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph1.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph2.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph2.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph3.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph3.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph4.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph4.graphPercent || 1
-                                  }
-                                />
-                                <FinancialGraph
-                                  value={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph5.rateInCr || "000"
-                                  }
-                                  bar_percentage={
-                                    APIstockData[0]?.financial.netWorthGraph
-                                      .yearly.graph5.graphPercent || 1
-                                  }
-                                />
-                              </>
-                            )
-                          ) : null}
+                              {financialActiveReason === "net_worth" ? (
+                                financialActiveQuarterlyOrYearly ===
+                                "quarterly" ? (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .quarterly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph1.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph1.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph2.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph2.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph3.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph3.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph4.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph4.graphPercent || 1
+                                      }
+                                    />
+                                    <FinancialGraph
+                                      value={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph5.rateInCr || "000"
+                                      }
+                                      bar_percentage={
+                                        APIstockData[0]?.financial.netWorthGraph
+                                          .yearly.graph5.graphPercent || 1
+                                      }
+                                    />
+                                  </>
+                                )
+                              ) : null}
+                            </div>
+                            <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid">
+                              <div id="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid_line_id"></div>
+                            </div>
+                            <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom">
+                              <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                                {financialActiveReason === "revenue"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.revenueGraph
+                                        .quarterly.graph1.date || "month"
+                                    : APIstockData[0]?.financial.revenueGraph
+                                        .yearly.graph1.date || "year"
+                                  : financialActiveReason === "profit"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.profitGraph
+                                        .quarterly.graph1.date || "month"
+                                    : APIstockData[0]?.financial.profitGraph
+                                        .yearly.graph1.date || "year"
+                                  : financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                  ? APIstockData[0]?.financial.netWorthGraph
+                                      .quarterly.graph1.date || "month"
+                                  : APIstockData[0]?.financial.netWorthGraph
+                                      .yearly.graph1.date || "year"}
+                              </span>
+                              <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                                {financialActiveReason === "revenue"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.revenueGraph
+                                        .quarterly.graph2.date || "month"
+                                    : APIstockData[0]?.financial.revenueGraph
+                                        .yearly.graph2.date || "year"
+                                  : financialActiveReason === "profit"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.profitGraph
+                                        .quarterly.graph2.date || "month"
+                                    : APIstockData[0]?.financial.profitGraph
+                                        .yearly.graph2.date || "year"
+                                  : financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                  ? APIstockData[0]?.financial.netWorthGraph
+                                      .quarterly.graph2.date || "month"
+                                  : APIstockData[0]?.financial.netWorthGraph
+                                      .yearly.graph2.date || "year"}
+                              </span>
+                              <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                                {financialActiveReason === "revenue"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.revenueGraph
+                                        .quarterly.graph3.date || "month"
+                                    : APIstockData[0]?.financial.revenueGraph
+                                        .yearly.graph3.date || "year"
+                                  : financialActiveReason === "profit"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.profitGraph
+                                        .quarterly.graph3.date || "month"
+                                    : APIstockData[0]?.financial.profitGraph
+                                        .yearly.graph3.date || "year"
+                                  : financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                  ? APIstockData[0]?.financial.netWorthGraph
+                                      .quarterly.graph3.date || "month"
+                                  : APIstockData[0]?.financial.netWorthGraph
+                                      .yearly.graph3.date || "year"}
+                              </span>
+                              <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                                {financialActiveReason === "revenue"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.revenueGraph
+                                        .quarterly.graph4.date || "month"
+                                    : APIstockData[0]?.financial.revenueGraph
+                                        .yearly.graph4.date || "year"
+                                  : financialActiveReason === "profit"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.profitGraph
+                                        .quarterly.graph4.date || "month"
+                                    : APIstockData[0]?.financial.profitGraph
+                                        .yearly.graph4.date || "year"
+                                  : financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                  ? APIstockData[0]?.financial.netWorthGraph
+                                      .quarterly.graph4.date || "month"
+                                  : APIstockData[0]?.financial.netWorthGraph
+                                      .yearly.graph4.date || "year"}
+                              </span>
+                              <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
+                                {financialActiveReason === "revenue"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.revenueGraph
+                                        .quarterly.graph5.date || "month"
+                                    : APIstockData[0]?.financial.revenueGraph
+                                        .yearly.graph5.date || "year"
+                                  : financialActiveReason === "profit"
+                                  ? financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                    ? APIstockData[0]?.financial.profitGraph
+                                        .quarterly.graph5.date || "month"
+                                    : APIstockData[0]?.financial.profitGraph
+                                        .yearly.graph5.date || "year"
+                                  : financialActiveQuarterlyOrYearly ===
+                                    "quarterly"
+                                  ? APIstockData[0]?.financial.netWorthGraph
+                                      .quarterly.graph5.date || "month"
+                                  : APIstockData[0]?.financial.netWorthGraph
+                                      .yearly.graph5.date || "year"}
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid">
-                          <div id="stock_detail_company_financial_main_data_visualization_mid_graph_show_mid_line_id"></div>
+                        <div className="stock_detail_company_financial_main_data_visualization_bottom">
+                          <div className="stock_detail_company_financial_main_data_visualization_bottom_arrange_width">
+                            <button
+                              className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
+                              id={
+                                financialActiveQuarterlyOrYearly === "quarterly"
+                                  ? "stock_detail_company_financial_main_data_visualization_bottom_quarterly"
+                                  : null
+                              }
+                              onClick={() => {
+                                setFinancialActiveQuarterlyOrYearly(
+                                  "quarterly"
+                                );
+                              }}
+                            >
+                              Quarterly
+                            </button>
+                            <button
+                              className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
+                              id={
+                                financialActiveQuarterlyOrYearly === "yearly"
+                                  ? "stock_detail_company_financial_main_data_visualization_bottom_yearly"
+                                  : null
+                              }
+                              onClick={() => {
+                                setFinancialActiveQuarterlyOrYearly("yearly");
+                              }}
+                            >
+                              Yearly
+                            </button>
+                          </div>
                         </div>
-                        <div className="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom">
-                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
-                            {financialActiveReason === "revenue"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.revenueGraph
-                                    .quarterly.graph1.date || "month"
-                                : APIstockData[0]?.financial.revenueGraph.yearly
-                                    .graph1.date || "year"
-                              : financialActiveReason === "profit"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.profitGraph
-                                    .quarterly.graph1.date || "month"
-                                : APIstockData[0]?.financial.profitGraph.yearly
-                                    .graph1.date || "year"
-                              : financialActiveQuarterlyOrYearly === "quarterly"
-                              ? APIstockData[0]?.financial.netWorthGraph
-                                  .quarterly.graph1.date || "month"
-                              : APIstockData[0]?.financial.netWorthGraph.yearly
-                                  .graph1.date || "year"}
-                          </span>
-                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
-                            {financialActiveReason === "revenue"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.revenueGraph
-                                    .quarterly.graph2.date || "month"
-                                : APIstockData[0]?.financial.revenueGraph.yearly
-                                    .graph2.date || "year"
-                              : financialActiveReason === "profit"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.profitGraph
-                                    .quarterly.graph2.date || "month"
-                                : APIstockData[0]?.financial.profitGraph.yearly
-                                    .graph2.date || "year"
-                              : financialActiveQuarterlyOrYearly === "quarterly"
-                              ? APIstockData[0]?.financial.netWorthGraph
-                                  .quarterly.graph2.date || "month"
-                              : APIstockData[0]?.financial.netWorthGraph.yearly
-                                  .graph2.date || "year"}
-                          </span>
-                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
-                            {financialActiveReason === "revenue"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.revenueGraph
-                                    .quarterly.graph3.date || "month"
-                                : APIstockData[0]?.financial.revenueGraph.yearly
-                                    .graph3.date || "year"
-                              : financialActiveReason === "profit"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.profitGraph
-                                    .quarterly.graph3.date || "month"
-                                : APIstockData[0]?.financial.profitGraph.yearly
-                                    .graph3.date || "year"
-                              : financialActiveQuarterlyOrYearly === "quarterly"
-                              ? APIstockData[0]?.financial.netWorthGraph
-                                  .quarterly.graph3.date || "month"
-                              : APIstockData[0]?.financial.netWorthGraph.yearly
-                                  .graph3.date || "year"}
-                          </span>
-                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
-                            {financialActiveReason === "revenue"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.revenueGraph
-                                    .quarterly.graph4.date || "month"
-                                : APIstockData[0]?.financial.revenueGraph.yearly
-                                    .graph4.date || "year"
-                              : financialActiveReason === "profit"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.profitGraph
-                                    .quarterly.graph4.date || "month"
-                                : APIstockData[0]?.financial.profitGraph.yearly
-                                    .graph4.date || "year"
-                              : financialActiveQuarterlyOrYearly === "quarterly"
-                              ? APIstockData[0]?.financial.netWorthGraph
-                                  .quarterly.graph4.date || "month"
-                              : APIstockData[0]?.financial.netWorthGraph.yearly
-                                  .graph4.date || "year"}
-                          </span>
-                          <span id="stock_detail_company_financial_main_data_visualization_mid_graph_show_bottom_Day_span">
-                            {financialActiveReason === "revenue"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.revenueGraph
-                                    .quarterly.graph5.date || "month"
-                                : APIstockData[0]?.financial.revenueGraph.yearly
-                                    .graph5.date || "year"
-                              : financialActiveReason === "profit"
-                              ? financialActiveQuarterlyOrYearly === "quarterly"
-                                ? APIstockData[0]?.financial.profitGraph
-                                    .quarterly.graph5.date || "month"
-                                : APIstockData[0]?.financial.profitGraph.yearly
-                                    .graph5.date || "year"
-                              : financialActiveQuarterlyOrYearly === "quarterly"
-                              ? APIstockData[0]?.financial.netWorthGraph
-                                  .quarterly.graph5.date || "month"
-                              : APIstockData[0]?.financial.netWorthGraph.yearly
-                                  .graph5.date || "year"}
-                          </span>
-                        </div>
+                      </>
+                    ) : (
+                      <div className="stock_detail_loader_financial">
+                        <div
+                          className="stock_detail_loader_animation"
+                          id="animation_financial2_move_light"
+                        ></div>
                       </div>
-                    </div>
-                    <div className="stock_detail_company_financial_main_data_visualization_bottom">
-                      <div className="stock_detail_company_financial_main_data_visualization_bottom_arrange_width">
-                        <button
-                          className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
-                          id={
-                            financialActiveQuarterlyOrYearly === "quarterly"
-                              ? "stock_detail_company_financial_main_data_visualization_bottom_quarterly"
-                              : null
-                          }
-                          onClick={() => {
-                            setFinancialActiveQuarterlyOrYearly("quarterly");
-                          }}
-                        >
-                          Quarterly
-                        </button>
-                        <button
-                          className="stock_detail_company_financial_main_data_visualization_bottom_title_btn"
-                          id={
-                            financialActiveQuarterlyOrYearly === "yearly"
-                              ? "stock_detail_company_financial_main_data_visualization_bottom_yearly"
-                              : null
-                          }
-                          onClick={() => {
-                            setFinancialActiveQuarterlyOrYearly("yearly");
-                          }}
-                        >
-                          Yearly
-                        </button>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
                 <div className="stock_detail_company_shareholding_pattern_main">
@@ -1087,80 +1435,89 @@ const StockDetail = () => {
                   </div>
                   <div className="stock_detail_company_shareholding_pattern_graph_div">
                     <div className="stock_detail_company_shareholding_pattern_graph_main">
-                      <div className="stock_detail_company_shareholding_pattern_graph_main_arrange_width">
-                        <div className="stock_detail_company_shareholding_pattern_graph_main_top">
-                          <button
-                            id={
-                              activeShareholdingPatternDay === "day1"
-                                ? "shareholding_pattern_top_day_active"
-                                : null
-                            }
-                            className="stock_detail_company_shareholding_pattern_top_day1"
-                            onClick={() => {
-                              setActiveShareholdingPatternDay("day1");
-                            }}
-                          >
-                            {APIstockData[0]?.shareHolderPattern.Day1.date ||
-                              "Day 1"}
-                          </button>
-                          <button
-                            id={
-                              activeShareholdingPatternDay === "day2"
-                                ? "shareholding_pattern_top_day_active"
-                                : null
-                            }
-                            className="stock_detail_company_shareholding_pattern_top_day2"
-                            onClick={() => {
-                              setActiveShareholdingPatternDay("day2");
-                            }}
-                          >
-                            {APIstockData[0]?.shareHolderPattern.Day2.date ||
-                              "Day 2"}
-                          </button>
-                          <button
-                            id={
-                              activeShareholdingPatternDay === "day3"
-                                ? "shareholding_pattern_top_day_active"
-                                : null
-                            }
-                            className="stock_detail_company_shareholding_pattern_top_day3"
-                            onClick={() => {
-                              setActiveShareholdingPatternDay("day3");
-                            }}
-                          >
-                            {APIstockData[0]?.shareHolderPattern.Day3.date ||
-                              "Day 3"}
-                          </button>
-                          <button
-                            id={
-                              activeShareholdingPatternDay === "day4"
-                                ? "shareholding_pattern_top_day_active"
-                                : null
-                            }
-                            className="stock_detail_company_shareholding_pattern_top_day4"
-                            onClick={() => {
-                              setActiveShareholdingPatternDay("day4");
-                            }}
-                          >
-                            {APIstockData[0]?.shareHolderPattern.Day4.date ||
-                              "Day 4"}
-                          </button>
+                      {!user_watchlist_loading ? (
+                        <div className="stock_detail_company_shareholding_pattern_graph_main_arrange_width">
+                          <div className="stock_detail_company_shareholding_pattern_graph_main_top">
+                            <button
+                              id={
+                                activeShareholdingPatternDay === "day1"
+                                  ? "shareholding_pattern_top_day_active"
+                                  : null
+                              }
+                              className="stock_detail_company_shareholding_pattern_top_day1"
+                              onClick={() => {
+                                setActiveShareholdingPatternDay("day1");
+                              }}
+                            >
+                              {APIstockData[0]?.shareHolderPattern.Day1.date ||
+                                "Day 1"}
+                            </button>
+                            <button
+                              id={
+                                activeShareholdingPatternDay === "day2"
+                                  ? "shareholding_pattern_top_day_active"
+                                  : null
+                              }
+                              className="stock_detail_company_shareholding_pattern_top_day2"
+                              onClick={() => {
+                                setActiveShareholdingPatternDay("day2");
+                              }}
+                            >
+                              {APIstockData[0]?.shareHolderPattern.Day2.date ||
+                                "Day 2"}
+                            </button>
+                            <button
+                              id={
+                                activeShareholdingPatternDay === "day3"
+                                  ? "shareholding_pattern_top_day_active"
+                                  : null
+                              }
+                              className="stock_detail_company_shareholding_pattern_top_day3"
+                              onClick={() => {
+                                setActiveShareholdingPatternDay("day3");
+                              }}
+                            >
+                              {APIstockData[0]?.shareHolderPattern.Day3.date ||
+                                "Day 3"}
+                            </button>
+                            <button
+                              id={
+                                activeShareholdingPatternDay === "day4"
+                                  ? "shareholding_pattern_top_day_active"
+                                  : null
+                              }
+                              className="stock_detail_company_shareholding_pattern_top_day4"
+                              onClick={() => {
+                                setActiveShareholdingPatternDay("day4");
+                              }}
+                            >
+                              {APIstockData[0]?.shareHolderPattern.Day4.date ||
+                                "Day 4"}
+                            </button>
+                          </div>
+                          <div className="stock_detail_company_shareholding_pattern_graph_main_bottom">
+                            <ShareholdingPatternCard
+                              title={"Promoters"}
+                              percentage={shareHolderPercentageRange1}
+                            />
+                            <ShareholdingPatternCard
+                              title={"Retail And Others"}
+                              percentage={shareHolderPercentageRange2}
+                            />
+                            <ShareholdingPatternCard
+                              title={"Other Domestic Industry"}
+                              percentage={shareHolderPercentageRange3}
+                            />
+                          </div>
                         </div>
-                        <div className="stock_detail_company_shareholding_pattern_graph_main_bottom">
-                          <ShareholdingPatternCard
-                            title={"Promoters"}
-                            percentage={shareHolderPercentageRange1}
-                          />
-                          <ShareholdingPatternCard
-                            title={"Retail And Others"}
-                            percentage={shareHolderPercentageRange2}
-                          />
-                          <ShareholdingPatternCard
-                            title={"Other Domestic Industry"}
-                            percentage={shareHolderPercentageRange3}
-                          />
+                      ) : (
+                        <div className="stock_detail_loader_shareholding">
+                          <div
+                            className="stock_detail_loader_animation"
+                            id="animation_shareholding2_move_light"
+                          ></div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1234,11 +1591,20 @@ const StockDetail = () => {
               {/* ........... Buy Stock ............... */}
               <div className="stock_detail_buy_stock_main">
                 <div className="stock_detail_buy_stock_main_buy_card_div">
-                  <BuyStockCard
-                    companyName={companyName}
-                    stockCost={companyCost}
-                    stockCostPerRate={companyCostPerRate}
-                  />
+                  {!user_watchlist_loading ? (
+                    <BuyStockCard
+                      companyName={companyName}
+                      stockCost={companyCost}
+                      stockCostPerRate={companyCostPerRate}
+                    />
+                  ) : (
+                    <div className="stock_detail_loader_buy_stock">
+                      <div
+                        className="stock_detail_loader_animation"
+                        id="animation_buy_stock2_move_light"
+                      ></div>
+                    </div>
+                  )}
                 </div>
               </div>
               {/* ........... Buy Stock on mobile ............... */}

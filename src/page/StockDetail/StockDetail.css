@@ -134,6 +134,7 @@ position: relative;
 }
 .stock_detail_company_information_head_right_alert {
   background-color: transparent;
+  /* background-color: red; */
   width: 115px;
   height: 32px;
   min-width: 115px;
@@ -581,6 +582,7 @@ position: relative;
   color: #44475b;
   font-size: 16px;
   font-weight: 500;
+  /* display: flex; */
 }
 
 .stock_detail_company_fundamental_main_data_left_market_cap {
@@ -1255,11 +1257,189 @@ position: relative;
 
 
 
+/* Create Loader in stock detail  */
+
+.stock_detail_company_logo_span{
+  /* position: relative; */
+}
+.stock_detail_loader_on_logo{
+  background-color: #fafafa;
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  position: relative;
+}
+#stock_detail_animation_logo_move_light{
+  background-color: #bdbdbd69;
+  filter: blur(15px);
+  width: 10px;
+}
+
+.stock_detail_loader_cp_name{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 50%;
+  height: 30px;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.stock_detail_loader_cp_cost{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 30%;
+  height: 30px;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.stock_detail_loader_cp_alert{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.stock_detail_loader_cp_cart_btn{
+  background-color: #e1e1e1;
+  /* background-color: #c03131; */
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  filter: blur(30px);
+}
+#animation_cart_btn_move_light{
+  background-color: #353535e8;
+  filter: blur(15px);
+}
+.stock_detail_loader_cp_graph{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+#animation_graph_move_light{
+  background-color: #c0c0c064;
+  filter: blur(75px);
+}
+.stock_detail_loader_performance{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 60%;
+  height: 40%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+#animation_performance_move_light{
+  background-color: #a3a3a3c3;
+  filter: blur(12px);
+}
+#animation_performance2_move_light{
+  background-color: #a3a3a35b;
+  filter: blur(15px);
+}
 
 
+.stock_detail_loader_fundamental{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100px;
+  height: 22px;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+#animation_fundamental2_move_light{
+  background-color: #a3a3a390;
+  filter: blur(15px);
+}
+
+.stock_detail_loader_financial{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100%;
+  height:100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+#animation_financial2_move_light{
+  background-color: #ccccccbb;
+  filter: blur(90px);
+}
+.stock_detail_loader_shareholding{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100%;
+  height:100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+#animation_shareholding2_move_light{
+  background-color: #ccccccbb;
+  filter: blur(90px);
+}
+.stock_detail_loader_buy_stock{
+  background-color: #fafafa;
+  /* background-color: #c03131; */
+  width: 100%;
+  height:100%;
+  /* position: absolute; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+#animation_buy_stock2_move_light{
+  width: 30px;
+  background-color: #cccccc78;
+  filter: blur(50px);
+}
 
 
+.stock_detail_loader_animation{
+  background-color: #9a9a9a4d;
+  /* background-color: #457e42; */
+  width: 13%;
+  filter: blur(25px);
+  height: 120%;
+  rotate: -10deg;
+  position: absolute;
+  top: -5px;
+  left: -10px;
+  animation: stockDetailAnimation 1.5s infinite;
+}
 
+@keyframes stockDetailAnimation{
+  0%{
+    left: -30%;
+  }
+  100%{
+    left: 130%;
+  }
+}
 
 @media (max-width: 850px) {
   .stock_detail_company_information_main {
@@ -1298,6 +1478,8 @@ position: relative;
     height: fit-content;
     min-height: fit-content;
     padding: 6px 7px;
+    width: 30px;
+    height: 32px;
   }
   .stock_detail_company_information_head_right_watchlist {
     padding: 6px 7px;
