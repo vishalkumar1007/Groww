@@ -27,10 +27,9 @@ const ShopCart = () => {
                 </div>
               ) : (
                 userCardData.map((data, index) => (
-                  
                   <StockCard
                     key={index}
-                    uniqueId={data.uniqueId}
+                    _id={data._id}
                     stock_id={data.stock_id}
                     name={data.name}
                     stockCost={data.stockCost}

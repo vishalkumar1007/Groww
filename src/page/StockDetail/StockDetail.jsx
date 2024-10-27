@@ -97,7 +97,7 @@ const StockDetail = () => {
 
 
 
-  const addStockToWatchList = () => {
+  const addStockToCart = () => {
     // setIsStockAlreadyInCart(!isStockAlreadyInCart);
     if(APIstockData.length>0){
       if (isStockAlreadyInCart) {
@@ -105,7 +105,7 @@ const StockDetail = () => {
         setIsStockAlreadyInCart(false);
       } else {
         dispatch(
-          addToCart({ _id : APIstockData[0]._id, stock_id : APIstockData[0].stock_id, name : APIstockData[0].name, cost : APIstockData[0].stockCost, costPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
+          addToCart({ _id : APIstockData[0]._id, stock_id : APIstockData[0].stock_id, name : APIstockData[0].name, stockCost : APIstockData[0].stockCost, stockCostPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
         );
       }
     }
@@ -332,7 +332,7 @@ const StockDetail = () => {
                         backgroundColor: isStockAlreadyInCart?'#00b3860d':null,
                       }}
                       onClick={() => {
-                        addStockToWatchList();
+                        addStockToCart();
                       }}
                     >
                       <svg

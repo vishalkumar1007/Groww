@@ -23,6 +23,15 @@ const StocksCard = ({
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
   // const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
 
+  // useEffect(()=>{
+  //   console.log('IN : _id = ',_id);
+  //   console.log('IN : stock_id = ',stock_id);
+  //   console.log('IN : name = ',name);
+  //   console.log('IN : stockCost = ',stockCost);
+  //   console.log('IN : stockCostPerRate = ',stockCostPerRate);
+  //   console.log('IN : logoUrl = ',logoUrl);
+  // },[_id, logoUrl, name, stockCost, stockCostPerRate, stock_id])
+
   const HandelAddCardToWatchList = () => {
     if (isCardAddToWatchList) {
       dispatch(removeFromWatchlist({ stock_id }));

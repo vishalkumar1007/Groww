@@ -9,6 +9,7 @@ import { selectUserWatchlistValue } from "../../features/userWatchlist/centralEx
 
 const Watchlist = () => {
   const WatchlistData = useSelector(selectUserWatchlistValue);
+  console.log("Watchlist Data = ",WatchlistData);
   return (
     <div className="watchlist_page_main">
       <Navbar callFrom="Dashboard" />

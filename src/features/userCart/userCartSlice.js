@@ -14,6 +14,7 @@ const userCartSlice = createSlice({
     reducers:{
         addToCart:(state,action)=>{
             state.data.push(action.payload);
+            console.log('action cart payload  : ',action.payload);
         },
         removeFromCart:(state,action)=>{
             state.data = state.data.filter((stock)=>(stock.stock_id!==action.payload.stock_id));
