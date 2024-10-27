@@ -12,6 +12,7 @@ const Watchlist = () => {
   return (
     <div className="watchlist_page_main">
       <Navbar callFrom="Dashboard" />
+      <div className="watchlist_page_main_prevent_flex_main">
       <div className="watchlist_page_arrange_width">
         <div className="watchlist_page_info_head" style={{display: WatchlistData.length === 0?"none":"block"}}>
           <p>Your watchlist</p>
@@ -26,16 +27,17 @@ const Watchlist = () => {
             WatchlistData.map((data, index) => (
               <StockCard
                 key={index}
-                uniqueId={data.uniqueId}
-                stockId={data.stockId}
-                title={data.title}
-                cost={data.cost}
-                costPerRate={data.costPerRate}
+                _id={data._id}
+                stock_id={data.stock_id}
+                name={data.name}
+                stockCost={data.stockCost}
+                stockCostPerRate={data.stockCostPerRate}
                 logoUrl={data.logoUrl}
               />
             ))
           )}
         </div>
+      </div>
       </div>
       <Footer />
     </div>

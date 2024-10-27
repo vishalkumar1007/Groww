@@ -8,17 +8,64 @@ import { selectUserCartValue } from "../../features/userCart/centralExportUserCa
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 import { addUserDetail } from "../../features/userProfileData/centralExportUserProfileData";
 import SearchStock from "../SearchStock/SearchStock";
-import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData'
+import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData';
+import {
+  selectUserWatchlistValue,
+  // selectUserWatchlistLoading,
+  // selectUserWatchlistError,
+  // selectUserWatchlistErrorMessage
+} from "../../features/userWatchlist/centralExportUserWatchlist";
 
 const Navbar = ({ callFrom = "" }) => {
   const dispatch = useDispatch();
-  const userCardCount = useSelector(selectUserCartValue);
-  const userProfileData = useSelector(selectUserProfileData);
   const navigate = useNavigate();
   const [activeFeture, setActiveFeture] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [userTokenData, setUserTokenData] = useState();
   const [openAlertConfig, setOpenAlertConfig] = useState(false);
+  const userCartData = useSelector(selectUserCartValue);
+  const userWatchlistApiData = useSelector(selectUserWatchlistValue);
+  const userProfileData = useSelector(selectUserProfileData);
+
+  // handel to fetch user user cart data through redux
+  
+  // useEffect(()=>{
+  //   if(userTokenData){
+  //       dispatch(fetchUserCartThunk(userTokenData.userEmail))
+  //     } 
+  // },[dispatch ,userTokenData])
+
+  // useEffect(()=>{
+  //   console.log("userCartData :", userCartData);
+  // },[userCartData])
+
+  const saveDataInDataBaseBeforeLogOut = ()=>{
+
+      if (!(userProfileData.userEmail && userWatchlistApiData && userCartData)) {
+        return;
+      }
+
+      // Prepare watchlist data
+      const watchListData = {
+        email: userProfileData.userEmail,
+        userWatchlistData: [...userWatchlistApiData]
+      };
+      const userWatchlistPushApi = 'http://localhost:8080/api/user/updateUserWatchlist';
+      const blobWatchlist = new Blob([JSON.stringify(watchListData)], { type: 'application/json' });
+      const success = navigator.sendBeacon(userWatchlistPushApi, blobWatchlist);
+      localStorage.setItem('WatchlistDataSaveStatus', success ? 'Saved successfully' : 'Error: Network issue');
+
+      // Prepare cart data
+      const cartData = {
+        email: userProfileData.userEmail,
+        userCartData: [...userCartData]
+      };
+      const userCartPushApi = 'http://localhost:8080/api/user/updateUserCart';
+      const blobCart = new Blob([JSON.stringify(cartData)], { type: 'application/json' });
+      const successCart = navigator.sendBeacon(userCartPushApi, blobCart);
+      localStorage.setItem('cartDataSaveStatus', successCart ? 'Saved successfully' : 'Error: Network issue');
+  }
+
 
   const removeActivePagePreview = () => {
     setActiveFeture("");
@@ -215,9 +262,9 @@ const Navbar = ({ callFrom = "" }) => {
                 <circle cx="19" cy="21" r="1" />
                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
               </svg>
-              {userCardCount.length === 0 ? null : (
+              {userCartData.length === 0 ? null : (
                 <div className="navbar_cart_count_div_main">
-                  {userCardCount.length}
+                  {userCartData.length}
                 </div>
               )}
             </div>
@@ -418,9 +465,9 @@ const Navbar = ({ callFrom = "" }) => {
                         </div>
                         <div className="Navbar_user_Profile_section_service_customerSupport_title">
                           <p>Order Item</p>
-                          {userCardCount.length === 0 ? null : (
+                          {userCartData.length === 0 ? null : (
                             <p id="user_order_card_counter_ui">
-                              {userCardCount.length}
+                              {userCartData.length}
                             </p>
                           )}
                           <svg
@@ -604,6 +651,8 @@ const Navbar = ({ callFrom = "" }) => {
                   <div className="Navbar_user_Profile_section_footer_arrange_logout">
                     <p
                       onClick={() => {
+                        // handelToRemoveAllDataFromReduxOnLogOut();
+                        saveDataInDataBaseBeforeLogOut()
                         setOpenAlertConfig(!openAlertConfig);
                         setIsProfileOpen(false);
                       }}

@@ -1,7 +1,7 @@
 import "./BuyStockCard.css";
 import { useState } from "react";
 
-const BuyStockCard = ({ companyName, cost, costPerRate }) => {
+const BuyStockCard = ({ name, stockCost, stockCostPerRate }) => {
   const [isBuyOption, setIsBuyOption] = useState("buy");
   const [userInputQytValue, setUserInputQytValue] = useState(0);
   const [userInputPriceValue, setUserInputPriceValue] = useState(0);
@@ -10,10 +10,10 @@ const BuyStockCard = ({ companyName, cost, costPerRate }) => {
       <div className="buy_stock_card_main_title_head">
         <div className="buy_stock_card_main_title_head_arrange_width">
           <span id="buy_stock_card_company_name">
-            {companyName || "Company Name"}
+            {name || "Company Name"}
           </span>
           <span id="buy_stock_card_nse_and_bse">
-            NSE ₹{cost || "000.00"} ~ BSE ₹{costPerRate || "000.00 (0.00%)"}
+            NSE ₹{stockCost || "000.00"} ~ BSE ₹{stockCostPerRate || "000.00 (0.00%)"}
           </span>
         </div>
       </div>

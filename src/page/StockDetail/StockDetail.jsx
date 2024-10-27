@@ -99,14 +99,13 @@ const StockDetail = () => {
 
   const addStockToWatchList = () => {
     // setIsStockAlreadyInCart(!isStockAlreadyInCart);
-    console.log('APIstockData : ',APIstockData);
     if(APIstockData.length>0){
       if (isStockAlreadyInCart) {
-        dispatch(removeFromCart({ stockId : APIstockData[0].stock_id }));
+        dispatch(removeFromCart({ stock_id : APIstockData[0].stock_id }));
         setIsStockAlreadyInCart(false);
       } else {
         dispatch(
-          addToCart({ uniqueId : APIstockData[0]._id, stockId : APIstockData[0].stock_id, title : APIstockData[0].name, cost : APIstockData[0].stockCost, costPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
+          addToCart({ _id : APIstockData[0]._id, stock_id : APIstockData[0].stock_id, name : APIstockData[0].name, cost : APIstockData[0].stockCost, costPerRate : APIstockData[0].stockCostPerRate, logoUrl : APIstockData[0].logoUrl })
         );
       }
     }
@@ -115,7 +114,7 @@ const StockDetail = () => {
   useEffect(() => {
     if(APIstockData.length>0){
       for (let i = 0; i < user_watchlist_data.length; i++) {
-        if (user_watchlist_data[i].stockId === APIstockData[0].stock_id) {
+        if (user_watchlist_data[i].stock_id === APIstockData[0].stock_id) {
           setIsStockAlreadyInCart(true);
           break;
         }else{
@@ -1174,27 +1173,27 @@ const StockDetail = () => {
                   <div className="stock_detail_company_similar_stock_comp">
                     <StockCard
                       logoUrl={pnbHouse}
-                      title="PNB Housing Finance"
-                      cost="892.21"
-                      costPerRate="17.21 (0.61%)"
+                      name="PNB Housing Finance"
+                      stockCost="892.21"
+                      stockCostPerRate="17.21 (0.61%)"
                     />
                     <StockCard
                       logoUrl={castrolIndia}
-                      title="Castrol India"
-                      cost="268.90"
-                      costPerRate="17.80 (7.10%)"
+                      name="Castrol India"
+                      stockCost="268.90"
+                      stockCostPerRate="17.80 (7.10%)"
                     />
                     <StockCard
                       logoUrl={aloakIndustries}
-                      title="Alok Industries"
-                      cost="28.32"
-                      costPerRate="2.10 (10.7%)"
+                      name="Alok Industries"
+                      stockCost="28.32"
+                      stockCostPerRate="2.10 (10.7%)"
                     />
                     <StockCard
                       logoUrl={centuryTextile}
-                      title="Century Textiles"
-                      cost="2,300.10"
-                      costPerRate="152.66 (7.91%)"
+                      name="Century Textiles"
+                      stockCost="2,300.10"
+                      stockCostPerRate="152.66 (7.91%)"
                     />
                   </div>
                 </div>
@@ -1207,27 +1206,27 @@ const StockDetail = () => {
                   <div className="stock_detail_company_recently_viewed_comp">
                     <StockCard
                       logoUrl={ola_logo}
-                      title="Ola Electric Mobility"
-                      cost="2.77"
-                      costPerRate="0.26 (0.19%)"
+                      name="Ola Electric Mobility"
+                      stockCost="2.77"
+                      stockCostPerRate="0.26 (0.19%)"
                     />
                     <StockCard
                       logoUrl={GTL_logo}
-                      title="GTL Infrastructure"
-                      cost="123.19"
-                      costPerRate="-0.04 (1.42%)"
+                      name="GTL Infrastructure"
+                      stockCost="123.19"
+                      stockCostPerRate="-0.04 (1.42%)"
                     />
                     <StockCard
                       logoUrl={MD_ship_logo}
-                      title="Mazagon Dock Ship"
-                      cost="4,539.65"
-                      costPerRate="240.1 (5.52%)"
+                      name="Mazagon Dock Ship"
+                      stockCost="4,539.65"
+                      stockCostPerRate="240.1 (5.52%)"
                     />
                     <StockCard
                       logoUrl={Angel_one_logo}
-                      title="Angel One"
+                      name="Angel One"
                       cost="2,699.90"
-                      costPerRate="-3.00 (0.11%)"
+                      stockCostPerRate="-3.00 (0.11%)"
                     />
                   </div>
                 </div>
@@ -1237,8 +1236,8 @@ const StockDetail = () => {
                 <div className="stock_detail_buy_stock_main_buy_card_div">
                   <BuyStockCard
                     companyName={companyName}
-                    cost={companyCost}
-                    costPerRate={companyCostPerRate}
+                    stockCost={companyCost}
+                    stockCostPerRate={companyCostPerRate}
                   />
                 </div>
               </div>
@@ -1280,8 +1279,8 @@ const StockDetail = () => {
                 <div className="buy_and_sell_option_open_in_mobile_view_main_div_arrange_width">
                   <BuyStockCard
                     companyName={companyName}
-                    cost={companyCost}
-                    costPerRate={companyCostPerRate}
+                    stockCost={companyCost}
+                    stockCostPerRate={companyCostPerRate}
                   />
                 </div>
               </div>

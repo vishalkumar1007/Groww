@@ -11,11 +11,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 const StockMarketCap = ({
-  cost = "",
-  costPerRate = "",
-  stockId = "",
-  uniqueId = "",
-  title = "",
+  _id = "",
+  stock_id = "",
+  stockCost = "",
+  stockCostPerRate = "",
+  name = "",
   logoUrl = "",
   RemoveAddToCardFeature = false,
 }) => {
@@ -30,29 +30,29 @@ const StockMarketCap = ({
 
   const addStockToWatchlist = () => {
     if (isAddToWatchList) {
-      dispatch(removeFromWatchlist({ stockId }));
+      dispatch(removeFromWatchlist({ stock_id }));
       setIsAddToWatchList(false);
     } else {
       dispatch(
-        addToWatchlist({ uniqueId, stockId, title, cost, costPerRate, logoUrl })
+        addToWatchlist({ _id, stock_id, name, stockCost, stockCostPerRate, logoUrl })
       );
     }
   };
 
   useEffect(() => {
     for (let i = 0; i < userWatchlistData.length; i++) {
-      if (userWatchlistData[i].stockId === stockId) {
+      if (userWatchlistData[i].stock_id === stock_id) {
         setIsAddToWatchList(true);
         break;
       }
     }
-  }, [stockId, userWatchlistData]);
+  }, [stock_id, userWatchlistData]);
 
   // ---------------
 
   useEffect(() => {
-    if (costPerRate.length > 0) {
-      for (const element of costPerRate) {
+    if (stockCostPerRate.length > 0) {
+      for (const element of stockCostPerRate) {
         if (element === "-") {
           setIsCostPerRateNegative(true);
           break;
@@ -61,7 +61,7 @@ const StockMarketCap = ({
         }
       }
     }
-  }, [costPerRate]);
+  }, [stockCostPerRate]);
 
   return (
     <div className="stock_market_cap_main">
@@ -70,10 +70,10 @@ const StockMarketCap = ({
           <div className="stock_market_cap_main_title_section_company">
             <button
               onClick={() => {
-                navigate(`/stock_detail?${stockId}`);
+                navigate(`/stock_detail?${stock_id}`);
               }}
             >
-              {title || "Company Name"}
+              {name || "Company Name"}
             </button>
           </div>
         </div>
@@ -87,20 +87,20 @@ const StockMarketCap = ({
           >
             <div className="stock_market_cap_main_title_section_price">
               <span id="stock_market_cap_price_value">
-                {cost || "₹0,000.00"}
+                {stockCost || "₹0,000.00"}
               </span>
               <span
                 id="stock_market_cap_price_valuePerRate"
                 style={{
                   color:
-                    costPerRate === ""
+                    stockCostPerRate === ""
                       ? "#717171"
                       : isCostPerRateNegative
                       ? "#e84e2c"
                       : "#00B386",
                 }}
               >
-                {costPerRate || "0.00 (0.00%)"}
+                {stockCostPerRate || "0.00 (0.00%)"}
               </span>
             </div>
           </div>

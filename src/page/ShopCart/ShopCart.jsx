@@ -31,10 +31,10 @@ const ShopCart = () => {
                   <StockCard
                     key={index}
                     uniqueId={data.uniqueId}
-                    stockId={data.stockId}
-                    title={data.title}
-                    cost={data.cost}
-                    costPerRate={data.costPerRate}
+                    stock_id={data.stock_id}
+                    name={data.name}
+                    stockCost={data.stockCost}
+                    stockCostPerRate={data.stockCostPerRate}
                     logoUrl={data.logoUrl}
                   />
                 ))

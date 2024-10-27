@@ -5,7 +5,7 @@ const initialState = {
     isLoading:false,
     data:[],
     isError:false,
-    ErrorMsg : null
+    ErrorMsg : ''
 }
 
 const allStockApiDataSlice = createSlice({

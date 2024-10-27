@@ -72,23 +72,23 @@ const StockWatchListCard = ({ watchlistTitle = "dummy" }) => {
           style={{height: isOpenWatchlist ? `${watchListDivHeight}px`:'0px'}}
         >
           <div className="stock_watchList_card_main_all_items_list_height_box" ref={getWatchlistHiddenBoxHeight}>
-            {userWatchlistData.map((data) => (
+            {userWatchlistData.map((data,index) => (
               <div
-                key={data.uniqueId}
+                key={index}
                 className="stock_watchList_card_main_all_items_list"
               >
                 <div className="stock_watchList_card_main_item_box">
                   <div className="stock_watchList_card_main_item_box_title">
-                    <span id="stock_watchList_card_main_item_box_title_name" onClick={()=>{navigate(`/stock_detail?${data.stockId}`)}}>
-                      {data.title || "Tata Steel"}
+                    <span id="stock_watchList_card_main_item_box_title_name" onClick={()=>{navigate(`/stock_detail?${data.stock_id}`)}}>
+                      {data.name || "Tata Steel"}
                     </span>
                   </div>
                   <div className="stock_watchList_card_main_item_box_rate">
                     <span id="stock_watchList_card_main_item_box_rate_cost">
-                      ₹{data.cost || "000.00"}
+                      ₹{data.stockCost || "000.00"}
                     </span>
                     <span id="stock_watchList_card_main_item_box_rate_costPerRate">
-                      {data.costPerRate || "0.00 (0.00%)"}
+                      {data.stockCostPerRate || "0.00 (0.00%)"}
                     </span>
                   </div>
                 </div>

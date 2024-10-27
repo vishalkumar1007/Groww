@@ -10,9 +10,13 @@ const userProfileDataSlice = createSlice({
     reducers:{
         addUserDetail:(state,action)=>{
             state.data = action.payload;
+        },
+        deleteUserProfileDetail:(state,action)=>{
+            // console.log('remove profile data -------------');
+            state.data = []
         }
     }
 });
 
-export const {addUserDetail} = userProfileDataSlice.actions;
+export const {addUserDetail,deleteUserProfileDetail} = userProfileDataSlice.actions;
 export default userProfileDataSlice.reducer;

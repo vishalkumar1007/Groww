@@ -180,11 +180,11 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
             showStockData.map((stockData) => (
               <StockMarketCap
                 key={stockData._id}
-                cost={stockData.stockCost}
-                costPerRate={stockData.stockCostPerRate}
-                stockId={stockData.stock_id}
-                uniqueId={stockData._id}
-                title={stockData.name}
+                stockCost={stockData.stockCost}
+                stockCostPerRate={stockData.stockCostPerRate}
+                stock_id={stockData.stock_id}
+                _id={stockData._id}
+                name={stockData.name}
                 logoUrl={stockData.logoUrl}
                 RemoveAddToCardFeature={RemoveAddToCardFeature}
               />

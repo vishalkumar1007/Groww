@@ -71,6 +71,16 @@ import {
   // selectorTopMarketCapStockErrorMsg
 } from "../../features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData";
 
+// import {
+//   fetchUserWatchlistApiDataThunk,
+//   selectUserWatchlistValue,
+//   // selectUserWatchlistLoading,
+//   // selectUserWatchlistError,
+//   // selectUserWatchlistErrorMessage
+// } from "../../features/userWatchlist/centralExportUserWatchlist";
+// import {selectUserProfileData} from "../../features/userProfileData/centralExportUserProfileData"
+
+
 import { useNavigate } from "react-router-dom";
 import StockMarketCapLoader from "../../component/Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
 
@@ -84,8 +94,24 @@ const Stocks = () => {
   const [paginationEndIndex, setPaginationEndIndex] = useState(0);
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
   const paginationChunk = 10;
-
+  
   // api data state
+
+  // handel to call user Watchlist Data api redux ------------
+
+  // const userWatchlistApiData = useSelector(selectUserWatchlistValue);
+  // const userProfileData = useSelector(selectUserProfileData);
+
+  // useEffect(()=>{
+  //   if(userProfileData.userEmail){
+  //     dispatch(fetchUserWatchlistApiDataThunk(userProfileData.userEmail));
+  //     // console.log('userProfileData.email : ', userProfileData.userEmail);
+  //   }
+  // },[dispatch, userProfileData])
+
+  // useEffect(()=>{
+  //   console.log('userWatchlistApiData : ',userWatchlistApiData)
+  // },[userWatchlistApiData])
 
   // handel to calling topByMarketCapStock api in redux -----------------
 
@@ -245,12 +271,12 @@ const Stocks = () => {
                 mostBoughtStocksApiData.map((data) => (
                   <StockCard
                     key={data._id}
-                    uniqueId={data._id}
-                    stockId={data.stock_id}
+                    _id={data._id}
+                    stock_id={data.stock_id}
                     logoUrl={data.logoUrl}
-                    title={data.name}
-                    cost={data.stockCost}
-                    costPerRate={data.stockCostPerRate}
+                    name={data.name}
+                    stockCost={data.stockCost}
+                    stockCostPerRate={data.stockCostPerRate}
                   />
                 ))
               )}
@@ -355,12 +381,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -381,12 +407,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -407,12 +433,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -458,12 +484,12 @@ const Stocks = () => {
                 stockNewsApiData.map((data) => (
                   <StockCard
                     key={data._id}
-                    uniqueId={data._id}
-                    stockId={data.stock_id}
+                    _id={data._id}
+                    stock_id={data.stock_id}
                     logoUrl={data.logoUrl}
-                    title={data.name}
-                    cost={data.stockCost}
-                    costPerRate={data.stockCostPerRate}
+                    name={data.name}
+                    stockCost={data.stockCost}
+                    stockCostPerRate={data.stockCostPerRate}
                   />
                 ))
               )}
@@ -536,12 +562,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -562,12 +588,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -588,12 +614,12 @@ const Stocks = () => {
                       .map((data) => (
                         <StockCard
                           key={data._id}
-                          uniqueId={data._id}
-                          stockId={data.stock_id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
                           logoUrl={data.logoUrl}
-                          title={data.name}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
                         />
                       ))
                   )}
@@ -661,11 +687,11 @@ const Stocks = () => {
                       .map((data) => (
                         <StockMarketCap
                           key={data._id}
-                          cost={data.stockCost}
-                          costPerRate={data.stockCostPerRate}
-                          stockId={data.stock_id}
-                          uniqueId={data._id}
-                          title={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                          stock_id={data.stock_id}
+                          _id={data._id}
+                          name={data.name}
                           logoUrl={data.logoUrl}
                         />
                       ))

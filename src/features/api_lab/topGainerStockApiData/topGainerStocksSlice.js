@@ -5,7 +5,7 @@ const initialState = {
     isLoading: false,
     data: [],
     isError: false,
-    errorMsg: null
+    errorMsg: ''
 }
 
 const topGainerSlice = createSlice({

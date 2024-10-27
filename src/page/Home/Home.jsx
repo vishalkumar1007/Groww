@@ -16,15 +16,39 @@ import Footer from "../../component/Footer/Footer";
 import SearchStock from '../../component/SearchStock/SearchStock'
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
 
-// import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 
 // import { useDispatch} from "react-redux";
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
+import {deleteAllWatchlistData, selectUserWatchlistValue} from '../../features/userWatchlist/centralExportUserWatchlist';
+import {deleteAllCartData, selectUserCartValue} from '../../features/userCart/centralExportUserCart';
+import {deleteUserProfileDetail , selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData';
+
 const Home = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
+
+  // const xUserWatchlistData = useSelector(selectUserWatchlistValue);
+  // const xUserCartData = useSelector(selectUserCartValue);
+  // const xUserProfileData = useSelector(selectUserProfileData);
+
+  
+
+  useEffect(()=>{      
+      dispatch(deleteAllWatchlistData());
+      dispatch(deleteAllCartData());
+      dispatch(deleteUserProfileDetail());
+  },[dispatch])
+
+  // useEffect(()=>{
+  //     console.log('xUserWatchlistData : ', xUserWatchlistData);
+  //     console.log('xUserCartData : ', xUserCartData);
+  //     console.log('xUserProfileData : ', xUserProfileData);
+  // },[xUserCartData, xUserProfileData, xUserWatchlistData])
 
   useEffect(()=>{
     const localStorageData = localStorage.getItem('existenceKey');

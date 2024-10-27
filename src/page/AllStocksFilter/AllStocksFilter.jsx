@@ -447,11 +447,11 @@ const AllStocksFilter = () => {
                         .map((data) => (
                           <StockMarketCap
                             key={data._id}
-                            cost={data.stockCost}
-                            costPerRate={data.stockCostPerRate}
-                            stockId={data.stock_id}
-                            uniqueId={data._id}
-                            title={data.name}
+                            stockCost={data.stockCost}
+                            stockCostPerRate={data.stockCostPerRate}
+                            stock_id={data.stock_id}
+                            _id={data._id}
+                            name={data.name}
                             logoUrl={data.logoUrl}
                           />
                         ))}
