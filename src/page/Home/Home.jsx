@@ -1,6 +1,5 @@
 import "./Home.css";
 import GrowwLogo from "../../assets/svg/groww-logo-light.svg";
-import GrowwLogoDark from "../../assets/svg/groww-logo-dark.svg";
 import Home_img from "../../assets/img/home_image_intro.png";
 import Mobile_image from "../../assets/img/stocksBuy.5382418f.webp";
 import indian_market_building from "../../assets/img/indianMarketBuilding.a399b6f2.webp";
@@ -24,15 +23,15 @@ import { useDispatch } from "react-redux";
 
 import {
   deleteAllWatchlistData,
-  selectUserWatchlistValue,
+  // selectUserWatchlistValue,
 } from "../../features/userWatchlist/centralExportUserWatchlist";
 import {
   deleteAllCartData,
-  selectUserCartValue,
+  // selectUserCartValue,
 } from "../../features/userCart/centralExportUserCart";
 import {
   deleteUserProfileDetail,
-  selectUserProfileData,
+  // selectUserProfileData,
 } from "../../features/userProfileData/centralExportUserProfileData";
 
 const Home = () => {
