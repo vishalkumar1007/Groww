@@ -10,7 +10,7 @@ import {
 import StockMarketCap from "../StockMarketCap/StockMarketCap";
 import StockMarketCapLoader from "../Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
 
-const SearchStock = ({ RemoveAddToCardFeature = false }) => {
+const SearchStock = ({ MoveTop=90, RemoveAddToCardFeature = false }) => {
   //   const x =
   const dispatch = useDispatch();
   const [isActiveInputOfSearch, setIsActiveInputOfSearch] = useState(false);
@@ -30,7 +30,6 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
       dispatch(fetchAllStockApiThunk());
     }
   }, [allStockHeadData, dispatch]);
-
 
   useEffect(() => {
     if (getHeightOFSearchResult.current) {
@@ -143,7 +142,9 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
         ) : null}
       </div>
       {isActiveInputOfSearch ? (
-        <div className="searchStock_search_result_count_show">
+        <div className="searchStock_search_result_count_show"
+          style={{top:`${MoveTop-20}px` }}
+        >
           {showStockData.length} search result
         </div>
       ) : null}
@@ -162,6 +163,7 @@ const SearchStock = ({ RemoveAddToCardFeature = false }) => {
         style={{
           height: `${searchDivHeight}px`,
           background: "white",
+          top:`${MoveTop}px` 
         }}
         // ref={getHeightOFSearchResult}
       >

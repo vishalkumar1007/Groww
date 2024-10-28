@@ -77,7 +77,12 @@ const StockMarketCap = ({
             </button>
           </div>
         </div>
-        <div className="stock_market_cap_main_title_section_price_and_watchlist">
+        <div className="stock_market_cap_main_title_section_price_and_watchlist"
+          style={{
+            minWidth: RemoveAddToCardFeature? '50px':'125px',
+            // backgroundColor: RemoveAddToCardFeature?'red':'blue'
+          }}
+        >
           <div className="stock_market_cap_main_title_section_price_main"
             style={{
               // RemoveAddToCardFeature

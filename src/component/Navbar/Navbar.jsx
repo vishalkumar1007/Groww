@@ -151,7 +151,8 @@ const Navbar = ({ callFrom = "" }) => {
           extraInfoText="Thank you , Hope you like this Groww , if you are facing any issue please report us..."
         />
       ) : null}
-      <div className="Navbar_main">
+      <div className="Navbar_main"
+      >
         <div className="Navbar_content_limit_width">
           <div className="Navbar_logo">
             <div className="Navbar_logo_groww">

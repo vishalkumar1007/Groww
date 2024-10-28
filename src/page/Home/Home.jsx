@@ -1,5 +1,6 @@
 import "./Home.css";
 import GrowwLogo from "../../assets/svg/groww-logo-light.svg";
+import GrowwLogoDark from "../../assets/svg/groww-logo-dark.svg";
 import Home_img from "../../assets/img/home_image_intro.png";
 import Mobile_image from "../../assets/img/stocksBuy.5382418f.webp";
 import indian_market_building from "../../assets/img/indianMarketBuilding.a399b6f2.webp";
@@ -10,21 +11,29 @@ import Credit_building from "../../assets/img/creditBuilding.c26d1ba5.webp";
 import Personal_loan from "../../assets/img/personalLoan.9d5e746c.webp";
 import General_store from "../../assets/img/generalStore.ab44242a.webp";
 import Pay_bill from "../../assets/img/payBillsComp.86cfc514.webp";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
-import SearchStock from '../../component/SearchStock/SearchStock'
+import SearchStock from "../../component/SearchStock/SearchStock";
 // import IntroAlert from "../../component/IntroAlert/IntroAlert";
-
 
 import { useDispatch } from "react-redux";
 
 // import { useDispatch} from "react-redux";
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
-import {deleteAllWatchlistData, selectUserWatchlistValue} from '../../features/userWatchlist/centralExportUserWatchlist';
-import {deleteAllCartData, selectUserCartValue} from '../../features/userCart/centralExportUserCart';
-import {deleteUserProfileDetail , selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData';
+import {
+  deleteAllWatchlistData,
+  selectUserWatchlistValue,
+} from "../../features/userWatchlist/centralExportUserWatchlist";
+import {
+  deleteAllCartData,
+  selectUserCartValue,
+} from "../../features/userCart/centralExportUserCart";
+import {
+  deleteUserProfileDetail,
+  selectUserProfileData,
+} from "../../features/userProfileData/centralExportUserProfileData";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -36,13 +45,11 @@ const Home = () => {
   // const xUserCartData = useSelector(selectUserCartValue);
   // const xUserProfileData = useSelector(selectUserProfileData);
 
-  
-
-  useEffect(()=>{      
-      dispatch(deleteAllWatchlistData());
-      dispatch(deleteAllCartData());
-      dispatch(deleteUserProfileDetail());
-  },[dispatch])
+  useEffect(() => {
+    dispatch(deleteAllWatchlistData());
+    dispatch(deleteAllCartData());
+    dispatch(deleteUserProfileDetail());
+  }, [dispatch]);
 
   // useEffect(()=>{
   //     console.log('xUserWatchlistData : ', xUserWatchlistData);
@@ -50,78 +57,74 @@ const Home = () => {
   //     console.log('xUserProfileData : ', xUserProfileData);
   // },[xUserCartData, xUserProfileData, xUserWatchlistData])
 
-  useEffect(()=>{
-    const localStorageData = localStorage.getItem('existenceKey');
+  useEffect(() => {
+    const localStorageData = localStorage.getItem("existenceKey");
 
-    if(!localStorageData){
+    if (!localStorageData) {
       // Don't change api localhost url to live api url -*
-      const userVisitApi = 'http://localhost:8080/api/activity/newVisit';
+      const userVisitApi = "http://localhost:8080/api/activity/newVisit";
 
-      fetch(userVisitApi,{
-        method:'GET',
-        headers:{
-          'Content-Type' : 'application/json',
-          'secretkeyauth' : 'authActivityNewVisit07'
-        }
-      })
-      .then(async(response)=>{
-        if(response.status === 200){
-          const data =  await response.json();
-          const localData = data.existenceKey;
-          localStorage.setItem('existenceKey',localData);
-        }
-      })
-      .catch((err)=>{
-        console.log('Error on visit' , err);
-      })
-    }
-    
-  },[])
-
-  useEffect(()=>{
-    const localStorageToken = localStorage.getItem('token');
-
-    if(localStorageToken){
-      const tokenVerifyApi = 'http://localhost:8080/api/user/verify/token';
-  
-      fetch(tokenVerifyApi , {
-        method:'GET',
+      fetch(userVisitApi, {
+        method: "GET",
         headers: {
-          'Content-Type':'application/json',
-          'Authorization':`Bearer ${localStorageToken}`
-        }
+          "Content-Type": "application/json",
+          secretkeyauth: "authActivityNewVisit07",
+        },
       })
-      .then(async (response)=>{
-        if(!response.ok){
-          return await response.json();
-        }
-        
-        if(response.status===200){
-          navigate('/dashboard');
-          return await response.json();
-        }
-        console.log('Auto login declined with status', response.status);
+        .then(async (response) => {
+          if (response.status === 200) {
+            const data = await response.json();
+            const localData = data.existenceKey;
+            localStorage.setItem("existenceKey", localData);
+          }
+        })
+        .catch((err) => {
+          console.log("Error on visit", err);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    const localStorageToken = localStorage.getItem("token");
+
+    if (localStorageToken) {
+      const tokenVerifyApi = "http://localhost:8080/api/user/verify/token";
+
+      fetch(tokenVerifyApi, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorageToken}`,
+        },
       })
-      .then((data)=>{
+        .then(async (response) => {
+          if (!response.ok) {
+            return await response.json();
+          }
+
+          if (response.status === 200) {
+            navigate("/dashboard");
+            return await response.json();
+          }
+          console.log("Auto login declined with status", response.status);
+        })
+        .then((data) => {
           // save data to redux
           // if(data.msg === 'Token Expired' && data.status === 'access denied'){
           //   dispatch(removeUserInformation());
           // }else{
           //   dispatch(addUserInformation(data));
           // }
-      })
-      .catch((err)=>{
-        console.log('Error on fetching auto login' , err);
-      })
-
+        })
+        .catch((err) => {
+          console.log("Error on fetching auto login", err);
+        });
     }
-
-  },[navigate])
+  }, [navigate]);
 
   /* alert popup  */
-    
+
   /*
-  
     const [isShowAlertOption , setIsShowAlertOption] = useState(false);
     const [popUpInterval , setPopUpInterval] = useState(5000);
 
@@ -147,29 +150,37 @@ const Home = () => {
 
   */
 
-
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       {
-      //   isShowAlertOption?
-      //   <div className="HomeMain_alert_show">
-      //   <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
-      // </div>:null
+        //   isShowAlertOption?
+        //   <div className="HomeMain_alert_show">
+        //   <IntroAlert requestToClose={(val)=>{requestToClose(val)}} />
+        // </div>:null
       }
 
-      <div className="HomeMain">
+      <div
+        className="HomeMain"
+        style={{ overflow: menuActive ? "hidden" : "scroll" }}
+        
+      >
         <div className="Home_navbar">
           <div className="Home_nav_logo">
-            <div className="Home_nav_logo_handel">
-              <img src={GrowwLogo} alt="" />
+            <div className="Home_nav_logo_handel" id="make_groww_logo_z_index">
+              {
+                // menuActive?
+                // <img src={GrowwLogoDark} alt="" id=''/>
+                // :
+                <img src={GrowwLogo} alt="" id="" />
+              }
             </div>
           </div>
           <div className="Home_nav_search">
             {/* <input type="text" placeholder="What are you looking for today" /> */}
-            <SearchStock RemoveAddToCardFeature = {true}/>
+            <SearchStock MoveTop={70} RemoveAddToCardFeature={true} />
           </div>
           <div className="Home_nav_register">
             <button
@@ -194,7 +205,7 @@ const Home = () => {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="currentColor"
+                stroke="white"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -223,20 +234,28 @@ const Home = () => {
               </svg>
             )}
           </button>
-          <div
-            className="Home_three_menu_bar"
-            id={menuActive ? "Home_three_menu_bar_animation" : null}
-          >
-            <div className="Home_nav_register_menu">
-              <button
-                onClick={() => {
-                  navigate("login");
-                }}
-              >
-                Login/Register
-              </button>
+          {menuActive ? (
+            <div
+              className="Home_three_menu_bar"
+              // id={menuActive ? "Home_three_menu_bar_animation" : null}
+            >
+              {/* <div className="Home_nav_register_menu"></div> */}
+              <div className="home_three_menu_sign_in_login">
+                <div className="home_three_menu_sign_in_login_btn">
+                  <button
+                    onClick={() => {
+                      navigate("login");
+                    }}
+                  >
+                    login
+                  </button>
+                </div>
+              </div>
+              <div className="home_three_menu_search_bar">
+                <SearchStock MoveTop={70} RemoveAddToCardFeature={true} />
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
         <div className="Home_body">
           <div className="Home_body_section_1">
@@ -292,7 +311,12 @@ const Home = () => {
                       <div className="Home_body_section_2_left_contain_stock_option_1">
                         <div className="Home_body_section_2_left_contain_stock_option_1_div">
                           <button className="Home_body_section_2_left_contain_stock_option_1_div_btn">
-                            <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrange" onClick={()=>{navigate("dashboard")}}>
+                            <div
+                              className="Home_body_section_2_left_contain_stock_option_1_div_btn_arrange"
+                              onClick={() => {
+                                navigate("dashboard");
+                              }}
+                            >
                               <div className="Home_body_section_2_left_contain_stock_option_1_div_btn_icon">
                                 <img src={Stocks_icon} alt="" />
                               </div>

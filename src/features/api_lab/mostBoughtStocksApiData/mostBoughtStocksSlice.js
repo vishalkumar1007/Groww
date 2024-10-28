@@ -7,7 +7,6 @@ const initialState ={
     isError:false,
     errorMsg:''
 }
-
 const mostBoughtStocksSlice = createSlice({
     name:'mostBoughtStocksData',
     initialState ,
@@ -20,7 +19,6 @@ const mostBoughtStocksSlice = createSlice({
             state.data = action.payload;
         })
         builder.addCase(fetchMostBoughtStockThunk.rejected , (state,action)=>{
-            console.log('rejected error in mostBoughtStock: ',action.payload);
             state.isError = true;
             state.errorMsg = action.error.message;
         })

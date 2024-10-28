@@ -56,12 +56,6 @@ import {
   // selectorTopLoserStockErrorMsg,
 } from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
 
-import // fetchAllStockApiThunk,
-// selectorAllStockApiData,
-// selectorAllStockApiIsLoading,
-// selectorAllStockApiIsError,
-// selectorAllStockApiErrorMsg
-"../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 
 import {
   fetchTopMarketCapStockThunk,
@@ -71,6 +65,12 @@ import {
   // selectorTopMarketCapStockErrorMsg
 } from "../../features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData";
 
+import // fetchAllStockApiThunk,
+// selectorAllStockApiData,
+// selectorAllStockApiIsLoading,
+// selectorAllStockApiIsError,
+// selectorAllStockApiErrorMsg
+"../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 // import {
 //   fetchUserWatchlistApiDataThunk,
 //   selectUserWatchlistValue,
@@ -85,7 +85,7 @@ import { useNavigate } from "react-router-dom";
 import StockMarketCapLoader from "../../component/Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
 
 const Stocks = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
@@ -99,19 +99,6 @@ const Stocks = () => {
 
   // handel to call user Watchlist Data api redux ------------
 
-  // const userWatchlistApiData = useSelector(selectUserWatchlistValue);
-  // const userProfileData = useSelector(selectUserProfileData);
-
-  // useEffect(()=>{
-  //   if(userProfileData.userEmail){
-  //     dispatch(fetchUserWatchlistApiDataThunk(userProfileData.userEmail));
-  //     // console.log('userProfileData.email : ', userProfileData.userEmail);
-  //   }
-  // },[dispatch, userProfileData])
-
-  // useEffect(()=>{
-  //   console.log('userWatchlistApiData : ',userWatchlistApiData)
-  // },[userWatchlistApiData])
 
   // handel to calling topByMarketCapStock api in redux -----------------
 
@@ -120,65 +107,27 @@ const Stocks = () => {
     selectorTopMarketCapStockLoading
   );
 
-  useEffect(() => {
-    if (topMarketCapStockApiData.length === 0) {
-      dispatch(fetchTopMarketCapStockThunk());
-    }
-  }, [dispatch, topMarketCapStockApiData]);
-
 
   // handel to calling mostBoughStock api in redux -----------------
 
   const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
   const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
-  // const mostBoughtStocksApiError = useSelector(selectMostBoughtStockError);
-  useEffect(() => {
-    if (mostBoughtStocksApiData.length === 0) {
-      // console.log("mostBoughtStockData api call");
-      dispatch(fetchMostBoughtStockThunk());
-    }
-  }, [dispatch, mostBoughtStocksApiData]);
 
   // handel to calling topGainerStock api in redux ------------------
 
   const topGainerStockApiData = useSelector(selectTopGainerStockData);
   const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
-  // const topGainerStockApiError = useSelector(selectTopGainerStockError);
-  // const topGainerStockApiErrorMessage = useSelector(selectTopGainerStockErrorMessage);
-  useEffect(() => {
-    if (topGainerStockApiData.length === 0) {
-      // console.log("topGainStockData api call");
-      dispatch(fetchTopGainerStockThunk());
-    }
-  }, [dispatch, topGainerStockApiData]);
+  
 
   // handel to calling stockNewsApiData api in redux ----------------
 
   const stockNewsApiData = useSelector(selectStockNewsApiData);
   const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
-  // const stockNewsApiError = useSelector(selectStockNewsApiError);
-  // const stockNewsApiErrorMessage = useSelector(selectStockNewsApiErrorMsg);
-
-  useEffect(() => {
-    if (stockNewsApiData.length === 0) {
-      // console.log("stockNewsApiData api call");
-      dispatch(fetchStockNewsApiThunk());
-    }
-  }, [dispatch, stockNewsApiData]);
 
   // handel to calling topLoserStockApiData api in redux ----------------
 
   const topLoserStockApiData = useSelector(selectorTopLoserStockData);
   const topLoserStockApiLoading = useSelector(selectorTopLoserStockLoading);
-  // const topLoserStockApiError = useSelector(selectorTopLoserStockError);
-  // const topLoserStockApiErrorMessage = useSelector(selectorTopLoserStockErrorMsg);
-
-  useEffect(() => {
-    if (topLoserStockApiData.length === 0) {
-      // console.log("topLoserStockApiData api call");
-      dispatch(fetchTopLoserStockThunk());
-    }
-  }, [dispatch, topLoserStockApiData]);
 
   // pagination on market cap >>>>>>>>>>>>>>
 
@@ -320,7 +269,7 @@ const Stocks = () => {
                 Top Gainer
               </span>
               <span className="stocks_left_top_gainers_heading_seeMore">
-                <button>See more</button>
+                <button onClick={()=>{navigate('/dashboard/topStock')}}>See more</button>
               </span>
             </div>
             <div className="stocks_left_top_gainers_filter">
@@ -451,7 +400,7 @@ const Stocks = () => {
               <span className="stocks_left_in_news_heading_title">
                 Stocks in News
               </span>
-              <button className="stocks_left_in_news_heading_news_box">
+              <button className="stocks_left_in_news_heading_news_box" onClick={()=>{navigate('/dashboard/topStock')}}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -501,7 +450,7 @@ const Stocks = () => {
                 Top Losers
               </span>
               <span className="stocks_left_top_losers_heading_seeMore">
-                <button>See more</button>
+                <button onClick={()=>{navigate('/dashboard/topStock')}}>See more</button>
               </span>
             </div>
             <div className="stocks_left_top_losers_filter">
@@ -630,7 +579,7 @@ const Stocks = () => {
           <div className="stocks_left_top_sector">
             <div className="stocks_left_top_sector_heading">
               <span>Top Sectors</span>
-              <button>
+              <button onClick={()=>{navigate('/dashboard/topStock')}}>
                 <p>See more</p>
               </button>
             </div>
@@ -649,8 +598,8 @@ const Stocks = () => {
               <span className="stocks_left_market_cap_heading_title">
                 Top by Market Cap
               </span>
-              <button className="stocks_left_market_cap_heading_seeMore">
-                <p>See more</p>
+              <button className="stocks_left_market_cap_heading_seeMore" onClick={()=>{navigate('/dashboard/topStock')}}>
+                <p onClick={()=>{navigate('/dashboard/topStock')}}>See more</p>
               </button>
             </div>
             <div className="stocks_left_market_cap_card_component_container">

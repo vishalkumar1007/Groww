@@ -1,22 +1,18 @@
-
-
 import Motilal_Oswal from "../../assets/img/Mutual_Fund/Motilal_Oswal_Midcap Fund_Direct_Growth.webp";
 import Quant_Small from "../../assets/img/Mutual_Fund/Quant_Small_Cap_Fund Direct_Plan_Growth.webp";
 import Parag_Parikh from "../../assets/img/Mutual_Fund/Parag_Parikh_Flexi_Cap Fund_Direct_Growth.webp";
 import Nippon_India from "../../assets/img/Mutual_Fund/Nippon_India_Large_Cap_Fund_Direct_Growth.png";
 import Groww_logo from "../../assets/img/Mutual_Fund/groww/indiabulls_groww.webp";
-import High_return from '../../assets/img/Mutual_Fund/collection/high_returns.svg'
-import SIP_with_500 from '../../assets/img/Mutual_Fund/collection/sip_with_500.svg'
-import Tax_Saving from '../../assets/img/Mutual_Fund/collection/tax_saving.svg'
-import Large_Cap from '../../assets/img/Mutual_Fund/collection/large_cap.svg'
-import Mid_Cap from '../../assets/img/Mutual_Fund/collection/mid_cap.svg'
-import Small_Cap from '../../assets/img/Mutual_Fund/collection/small_cap.svg'
+import High_return from "../../assets/img/Mutual_Fund/collection/high_returns.svg";
+import SIP_with_500 from "../../assets/img/Mutual_Fund/collection/sip_with_500.svg";
+import Tax_Saving from "../../assets/img/Mutual_Fund/collection/tax_saving.svg";
+import Large_Cap from "../../assets/img/Mutual_Fund/collection/large_cap.svg";
+import Mid_Cap from "../../assets/img/Mutual_Fund/collection/mid_cap.svg";
+import Small_Cap from "../../assets/img/Mutual_Fund/collection/small_cap.svg";
 import new_fund_offering from "../../assets/img/Mutual_Fund/quick_access/nfo.svg";
 import import_fund from "../../assets/img/Mutual_Fund/quick_access/import_funds.svg";
 import compare_fund from "../../assets/img/Mutual_Fund/quick_access/compare_funds.svg";
 import sip_calculator from "../../assets/img/Mutual_Fund/quick_access/calculator.svg";
-
-
 
 import "./MutualFund.css";
 // import MutualFundCard from "../../MutualFundComponents/MutualFundCard/MutualFundCard";
@@ -27,7 +23,8 @@ import QuicksAccess from "../../component/MutualFundComponents/QuicksAccess/Quic
 
 const MutualFund = () => {
   return (
-    <div className="mutual_fund_main">
+    <div
+      className="mutual_fund_main">
       <div className="mutual_fund_main_arrange_width">
         <div className="mutual_fund_main_left">
           <div className="mutual_fund_main_left_popular_fund">
@@ -88,12 +85,21 @@ const MutualFund = () => {
               </span>
             </div>
             <div className="mutual_fund_main_left_collection_comp_div">
-              <MutualFundCollectionCard logoUrl={High_return} title='High return'/>
-              <MutualFundCollectionCard logoUrl={SIP_with_500} title='SIP with 500'/>
-              <MutualFundCollectionCard logoUrl={Tax_Saving} title='Tax Saving'/>
-              <MutualFundCollectionCard logoUrl={Large_Cap} title='Large Cap'/>
-              <MutualFundCollectionCard logoUrl={Mid_Cap} title='Mid Cap'/>
-              <MutualFundCollectionCard logoUrl={Small_Cap} title='Small Cap'/>
+              <MutualFundCollectionCard
+                logoUrl={High_return}
+                title="High return"
+              />
+              <MutualFundCollectionCard
+                logoUrl={SIP_with_500}
+                title="SIP with 500"
+              />
+              <MutualFundCollectionCard
+                logoUrl={Tax_Saving}
+                title="Tax Saving"
+              />
+              <MutualFundCollectionCard logoUrl={Large_Cap} title="Large Cap" />
+              <MutualFundCollectionCard logoUrl={Mid_Cap} title="Mid Cap" />
+              <MutualFundCollectionCard logoUrl={Small_Cap} title="Small Cap" />
             </div>
           </div>
           <div className="mutual_fund_main_left_fund_by_groww">
@@ -135,10 +141,13 @@ const MutualFund = () => {
               </span>
             </div>
             <div className="mutual_fund_main_left_quick_access_component">
-              <QuicksAccess logoUrl={new_fund_offering} title="New Fund Offering"/>
-              <QuicksAccess logoUrl={import_fund} title="Import Fund"/>
-              <QuicksAccess logoUrl={compare_fund} title="Compare Funds"/>
-              <QuicksAccess logoUrl={sip_calculator} title="SIP Calculator"/>
+              <QuicksAccess
+                logoUrl={new_fund_offering}
+                title="New Fund Offering"
+              />
+              <QuicksAccess logoUrl={import_fund} title="Import Fund" />
+              <QuicksAccess logoUrl={compare_fund} title="Compare Funds" />
+              <QuicksAccess logoUrl={sip_calculator} title="SIP Calculator" />
             </div>
           </div>
         </div>

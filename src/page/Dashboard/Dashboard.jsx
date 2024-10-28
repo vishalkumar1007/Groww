@@ -10,7 +10,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [optionActive, setOptionActive] = useState("stocks");
 
-
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken) {
