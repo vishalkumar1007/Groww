@@ -88,7 +88,6 @@ const Login = () => {
     if (!allowContinueEmailVerify) {
       setF_incorrectEmail(true);
       deactivateAfter2sec();
-      console.log("not allow with user allowContinueEmailVerify");
       return;
     }
     setLoaderActive(true);
