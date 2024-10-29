@@ -140,7 +140,7 @@ const SignUp = () => {
       return false;
     }
     setLoaderActive(true);
-    const sendOtpApi = `http://localhost:8080/api/user/verifyTopForNewUser?email=${userEmailId}`;
+    const sendOtpApi = `http://localhost:8080/api/user/sendOtpForVerify?email=${userEmailId}`;
 
     fetch(sendOtpApi, {
       method: "GET",
