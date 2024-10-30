@@ -63,3 +63,38 @@
   color: #d1d7d5;
   text-align: center;
 }
+
+
+.watchList_float_search_option{
+  /* background-color: pink; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+}
+.watchList_float_search_option_icon{
+  background-color: rgba(177, 16, 91, 0.7);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(1px);
+  color: #ffffff;
+  z-index: 102;
+  display: none;
+}
+
+@media (max-width:500px){
+  .watchList_float_search_option_icon{
+    display: flex;;
+  }
+  .watchList_float_search_option{
+    display: flex;
+  }
+}

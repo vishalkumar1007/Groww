@@ -672,7 +672,7 @@ const Stocks = () => {
                     navigate("/user/investments");
                   }}
                 >
-                  Dashboard
+                  Investments
                 </button>
               </span>
             </div>
