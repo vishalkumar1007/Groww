@@ -9,6 +9,7 @@ import {
 } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 import StockMarketCap from "../StockMarketCap/StockMarketCap";
 import StockMarketCapLoader from "../Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
+// import {selectUserWatchlistValue} from '../../features/userWatchlist/centralExportUserWatchlist';
 
 const SearchStock = ({ MoveTop=90, RemoveAddToCardFeature = false }) => {
   //   const x =
@@ -25,6 +26,8 @@ const SearchStock = ({ MoveTop=90, RemoveAddToCardFeature = false }) => {
 
   const allStockHeadData = useSelector(selectorAllStockApiData);
   const allStockHeadLoading = useSelector(selectorAllStockApiIsLoading);
+  // const userWatchlistData = useSelector(selectUserWatchlistValue);
+
   useEffect(() => {
     if (allStockHeadData.length === 0) {
       dispatch(fetchAllStockApiThunk());

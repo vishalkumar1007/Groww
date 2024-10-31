@@ -39,12 +39,21 @@ const StockMarketCap = ({
     }
   };
 
+  useEffect(()=>{
+    console.log('')
+  },[])
+
   useEffect(() => {
+    let isNotAdd = true;
     for (let i = 0; i < userWatchlistData.length; i++) {
       if (userWatchlistData[i].stock_id === stock_id) {
         setIsAddToWatchList(true);
+        isNotAdd = false;
         break;
       }
+    }
+    if(isNotAdd){
+      setIsAddToWatchList(false);
     }
   }, [stock_id, userWatchlistData]);
 

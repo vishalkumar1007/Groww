@@ -146,12 +146,9 @@ function App() {
       }
     };
 
-
-    // Add event listeners to `beforeunload` and `popstate`
     window.addEventListener('popstate', saveData);
     window.addEventListener('beforeunload', saveData);
 
-    // Clean up the event listeners on unmount
     return () => {
       window.removeEventListener('beforeunload', saveData);
       window.removeEventListener('popstate', saveData);
