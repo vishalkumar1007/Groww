@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchTopLoserStockThunk = createAsyncThunk('topLoserStockData',async()=>{
 
-    const topLoserStocksApi = 'http://localhost:8080/api/specific/stock/topLoserStocks';
+    const topLoserStocksApi = 'https://groww-backend-omega.vercel.app/api/specific/stock/topLoserStocks';
     const localStorageToken = localStorage.getItem('token');
     if(!localStorageToken){
         return

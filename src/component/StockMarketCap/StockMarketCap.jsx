@@ -39,10 +39,6 @@ const StockMarketCap = ({
     }
   };
 
-  useEffect(()=>{
-    console.log('')
-  },[])
-
   useEffect(() => {
     let isNotAdd = true;
     for (let i = 0; i < userWatchlistData.length; i++) {

@@ -50,7 +50,7 @@ const Navbar = ({ callFrom = "" }) => {
         email: userProfileData.userEmail,
         userWatchlistData: [...userWatchlistApiData]
       };
-      const userWatchlistPushApi = 'http://localhost:8080/api/user/updateUserWatchlist';
+      const userWatchlistPushApi = 'https://groww-backend-omega.vercel.app/api/user/updateUserWatchlist';
       const blobWatchlist = new Blob([JSON.stringify(watchListData)], { type: 'application/json' });
       const success = navigator.sendBeacon(userWatchlistPushApi, blobWatchlist);
       localStorage.setItem('WatchlistDataSaveStatus', success ? 'Saved successfully' : 'Error: Network issue');
@@ -60,7 +60,7 @@ const Navbar = ({ callFrom = "" }) => {
         email: userProfileData.userEmail,
         userCartData: [...userCartData]
       };
-      const userCartPushApi = 'http://localhost:8080/api/user/updateUserCart';
+      const userCartPushApi = 'https://groww-backend-omega.vercel.app/api/user/updateUserCart';
       const blobCart = new Blob([JSON.stringify(cartData)], { type: 'application/json' });
       const successCart = navigator.sendBeacon(userCartPushApi, blobCart);
       localStorage.setItem('cartDataSaveStatus', successCart ? 'Saved successfully' : 'Error: Network issue');

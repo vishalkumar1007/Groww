@@ -79,7 +79,7 @@ const StockDetail = () => {
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken) {
-      const api = "http://localhost:8080/api/user/verify/token";
+      const api = "https://groww-backend-omega.vercel.app/api/user/verify/token";
 
       fetch(api, {  
         method: "GET",
@@ -150,7 +150,7 @@ const StockDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const stockDetailApi = `http://localhost:8080/api/stock/getById?stock_id=${stockName}`;
+      const stockDetailApi = `https://groww-backend-omega.vercel.app/api/stock/getById?stock_id=${stockName}`;
       const localStorageToken = localStorage.getItem('token');
       if(!localStorageToken){
         return

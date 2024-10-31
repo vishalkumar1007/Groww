@@ -310,7 +310,7 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
       userMobileNumber: updateUserMobileNumber,
     };
 
-    const UpdateProfileApi = "http://localhost:8080/api/user/updateProfile";
+    const UpdateProfileApi = "https://groww-backend-omega.vercel.app/api/user/updateProfile";
     const localStorageToken = localStorage.getItem('token');
 
     if(!localStorageToken){
