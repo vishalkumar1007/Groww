@@ -52,7 +52,7 @@ const SearchStock = ({ MoveTop=90, RemoveAddToCardFeature = false }) => {
     if (allStockHeadData.length > 0 && userInputStockSearchValue.length > 0) {
       const searchDataArray = [];
       for (let i = 0; i < allStockHeadData.length; i++) {
-        const indexData = allStockHeadData[i].stock_id.toLowerCase();
+        const indexData = allStockHeadData[i].name.toLowerCase();
         let makeItAdd = true;
         for (let j = 0; j < userInputStockSearchValue.length; j++) {
           if (indexData[j] !== userInputStockSearchValue[j]) {
@@ -115,7 +115,6 @@ const SearchStock = ({ MoveTop=90, RemoveAddToCardFeature = false }) => {
               onChange={(e) => {
                 setUserInputStockSearchValue(e.target.value.toLowerCase());
               }}
-              value={userInputStockSearchValue}
             />
           </div>
         </div>

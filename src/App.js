@@ -78,13 +78,18 @@ import {
   // selectorTopMarketCapStockErrorMsg
 } from "./features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData.js";
 
-
+import {
+  selectorDashboardVisitCount,
+  selectorPageRouteStalkCurrentPage
+} from './features/pageRouteStalk/centralExportPageRouteStalk.js'
 
 function App() {
   const dispatch = useDispatch();
   const userWatchlistApiData = useSelector(selectUserWatchlistValue);
   const userProfileData = useSelector(selectUserProfileData);
   const userCartApiData = useSelector(selectUserCartValue);
+  const dashboardVisitCount = useSelector(selectorDashboardVisitCount);
+  const currentPageOfApplication = useSelector(selectorPageRouteStalkCurrentPage);
   // const userWatchlistApiLoading = useSelector(selectUserWatchlistLoading);
   // const userCartApiLoading = useSelector(selectUserCartIsLoading);
 
@@ -155,46 +160,45 @@ function App() {
     };
   }, [userCartApiData, userCartApiLoading, userProfileData.userEmail, userWatchlistApiData, userWatchlistApiLoading]);
 
-
   // handel to calling mostBoughStock api in redux -----------------
 
   const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
   useEffect(() => {
-    if (mostBoughtStocksApiData.length === 0) {
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && mostBoughtStocksApiData.length === 0){
       // console.log("mostBoughtStockData api call");
       dispatch(fetchMostBoughtStockThunk());
     }
-  }, [dispatch, mostBoughtStocksApiData]);
+  }, [currentPageOfApplication, dispatch, dashboardVisitCount, mostBoughtStocksApiData]);
 
   // handel to calling topGainerStock api in redux ------------------
 
   const topGainerStockApiData = useSelector(selectTopGainerStockData);
   useEffect(() => {
-    if (topGainerStockApiData.length === 0) {
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && topGainerStockApiData.length === 0){
       // console.log("topGainStockData api call");
       dispatch(fetchTopGainerStockThunk());
     }
-  }, [dispatch, topGainerStockApiData]);
+  }, [currentPageOfApplication, dispatch, dashboardVisitCount, topGainerStockApiData]);
 
   // handel to calling stockNewsApiData api in redux ----------------
 
   const stockNewsApiData = useSelector(selectStockNewsApiData);
   useEffect(() => {
-    if (stockNewsApiData.length === 0) {
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && stockNewsApiData.length === 0){
       // console.log("stockNewsApiData api call");
       dispatch(fetchStockNewsApiThunk());
     }
-  }, [dispatch, stockNewsApiData]);
+  }, [currentPageOfApplication, dispatch, dashboardVisitCount, stockNewsApiData]);
 
   // handel to calling topLoserStockApiData api in redux ----------------
 
   const topLoserStockApiData = useSelector(selectorTopLoserStockData);
   useEffect(() => {
-    if (topLoserStockApiData.length === 0) {
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && topLoserStockApiData.length === 0){
       // console.log("topLoserStockApiData api call");
       dispatch(fetchTopLoserStockThunk());
     }
-  }, [dispatch, topLoserStockApiData]);
+  }, [currentPageOfApplication, dispatch, dashboardVisitCount, topLoserStockApiData]);
 
 
   
@@ -202,10 +206,10 @@ function App() {
 
   const topMarketCapStockApiData = useSelector(selectorTopMarketCapStockData);
   useEffect(() => {
-    if (topMarketCapStockApiData.length === 0) {
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && topMarketCapStockApiData.length === 0){
       dispatch(fetchTopMarketCapStockThunk());
     }
-  }, [dispatch, topMarketCapStockApiData]);
+  }, [currentPageOfApplication, dispatch, dashboardVisitCount, topMarketCapStockApiData]);
 
 
   return (

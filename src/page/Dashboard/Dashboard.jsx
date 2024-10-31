@@ -6,12 +6,25 @@ import FloatSearchStock from "../../component/FloatSearchStock/FloatSearchStock"
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import {updatePageRouteStalk,
+  increaseDashboardVisitCount,
+  selectorDashboardVisitCount,
+} from '../../features/pageRouteStalk/centralExportPageRouteStalk'
+import { useDispatch, useSelector } from "react-redux";
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [optionActive, setOptionActive] = useState("stocks");
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
   const [screenWidth , setScreenWidth] = useState(0);
+  const dashboardVisitCount = useSelector(selectorDashboardVisitCount);
+
+  useEffect(()=>{
+    if(dashboardVisitCount===0){
+      dispatch(increaseDashboardVisitCount(1))
+      dispatch(updatePageRouteStalk('dashboard'))
+    }
+  },[dashboardVisitCount, dispatch])
 
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
@@ -47,7 +60,7 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);  
   }, []);
 
   return (

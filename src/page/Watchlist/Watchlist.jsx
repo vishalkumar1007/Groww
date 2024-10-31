@@ -11,7 +11,6 @@ import {useState} from 'react'
 const Watchlist = () => {
   const WatchlistData = useSelector(selectUserWatchlistValue);
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
-  console.log("Watchlist Data = ",WatchlistData);
   return (
     <div className="watchlist_page_main">
       {openSearchStockFloat ? (
