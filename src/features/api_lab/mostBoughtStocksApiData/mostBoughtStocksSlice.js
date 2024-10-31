@@ -15,8 +15,10 @@ const mostBoughtStocksSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(fetchMostBoughtStockThunk.fulfilled , (state,action)=>{
-            state.isLoading = false;
-            state.data = action.payload;
+            if(action.payload){
+                state.isLoading = false;
+                state.data = action.payload;
+            }
         })
         builder.addCase(fetchMostBoughtStockThunk.rejected , (state,action)=>{
             state.isError = true;

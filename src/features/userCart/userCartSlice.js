@@ -29,6 +29,9 @@ const userCartSlice = createSlice({
             state.isError = false;
         })
         builder.addCase(fetchUserCartThunk.fulfilled , (state,action)=>{
+            if(!action.payload){
+                return;
+            }
             state.isLoading = false;
             state.isError = false;
             const CART_API_DATA = action.payload.userCart.userCartData;

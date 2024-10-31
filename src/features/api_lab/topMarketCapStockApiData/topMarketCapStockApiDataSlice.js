@@ -16,8 +16,10 @@ const topMarketCapStockSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchTopMarketCapStockThunk.fulfilled,(state,action)=>{
-            state.isLoading=false;
-            state.data = action.payload;
+            if(action.payload){
+                state.isLoading=false;
+                state.data = action.payload;
+            }
         })
         builder.addCase(fetchTopMarketCapStockThunk.rejected,(state,action)=>{
             state.isError = true;

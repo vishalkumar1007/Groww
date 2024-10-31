@@ -81,7 +81,7 @@ const StockDetail = () => {
     if (localStorageToken) {
       const api = "http://localhost:8080/api/user/verify/token";
 
-      fetch(api, {
+      fetch(api, {  
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -151,12 +151,16 @@ const StockDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       const stockDetailApi = `http://localhost:8080/api/stock/getById?stock_id=${stockName}`;
-
+      const localStorageToken = localStorage.getItem('token');
+      if(!localStorageToken){
+        return
+      }
       try {
         const response = await fetch(stockDetailApi, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization:`Bearer ${localStorageToken}`
           },
         });
 

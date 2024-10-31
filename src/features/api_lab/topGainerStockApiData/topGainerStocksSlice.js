@@ -16,8 +16,10 @@ const topGainerSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchTopGainerStockThunk.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.data = action.payload;
+            if(action.payload){
+                state.isLoading = false;
+                state.data = action.payload;
+            }
         })
         builder.addCase(fetchTopGainerStockThunk.rejected, (state, action) => {
             console.log('rejected error in topGainerStock: ', action.error.message); 

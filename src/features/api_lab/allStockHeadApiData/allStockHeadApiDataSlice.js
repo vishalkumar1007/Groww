@@ -16,8 +16,10 @@ const allStockApiDataSlice = createSlice({
             state.isLoading=true;
         })
         builder.addCase(fetchAllStockApiThunk.fulfilled,(state,action)=>{
-            state.isLoading=false;
-            state.data = action.payload;
+            if(action.payload){
+                state.isLoading=false;
+                state.data = action.payload;
+            }
         })
         builder.addCase(fetchAllStockApiThunk.rejected,(state,action)=>{
             state.isError=true;

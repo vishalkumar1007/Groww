@@ -17,8 +17,10 @@ const topLoserStockSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchTopLoserStockThunk.fulfilled , (state,action)=>{
-            state.isLoading = false;
-            state.data = action.payload;
+            if(action.payload){
+                state.isLoading = false;
+                state.data = action.payload;
+            }
         })
         builder.addCase(fetchTopLoserStockThunk.rejected,(state,action)=>{
             state.isError = true;

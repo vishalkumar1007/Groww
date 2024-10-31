@@ -269,7 +269,7 @@ const Home = () => {
               <div className="Home_body_section_1_text_btn">
                 <button
                   onClick={() => {
-                    navigate("login");
+                    navigate("signUp");
                   }}
                 >
                   Get Started

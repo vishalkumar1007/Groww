@@ -30,6 +30,9 @@ const userWatchlistSlice = createSlice({
             state.isError=false
         })
         builder.addCase(fetchUserWatchlistApiDataThunk.fulfilled , (state,action)=>{
+            if(!action.payload){
+                return 
+            }
             state.isLoading=false
             state.isError=false
             state.value = []

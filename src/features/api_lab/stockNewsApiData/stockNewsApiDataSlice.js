@@ -16,8 +16,10 @@ const stockNewsApiSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchStockNewsApiThunk.fulfilled , (state,action)=>{
-            state.isLoading = false;
-            state.data = action.payload
+            if(action.payload){
+                state.isLoading = false;
+                state.data = action.payload
+            }
         })
         builder.addCase(fetchStockNewsApiThunk.rejected , (state,action)=>{
             state.isError = true;

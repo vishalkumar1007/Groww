@@ -38,6 +38,9 @@ const Login = () => {
 
   // activate button
   const [isActivateButton, setIsActivateButton] = useState(true);
+  const [activeResendButtonOnOtp, setActiveResendButtonOnOtp] = useState(false);
+  const [activeResendButtonCountDown, setActiveResendButtonCountDown] =
+    useState(45);
 
   // otp
   const [allowContinueOtpVerify, setAllowContinueOtpVerify] = useState(true);
@@ -91,6 +94,9 @@ const Login = () => {
       return;
     }
     setLoaderActive(true);
+    setActiveResendButtonOnOtp(false);
+    setActiveResendButtonCountDown(46);
+    console.log('activeResendButtonCountDown : ',activeResendButtonCountDown)
     const sendOtpApi = `http://localhost:8080/api/user/forgot?email=${f_userEmailId}`;
 
     fetch(sendOtpApi, {
@@ -104,15 +110,20 @@ const Login = () => {
           console.log("response is not ok");
           ShowQuickMsgForEmail(response.status);
           setLoaderActive(false);
+          setActiveResendButtonOnOtp(true);
+          console.log('activeResendButtonCountDown 1 : ',activeResendButtonCountDown)
           return;
         }
         ShowQuickMsgForEmail(response.status);
+        scheduleTimeForEnableResendBtn(); // start timer for resent otp in opt section
         setLoaderActive(false);
       })
       .catch((err) => {
         console.log("error while fetching data");
         ShowQuickMsgForEmail(500);
         setLoaderActive(false);
+        setActiveResendButtonOnOtp(true);
+        console.log('activeResendButtonCountDown 2 : ',activeResendButtonCountDown)
       });
   };
 
@@ -136,8 +147,8 @@ const Login = () => {
         })
       );
       // .. fn
-      setF_emailValidFromDataBase(true); // open otp component
       setF_inputActive(false);
+      setF_emailValidFromDataBase(true); // open otp component
     } else if (statusCode === 404) {
       // redux ...
       dispatch(
@@ -239,7 +250,6 @@ const Login = () => {
       setSuccessMessageFromDataBaseForOTP(true);
       setF_otpValidFromDataBase(true); // open change password component
       setF_inputActive(false);
-
     } else if (statusCode === 404) {
       //.... redux
       dispatch(
@@ -378,7 +388,6 @@ const Login = () => {
       //... fn
       navigate("/login"); // redirect to login
       setF_inputActive(false);
-
     } else if (statusCode === 404) {
       // setSuccessMsgStatus(false);
       // setMsgContent("Invalid email. Please check.");
@@ -413,7 +422,7 @@ const Login = () => {
         })
       );
     }
-    if(statusCode!==200){
+    if (statusCode !== 200) {
       setIsActivateButton(false);
       const timeOut = setTimeout(() => {
         setIsActivateButton(true);
@@ -545,6 +554,19 @@ const Login = () => {
     }
   }, [f_inputActive, f_userEmailId]);
 
+  const scheduleTimeForEnableResendBtn = (status) => {
+    let time = 45;
+    const timeInterval = setInterval(() => {
+      setActiveResendButtonCountDown(time);
+      if (time === 0) {
+        setActiveResendButtonCountDown(time);
+        setActiveResendButtonOnOtp(true);
+        clearInterval(timeInterval);
+      }
+      time--;
+    }, 1000);
+  };
+
   return (
     <div className="main_view_forgot">
       <div className="main_center_element_forgot">
@@ -658,7 +680,7 @@ const Login = () => {
                           {loaderActive ? <Loader /> : <p>Send OTP</p>}
                         </button>
                       </div>
-                      <div className="company_terms_div_forgot">
+                      <div className="company_terms_div_forgot_email">
                         <p>
                           i just remind my password ?{" "}
                           <Link to="/login">Login Account</Link>{" "}
@@ -746,11 +768,29 @@ const Login = () => {
                         </button>
                       </div>
                       <div className="company_terms_div_forgot">
-                        <p>
+                        <span id="company_terms_div_forgot_span_1">
                           {" "}
                           Still not getting OTP ?{" "}
-                          <a href="https://google.com">Resend it</a>
-                        </p>
+                        </span>
+                        <span id="company_terms_div_forgot_span_2">
+                          {activeResendButtonOnOtp ? (
+                            <button
+                              onClick={() => {
+                                handelToSendMailToUserAPI();
+                              }}
+                            >
+                              Resend Otp
+                            </button>
+                          ) : (
+                            <span>
+                              {
+                                activeResendButtonCountDown===46?
+                                'Process':
+                                `Resend in ${activeResendButtonCountDown} sec`
+                              }
+                            </span>
+                          )}
+                        </span>
                       </div>
                     </div>
                   )}

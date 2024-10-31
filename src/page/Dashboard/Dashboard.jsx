@@ -11,6 +11,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [optionActive, setOptionActive] = useState("stocks");
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
+  const [screenWidth , setScreenWidth] = useState(0);
 
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
@@ -36,12 +37,21 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
+  useEffect(()=>{
+    const getScreenWidth = ()=>{
+      setScreenWidth(window.innerWidth);
+    }
+    window.addEventListener('resize',getScreenWidth);
+    return ()=> window.removeEventListener('resize',getScreenWidth);
+  },[])
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="Dashboard_main" style={{overflowY :openSearchStockFloat?'hidden':'scroll'}}>
+    <div className="Dashboard_main" style={{overflowY :openSearchStockFloat && screenWidth<=500?'hidden':'scroll'}}>
       {openSearchStockFloat ? (
         <div className="dashboard_float_search_option">
           <FloatSearchStock />

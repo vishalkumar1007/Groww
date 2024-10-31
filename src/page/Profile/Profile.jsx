@@ -311,10 +311,23 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
     };
 
     const UpdateProfileApi = "http://localhost:8080/api/user/updateProfile";
+    const localStorageToken = localStorage.getItem('token');
+
+    if(!localStorageToken){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "token not found , unauthorized request",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      return ;
+    }
     const response = await fetch(UpdateProfileApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization:`Bearer ${localStorageToken}`
       },
       body: JSON.stringify(updatedData),
     });
