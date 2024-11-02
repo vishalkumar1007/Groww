@@ -204,6 +204,17 @@
   cursor: pointer;
   font-weight: 500;
 }
+#withDrawAndDeposit_main_arrange_width_deposit_money_main_bottom_deposit_button_loader {
+  background-color: #00b386;
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
 
 /* ...................  */
 
@@ -329,6 +340,17 @@
 }
 
 #withDrawAndDeposit_main_arrange_width_withdraw_money_main_bottom_deposit_button {
+  background-color: #eb5b3c;
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+#withDrawAndDeposit_main_arrange_width_withdraw_money_main_bottom_deposit_button_loader {
   background-color: #eb5b3c;
   width: 100%;
   height: 42px;
