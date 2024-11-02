@@ -10,7 +10,8 @@ import userProfileReducer from '../features/userProfileData/userProfileDataSlice
 import allStockHeadReducer from '../features/api_lab/allStockHeadApiData/allStockHeadApiDataSlice'
 import topMarketCapStockReducer from '../features/api_lab/topMarketCapStockApiData/topMarketCapStockApiDataSlice';
 import userWatchlistApiReducer from '../features/api_lab/userWatchlistData/userWatchlistDataSlice';
-import pageNavigateStalkReducer from '../features/pageRouteStalk/pageRouteStalkSlice'
+import pageNavigateStalkReducer from '../features/pageRouteStalk/pageRouteStalkSlice';
+import userTransactionDataReducer from '../features/api_lab/userTransactionData/userTransactionDataSlice.js';
 const rootReducer = combineReducers({
     userWatchlist:userWatchlistReducer,
     mostBoughtStock:mostBoughtStockReducer,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
     allStockApiData:allStockHeadReducer,
     topMarketCapStock:topMarketCapStockReducer,
     userWatchlistAPiData:userWatchlistApiReducer,
-    pageRouteStalkData:pageNavigateStalkReducer
+    pageRouteStalkData:pageNavigateStalkReducer,
+    userTransactionData:userTransactionDataReducer
 });
 
 export default rootReducer;

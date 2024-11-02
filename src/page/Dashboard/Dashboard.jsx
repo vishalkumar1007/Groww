@@ -29,7 +29,7 @@ const Dashboard = () => {
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken) {
-      const api = "https://groww-backend-omega.vercel.app/api/user/verify/token";
+      const api = "http://localhost:8080/api/user/verify/token";
 
       fetch(api, {
         method: "GET",

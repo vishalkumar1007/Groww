@@ -83,6 +83,12 @@ import {
   selectorPageRouteStalkCurrentPage
 } from './features/pageRouteStalk/centralExportPageRouteStalk.js'
 
+import {
+  fetchUserTransactionDataThunk,
+  selectorUserTransactionWalletBalance,
+  selectorUserTransactionTransactionData
+} from './features/api_lab/userTransactionData/centralExportUserTransactionData.js'
+
 function App() {
   const dispatch = useDispatch();
   const userWatchlistApiData = useSelector(selectUserWatchlistValue);
@@ -127,7 +133,7 @@ function App() {
           email: userProfileData.userEmail,
           userWatchlistData: [...userWatchlistApiData]
         };
-        const userWatchlistPushApi = 'https://groww-backend-omega.vercel.app/api/user/updateUserWatchlist';
+        const userWatchlistPushApi = 'http://localhost:8080/api/user/updateUserWatchlist';
         const blobWatchlist = new Blob([JSON.stringify(watchListData)], { type: 'application/json' });
 
         const success = await navigator.sendBeacon(userWatchlistPushApi, blobWatchlist);
@@ -138,7 +144,7 @@ function App() {
           email: userProfileData.userEmail,
           userCartData: [...userCartApiData]
         };
-        const userCartPushApi = 'https://groww-backend-omega.vercel.app/api/user/updateUserCart';
+        const userCartPushApi = 'http://localhost:8080/api/user/updateUserCart';
         const blobCart = new Blob([JSON.stringify(cartData)], { type: 'application/json' });
 
         const successCart = await navigator.sendBeacon(userCartPushApi, blobCart);
@@ -199,17 +205,17 @@ function App() {
       dispatch(fetchTopLoserStockThunk());
     }
   }, [currentPageOfApplication, dispatch, dashboardVisitCount, topLoserStockApiData]);
-
-
   
   // handel to calling topByMarketCapStock api in redux -----------------
-
+  
   const topMarketCapStockApiData = useSelector(selectorTopMarketCapStockData);
   useEffect(() => {
     if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard' && topMarketCapStockApiData.length === 0){
       dispatch(fetchTopMarketCapStockThunk());
     }
   }, [currentPageOfApplication, dispatch, dashboardVisitCount, topMarketCapStockApiData]);
+  
+  
 
 
   return (

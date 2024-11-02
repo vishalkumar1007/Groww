@@ -97,7 +97,7 @@ const Login = () => {
     setActiveResendButtonOnOtp(false);
     setActiveResendButtonCountDown(46);
     console.log('activeResendButtonCountDown : ',activeResendButtonCountDown)
-    const sendOtpApi = `https://groww-backend-omega.vercel.app/api/user/forgot?email=${f_userEmailId}`;
+    const sendOtpApi = `http://localhost:8080/api/user/forgot?email=${f_userEmailId}`;
 
     fetch(sendOtpApi, {
       method: "GET",
@@ -199,7 +199,7 @@ const Login = () => {
       return;
     }
     setLoaderActive(true);
-    const apiForOtpVerify = `https://groww-backend-omega.vercel.app/api/user/otpVerification?email=${f_userEmailId}&otp=${f_userInputOtp}`;
+    const apiForOtpVerify = `http://localhost:8080/api/user/otpVerification?email=${f_userEmailId}&otp=${f_userInputOtp}`;
 
     fetch(apiForOtpVerify, {
       method: "GET",
@@ -332,7 +332,7 @@ const Login = () => {
       return;
     }
     setLoaderActive(true);
-    const updatePasswordAPI = "https://groww-backend-omega.vercel.app/api/user/updatePassword";
+    const updatePasswordAPI = "http://localhost:8080/api/user/updatePassword";
 
     const UpdateData = {
       email: f_userEmailId,

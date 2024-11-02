@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllStockApiThunk = createAsyncThunk('allStockApiData', async ()=>{
-    const allStockHeadApi = 'https://groww-backend-omega.vercel.app/api/stock/getAllHead';
+    const allStockHeadApi = 'http://localhost:8080/api/stock/getAllHead';
     // const allStockHeadApi = '';
     const response = await fetch(allStockHeadApi,{
         method:'GET',
