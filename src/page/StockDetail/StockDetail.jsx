@@ -67,6 +67,7 @@ const StockDetail = () => {
     useState(0);
   const [shareHolderPercentageRange3, setShareHolderPercentageRange3] =
     useState(0);
+
   // variables of Stock Api data
   const [APIstockData, setAPIStockData] = useState("");
 
@@ -75,6 +76,7 @@ const StockDetail = () => {
 
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
 
+  // console.log('xxx : ',APIstockData[0].stock_id);
 
   // auth user token
   useEffect(() => {
@@ -184,7 +186,7 @@ const StockDetail = () => {
         setCompanyCost(jsonData[0].stockCost);
         setCompanyCostPerRate(jsonData[0].stockCostPerRate);
 
-        //
+        // 
         setAPIStockData(jsonData);
         setIsStockDetailLoadingStop(true);
       } catch (error) {
@@ -257,6 +259,8 @@ const StockDetail = () => {
   //     }
   //   }
   // }, [companyLogoUrlName, stockName]);
+
+  // console.log('APIstockData[0].stock_id : ',APIstockData[0].stock_id)
 
   useEffect(() => {
     if (companyCostPerRate.length) {
@@ -1639,6 +1643,8 @@ const StockDetail = () => {
                 <div className="stock_detail_buy_stock_main_buy_card_div">
                   {isStockDetailLoadingStop ? (
                     <BuyStockCard
+                      logoUrl={companyLogoUrlName}
+                      stock_id = {APIstockData[0].stock_id}
                       companyName={companyName}
                       stockCost={companyCost}
                       stockCostPerRate={companyCostPerRate}

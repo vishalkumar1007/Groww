@@ -4,7 +4,7 @@ import "./Investments.css";
 import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import ComingSoonWithTitle from "../../component/ComingSoonWithProps/ComingSoonWithProps";
-
+import InvestmentStock from "../InvestmentStock/InvestmentStock";
 
 const Investments = () => {
   // const navigate = useNavigate();
@@ -75,7 +75,8 @@ const Investments = () => {
       </div>
       <div className="Investments_main_comp_section">
         {
-          optionActive==='Investments_stocks'?<ComingSoonWithTitle title={'Investment Stock'}/>:<ComingSoonWithTitle title={'Investment Mutual Fund'}/>
+          optionActive==='Investments_stocks'?<InvestmentStock/>:<ComingSoonWithTitle title={'Investment Mutual Fund'}/>
+          // optionActive==='Investments_stocks'?<ComingSoonWithTitle title={'Investment Stock'}/>:<ComingSoonWithTitle title={'Investment Mutual Fund'}/>
         }
       </div>
       <Footer />

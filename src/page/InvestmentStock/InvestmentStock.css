@@ -1,0 +1,56 @@
+.InvestmentStock_main{
+    /* background-color: palevioletred; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.InvestmentStock_main_width{
+    /* background-color: blanchedalmond; */
+    width: 95%;
+    height: 100%;
+    max-width: 1230px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 50px 0px 100px 0px;
+}
+.InvestmentStock_main_title{
+    width: 100%;
+    height: 70px;
+    font-size: 26px;
+    font-weight: 500;
+    color: #767676;
+}
+
+.InvestmentStock_main_buy_stock_cards{
+    display: flex;
+    row-gap: 15px;
+    column-gap: 20px;
+}
+
+
+.InvestmentStock_main_container_all_stock_add_card_svg {
+    width: 100%;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .InvestmentStock_main_container_all_stock_add_card_svg img {
+    /* background-color: #484e60; */
+    width: 100%;
+    max-height: 400px;
+    height: 100%;
+  }
+  .InvestmentStock_main_container_all_stock_add_card_svg span {
+    font-size: 25px;
+    font-weight: 500;
+    color: #d1d7d5;
+    text-align: center;
+  }
