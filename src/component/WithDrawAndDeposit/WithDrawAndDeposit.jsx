@@ -359,7 +359,7 @@ const WithDrawAndDeposit = () => {
                 Withdrawable
               </span>
               <span id="withDrawAndDeposit_main_arrange_width_deposit_money_main_bottom_withdrawable_money">
-                ₹{userTransactionDataWalletBalance || 0}.00
+                ₹{userTransactionDataWalletBalance || 0}
               </span>
             </div>
             <div className="withDrawAndDeposit_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_main">

@@ -75,6 +75,7 @@ const StockDetail = () => {
 
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
 
+
   // auth user token
   useEffect(() => {
     const localStorageToken = localStorage.getItem("token");
@@ -1689,6 +1690,7 @@ const StockDetail = () => {
               <div className="buy_and_sell_option_open_in_mobile_view_main_div">
                 <div className="buy_and_sell_option_open_in_mobile_view_main_div_arrange_width">
                   <BuyStockCard
+                    stock_id = {APIstockData[0].stock_id}
                     companyName={companyName}
                     stockCost={companyCost}
                     stockCostPerRate={companyCostPerRate}

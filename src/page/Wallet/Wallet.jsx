@@ -80,9 +80,9 @@ const Wallet = () => {
                   </div>
                   <div id="wallet_main_wallet_card_main_for_stock_balance_left_money">
                     <span id="wallet_main_stock_balance_large">
-                      ₹{userTransactionDataWalletBalance || 0}
+                      ₹{userTransactionDataWalletBalance!==null?userTransactionDataWalletBalance.toString().split('.')[0]:'00'}
                     </span>
-                    <span id="wallet_main_stock_balance_small">.00</span>
+                    <span id="wallet_main_stock_balance_small">.{userTransactionDataWalletBalance!==null?userTransactionDataWalletBalance.toString().split('.')[1]:'00'}</span>
                   </div>
                 </div>
                 <div className="wallet_main_wallet_card_main_for_stock_balance_right">
@@ -111,7 +111,7 @@ const Wallet = () => {
                     User balance
                   </span>
                   <span id="wallet_main_wallet_card_main_user_balance_money_view">
-                    ₹{userTransactionDataWalletBalance || 0}.00
+                    ₹{userTransactionDataWalletBalance || 0}
                   </span>
                 </div>
               </div>

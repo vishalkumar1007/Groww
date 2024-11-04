@@ -21,7 +21,7 @@ const userTransactionDataSlice = createSlice({
             state.isLoading=false;
             if(action.payload){
                 state.transactionData = action.payload.transactions;
-                state.walletBalance = action.payload.balance;
+                state.walletBalance = action.payload.balance.toFixed(2);
             }
             state.isError=false
         })

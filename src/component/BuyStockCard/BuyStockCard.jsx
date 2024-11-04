@@ -1,10 +1,172 @@
 import "./BuyStockCard.css";
-import { useState } from "react";
-
-const BuyStockCard = ({ companyName, stockCost, stockCostPerRate }) => {
+import { useState,useEffect } from "react";
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
+import { useDispatch } from "react-redux";
+import {fetchUserTransactionDataThunk,selectorUserTransactionWalletBalance} from '../../features/api_lab/userTransactionData/centralExportUserTransactionData'
+import { useSelector } from "react-redux";
+import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData'
+import { useNavigate } from "react-router-dom";
+const BuyStockCard = ({stock_id, companyName, stockCost, stockCostPerRate }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isBuyOption, setIsBuyOption] = useState("buy");
   const [userInputQytValue, setUserInputQytValue] = useState(0);
   const [userInputPriceValue, setUserInputPriceValue] = useState(0);
+  const [userInputQytValueSell, setUserInputQytValueSell] = useState(0);
+  const [userInputPriceValueSell, setUserInputPriceValueSell] = useState(0);
+  const userTransactionBalanceAmount = useSelector(selectorUserTransactionWalletBalance);
+  const userProfileData = useSelector(selectUserProfileData);
+
+  useEffect(()=>{
+    if(userTransactionBalanceAmount===null){
+      dispatch(fetchUserTransactionDataThunk(userProfileData.userEmail));
+    }
+  });
+
+
+  const handelToBuyStock = async () => {
+    const newBuyStockData = {
+      email:userProfileData.userEmail,
+      stock_id ,
+      stockCost,
+      stockCostPerRate,
+      stockQuantity:userInputQytValue
+    }
+    
+    const buyStockApi = 'http://localhost:8080/api/user/buyStock';
+    const token = localStorage.getItem('token');
+
+    if(!token){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "You are not authorized , login again",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      navigate('/login');
+      return;
+    }
+    
+    const responseBuyStock = await fetch(buyStockApi , {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(newBuyStockData)
+    })
+    
+    
+    if(!responseBuyStock.ok){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Are you Online ?",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      
+      return
+    }
+    console.log('step 5');
+    
+    if(responseBuyStock.status===200){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: `Congratulation, for own ${companyName} Stocks`,
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      setUserInputQytValue(0);
+      dispatch(fetchUserTransactionDataThunk(userProfileData.userEmail));
+    }else{
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: `You are not authorized to own  ${companyName} stock`,
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+  };
+  
+  const authQytInputValueBuy = () => {
+    if (userInputQytValue <= 0 || userInputQytValue > 1000) {
+      if(userInputQytValue > 1000){
+        dispatch(
+          fireTheMessagePopUp({
+            messageShow: "you can not buy more than 1000 stock at a time",
+            positiveResponse: false,
+            makeFire: true,
+          })
+        );
+      }else{
+        dispatch(
+          fireTheMessagePopUp({
+            messageShow: "you must have to buy at list 1 stock",
+            positiveResponse: false,
+            makeFire: true,
+          })
+        );
+      }
+    }else if(Number(userInputPriceValue)>Number(userTransactionBalanceAmount)){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "You don't have sufficient amount , add money in wallet",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }else {
+      handelToBuyStock();
+    }
+  };
+
+  useEffect(()=>{
+    if (userTransactionBalanceAmount) {
+      const calculate = (userInputQytValue*stockCost).toString();
+      // console.log('x : ',calculate);
+      // console.log('y : ',countDecimal[0]+countDecimal[1]);
+      // console.log('z : ',countDecimal.length);
+      const countDecimal = (calculate.split('.')[1])===undefined?'':(calculate.split('.')[1]).toString();
+      if(countDecimal.length>2){
+        const trimData = `${calculate.split('.')[0] }.${countDecimal[0]+countDecimal[1]}`;
+        setUserInputPriceValue(trimData);
+      }else{
+        setUserInputPriceValue(calculate);
+      }
+    }
+  },[stockCost, userInputQytValue, userTransactionBalanceAmount])
+
+
+  const handelToSellStock = () => {
+    console.log('sell stock section');
+  };
+
+  const authQytInputValueSell = () => {
+    if (userInputQytValueSell <= 0 || userInputQytValueSell > 100) {
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Sell Qyt NSE must be more than 1 and less than 100",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }else if (userInputPriceValueSell <= 0 || userInputPriceValueSell > 10_000) {
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Sell Price limit not be zero or more than 10000",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else {
+      handelToSellStock();
+    }
+  };
+
   return (
     <div className="buy_stock_card_main">
       <div className="buy_stock_card_main_title_head">
@@ -13,7 +175,8 @@ const BuyStockCard = ({ companyName, stockCost, stockCostPerRate }) => {
             {companyName || "Company Name"}
           </span>
           <span id="buy_stock_card_nse_and_bse">
-            NSE ₹{stockCost || "000.00"} ~ BSE ₹{stockCostPerRate || "000.00 (0.00%)"}
+            NSE ₹{stockCost || "000.00"} ~ BSE ₹
+            {stockCostPerRate || "000.00 (0.00%)"}
           </span>
         </div>
       </div>
@@ -53,38 +216,73 @@ const BuyStockCard = ({ companyName, stockCost, stockCostPerRate }) => {
         <div className="buy_stock_card_main_buy_and_sell_chose_rate_main">
           <div className="buy_stock_card_main_buy_and_sell_chose_rate_main_arrange_width">
             <div className="buy_stock_card_main_buy_and_sell_chose_top">
-              <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_box">
-                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main">
-                  <span id="buy_stock_card_inputs_quality_title">Qty NSE</span>
-                  <input
-                    id="buy_stock_card_inputs_quality_input"
-                    type="number"
-                    min="0"
-                    value={userInputQytValue}
-                    onChange={(e) => {
-                      setUserInputQytValue(
-                        e.target.value === "" ? 0 : e.target.value
-                      );
-                    }}
-                  />
+              {isBuyOption==='buy' ? (
+                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_box">
+                  <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main">
+                    <span id="buy_stock_card_inputs_quality_title">
+                      Qty NSE
+                    </span>
+                    <input
+                      id="buy_stock_card_inputs_quality_input"
+                      type="number"
+                      min="0"
+                      value={userInputQytValue}
+                      onChange={(e) => {
+                        setUserInputQytValue(
+                          e.target.value>10_000?0:e.target.value
+                        );
+                      }}
+                    />
+                  </div>
+                  <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main">
+                    <span id="buy_stock_card_inputs_price_title">
+                      Price Limit
+                    </span>
+                    <div id="buy_stock_card_inputs_price_input">
+                      <p>{`${userInputPriceValue}`}</p>
+                      {/* <p>{`${userInputPriceValue.toString().split('.')[0]}.${userInputPriceValue.toString()?.split('.')[1]?.slice(0,2)}` || 0}</p> */}
+                    </div>
+                  </div>
                 </div>
-                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main">
-                  <span id="buy_stock_card_inputs_price_title">
-                    Price Limit
-                  </span>
-                  <input
-                    id="buy_stock_card_inputs_price_input"
-                    type="number"
-                    min="0"
-                    value={userInputPriceValue}
-                    onChange={(e) => {
-                      setUserInputPriceValue(
-                        e.target.value === "" ? 0 : e.target.value
-                      );
-                    }}
-                  />
+              ) : (
+                <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_box">
+                  <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main">
+                    <span id="buy_stock_card_inputs_quality_title">
+                      Qty NSE
+                    </span>
+                    <input
+                      id="buy_stock_card_inputs_quality_input"
+                      type="number"
+                      min="0"
+                      value={userInputQytValueSell}
+                      onChange={(e) => {
+                        setUserInputQytValueSell(
+                          e.target.value>1000?0:e.target.value
+                        );
+                      }}
+                    />
+                  </div>
+                  <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main">
+                    <span id="buy_stock_card_inputs_price_title">
+                      Price Limit
+                    </span>
+                    <div id="buy_stock_card_inputs_price_input">
+                      <p>{userInputPriceValueSell || 0}</p>
+                    </div>
+                    {/* <input
+                      id="buy_stock_card_inputs_price_input"
+                      type="number"
+                      min="0"
+                      value={userInputPriceValueSell}
+                      onChange={(e) => {
+                        setUserInputPriceValueSell(
+                          e.target.value>10_000?0:e.target.value
+                        );
+                      }}
+                    /> */}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="buy_stock_card_main_buy_and_sell_chose_bottom">
               <div className="buy_stock_card_main_buy_and_sell_chose_bottom_notify_box">
@@ -97,7 +295,7 @@ const BuyStockCard = ({ companyName, stockCost, stockCostPerRate }) => {
               <div className="buy_stock_card_main_buy_and_sell_chose_bottom_button_and_text_cost_box">
                 <div className="buy_stock_card_main_buy_and_sell_chose_bottom_cost_text_box">
                   <span id="buy_stock_card_main_buy_and_sell_chose_bottom_cost_text_balance">
-                    Balance : ₹0
+                    Balance : ₹{userTransactionBalanceAmount}
                   </span>
                   <span id="buy_stock_card_main_buy_and_sell_chose_bottom_cost_text_approx">
                     Approx req : ₹0
@@ -105,9 +303,19 @@ const BuyStockCard = ({ companyName, stockCost, stockCostPerRate }) => {
                 </div>
                 <div className="buy_stock_card_main_buy_and_sell_chose_bottom_button_box">
                   {isBuyOption === "buy" ? (
-                    <button id="buy_stock_card_main_buy_btn">BUY</button>
+                    <button
+                      id="buy_stock_card_main_buy_btn"
+                      onClick={authQytInputValueBuy}
+                    >
+                      BUY
+                    </button>
                   ) : (
-                    <button id="buy_stock_card_main_sell_btn">SELL</button>
+                    <button
+                      id="buy_stock_card_main_sell_btn"
+                      onClick={authQytInputValueSell}
+                    >
+                      SELL
+                    </button>
                   )}
                 </div>
               </div>

@@ -184,6 +184,7 @@
     font-size: 14px;
 }
 #buy_stock_card_inputs_price_input{
+    /* background-color: red; */
     width: 120px;
     height: 90%;
     border: 1.7px solid #f0f0f0df;
@@ -192,6 +193,9 @@
     padding: 0px 8px;
     font-size: 17px;
     transition: 0.1s ease-in-out;
+}
+#buy_stock_card_inputs_price_input p{
+    margin-top: 6px;
 }
 #buy_stock_card_inputs_price_input:focus{
     border: 1.7px solid #008d6aa6;
