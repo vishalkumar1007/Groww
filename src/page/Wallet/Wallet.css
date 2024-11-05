@@ -185,7 +185,21 @@
   /* background-color: lightsalmon; */
   width: 93%;
   transition: 0.5s ease-in-out;
+  max-height: 420px;
+  overflow-y: scroll;
 }
+
+/* width */
+.wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+}
+
+.wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width::-webkit-scrollbar-thumb {
+  background: #b5b5b516; 
+}
+
+
 .wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width_animation {
   width: 100%;
   height: fit-content;
