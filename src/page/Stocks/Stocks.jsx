@@ -26,14 +26,12 @@ import screener_icon from "../../assets/svg/product_and_tool/screener.svg";
 import { useDispatch, useSelector } from "react-redux";
 // import {useSelector } from "react-redux";
 import {
-  fetchMostBoughtStockThunk,
   selectMostBoughtStockData,
   selectMostBoughtStockLoading,
   // selectMostBoughtStockError,
 } from "../../features/api_lab/mostBoughtStocksApiData/centralExportMostBoughtStocks";
 
 import {
-  fetchTopGainerStockThunk,
   selectTopGainerStockData,
   selectTopGainerStockLoading,
   // selectTopGainerStockError,
@@ -41,7 +39,6 @@ import {
 } from "../../features/api_lab/topGainerStockApiData/centralExportTopGainer";
 
 import {
-  fetchStockNewsApiThunk,
   selectStockNewsApiData,
   selectStockNewsApiLoading,
   // selectStockNewsApiError,
@@ -49,7 +46,6 @@ import {
 } from "../../features/api_lab/stockNewsApiData/centralExportStockNewsApiData";
 
 import {
-  fetchTopLoserStockThunk,
   selectorTopLoserStockData,
   selectorTopLoserStockLoading,
   // selectorTopLoserStockError,
@@ -58,7 +54,6 @@ import {
 
 
 import {
-  fetchTopMarketCapStockThunk,
   selectorTopMarketCapStockData,
   selectorTopMarketCapStockLoading,
   // selectorTopMarketCapStockError,
@@ -71,18 +66,16 @@ import // fetchAllStockApiThunk,
 // selectorAllStockApiIsError,
 // selectorAllStockApiErrorMsg
 "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
-// import {
-//   fetchUserWatchlistApiDataThunk,
-//   selectUserWatchlistValue,
-//   // selectUserWatchlistLoading,
-//   // selectUserWatchlistError,
-//   // selectUserWatchlistErrorMessage
-// } from "../../features/userWatchlist/centralExportUserWatchlist";
-// import {selectUserProfileData} from "../../features/userProfileData/centralExportUserProfileData"
-
+import {
+  fetchUserBuyStockData,
+  selectorUserBuyStockEmail,
+  selectorUserBuyStockData,
+} from "../../features/api_lab/userBuyStockData/centralExportUserBuyStockData";
 
 import { useNavigate } from "react-router-dom";
 import StockMarketCapLoader from "../../component/Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
+import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
+import { selectorAllStockApiData } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 
 const Stocks = () => {
   // const dispatch = useDispatch();
@@ -135,6 +128,15 @@ const Stocks = () => {
     setPaginationCurrentActivePage(activePage);
   };
 
+  const dispatch = useDispatch();
+  const userProfileData = useSelector(selectUserProfileData);
+  const allStockData = useSelector(selectorAllStockApiData);
+  const userBuyStockData = useSelector(selectorUserBuyStockData);
+  const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
+  const [buyValue , setBuyValue] = useState(0);
+  const [currentValue , setCurrentValue] = useState(0);
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -158,6 +160,33 @@ const Stocks = () => {
       setPaginationEndIndex(endIndex);
     }
   }, [paginationCurrentActivePage, topMarketCapStockApiData]);
+
+  useEffect(() => {
+    if (userBuyStockEmail === null && userProfileData.userEmail) {
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail));
+    }
+  }, [dispatch, userBuyStockEmail, userProfileData.userEmail]);
+
+  useEffect(() => {
+    if (allStockData.length > 0 && userBuyStockData.length > 0) {
+      let currentValueData = 0;
+      let buyValueData = 0
+      for (let i = 0; i < userBuyStockData.length; i++) {
+        for (let x = 0; x < allStockData.length; x++) {
+          if (userBuyStockData[i].stock_id === allStockData[x].stock_id) {
+            currentValueData += (Number(allStockData[x].stockCost)*Number(userBuyStockData[i].stockQuantity));
+            break;
+          }
+        }
+        buyValueData += (Number(userBuyStockData[i].stockCost)*Number(userBuyStockData[i].stockQuantity))
+      }
+      currentValueData = currentValueData.toFixed(2);
+      buyValueData = buyValueData.toFixed(2);
+      setCurrentValue(currentValueData);
+      setBuyValue(buyValueData)
+    }
+  }, [allStockData, userBuyStockData]);
+
 
   return (
     <div className="stocks_main">
@@ -679,7 +708,7 @@ const Stocks = () => {
             <div className="stocks_content_right_yourInvestments_card_main">
               <div className="stocks_content_right_yourInvestments_card_main_total_return">
                 <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees">
-                  ₹0
+                  ₹{currentValue-buyValue}
                 </span>
                 <span id="stocks_content_right_yourInvestments_card_main_total_return_title">
                   Total Returns
@@ -687,7 +716,7 @@ const Stocks = () => {
               </div>
               <div className="stocks_content_right_yourInvestments_card_main_current_value">
                 <span id="stocks_content_right_yourInvestments_card_main_current_value_rupees">
-                  ₹0
+                  ₹{currentValue}
                 </span>
                 <span id="stocks_content_right_yourInvestments_card_main_current_value_title">
                   Current Value

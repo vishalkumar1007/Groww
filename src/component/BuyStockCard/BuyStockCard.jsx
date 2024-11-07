@@ -141,7 +141,6 @@ const BuyStockCard = ({
   };
 
   const authQytInputValueBuy = () => {
-    setLoader(true);
     if (userInputQytValue <= 0 || userInputQytValue > 1000) {
       if (userInputQytValue > 1000) {
         dispatch(
@@ -151,7 +150,6 @@ const BuyStockCard = ({
             makeFire: true,
           })
         );
-        setLoader(false);
       } else {
         dispatch(
           fireTheMessagePopUp({
@@ -160,7 +158,6 @@ const BuyStockCard = ({
             makeFire: true,
           })
         );
-        setLoader(false);
       }
     } else if (
       Number(userInputPriceValue) > Number(userTransactionBalanceAmount)
@@ -173,11 +170,9 @@ const BuyStockCard = ({
         })
       );
       setIsAddMoneyOpen(true)
-      setLoader(false);
     } else {
       if (stock_id && companyName && stockCost && stockCostPerRate) {
         handelToBuyStock();
-        setLoader(false);
       } else {
         dispatch(
           fireTheMessagePopUp({
@@ -186,7 +181,6 @@ const BuyStockCard = ({
             makeFire: true,
           })
         );
-        setLoader(false);
       }
     }
   };

@@ -1,5 +1,4 @@
 import "./InvestmentStock.css";
-import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import StockCard from "../../component/StockCard/StockCard";
@@ -10,6 +9,7 @@ import {
   selectorUserBuyStockData,
 } from "../../features/api_lab/userBuyStockData/centralExportUserBuyStockData";
 
+import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
 import { selectorAllStockApiData } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 
 const InvestmentStock = () => {
