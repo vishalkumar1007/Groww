@@ -1,59 +1,40 @@
-import { useEffect } from "react";
 import "./InvestmentStock.css";
 import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { useState , useEffect } from "react";
 import StockCard from "../../component/StockCard/StockCard";
 import EmptyDataSvg from "../../assets/svg/am_icon/Empty_data_bro.svg";
-
+import {
+  fetchUserBuyStockData,
+  selectorUserBuyStockEmail,
+  selectorUserBuyStockData,
+  selectorUserBuyStockLoading
+} from '../../features/api_lab/userBuyStockData/centralExportUserBuyStockData'
 const InvestmentStock = () => {
+  const dispatch = useDispatch();
   const userProfileData = useSelector(selectUserProfileData);
-  const [userStockBuyData, setUserStockBuyData] = useState([]);
 
-  useEffect(() => {
-    const fetchUserBuyData = async () => {
-      try {
-        const buyStockData = "http://localhost:8080/api/user/getUserBuyData";
-        const token = localStorage.getItem("token");
+  const userBuyStockData = useSelector(selectorUserBuyStockData);
+  const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
 
-        const response = await fetch(buyStockData, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ email: userProfileData.userEmail }),
-        });
-        if (!response) {
-          console.log("response is not ok");
-          return;
-        }
-
-        if (response.status === 200) {
-          const jsonData = await response.json();
-          setUserStockBuyData(jsonData.ownStocks);
-        }
-      } catch (error) {
-        console.log("error while fetch data", error);
-      }
-    };
-
-    if (userProfileData.userEmail) {
-      fetchUserBuyData();
+  useEffect(()=>{
+    if(userBuyStockEmail===null && userProfileData.userEmail){
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail))
     }
-  }, [userProfileData.userEmail]);
+  },[dispatch, userBuyStockEmail, userProfileData.userEmail])
+  
 
   return (
     <div className="InvestmentStock_main">
       <div className="InvestmentStock_main_width">
-        {userStockBuyData.length > 0 ? (
+        {userBuyStockData.length > 0 ? (
           <div className="InvestmentStock_main_title">
             <p>Your all buy stocks</p>
           </div>
         ) : null}
         <div className="InvestmentStock_main_buy_stock_cards">
-          {userStockBuyData.length > 0 ? (
-            userStockBuyData.map((data, index) => (
+          {userBuyStockData.length > 0 ? (
+            userBuyStockData.map((data, index) => (
               <StockCard
                 key={index}
                 _id={data._id}

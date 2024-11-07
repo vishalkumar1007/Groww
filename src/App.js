@@ -87,7 +87,12 @@ import {
   fetchUserTransactionDataThunk,
   selectorUserTransactionWalletBalance,
   selectorUserTransactionTransactionData
-} from './features/api_lab/userTransactionData/centralExportUserTransactionData.js'
+} from './features/api_lab/userTransactionData/centralExportUserTransactionData.js';
+
+import {
+  fetchUserBuyStockData,
+  selectorUserBuyStockEmail,
+} from './features/api_lab/userBuyStockData/centralExportUserBuyStockData.js'
 
 function App() {
   const dispatch = useDispatch();
@@ -215,8 +220,15 @@ function App() {
     }
   }, [currentPageOfApplication, dispatch, dashboardVisitCount, topMarketCapStockApiData]);
   
-  
+  // handel to calling allBuyStockUserData api in redux -------------
 
+  const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
+
+  useEffect(()=>{
+    if(dashboardVisitCount>0 && currentPageOfApplication==='dashboard'&&userBuyStockEmail===null){
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail))
+    }
+  },[dispatch,dashboardVisitCount,currentPageOfApplication,userBuyStockEmail,userProfileData])
 
   return (
     // basename="/Groww" // for production ---------------

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
 import { useNavigate } from "react-router-dom";
 import Loader from "../LoaderComponent/Loader";
+import {fetchUserBuyStockData,selectorUserBuyStockData} from '../../features/api_lab/userBuyStockData/centralExportUserBuyStockData'
 
 const BuyStockCard = ({
   logoUrl,
@@ -30,12 +31,32 @@ const BuyStockCard = ({
   );
   const userProfileData = useSelector(selectUserProfileData);
   const [loader, setLoader] = useState(false);
+  const userAllBuyStockData = useSelector(selectorUserBuyStockData);
+  const [currentBuyStockData , setCurrentBuyStockData] = useState(null);
+  const [numberOfBuyStockData , setNumberOfBuyStockData] = useState(0);
+
+  useEffect(()=>{
+    if(userAllBuyStockData.length>0){
+      for(let i=0;i<userAllBuyStockData.length;i++){
+        if(userAllBuyStockData[i].stock_id===stock_id){
+          setCurrentBuyStockData(userAllBuyStockData[i]);
+          break;
+        }else{
+          setCurrentBuyStockData(null);
+        }
+      }
+    }
+  },[stock_id, userAllBuyStockData])
 
   useEffect(() => {
     if (userTransactionBalanceAmount === null) {
       dispatch(fetchUserTransactionDataThunk(userProfileData.userEmail));
     }
-  });
+    
+    if(userAllBuyStockData.length===0){
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail));
+    }
+  },[dispatch, userAllBuyStockData.length, userProfileData.userEmail, userTransactionBalanceAmount]);
 
 
   const handelToBuyStock = async () => {
@@ -97,6 +118,7 @@ const BuyStockCard = ({
       );
       setUserInputQytValue(0);
       dispatch(fetchUserTransactionDataThunk(userProfileData.userEmail));
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail))
       setLoader(false);
     } else {
       dispatch(
@@ -109,7 +131,7 @@ const BuyStockCard = ({
       setLoader(false);
     }
   };
-
+  
   const authQytInputValueBuy = () => {
     setLoader(true);
     if (userInputQytValue <= 0 || userInputQytValue > 1000) {
@@ -163,9 +185,6 @@ const BuyStockCard = ({
   useEffect(() => {
     if (userTransactionBalanceAmount) {
       const calculate = (userInputQytValue * stockCost).toString();
-      // console.log('x : ',calculate);
-      // console.log('y : ',countDecimal[0]+countDecimal[1]);
-      // console.log('z : ',countDecimal.length);
       const countDecimal =
         calculate.split(".")[1] === undefined
           ? ""
@@ -181,31 +200,102 @@ const BuyStockCard = ({
     }
   }, [stockCost, userInputQytValue, userTransactionBalanceAmount]);
 
-  const handelToSellStock = () => {
-    console.log("sell stock section");
+  // handel to sell stock data ...
+
+  useEffect(()=>{
+    if(currentBuyStockData!==null){
+      setNumberOfBuyStockData(currentBuyStockData.stockQuantity)
+    }
+  },[currentBuyStockData])
+
+  const handelToSellStock = async () => {
+    setLoader(true);
+    const sellStockApi = 'http://localhost:8080/api/user/sellStock';
+    const token = localStorage.getItem('token');
+    if(!token){
+      console.log('Token not available to perform sell user stock');
+      setLoader(false);
+      return ;
+    }
+
+    const sellData = {
+      email: userProfileData.userEmail,
+      stock_id,
+      stockCost,
+      stockQuantity: userInputQytValueSell,
+    }
+
+    const response = await fetch(sellStockApi , {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:`Bearer ${token}`
+      },
+      body:JSON.stringify(sellData)
+    });
+
+    if(!response.ok){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Response not ok , Are You Online",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      console.log('response : ',response);
+      setLoader(false);
+      return 
+    }
+
+
+    if(response.status===200){
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Successfully sell your stock , and mony add to account",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      dispatch(fetchUserTransactionDataThunk(userProfileData.userEmail));
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail))
+      setUserInputQytValueSell(0);
+    }else{
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Something went wrong",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+    setLoader(false);
   };
+
+  useEffect(()=>{
+    const sellPrice = (Number(userInputQytValueSell)*Number(stockCost));
+    setUserInputPriceValueSell(sellPrice);
+  },[stockCost, userInputQytValueSell]);
+  
 
   const authQytInputValueSell = () => {
     if (userInputQytValueSell <= 0 || userInputQytValueSell > 100) {
       dispatch(
         fireTheMessagePopUp({
-          messageShow: "Sell Qyt NSE must be more than 1 and less than 100",
+          messageShow: "no of stock must be more than 1 to sell",
           positiveResponse: false,
           makeFire: true,
         })
       );
-    } else if (
-      userInputPriceValueSell <= 0 ||
-      userInputPriceValueSell > 10_000
-    ) {
+    }else if(userInputQytValueSell>numberOfBuyStockData){
       dispatch(
         fireTheMessagePopUp({
-          messageShow: "Sell Price limit not be zero or more than 10000",
+          messageShow: "You don't have enough stock to sell",
           positiveResponse: false,
           makeFire: true,
         })
       );
-    } else {
+      setUserInputQytValueSell(0);
+    }else {
       handelToSellStock();
     }
   };
@@ -291,7 +381,7 @@ const BuyStockCard = ({
                 <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_box">
                   <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_quality_main">
                     <span id="buy_stock_card_inputs_quality_title">
-                      Qty NSE
+                      No of Stock
                     </span>
                     <input
                       id="buy_stock_card_inputs_quality_input"
@@ -307,7 +397,7 @@ const BuyStockCard = ({
                   </div>
                   <div className="buy_stock_card_main_buy_and_sell_chose_top_inputs_price_main">
                     <span id="buy_stock_card_inputs_price_title">
-                      Price Limit
+                      Current Value
                     </span>
                     <div id="buy_stock_card_inputs_price_input">
                       <p>{userInputPriceValueSell || 0}</p>
@@ -341,7 +431,7 @@ const BuyStockCard = ({
                     Balance : ₹{userTransactionBalanceAmount}
                   </span>
                   <span id="buy_stock_card_main_buy_and_sell_chose_bottom_cost_text_approx">
-                    Approx req : ₹0
+                    no of this stock you have: {currentBuyStockData!==null ? currentBuyStockData.stockQuantity:'0'}
                   </span>
                 </div>
                 <div className="buy_stock_card_main_buy_and_sell_chose_bottom_button_box">
