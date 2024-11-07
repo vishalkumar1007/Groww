@@ -10,7 +10,7 @@ import {
   selectorUserBuyStockData,
 } from "../../features/api_lab/userBuyStockData/centralExportUserBuyStockData";
 
-import {selectorAllStockApiData} from '../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData'
+import { selectorAllStockApiData } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 
 const InvestmentStock = () => {
   const dispatch = useDispatch();
@@ -18,14 +18,14 @@ const InvestmentStock = () => {
   const allStockData = useSelector(selectorAllStockApiData);
   const userBuyStockData = useSelector(selectorUserBuyStockData);
   const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
-  const [currentValueStockData,setCurrentValueStockData] = useState([]);
+  const [currentValueStockData, setCurrentValueStockData] = useState([]);
 
-  useEffect(()=>{
-    if(allStockData.length>0 && userBuyStockData.length>0){
+  useEffect(() => {
+    if (allStockData.length > 0 && userBuyStockData.length > 0) {
       const arr = [];
-      for(let i=0;i<userBuyStockData.length;i++){
-        for(let x=0;x<allStockData.length;x++){
-          if(userBuyStockData[i].stock_id === allStockData[x].stock_id){
+      for (let i = 0; i < userBuyStockData.length; i++) {
+        for (let x = 0; x < allStockData.length; x++) {
+          if (userBuyStockData[i].stock_id === allStockData[x].stock_id) {
             arr.push(allStockData[x]);
             break;
           }
@@ -33,7 +33,7 @@ const InvestmentStock = () => {
       }
       setCurrentValueStockData(arr);
     }
-  },[allStockData, userBuyStockData])
+  }, [allStockData, userBuyStockData]);
 
   useEffect(() => {
     if (userBuyStockEmail === null && userProfileData.userEmail) {
@@ -44,71 +44,120 @@ const InvestmentStock = () => {
   return (
     <div className="InvestmentStock_main">
       <div className="InvestmentStock_main_width">
-        <div className="InvestmentStock_main_preview_data_detail">
-          <div className="InvestmentStock_main_title">
-            <p>Your all buy stocks with buy value</p>
-          </div>
-          <div className="InvestmentStock_main_preview_data_detail_arrange_width">
-            <div className="InvestmentStock_main_preview_data_detail_container">
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_icon">
-                <p id="title">Logo</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_name">
-                <p id="title">Stock Name</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value">
-                <p id="title">Buy Value</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value_per_rate">
-                <p id="title">BV Per Rate</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value">
-                <p id="title">Current Value</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate">
-                <p id="title">CV Per Rate</p>
-              </div>
-              <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate">
-                <p id="title">No of stock you have</p>
-              </div>
+        {userBuyStockData.length > 0 ? (
+          <div className="InvestmentStock_main_preview_data_detail">
+            <div className="InvestmentStock_main_title">
+              <p>Your Investment Stock Chart</p>
             </div>
-            {userBuyStockData.map((data, index) => (
-              <div
-                className="InvestmentStock_main_preview_data_detail_container"
-                id="InvestmentStock_main_preview_data_detail_container_border"
-                key={index}
-              >
+            <div className="InvestmentStock_main_preview_data_detail_arrange_width">
+              <div className="InvestmentStock_main_preview_data_detail_container">
                 <div className="InvestmentStock_main_preview_data_detail_container_stock_icon">
-                  <div className="InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div">
-                    <img src={data.logoUrl} alt="" />
-                  </div>
+                  <p id="title">Logo</p>
                 </div>
                 <div className="InvestmentStock_main_preview_data_detail_container_stock_name">
-                  <p>{data.name}</p>
+                  <p id="title">Stock Name</p>
                 </div>
-                <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value" id="InvestmentStock_main_cost_style_buy">
-                  <p>₹{data.stockCost}</p>
+                <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value">
+                  <p id="title">Buy Value</p>
                 </div>
                 <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value_per_rate">
-                  <p>{data.stockCostPerRate}</p>
+                  <p id="title">BV Per Rate</p>
                 </div>
-                <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value" id="InvestmentStock_main_cost_style">
-                  <p>₹{currentValueStockData.length>0?currentValueStockData[index].stockCost:'0'}</p>
+                <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value">
+                  <p id="title">Current Value</p>
                 </div>
                 <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate">
-                  <p>{currentValueStockData.length>0?currentValueStockData[index].stockCostPerRate:'0'}</p>
+                  <p id="title">CV Per Rate</p>
                 </div>
-                <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate" id="InvestmentStock_main_number_of_stock">
-                  <p>{data.stockQuantity}</p>
+                <div className="InvestmentStock_main_preview_data_detail_container_no_of_stock_you_have">
+                  <p id="title">No of stock you have</p>
+                </div>
+                <div className="InvestmentStock_main_preview_data_detail_container_stock_profits">
+                  <p id="title">Profit's</p>
                 </div>
               </div>
-            ))}
+              {userBuyStockData.map((data, index) => (
+                <div
+                  className="InvestmentStock_main_preview_data_detail_container"
+                  id="InvestmentStock_main_preview_data_detail_container_border"
+                  key={index}
+                >
+                  <div className="InvestmentStock_main_preview_data_detail_container_stock_icon">
+                    <div className="InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div">
+                      <img src={data.logoUrl} alt="" />
+                    </div>
+                  </div>
+                  <div className="InvestmentStock_main_preview_data_detail_container_stock_name">
+                    <p>{data.name}</p>
+                  </div>
+                  <div
+                    className="InvestmentStock_main_preview_data_detail_container_stock_buy_value"
+                    id="InvestmentStock_main_cost_style_buy"
+                  >
+                    <p>₹{data.stockCost}</p>
+                  </div>
+                  <div className="InvestmentStock_main_preview_data_detail_container_stock_buy_value_per_rate">
+                    <p>{data.stockCostPerRate}</p>
+                  </div>
+                  <div
+                    className="InvestmentStock_main_preview_data_detail_container_stock_current_value"
+                    id="InvestmentStock_main_cost_style"
+                  >
+                    <p>
+                      ₹
+                      {currentValueStockData.length > 0
+                        ? currentValueStockData[index].stockCost
+                        : "0"}
+                    </p>
+                  </div>
+                  <div className="InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate">
+                    <p>
+                      {currentValueStockData.length > 0
+                        ? currentValueStockData[index].stockCostPerRate
+                        : "0"}
+                    </p>
+                  </div>
+                  <div className="InvestmentStock_main_preview_data_detail_container_no_of_stock_you_have">
+                    <p>{data.stockQuantity}</p>
+                  </div>
+                  <div className="InvestmentStock_main_preview_data_detail_container_stock_profits">
+                    {(
+                      Number(
+                        currentValueStockData.length > 0
+                          ? currentValueStockData[index].stockCost
+                          : "0"
+                      ) - Number(data.stockCost)
+                    ).toFixed(2) < 0 ? (
+                      <p id="InvestmentStock_main_preview_data_detail_container_stock_profits_negative">
+                        {(
+                          Number(
+                            currentValueStockData.length > 0
+                              ? currentValueStockData[index].stockCost
+                              : "0"
+                          ) - Number(data.stockCost)
+                        ).toFixed(2)}
+                      </p>
+                    ) : (
+                      <p id="InvestmentStock_main_preview_data_detail_container_stock_profits_positive">
+                        {(
+                          Number(
+                            currentValueStockData.length > 0
+                              ? currentValueStockData[index].stockCost
+                              : "0"
+                          ) - Number(data.stockCost)
+                        ).toFixed(2)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
 
         {userBuyStockData.length > 0 ? (
           <div className="InvestmentStock_main_title">
-            <p>Your all buy stocks with buy value</p>
+            <p>All Buy Stock Navigator</p>
           </div>
         ) : null}
 

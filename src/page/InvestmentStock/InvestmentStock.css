@@ -1,29 +1,29 @@
-.InvestmentStock_main{
-    /* background-color: palevioletred; */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.InvestmentStock_main {
+  /* background-color: palevioletred; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_width{
-    /* background-color: blanchedalmond; */
-    width: 95%;
-    max-width: 1230px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 50px 0px 100px 0px;
+.InvestmentStock_main_width {
+  /* background-color: blanchedalmond; */
+  width: 95%;
+  max-width: 1230px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 50px 0px 100px 0px;
 }
 
-.InvestmentStock_main_preview_data_detail{
+.InvestmentStock_main_preview_data_detail {
   /* background-color: antiquewhite; */
   width: 100%;
   /* height: 300px; */
   /* overflow: hidden; */
 }
-.InvestmentStock_main_preview_data_detail_arrange_width{
+.InvestmentStock_main_preview_data_detail_arrange_width {
   /* background-color: #ac2189; */
   width: 100%;
   /* height: 80px; */
@@ -38,11 +38,17 @@
 }
 
 .InvestmentStock_main_preview_data_detail_arrange_width::-webkit-scrollbar {
-  display: none;
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 4px;
+  color: #00b386;
+  height: 4px;
+  border-radius: 5px;
 }
-.InvestmentStock_main_preview_data_detail_container{
+
+.InvestmentStock_main_preview_data_detail_arrange_width::-webkit-scrollbar-thumb {
+  background: #d9d9d9b5;
+}
+
+.InvestmentStock_main_preview_data_detail_container {
   /* background-color: darkcyan; */
   width: 100%;
   min-width: 800px;
@@ -55,30 +61,30 @@
   /* overflow: scroll; */
 }
 
-#InvestmentStock_main_preview_data_detail_container_border{
+#InvestmentStock_main_preview_data_detail_container_border {
   border-top: 1px solid #e1e1e1;
 }
-.InvestmentStock_main_preview_data_detail_container p{
+.InvestmentStock_main_preview_data_detail_container p {
   text-align: center;
   font-size: 12px;
 }
-.InvestmentStock_main_preview_data_detail_container #title{
+.InvestmentStock_main_preview_data_detail_container #title {
   text-align: center;
   font-size: 12px;
   color: #151414;
   font-weight: 500;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_icon{
+.InvestmentStock_main_preview_data_detail_container_stock_icon {
   /* background-color: yellow; */
-  width: 120px;
+  width: 100px;
   height: 50px;
   min-width: 60px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div{
+.InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div {
   /* background-color: #9d003c; */
   width: 50px;
   height: 48px;
@@ -86,106 +92,142 @@
   border: 1px solid #eaeaea;
   overflow: hidden;
 }
-.InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div img{
+.InvestmentStock_main_preview_data_detail_container_stock_icon_logo_div img {
   width: 100%;
   height: 100%;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_name{
+.InvestmentStock_main_preview_data_detail_container_stock_name {
   /* background-color: violet; */
-  width: 220px;
+  width: 200px;
   height: 50px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_buy_value{
+.InvestmentStock_main_preview_data_detail_container_stock_buy_value {
   /* background-color: turquoise; */
-  width: 120px;
+  width: 100px;
   height: 50px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_buy_value_per_rate{
+.InvestmentStock_main_preview_data_detail_container_stock_buy_value_per_rate {
   /* background-color: tan; */
-  width: 150px;
+  width: 100px;
+  min-width: 80px;
   height: 50px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_current_value{
+.InvestmentStock_main_preview_data_detail_container_stock_current_value {
   /* background-color: sienna; */
-  width: 120px;
+  width: 100px;
+  min-width: 75px;
   height: 50px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate{
+.InvestmentStock_main_preview_data_detail_container_stock_current_value_per_rate {
   /* background-color: #2029da; */
-  width: 120px;
+  width: 90px;
   height: 50px;
-  min-width: 120px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  min-width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvestmentStock_main_title{
-    width: 100%;
-    height: 70px;
-    font-size: 22px;
-    font-weight: 500;
-    color: #5f5e5ede;
+.InvestmentStock_main_title {
+  width: 100%;
+  height: 70px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #8c8c8cde;
 }
 
-.InvestmentStock_main_buy_stock_cards{
+.InvestmentStock_main_buy_stock_cards {
   /* background-color: rebeccapurple; */
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 15px;
-    column-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 15px;
+  column-gap: 20px;
 }
-
 
 .InvestmentStock_main_container_all_stock_add_card_svg {
-    width: 100%;
-    /* background-color: pink; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .InvestmentStock_main_container_all_stock_add_card_svg img {
-    /* background-color: #484e60; */
-    width: 100%;
-    max-height: 400px;
-    height: 100%;
-  }
-  .InvestmentStock_main_container_all_stock_add_card_svg span {
-    font-size: 25px;
-    font-weight: 500;
-    color: #d1d7d5;
-    text-align: center;
-  }
+  width: 100%;
+  /* background-color: pink; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-  #InvestmentStock_main_cost_style_buy{
-    color: #6500b3;
-    font-weight: 500;
+.InvestmentStock_main_container_all_stock_add_card_svg img {
+  /* background-color: #484e60; */
+  width: 100%;
+  max-height: 400px;
+  height: 100%;
+}
+.InvestmentStock_main_container_all_stock_add_card_svg span {
+  font-size: 25px;
+  font-weight: 500;
+  color: #d1d7d5;
+  text-align: center;
+}
+
+#InvestmentStock_main_cost_style_buy {
+  color: #b3009b;
+  font-weight: 500;
+}
+#InvestmentStock_main_cost_style {
+  color: #1a81b8;
+  font-weight: 500;
+}
+#InvestmentStock_main_number_of_stock {
+  color: #c10050;
+  font-weight: 500;
+}
+
+.InvestmentStock_main_preview_data_detail_container_no_of_stock_you_have {
+  /* background-color: #d1d7d5; */
+  width: 120px;
+  min-width: 118px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.InvestmentStock_main_preview_data_detail_container_stock_profits {
+  /* background-color: #9d003c; */
+  width: 100px;
+  height: 50px;
+  min-width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#InvestmentStock_main_preview_data_detail_container_stock_profits_negative{
+  color: #d81212;
+  font-weight: 500;
+}
+#InvestmentStock_main_preview_data_detail_container_stock_profits_positive{
+  color: #05b838;
+  font-weight: 500;
+}
+
+@media (max-width: 450px) {
+  .InvestmentStock_main_title {
+    font-size: 18.5px;
   }
-  #InvestmentStock_main_cost_style{
-    color: #00b386;
-    font-weight: 500;
-  }
-  #InvestmentStock_main_number_of_stock{
-    color: #c10050;
-    font-weight: 500;
-  }
+}
