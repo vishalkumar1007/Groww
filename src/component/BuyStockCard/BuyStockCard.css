@@ -1,6 +1,7 @@
 .buy_stock_card_main{
+    border: 1.5px solid #e9e9e9ea;
     width: 100%;
-    height: 100%;
+    /* height: 570px; */
     border-radius: 10px;
     overflow: hidden;
     
@@ -8,7 +9,8 @@
 .buy_stock_card_main_title_head{
     /* background-color: #ffd90025; */
     width: 100%;
-    height: 12.5%;
+    /* height: 12.5%; */
+    height: 75px;
     border-bottom: 1.5px solid #eeeeeecf;
     display: flex;
     justify-content: center;
@@ -16,14 +18,41 @@
 }
 .buy_stock_card_main_title_head_arrange_width{
     /* background-color: #ffd90031; */
-    width: 90%;
+    width: 70%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
 }
-
+.buy_stock_card_main_title_head_open_add_money{
+    /* background-color: red; */
+    width: 20%;
+    min-width: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    justify-content: center;
+    /* color: #19a363; */
+    /* color: #bb0000; */
+    flex-direction: column;
+}
+.buy_stock_card_main_title_head_open_add_money button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+.buy_stock_card_main_title_head_open_add_money p{
+    font-size: 10px;
+    color: #545973;
+}
+.buy_stock_card_main_title_head_open_add_money button svg{
+    width: 100%;
+    height: 100%;
+}
 #buy_stock_card_company_name{
     font-size: 16px;
     color: #44475b;
@@ -37,7 +66,8 @@
 .buy_stock_card_main_buy_and_sell{
     /* background-color: #4683b40e; */
     width: 100%;
-    height: 87.5%;
+    /* height: 87.5%; */
+    height: 480px;
     display: flex;
     justify-content: center;
     flex-direction: column;

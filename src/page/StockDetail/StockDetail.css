@@ -1174,10 +1174,9 @@ position: relative;
 .stock_detail_buy_stock_main_buy_card_div {
   /* background-color: rgba(245, 222, 179, 0.242); */
   width: 98%;
-  height: 570px;
+  /* height: 570px; */
   border-radius: 10px;
   overflow: hidden;
-  border: 1.5px solid #e9e9e9ea;
   position: sticky;
   top: 40px;
   z-index: 4;
@@ -1202,7 +1201,7 @@ position: relative;
   border: 1px solid #616161d9;
   cursor: pointer;
   box-shadow: 0px 0px 15px #d4d4d4;
-  z-index: 21;
+  z-index: 101;
 }
 
 .stock_detail_buy_stock_on_mobile_main span{
@@ -1235,18 +1234,17 @@ position: relative;
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 20;
+  z-index: 100;
 }
 
 .buy_and_sell_option_open_in_mobile_view_main_div_arrange_width{
   background-color: rgb(255, 255, 255);
   width: 92%;
-  height: 80%;
+  /* height: 80%; */
   max-width: 500px;
   max-height: 600px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #cbcbcb;
   box-shadow: 0px 0px 20px #ffffff;
 }
 

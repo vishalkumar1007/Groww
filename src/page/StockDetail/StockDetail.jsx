@@ -11,6 +11,7 @@ import BuyStockCard from "../../component/BuyStockCard/BuyStockCard";
 import ShareholdingPatternCard from "../../component/ShareholdingPatternCard/ShareholdingPatternCard";
 import FinancialGraph from "../../component/StockDetailComponents/FinancialGraph/FinancialGraph";
 import StockCard from "../../component/StockCard/StockCard";
+
 // ............... json data ..............
 // import StockData from "../../utils/stockData.json";
 // ............... image ..................
@@ -75,7 +76,7 @@ const StockDetail = () => {
   const [isStockAlreadyInCart, setIsStockAlreadyInCart] = useState(false);
 
   const [openSearchStockFloat, setOpenSearchStockFloat] = useState(false);
-
+  // const [addMoneySectionOpen , setAddMoneySectionOpen] = useState(false);
   // console.log('xxx : ',APIstockData[0].stock_id);
 
   // auth user token
@@ -1695,12 +1696,15 @@ const StockDetail = () => {
             {isBuyAndSellOpenInMobile ? (
               <div className="buy_and_sell_option_open_in_mobile_view_main_div">
                 <div className="buy_and_sell_option_open_in_mobile_view_main_div_arrange_width">
-                  <BuyStockCard
-                    stock_id = {APIstockData[0].stock_id}
-                    companyName={companyName}
-                    stockCost={companyCost}
-                    stockCostPerRate={companyCostPerRate}
-                  />
+                  {
+                    <BuyStockCard
+                      stock_id = {APIstockData[0].stock_id}
+                      companyName={companyName}
+                      stockCost={companyCost}
+                      stockCostPerRate={companyCostPerRate}
+                    />
+                  }
+
                 </div>
               </div>
             ) : null}
