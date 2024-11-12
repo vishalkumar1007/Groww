@@ -52,7 +52,6 @@ import {
   // selectorTopLoserStockErrorMsg,
 } from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
 
-
 import {
   selectorTopMarketCapStockData,
   selectorTopMarketCapStockLoading,
@@ -87,11 +86,10 @@ const Stocks = () => {
   const [paginationEndIndex, setPaginationEndIndex] = useState(0);
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
   const paginationChunk = 10;
-  
+
   // api data state
 
   // handel to call user Watchlist Data api redux ------------
-
 
   // handel to calling topByMarketCapStock api in redux -----------------
 
@@ -99,7 +97,6 @@ const Stocks = () => {
   const topMarketCapStockApiLoading = useSelector(
     selectorTopMarketCapStockLoading
   );
-
 
   // handel to calling mostBoughStock api in redux -----------------
 
@@ -110,7 +107,6 @@ const Stocks = () => {
 
   const topGainerStockApiData = useSelector(selectTopGainerStockData);
   const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
-  
 
   // handel to calling stockNewsApiData api in redux ----------------
 
@@ -133,9 +129,8 @@ const Stocks = () => {
   const allStockData = useSelector(selectorAllStockApiData);
   const userBuyStockData = useSelector(selectorUserBuyStockData);
   const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
-  const [buyValue , setBuyValue] = useState(0);
-  const [currentValue , setCurrentValue] = useState(0);
-
+  const [buyValue, setBuyValue] = useState(0);
+  const [currentValue, setCurrentValue] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -170,23 +165,31 @@ const Stocks = () => {
   useEffect(() => {
     if (allStockData.length > 0 && userBuyStockData.length > 0) {
       let currentValueData = 0;
-      let buyValueData = 0
+      let buyValueData = 0;
       for (let i = 0; i < userBuyStockData.length; i++) {
         for (let x = 0; x < allStockData.length; x++) {
           if (userBuyStockData[i].stock_id === allStockData[x].stock_id) {
-            currentValueData += (Number(allStockData[x].stockCost)*Number(userBuyStockData[i].stockQuantity));
+            currentValueData +=
+              Number(allStockData[x].stockCost) *
+              Number(userBuyStockData[i].stockQuantity);
             break;
           }
         }
-        buyValueData += (Number(userBuyStockData[i].stockCost)*Number(userBuyStockData[i].stockQuantity))
+        buyValueData +=
+          Number(userBuyStockData[i].stockCost) *
+          Number(userBuyStockData[i].stockQuantity);
       }
       currentValueData = currentValueData.toFixed(2);
       buyValueData = buyValueData.toFixed(2);
       setCurrentValue(currentValueData);
-      setBuyValue(buyValueData)
+      setBuyValue(buyValueData);
     }
   }, [allStockData, userBuyStockData]);
 
+  useEffect(() => {
+    console.log("Hy : ", currentValue);
+    console.log("Hy : ", buyValue);
+  }, [buyValue, currentValue]);
 
   return (
     <div className="stocks_main">
@@ -298,7 +301,13 @@ const Stocks = () => {
                 Top Gainer
               </span>
               <span className="stocks_left_top_gainers_heading_seeMore">
-                <button onClick={()=>{navigate('/dashboard/topStock')}}>See more</button>
+                <button
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </button>
               </span>
             </div>
             <div className="stocks_left_top_gainers_filter">
@@ -429,7 +438,12 @@ const Stocks = () => {
               <span className="stocks_left_in_news_heading_title">
                 Stocks in News
               </span>
-              <button className="stocks_left_in_news_heading_news_box" onClick={()=>{navigate('/dashboard/topStock')}}>
+              <button
+                className="stocks_left_in_news_heading_news_box"
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -479,7 +493,13 @@ const Stocks = () => {
                 Top Losers
               </span>
               <span className="stocks_left_top_losers_heading_seeMore">
-                <button onClick={()=>{navigate('/dashboard/topStock')}}>See more</button>
+                <button
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </button>
               </span>
             </div>
             <div className="stocks_left_top_losers_filter">
@@ -608,7 +628,11 @@ const Stocks = () => {
           <div className="stocks_left_top_sector">
             <div className="stocks_left_top_sector_heading">
               <span>Top Sectors</span>
-              <button onClick={()=>{navigate('/dashboard/topStock')}}>
+              <button
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
                 <p>See more</p>
               </button>
             </div>
@@ -627,8 +651,19 @@ const Stocks = () => {
               <span className="stocks_left_market_cap_heading_title">
                 Top by Market Cap
               </span>
-              <button className="stocks_left_market_cap_heading_seeMore" onClick={()=>{navigate('/dashboard/topStock')}}>
-                <p onClick={()=>{navigate('/dashboard/topStock')}}>See more</p>
+              <button
+                className="stocks_left_market_cap_heading_seeMore"
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
+                <p
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </p>
               </button>
             </div>
             <div className="stocks_left_market_cap_card_component_container">
@@ -657,7 +692,16 @@ const Stocks = () => {
                 >
                   {topMarketCapStockApiLoading ? (
                     <>
-                      <StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader /><StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
                     </>
                   ) : (
                     topMarketCapStockApiData
@@ -707,9 +751,16 @@ const Stocks = () => {
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
               <div className="stocks_content_right_yourInvestments_card_main_total_return">
-                <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees">
-                  ₹{currentValue-buyValue}
-                </span>
+                {currentValue - buyValue < 0 ? (
+                  <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees" style={{color:'#e62214eb'}}>
+                    ₹{(currentValue - buyValue).toFixed(2)}
+                  </span>
+                ) : (
+                  <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees">
+                    ₹{(currentValue - buyValue).toFixed(2)}
+                  </span>
+                )}
+
                 <span id="stocks_content_right_yourInvestments_card_main_total_return_title">
                   Total Returns
                 </span>
