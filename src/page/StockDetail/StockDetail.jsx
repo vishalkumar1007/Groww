@@ -1698,6 +1698,7 @@ const StockDetail = () => {
                 <div className="buy_and_sell_option_open_in_mobile_view_main_div_arrange_width">
                   {
                     <BuyStockCard
+                      logoUrl={companyLogoUrlName}
                       stock_id = {APIstockData[0].stock_id}
                       companyName={companyName}
                       stockCost={companyCost}
