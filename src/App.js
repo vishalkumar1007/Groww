@@ -41,14 +41,14 @@ import {
 import {
   fetchMostBoughtStockThunk,
   selectMostBoughtStockData,
-  selectMostBoughtStockLoading,
+  // selectMostBoughtStockLoading,
   // selectMostBoughtStockError,
 } from "./features/api_lab/mostBoughtStocksApiData/centralExportMostBoughtStocks.js";
 
 import {
   fetchTopGainerStockThunk,
   selectTopGainerStockData,
-  selectTopGainerStockLoading,
+  // selectTopGainerStockLoading,
   // selectTopGainerStockError,
   // selectTopGainerStockErrorMessage,
 } from "./features/api_lab/topGainerStockApiData/centralExportTopGainer.js";
@@ -56,7 +56,7 @@ import {
 import {
   fetchStockNewsApiThunk,
   selectStockNewsApiData,
-  selectStockNewsApiLoading,
+  // selectStockNewsApiLoading,
   // selectStockNewsApiError,
   // selectStockNewsApiErrorMsg,
 } from "./features/api_lab/stockNewsApiData/centralExportStockNewsApiData.js";
@@ -64,7 +64,7 @@ import {
 import {
   fetchTopLoserStockThunk,
   selectorTopLoserStockData,
-  selectorTopLoserStockLoading,
+  // selectorTopLoserStockLoading,
   // selectorTopLoserStockError,
   // selectorTopLoserStockErrorMsg,
 } from "./features/api_lab/topLosersStockApiData/centralExportTopLoserStock.js";
@@ -73,7 +73,7 @@ import {
 import {
   fetchTopMarketCapStockThunk,
   selectorTopMarketCapStockData,
-  selectorTopMarketCapStockLoading,
+  // selectorTopMarketCapStockLoading,
   // selectorTopMarketCapStockError,
   // selectorTopMarketCapStockErrorMsg
 } from "./features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData.js";
@@ -84,9 +84,9 @@ import {
 } from './features/pageRouteStalk/centralExportPageRouteStalk.js'
 
 import {
-  fetchUserTransactionDataThunk,
-  selectorUserTransactionWalletBalance,
-  selectorUserTransactionTransactionData
+  // fetchUserTransactionDataThunk,
+  // selectorUserTransactionWalletBalance,
+  // selectorUserTransactionTransactionData
 } from './features/api_lab/userTransactionData/centralExportUserTransactionData.js';
 
 import {

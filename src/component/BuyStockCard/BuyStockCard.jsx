@@ -160,7 +160,7 @@ const BuyStockCard = ({
         );
       }
     } else if (
-      Number(userInputPriceValue) > Number(userTransactionBalanceAmount)
+      Number(userTransactionBalanceAmount)===0 && Number(userInputPriceValue) > Number(userTransactionBalanceAmount)
     ) {
       dispatch(
         fireTheMessagePopUp({
