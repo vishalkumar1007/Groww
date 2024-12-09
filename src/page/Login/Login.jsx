@@ -3,18 +3,257 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
 import google_svg from "../../assets/svg/google.icon.svg";
+// import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../component/LoaderComponent/Loader";
+import { useDispatch } from "react-redux";
+import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
+// import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [inputActive, setInputActive] = useState(false);
   const [userEmailId, setUserEmailId] = useState("");
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
   const [userPassword, setUserPassword] = useState("");
   const [emailNotFoundError, setEmailNotFoundError] = useState(false);
-  const [incorrectEmail, setIncorrectEmail] = useState(false);
   const [emailValidFromDataBase, setEmailValidFromDataBase] = useState(false);
   const [passwordValidFromDataBase, setPasswordValidFromDataBase] =
-    useState(false);
-  const [passwordErrorAlert, setPasswordErrorAlert] = useState("");
+    useState(true);
+  const [passwordErrorAlert, setPasswordErrorAlert] = useState(false);
   const [isLoginPasswordHide, setIsLoginPasswordHide] = useState(true);
+  const [animationTextChangeLogin, setAnimationTextChangeLogin] =
+    useState("Mutual Funds");
+
+  const [allowContinueEmailVerify, setAllowContinueEmailVerify] =
+    useState(true);
+  const [allowToLogin, setAllowToLogin] = useState(true);
+
+  const [loaderActive, setLoaderActive] = useState(false);
+
+  useEffect(() => {
+    if (!(userEmailId.length > 0)) {
+      setAllowContinueEmailVerify(false);
+      return;
+    }
+
+    if (incorrectEmail) {
+      setAllowContinueEmailVerify(false);
+      return;
+    }
+    setAllowContinueEmailVerify(true);
+  }, [incorrectEmail, userEmailId]);
+
+  const handelEmailValidation = async () => {
+    if (!allowContinueEmailVerify) {
+      return;
+    }
+    setLoaderActive(true);
+
+    const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
+
+    fetch(EmailValidationApi, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          ShowQuickMsgForEmailValidation(response.status);
+          setLoaderActive(false);
+          return;
+        }
+        ShowQuickMsgForEmailValidation(response.status);
+        setLoaderActive(false);
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForEmailValidation(500);
+        setLoaderActive(false);
+      });
+  };
+
+  const ShowQuickMsgForEmailValidation = async (statusCode) => {
+    if (statusCode === 401) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Authorization failed. Please try again.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 200) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Validation successful.",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //..... fn
+      setEmailValidFromDataBase(true); // open password section if true
+      setInputActive(false); //  deactivate input field
+
+    } else if (statusCode === 404) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Email not found.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      //... fn
+      setEmailNotFoundError(true); // enable create account msg
+    } else if (statusCode === 500) {
+      //.... redux
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Try again later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+
+    if(statusCode !== 200){
+      setAllowContinueEmailVerify(false); // disable continue button
+      const timeOut = setTimeout(() => {
+        if (statusCode === 404) {
+          setEmailNotFoundError(false); // disable create account msg after interval
+        }
+        setAllowContinueEmailVerify(true); // enable continue button
+      }, 4000);
+  
+      return () => clearTimeout(timeOut);
+    }
+  };
+
+  // PASSWORD
+  useEffect(() => {
+    if (!(userPassword.length > 0)) {
+      setAllowToLogin(false);
+      return;
+    }
+
+    if (passwordErrorAlert) {
+      setAllowToLogin(false);
+      return;
+    }
+    setAllowToLogin(true);
+  }, [passwordErrorAlert, userPassword.length]);
+
+  const handelLoginValidation = async () => {
+    if (!allowToLogin) {
+      return;
+    }
+    setLoaderActive(true);
+    const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
+
+    fetch(LoginAPI, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.log("response not ok", response.status);
+          ShowQuickMsgForLogin(response.status);
+          setLoaderActive(false);
+          return;
+        }
+
+        if (response.status === 200) {
+          const data = await response.json();
+          localStorage.setItem("token", data.token);
+        }
+
+        ShowQuickMsgForLogin(response.status);
+        setLoaderActive(false);
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForLogin(500);
+        setLoaderActive(false);
+      });
+  };
+
+  const ShowQuickMsgForLogin = async (statusCode) => {
+    if (statusCode === 401) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Unauthorized request. Please log in.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    } else if (statusCode === 400) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Incorrect password. Please try again.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+      //....fn
+      setPasswordValidFromDataBase(false);
+
+    } else if (statusCode === 200) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Login validation successful. Welcome!",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //.... fn
+      setInputActive(false);
+      navigate("/dashboard");
+
+    } else if (statusCode === 404) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "User not found. Check your credentials.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+
+      
+    } else if (statusCode === 500) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Server error. Please try later.",
+          positiveResponse: false,
+          makeFire: true,
+        })
+      );
+    }
+
+    if(statusCode !== 200){
+      setAllowToLogin(false);
+      const timeOut = setTimeout(() => {
+        setAllowToLogin(true);
+      }, 4000);
+  
+      return () => clearTimeout(timeOut);
+    }
+
+  };
+
+
+
+  // ........ input focus 
 
   const checkInputFocus = () => {
     setInputActive(true);
@@ -25,35 +264,31 @@ const Login = () => {
     }
   };
 
+  useState(() => {
+    const interval = setInterval(() => {
+      setAnimationTextChangeLogin((pvrState) => {
+        if (pvrState === "Mutual Funds") {
+          return "Stocks";
+        } else if (pvrState === "Stocks") {
+          return "EFT's";
+        } else {
+          return "Mutual Funds";
+        }
+      });
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   useEffect(() => {
     if (inputActive) {
       if (userPassword.length < 7 || userPassword.length > 20) {
-        setPasswordErrorAlert("Password length must be between 7 to 20");
-      } else if (
-        ["$", "!", "%", "^", "*", "(", ")", "|"].some((operator) =>
-          userPassword.includes(operator)
-        )
-      ) {
-        setPasswordErrorAlert(
-          "Not allow to use these character $ ! % ^ | ( ) "
-        );
-      } else if (!/\d/.test(userPassword)) {
-        setPasswordErrorAlert("Password must be contain number");
-      } else if (
-        !["@", "#", "-", ".", "/"].some((operator) =>
-          userPassword.includes(operator)
-        )
-      ) {
-        setPasswordErrorAlert("Password must be contain special character");
-      } else if (!/[A-Z]/.test(userPassword)) {
-        setPasswordErrorAlert(
-          "Password must contain at least one capital letter"
-        );
+        setPasswordErrorAlert(true);
       } else {
-        setPasswordErrorAlert("Seems Like All Set For Login You Account");
+        setPasswordErrorAlert(false);
       }
-    } else if (userPassword === "") {
-      setPasswordErrorAlert("");
     }
   }, [inputActive, userPassword]);
 
@@ -83,8 +318,10 @@ const Login = () => {
                   <p id="left_tagline_top_text">Investing.</p>
                 </div>
                 <div className="left_tagline_bottom">
-                  <div id="interval"></div>
-                  <p id="left_tagline_bottom_text">Mutual Funds</p>
+                  <div id="interval_login"></div>
+                  <p id="left_tagline_bottom_text">
+                    {animationTextChangeLogin}
+                  </p>
                 </div>
               </div>
             </div>
@@ -116,7 +353,15 @@ const Login = () => {
                 </div>
 
                 {!emailValidFromDataBase ? (
-                  <div className="login_with_id">
+                  <div
+                    className="login_with_id"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handelEmailValidation();
+                      }
+                    }}
+                  >
                     <div className="input_email_div">
                       <div className="ied_center">
                         <label
@@ -163,13 +408,17 @@ const Login = () => {
                       <button
                         id="cnt_btn"
                         onClick={() => {
-                          if (!incorrectEmail && userEmailId !== "") {
-                            setInputActive(false);
-                            setEmailValidFromDataBase(true);
-                          }
+                          handelEmailValidation();
+                        }}
+                        disabled={!allowContinueEmailVerify}
+                        style={{
+                          backgroundColor: allowContinueEmailVerify
+                            ? null
+                            : "#22b892cf",
+                          cursor: allowContinueEmailVerify ? null : "no-drop",
                         }}
                       >
-                        Continue
+                        {loaderActive ? <Loader /> : <p>Continue</p>}
                       </button>
                     </div>
                     <div className="company_terms_div">
@@ -180,7 +429,15 @@ const Login = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="login_with_id">
+                  <div
+                    className="login_with_id"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handelLoginValidation();
+                      }
+                    }}
+                  >
                     <div className="input_email_div">
                       <div className="input_email_div">
                         <div className="ied_center">
@@ -251,36 +508,40 @@ const Login = () => {
                           </div>
 
                           <div className="email_error_div">
-                            {passwordValidFromDataBase ? (
-                              <label id="email_invalid_error">
-                                Your Password is Incorrect
-                              </label>
-                            ) : (
-                              <label
-                                id="email_incorrect_error"
-                                style={{
-                                  color:
-                                    passwordErrorAlert ===
-                                    "Seems Like All Set For Login You Account"
-                                      ? "#39ac13"
-                                      : "#d50707",
-                                }}
-                              >
-                                {passwordErrorAlert}
+                            {passwordValidFromDataBase ? null : (
+                              <label id="password_invalid_error">
+                                Password Incorrect
                               </label>
                             )}
+                            {passwordErrorAlert ? (
+                              <label id="password_invalid_error">
+                                Password length must be between 7 to 20
+                              </label>
+                            ) : null}
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="continue_btn_div">
-                      <button id="cnt_btn">Login</button>
+                      <button
+                        id="cnt_btn"
+                        onClick={() => {
+                          handelLoginValidation();
+                        }}
+                        disabled={!allowToLogin}
+                        style={{
+                          backgroundColor: allowToLogin ? null : "#22b892cf",
+                          cursor: allowToLogin ? null : "no-drop",
+                        }}
+                      >
+                        {loaderActive ? <Loader /> : <p>Login</p>}
+                      </button>
                     </div>
                     <div className="company_terms_div">
                       <p>
                         Don't remember Password ?{" "}
-                        <Link to="/forget">Forget Password</Link>
+                        <Link to="/forgot">Forgot Password</Link>
                       </p>
                     </div>
                   </div>

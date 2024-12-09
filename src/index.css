@@ -1,0 +1,12 @@
+.messagePopUpHome{
+    top: 40px;
+    z-index: 120;
+    position: sticky;
+}
+
+.makeStickyMessagePopUp_Index{
+    position: absolute;
+    overflow: hidden;
+    z-index: 120;
+    right: 30px;
+}

@@ -4,13 +4,32 @@
 }
 
 .HomeMain {
+  /* background-color: rebeccapurple; */
   width: 100%;
   height: 100dvh;
   /* prevent to select text  */
   -webkit-user-select: none; 
   -ms-user-select: none;
   user-select: none;
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.HomeMain_arrange_width{
+  /* background-color: pink; */
+  width:100%;
+  height: 100%;
+  max-width: 1550px;
+}
+
+.HomeMain_alert_show{
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  z-index: 10;
+}
+
 .Home_navbar {
   background-color: rgb(255, 255, 255);
   width: 100%;
@@ -44,7 +63,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 27%;
+  width: 30%;
   height: 48%;
   min-width: 263.95px;
   /* border-radius: 7px; */
@@ -800,7 +819,93 @@
     min-height: 95%;
 
   }
+  .Home_nav_register {
+    display: none;
+  }
+  .Home_three_line_nav {
+    /* background-color: red; */
+    /* width: 30px; */
+    /* height: 25px; */
+    margin-right: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition: 0.3s ease-in-out; */
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    z-index: 10;
+  }
+  .Home_three_line_nav #svgMenu1 {
+    transition: 0.1s ease-in-out;
+    /* color: red; */
+  }
+  .Home_three_line_nav #svgMenu2 {
+    transition: 0.1s ease-in-out;
+    /* color: red; */
+  }
+  .Home_three_menu_bar {
+    background-color: #2b29297a;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* transition: height 0.3s ease-in-out; */
+    /* position: fixed; */
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+    gap: 15px;
+  }
 
+  .home_three_menu_search_bar{
+    /* background-color: pink; */
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 0px 20px;
+  }
+  
+  .home_three_menu_sign_in_login{
+    /* background-color: navajowhite; */
+    width: 100%;
+    height: 40px;
+    padding: 5px 0px 0px 20px ;
+  }
+  .home_three_menu_sign_in_login_btn{
+    width: 60px;
+    height: 32px;
+    /* background-color: #00b386; */
+    overflow: hidden;
+    border-radius: 7px;
+  }
+  .home_three_menu_sign_in_login_btn button:hover{
+    background-color: #03ab81;
+  }
+  .home_three_menu_sign_in_login_btn button{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: #00b386;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 2px;
+  }
+  #make_groww_logo_z_index{
+    /* z-index: 20; */
+  }
+  #Home_three_menu_bar_animation {
+    /* height: 100px; */
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -846,36 +951,81 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s ease-in-out;
+    /* transition: 0.3s ease-in-out; */
     position: relative;
     cursor: pointer;
-    background-color: white;
+    background-color: transparent;
     border: none;
+    z-index: 10;
   }
   .Home_three_line_nav #svgMenu1 {
-    transition: 0.7s ease-in-out;
+    transition: 0.1s ease-in-out;
     /* color: red; */
   }
   .Home_three_line_nav #svgMenu2 {
-    transition: 0.7s ease-in-out;
+    transition: 0.1s ease-in-out;
     /* color: red; */
   }
   .Home_three_menu_bar {
-    background-color: #535353d0;
+    background-color: #2b29297a;
     position: absolute;
-    width: 160px;
-    height: 0px;
-    top: 60px;
-    right: 30px;
-    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    right: 0px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: height 0.3s ease-in-out;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* transition: height 0.3s ease-in-out; */
+    /* position: fixed; */
+    backdrop-filter: blur(10px);
+    padding-top: 20px;
+    gap: 15px;
+  }
+
+  .home_three_menu_search_bar{
+    /* background-color: pink; */
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 0px 20px;
   }
   
+  .home_three_menu_sign_in_login{
+    /* background-color: navajowhite; */
+    width: 100%;
+    height: 40px;
+    padding: 5px 0px 0px 20px ;
+  }
+  .home_three_menu_sign_in_login_btn{
+    width: 60px;
+    height: 32px;
+    /* background-color: #00b386; */
+    overflow: hidden;
+    border-radius: 7px;
+  }
+  .home_three_menu_sign_in_login_btn button:hover{
+    background-color: #03ab81;
+  }
+  .home_three_menu_sign_in_login_btn button{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: #00b386;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 2px;
+  }
+  #make_groww_logo_z_index{
+    /* z-index: 20; */
+  }
   #Home_three_menu_bar_animation {
-    height: 100px;
+    /* height: 100px; */
   }
 
 

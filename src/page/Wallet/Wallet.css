@@ -2,16 +2,23 @@
   /* background-color: pink; */
   width: 100%;
   /* height: 500px; */
+  
+  /* prevent to select text  */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.wallet_main_handel_flex_bug_in_parent{
+  /* background-color: rgba(174, 184, 92, 0.427); */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   min-width: 20px;
-  /* prevent to select text  */
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 .wallet_main_arrange_width {
   /* background-color: gray; */
@@ -178,7 +185,21 @@
   /* background-color: lightsalmon; */
   width: 93%;
   transition: 0.5s ease-in-out;
+  max-height: 420px;
+  overflow-y: scroll;
 }
+
+/* width */
+.wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+}
+
+.wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width::-webkit-scrollbar-thumb {
+  background: #b5b5b516; 
+}
+
+
 .wallet_main_wallet_card_main_all_transaction_show_on_open_arrange_width_animation {
   width: 100%;
   height: fit-content;
@@ -193,357 +214,30 @@
   border-top: 1px solid #e6e6e6;
 }
 .wallet_main_wallet_card_main_all_transaction_show_on_open_div #date {
+  /* background-color: antiquewhite; */
   font-size: 15px;
   color: #6c6e7c;
 }
+.wallet_main_wallet_card_main_all_transaction_show_on_open_div #date p{
+  /* background-color: antiquewhite; */
+  font-size: 10px;
+  color: #6c6e7c;
+}
 .wallet_main_wallet_card_main_all_transaction_show_on_open_div #money {
+  /* background-color: rgb(233, 250, 215); */
   font-size: 15px;
   color: #6c6e7c;
 }
 
 .wallet_main_arrange_width_deposit_money_main {
-  /* background-color: pink; */
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
   width: 32.5%;
   min-width: 300px;
   height: fit-content;
-  border: 1px solid #e6e6e6;
-  border-radius: 8px;
   overflow: hidden;
-  /* box-sizing: border-box; */
-}
-.wallet_main_arrange_width_deposit_money_main_top {
-  /* background-color: lightcyan; */
-  width: 100%;
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #e6e6e6;
-}
-.wallet_main_arrange_width_deposit_money_main_top_arrange_width {
-  /* background-color: rgba(255, 0, 255, 0.235); */
-  width: 93%;
-  height: 100%;
 }
 
-.wallet_main_arrange_width_deposit_money_main_top_title {
-    /* background-color: thistle; */
-  width: 100%;
-  height: 85%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-#wallet_main_money_main_top_title_deposit {
-  /* background-color: firebrick; */
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 15px;
-  color: #44475b;
-  padding: 0px 5px;
-  cursor: pointer;
-  padding-top: 10px;
-}
-#wallet_main_money_main_top_title_withdraw {
-  /* background-color: firebrick; */
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 15px;
-  color: #44475b;
-  padding: 0px 5px;
-  cursor: pointer;
-  padding-top: 10px;
-}
-
-.wallet_main_arrange_width_deposit_money_main_top_animation_scroll {
-  /* background-color: rgba(42, 186, 114, 0.688); */
-  width: 100%;
-  height: 15%;
-  display: flex;
-  align-items: end;
-  position: relative;
-}
-.animation_move_payment_option{
-    background-color: #00b386;
-    width: 70px;
-    height: 4px;
-    display: inline-block;
-    border-radius: 5px;
-    position: absolute;
-    transition: 0.4s ease-in-out;
-}
-#move_to_option_deposit{
-    left: 0px;
-    transition: 0.3s ease-in-out;
-}
-#move_to_option_withdraw{
-  background-color: #eb5b3c;
-    left: 80px;
-    width: 90px;
-    transition: 0.3s ease-in-out;
-}
-
-.wallet_main_arrange_width_deposit_money_main_bottom {
-  /* background-color: #84e37d7c; */
-  width: 100%;
-
-  height: auto;
-  display: flex;
-  justify-content: center;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_arrange_width {
-  /* background-color: darkkhaki; */
-  width: 93%;
-  /* height: 300px; */
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_main{
-    /* background-color: pink; */
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_title_box{
-    /* background-color: rgb(214, 198, 228); */
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_title_box span{
-    color: #56586a;
-    font-size: 16px;
-
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_input_box{
-    /* background-color: rgb(193, 191, 187); */
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    position: relative;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_input_box input{
-    background-color: #c8f4e8;
-    width: 105px;
-    border: none;
-    height: 30px;
-    text-align: end;
-    padding: 0px 7px 0px 25px;
-    color: #00b386;
-    font-size: 17px;
-}
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_enter_amount_input_box span{
-    position: absolute;
-    color: #00b386;
-    left: 8px;
-    font-weight: 500;
-    font-size: 19px;
-}
-
-.wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option{
-  /* background-color: rgb(255, 255, 255); */
-  width: 100%;
-  height: 100px;
-  display: flex;
-  gap: 10px;
-  justify-content: end;
-}
-
-#wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option_100{
-  width: 55px;
-  height: 24px;
-  background-color: #ddfcf3c3;
-  color: #898989;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 13.5px;
-  padding: 0px 4px 1px 0px;
-  border: 1px solid #00b386;
-  cursor: pointer;
-}
-#wallet_main_arrange_width_deposit_money_main_bottom_add_money_pp_option_500{
-  width: 55px;
-  height: 24px;
-  background-color: #ddfcf3c3;
-  color: #898989;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 13.5px;
-  padding: 0px 4px 1px 0px;
-  border: 1px solid #00b386;
-  cursor: pointer;
-}
-
-
-
-.wallet_main_arrange_width_deposit_money_main_bottom_deposit_button_main_div{
-  /* background-color: #2f2f2f; */
-  width: 100%;
-  height: 65px;
-}
-
-#wallet_main_arrange_width_deposit_money_main_bottom_deposit_button{
-    background-color: #00b386;
-    width: 100%;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    color: white;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-/* ...................  */
-
-.wallet_main_arrange_width_withdraw_money_main_bottom_arrange_width {
-  /* background-color: darkkhaki; */
-  width: 93%;
-  /* height: 300px; */
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_or_not{
-  /* background-color: yellow; */
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_title{
-  color: #56586a;
-  font-size: 16px;
-}
-
-#wallet_main_arrange_width_deposit_money_main_bottom_withdrawable_money{
-  color: #56586a;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_main{
-    /* background-color: pink; */
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-}
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_title_box{
-    /* background-color: rgb(214, 198, 228); */
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_title_box span{
-    color: #56586a;
-    font-size: 16px;
-
-}
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_input_box{
-    /* background-color: rgb(193, 191, 187); */
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    position: relative;
-}
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_input_box input{
-    background-color: #ffe6df;
-    width: 105px;
-    border: none;
-    height: 30px;
-    text-align: end;
-    padding: 0px 7px 0px 25px;
-    color: #eb5b3c;
-    font-size: 17px;
-}
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_enter_amount_input_box span{
-    position: absolute;
-    color: #eb5b3c;
-    left: 8px;
-    font-weight: 500;
-    font-size: 19px;
-}
-
-.wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option{
-  /* background-color: rgb(255, 255, 255); */
-  width: 100%;
-  height: 100px;
-  display: flex;
-  gap: 10px;
-  justify-content: end;
-}
-
-#wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option_100{
-  width: 55px;
-  height: 24px;
-  background-color: #ffe1d9;
-  color: #898989;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 13.5px;
-  padding: 0px 4px 1px 0px;
-  border: 1px solid #eb5b3c;
-  cursor: pointer;
-}
-#wallet_main_arrange_width_withdraw_money_main_bottom_add_money_pp_option_500{
-  width: 55px;
-  height: 24px;
-  background-color: #ffe1d9;
-  color: #898989;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 13.5px;
-  padding: 0px 4px 1px 0px;
-  border: 1px solid #ff937b;
-  cursor: pointer;
-}
-
-
-
-.wallet_main_arrange_width_withdraw_money_main_bottom_deposit_button_main_div{
-  /* background-color: #2f2f2f; */
-  width: 100%;
-  height: 65px;
-}
-
-#wallet_main_arrange_width_withdraw_money_main_bottom_deposit_button{
-    background-color: #eb5b3c;
-    width: 100%;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    color: white;
-    cursor: pointer;
-    font-weight: 500;
-}
 
 
 
@@ -562,5 +256,39 @@
   .wallet_main_arrange_width_deposit_money_main {
     /* background-color: pink; */
     width: 100%;
+  }
+}
+
+.wallet_float_search_option{
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+}
+.wallet_float_search_option_icon{
+  background-color: rgba(177, 16, 91, 0.7);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(1px);
+  color: #ffffff;
+  z-index: 102;
+  display: none;
+}
+
+@media (max-width:500px){
+  .wallet_float_search_option_icon{
+    display: flex;
+  }
+  .wallet_float_search_option{
+    display: flex;
   }
 }

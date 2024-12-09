@@ -20,6 +20,7 @@
   max-width: 1230px;
   display: flex;
   box-sizing: border-box;
+  flex-direction: row;
   gap: 25px;
 }
 .stocks_main_content_left {
@@ -735,8 +736,13 @@
 }
 
 @media (max-width: 900px) {
-  .stocks_content_right {
-    display: none;
+  .stocks_width_arrange{
+    /* background-color: rebeccapurple; */
+    flex-direction: column;
+  } 
+  .stocks_content_right{
+    width: 100%;
+    padding-bottom: 100px;
   }
   .stocks_main_content_left {
     width: 100%;

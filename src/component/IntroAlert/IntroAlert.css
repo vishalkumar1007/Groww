@@ -1,0 +1,177 @@
+
+
+.inter_alert_main{
+    width: 100%;
+    height: 100dvh;
+    background-color: rgba(30, 28, 28, 0.438);
+    /* filter: blur(10px); */
+    backdrop-filter: blur(7px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro_alert_arrange_width{
+    background-color: white;
+    width: 85%;
+    max-width: 488px;
+    height: 350px;
+    border-radius: 10px;
+    /* overflow: hidden; */
+    min-width: 300px;
+}
+.inter_alert_top_main{
+    background-color: #00b386;
+    width: 100%;
+    height: 25%;
+    display: flex;
+    border-radius: 10px 10px 0px 0px;
+}
+.inter_alert_top_main_left{
+    /* background-color: rgb(220, 220, 220); */
+    width: 65%;
+    height: 100%;
+    min-width: 245px;
+    position: relative;
+}
+#Hello_user_icon{
+    /* background-color: red; */
+    width: 100%;
+    height: 240%;
+    /* min-width: 230px; */
+    position: absolute;
+    bottom: -12px;
+    left: 5px;
+}
+.inter_alert_top_main_rigth{
+    /* background-color: goldenrod; */
+    width: 35%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+}
+.inter_alert_top_main_rigth p{
+    font-family:cursive;
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    position: absolute;
+    left: -70px;
+    margin-right: 10px;
+}
+
+.inter_alert_bottom_main{
+    /* background-color: tan; */
+    width: 100%;
+    height: 75%;
+    border-radius: 0px 0px 10px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.inter_alert_bottom_main_design{
+    background-color: #defff747;
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 500% 120% 35px 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inter_alert_bottom_main_design_internal{
+    background-color: #fffffff0;
+    width: 40%;
+    height: 19%;
+    border-radius: 40% 50% 45% 80%;
+}
+.inter_alert_bottom_main_design_1{
+    background-color: #defff747;
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    top: 25%;
+    left: 6%;
+    border-radius: 100% 120% 55% 100%;
+}
+.inter_alert_bottom_main_title{
+    /* background-color: gray; */
+    width: 95%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+.inter_alert_bottom_main_title p{ 
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #067b5e;
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+}
+
+.inter_alert_bottom_main_disclaimer{
+    /* background-color: pink; */
+    width: 90%;
+    height: 30%;
+    position: relative;
+}
+.inter_alert_bottom_main_disclaimer p{
+    text-align: center;
+    color: #8d8d8d;
+}
+.inter_alert_bottom_main_button{
+    /* background-color: pink; */
+    height: 25%;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+#inter_alert_bottom_main_button_close_btn{
+    width: 65px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background-color: #eb5b3c;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+#inter_alert_bottom_main_button_close_btn:hover{
+    background-color: #da4b2b;
+}
+
+#inter_alert_bottom_main_button_open_btn{
+    width: 65px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background-color: #00b386;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+#inter_alert_bottom_main_button_open_btn:hover{
+    background-color: #03a17a;
+}
+
+#inter_alert_bottom_main_disclaimer_highlight{
+    color: #656666;
+    font-weight: 500;
+}

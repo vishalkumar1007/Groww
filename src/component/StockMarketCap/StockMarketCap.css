@@ -63,10 +63,11 @@
   align-items: center;
   min-width: 165px;
   justify-content: space-between;
-
   -webkit-user-select: none; 
   -ms-user-select: none; 
   user-select: none;
+  /* padding-right: 20px; */
+  /* margin-right: 1px; */
 }
 .stock_market_cap_main_title_section_price_main {
   /* background-color: slateblue; */

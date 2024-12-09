@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./Stocks.css";
 
 // ............. json data ............
-import marketCapData from "../../utils/marketCapData.json";
+// import marketCapData from "../../utils/marketCapData.json";
 
 // ...... component .......
 import StocksIndex from "../../component/StockIndex/StockIndex";
@@ -13,13 +13,7 @@ import StockToolsCard from "../../component/StockToolsCard/StockToolsCard";
 import TopSector from "../../component/TopSector/TopSector";
 import StockMarketCap from "../../component/StockMarketCap/StockMarketCap";
 import Pagination from "../../component/Pagination/Pagination";
-
-
-// ...... icons .......
-import ola_logo from "../../assets/svg/ola_logo.svg";
-import GTL_logo from "../../assets/svg/GTL_logo.webp";
-import MD_ship_logo from "../../assets/svg/GSTK_logo.webp";
-import Angel_one_logo from "../../assets/svg/angel_one_logo.webp";
+import StockCardLoader from "../../component/Loaders_Components/StockCardLoader/StockCardLoader";
 
 // ...... product and tool .......
 import fAndO_icon from "../../assets/svg/product_and_tool/F&O.svg";
@@ -28,40 +22,63 @@ import intraday_icon from "../../assets/svg/product_and_tool/intraday.svg";
 import ipo_icon from "../../assets/svg/product_and_tool/ipo.svg";
 import screener_icon from "../../assets/svg/product_and_tool/screener.svg";
 
-// ............. top gainers .........
-import diviLabs from "../../assets/img/top_gainer/divis_lab_icon.webp";
-import varunBeverages from "../../assets/img/top_gainer/varun_beverages_icon.webp";
-import titan from "../../assets/img/top_gainer/titan_icon.webp";
-import sbiLife from "../../assets/img/top_gainer/sbi_icon.webp";
-import nykaa from "../../assets/img/top_gainer/mid_nykaa_icon.webp";
-import mazagonShip from "../../assets/img/top_gainer/mid_mazagon_ship_icon.webp";
-import patanjaliFood from "../../assets/img/top_gainer/mid_patanjali_food_icon.webp";
-import bandhanBank from "../../assets/img/top_gainer/mid_bandhan_bank_icon.webp";
-import aloakIndustries from "../../assets/img/top_gainer/small_aloak_industry_icon.webp";
-import pnbHouse from "../../assets/img/top_gainer/small_pnb_house_finance_icon.webp";
-import centuryTextile from "../../assets/img/top_gainer/small_century_textiles_icon.webp";
-import castrolIndia from "../../assets/img/top_gainer/small_castrol_india_icon.webp";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+// import {useSelector } from "react-redux";
+import {
+  selectMostBoughtStockData,
+  selectMostBoughtStockLoading,
+  // selectMostBoughtStockError,
+} from "../../features/api_lab/mostBoughtStocksApiData/centralExportMostBoughtStocks";
 
-//.......... stock news ...........
-import zomato from "../../assets/img/news_stock/zomato_icon.webp";
-import Dwarikesh_Sugar from "../../assets/img/news_stock/Dwarikesh_Sugar_icon.webp";
-import tata_motors from "../../assets/img/news_stock/tata_moters_icon.webp";
-import geojit from "../../assets/img/news_stock/geojit_icon.webp";
+import {
+  selectTopGainerStockData,
+  selectTopGainerStockLoading,
+  // selectTopGainerStockError,
+  // selectTopGainerStockErrorMessage,
+} from "../../features/api_lab/topGainerStockApiData/centralExportTopGainer";
 
-// ............. top gainers .........
-import cholamandalam_invest from "../../assets/img/top_looser/Cholamandalam_Invest_icon.webp";
-import firstsource_soln from "../../assets/img/top_looser/Firstsource_Soln_icon.webp";
-import SJVN from "../../assets/img/top_looser/SJVN_icon.webp";
-import adani from "../../assets/img/top_looser/adani_icon.webp";
-import cyient from "../../assets/img/top_looser/cyient_icon.webp";
-import gland from "../../assets/img/top_looser/gland_icon.webp";
-import jsw_energy from "../../assets/img/top_looser/jsw_energy_icon.webp";
-import mahanagar_gas from "../../assets/img/top_looser/mahanagar_gas_icon.webp";
-import mahindra from "../../assets/img/top_looser/mahindra_icon.webp";
-import tata from "../../assets/img/top_looser/tata_icon.webp";
+import {
+  selectStockNewsApiData,
+  selectStockNewsApiLoading,
+  // selectStockNewsApiError,
+  // selectStockNewsApiErrorMsg,
+} from "../../features/api_lab/stockNewsApiData/centralExportStockNewsApiData";
 
+import {
+  selectorTopLoserStockData,
+  selectorTopLoserStockLoading,
+  // selectorTopLoserStockError,
+  // selectorTopLoserStockErrorMsg,
+} from "../../features/api_lab/topLosersStockApiData/centralExportTopLoserStock";
+
+import {
+  selectorTopMarketCapStockData,
+  selectorTopMarketCapStockLoading,
+  // selectorTopMarketCapStockError,
+  // selectorTopMarketCapStockErrorMsg
+} from "../../features/api_lab/topMarketCapStockApiData/centralExportTopMarketCapStockApiData";
+
+import // fetchAllStockApiThunk,
+// selectorAllStockApiData,
+// selectorAllStockApiIsLoading,
+// selectorAllStockApiIsError,
+// selectorAllStockApiErrorMsg
+"../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
+import {
+  fetchUserBuyStockData,
+  selectorUserBuyStockEmail,
+  selectorUserBuyStockData,
+} from "../../features/api_lab/userBuyStockData/centralExportUserBuyStockData";
+
+import { useNavigate } from "react-router-dom";
+import StockMarketCapLoader from "../../component/Loaders_Components/StockMarketCapLoader/StockMarketCapLoader";
+import { selectUserProfileData } from "../../features/userProfileData/centralExportUserProfileData";
+import { selectorAllStockApiData } from "../../features/api_lab/allStockHeadApiData/centralExportAllStockHeadApiData";
 
 const Stocks = () => {
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [topGainActive, setTopGainActive] = useState("large");
   const [topLosersActive, setTopLosersActive] = useState("large");
   const [paginationCurrentActivePage, setPaginationCurrentActivePage] =
@@ -70,22 +87,109 @@ const Stocks = () => {
   const [paginationStartIndex, setPaginationStartIndex] = useState(0);
   const paginationChunk = 10;
 
+  // api data state
+
+  // handel to call user Watchlist Data api redux ------------
+
+  // handel to calling topByMarketCapStock api in redux -----------------
+
+  const topMarketCapStockApiData = useSelector(selectorTopMarketCapStockData);
+  const topMarketCapStockApiLoading = useSelector(
+    selectorTopMarketCapStockLoading
+  );
+
+  // handel to calling mostBoughStock api in redux -----------------
+
+  const mostBoughtStocksApiData = useSelector(selectMostBoughtStockData);
+  const mostBoughtStocksApiLoading = useSelector(selectMostBoughtStockLoading);
+
+  // handel to calling topGainerStock api in redux ------------------
+
+  const topGainerStockApiData = useSelector(selectTopGainerStockData);
+  const topGainerStockApiLoading = useSelector(selectTopGainerStockLoading);
+
+  // handel to calling stockNewsApiData api in redux ----------------
+
+  const stockNewsApiData = useSelector(selectStockNewsApiData);
+  const stockNewsApiLoading = useSelector(selectStockNewsApiLoading);
+
+  // handel to calling topLoserStockApiData api in redux ----------------
+
+  const topLoserStockApiData = useSelector(selectorTopLoserStockData);
+  const topLoserStockApiLoading = useSelector(selectorTopLoserStockLoading);
+
+  // pagination on market cap >>>>>>>>>>>>>>
+
   const currentActivePage = (activePage) => {
     setPaginationCurrentActivePage(activePage);
   };
 
-  
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
+  const dispatch = useDispatch();
+  const userProfileData = useSelector(selectUserProfileData);
+  const allStockData = useSelector(selectorAllStockApiData);
+  const userBuyStockData = useSelector(selectorUserBuyStockData);
+  const userBuyStockEmail = useSelector(selectorUserBuyStockEmail);
+  const [buyValue, setBuyValue] = useState(0);
+  const [currentValue, setCurrentValue] = useState(0);
 
   useEffect(() => {
-    const endIndex = ((paginationChunk * paginationCurrentActivePage)>marketCapData.length ? marketCapData.length : (paginationChunk * paginationCurrentActivePage));
-    const startIndex = endIndex - ((endIndex===marketCapData.length ? ((endIndex%10)+paginationChunk === paginationChunk?paginationChunk:(endIndex%10)):(paginationChunk)));
-    
-    setPaginationStartIndex(startIndex);
-    setPaginationEndIndex(endIndex);
-  }, [paginationCurrentActivePage]);
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (topMarketCapStockApiData.length > 0) {
+      const endIndex =
+        paginationChunk * paginationCurrentActivePage >
+        topMarketCapStockApiData.length
+          ? topMarketCapStockApiData.length
+          : paginationChunk * paginationCurrentActivePage;
+      const startIndex =
+        endIndex -
+        (endIndex === topMarketCapStockApiData.length
+          ? (endIndex % 10) + paginationChunk === paginationChunk
+            ? paginationChunk
+            : endIndex % 10
+          : paginationChunk);
+
+      setPaginationStartIndex(startIndex);
+      setPaginationEndIndex(endIndex);
+    }
+  }, [paginationCurrentActivePage, topMarketCapStockApiData]);
+
+  useEffect(() => {
+    if (userBuyStockEmail === null && userProfileData.userEmail) {
+      dispatch(fetchUserBuyStockData(userProfileData.userEmail));
+    }
+  }, [dispatch, userBuyStockEmail, userProfileData.userEmail]);
+
+  useEffect(() => {
+    if (allStockData.length > 0 && userBuyStockData.length > 0) {
+      let currentValueData = 0;
+      let buyValueData = 0;
+      for (let i = 0; i < userBuyStockData.length; i++) {
+        for (let x = 0; x < allStockData.length; x++) {
+          if (userBuyStockData[i].stock_id === allStockData[x].stock_id) {
+            currentValueData +=
+              Number(allStockData[x].stockCost) *
+              Number(userBuyStockData[i].stockQuantity);
+            break;
+          }
+        }
+        buyValueData +=
+          Number(userBuyStockData[i].stockCost) *
+          Number(userBuyStockData[i].stockQuantity);
+      }
+      currentValueData = currentValueData.toFixed(2);
+      buyValueData = buyValueData.toFixed(2);
+      setCurrentValue(currentValueData);
+      setBuyValue(buyValueData);
+    }
+  }, [allStockData, userBuyStockData]);
+
+  useEffect(() => {
+    console.log("Hy : ", currentValue);
+    console.log("Hy : ", buyValue);
+  }, [buyValue, currentValue]);
 
   return (
     <div className="stocks_main">
@@ -123,12 +227,12 @@ const Stocks = () => {
               <StocksIndex
                 title="MIDCPNIFTY"
                 valueNo="11,105.21"
-                valuePercentage="734.76 (0.56%)"
+                valuePercentage="-734.76 (0.56%)"
               />
               <StocksIndex
                 title="BANKEX"
                 valueNo="54,135.51"
-                valuePercentage="114.45 (0.16%)"
+                valuePercentage="-114.45 (0.16%)"
               />
             </div>
           </div>
@@ -137,30 +241,26 @@ const Stocks = () => {
               <span>Most Bought on Groww</span>
             </div>
             <div className="stock_left_most_bought_on_groww_component">
-              <StockCard
-                logoUrl={ola_logo}
-                title="Ola Electric Mobility"
-                cost="2.77"
-                costPerRate="0.26 (0.19%)"
-              />
-              <StockCard
-                logoUrl={GTL_logo}
-                title="GTL Infrastructure"
-                cost="123.19"
-                costPerRate="-0.04 (1.42%)"
-              />
-              <StockCard
-                logoUrl={MD_ship_logo}
-                title="Mazagon Dock Ship"
-                cost="4,539.65"
-                costPerRate="240.1 (5.52%)"
-              />
-              <StockCard
-                logoUrl={Angel_one_logo}
-                title="Angel One"
-                cost="2,699.90"
-                costPerRate="-3.00 (0.11%)"
-              />
+              {mostBoughtStocksApiLoading ? (
+                <>
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                </>
+              ) : (
+                mostBoughtStocksApiData.map((data) => (
+                  <StockCard
+                    key={data._id}
+                    _id={data._id}
+                    stock_id={data.stock_id}
+                    logoUrl={data.logoUrl}
+                    name={data.name}
+                    stockCost={data.stockCost}
+                    stockCostPerRate={data.stockCostPerRate}
+                  />
+                ))
+              )}
             </div>
           </div>
           <div className="stocks_left_product_and_tools">
@@ -168,20 +268,46 @@ const Stocks = () => {
               <span>Products & tools</span>
             </div>
             <div className="stocks_left_product_and_tools_card_section">
-              <StockToolsCard iconUrl={fAndO_icon} title="F&O" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={event_icon} title="Event" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={intraday_icon} title="Intraday" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={ipo_icon} title="IPO" redirect="/under_construction"/>
-              <StockToolsCard iconUrl={screener_icon} title="Screener"  redirect="/all_stocks_filter"/>
+              <StockToolsCard
+                iconUrl={fAndO_icon}
+                title="F&O"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={event_icon}
+                title="Event"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={intraday_icon}
+                title="Intraday"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={ipo_icon}
+                title="IPO"
+                redirect="/under_construction"
+              />
+              <StockToolsCard
+                iconUrl={screener_icon}
+                title="Screener"
+                redirect="/all_stocks_filter"
+              />
             </div>
           </div>
-          <div className="stocks_left_top_gainers" >
+          <div className="stocks_left_top_gainers">
             <div className="stocks_left_top_gainers_heading">
               <span className="stocks_left_top_gainers_heading_title">
                 Top Gainer
               </span>
               <span className="stocks_left_top_gainers_heading_seeMore">
-                <button>See more</button>
+                <button
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </button>
               </span>
             </div>
             <div className="stocks_left_top_gainers_filter">
@@ -228,84 +354,81 @@ const Stocks = () => {
             <div className="stocks_left_top_gainers_card_component">
               {topGainActive === "large" ? (
                 <>
-                  <StockCard
-                    logoUrl={diviLabs}
-                    title="Divi's Labs"
-                    cost="4,980.80"
-                    costPerRate="177.65 (3.76%)"
-                  />
-                  <StockCard
-                    logoUrl={varunBeverages}
-                    title="Varun Beverages"
-                    cost="1,546.10"
-                    costPerRate="54.50 (4.69%)"
-                  />
-                  <StockCard
-                    logoUrl={titan}
-                    title="Titan"
-                    cost="3,560.88"
-                    costPerRate="85.26 (2.16%)"
-                  />
-                  <StockCard
-                    logoUrl={sbiLife}
-                    title="SBI Life Insurance"
-                    cost="1,800.60"
-                    costPerRate="39.3 (2.24%)"
-                  />
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(0, 4)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : topGainActive === "mid" ? (
                 <>
-                  <StockCard
-                    logoUrl={nykaa}
-                    title="Nykaa"
-                    cost="210.39"
-                    costPerRate="18.17 (9.48%)"
-                  />
-                  <StockCard
-                    logoUrl={mazagonShip}
-                    title="Mazagon Dock Ship"
-                    cost="4,593.2"
-                    costPerRate="240.12 (5.52%)"
-                  />
-                  <StockCard
-                    logoUrl={patanjaliFood}
-                    title="Patanjali Foods"
-                    cost="1,901.32"
-                    costPerRate="79.04 (4.36%)"
-                  />
-                  <StockCard
-                    logoUrl={bandhanBank}
-                    title="Bandhan Bank"
-                    cost="203.77"
-                    costPerRate="6.84 (3.42%)"
-                  />
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(4, 8)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : (
                 <>
-                  <StockCard
-                    logoUrl={aloakIndustries}
-                    title="Alok Industries"
-                    cost="28.32"
-                    costPerRate="2.10 (10.7%)"
-                  />
-                  <StockCard
-                    logoUrl={pnbHouse}
-                    title="PNB Housing Finance"
-                    cost="892.21"
-                    costPerRate="17.21 (0.61%)"
-                  />
-                  <StockCard
-                    logoUrl={centuryTextile}
-                    title="Century Textiles"
-                    cost="2,300.10"
-                    costPerRate="152.66 (7.91%)"
-                  />
-                  <StockCard
-                    logoUrl={castrolIndia}
-                    title="Castrol India"
-                    cost="268.90"
-                    costPerRate="17.80 (7.10%)"
-                  />
+                  {topGainerStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topGainerStockApiData &&
+                    topGainerStockApiData
+                      .slice(8, 12)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               )}
             </div>
@@ -315,7 +438,12 @@ const Stocks = () => {
               <span className="stocks_left_in_news_heading_title">
                 Stocks in News
               </span>
-              <button className="stocks_left_in_news_heading_news_box">
+              <button
+                className="stocks_left_in_news_heading_news_box"
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -337,30 +465,26 @@ const Stocks = () => {
               </button>
             </div>
             <div className="stocks_left_in_news_card_component">
-              <StockCard
-                logoUrl={zomato}
-                title="Zomato"
-                cost="42.77"
-                costPerRate="-1.21 (0.29%)"
-              />
-              <StockCard
-                logoUrl={Dwarikesh_Sugar}
-                title="Dwarikesh Sugar"
-                cost="828.77"
-                costPerRate="12.26 (23.19%)"
-              />
-              <StockCard
-                logoUrl={tata_motors}
-                title="Tata Motors"
-                cost="1070.76"
-                costPerRate="14.08 (1.39%)"
-              />
-              <StockCard
-                logoUrl={geojit}
-                title="Geojit Financial Services"
-                cost="212.12"
-                costPerRate="-4.26 (2.31%)"
-              />
+              {stockNewsApiLoading ? (
+                <>
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                  <StockCardLoader />
+                </>
+              ) : (
+                stockNewsApiData.map((data) => (
+                  <StockCard
+                    key={data._id}
+                    _id={data._id}
+                    stock_id={data.stock_id}
+                    logoUrl={data.logoUrl}
+                    name={data.name}
+                    stockCost={data.stockCost}
+                    stockCostPerRate={data.stockCostPerRate}
+                  />
+                ))
+              )}
             </div>
           </div>
           <div className="stocks_left_top_losers">
@@ -369,7 +493,13 @@ const Stocks = () => {
                 Top Losers
               </span>
               <span className="stocks_left_top_losers_heading_seeMore">
-                <button>See more</button>
+                <button
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </button>
               </span>
             </div>
             <div className="stocks_left_top_losers_filter">
@@ -416,84 +546,81 @@ const Stocks = () => {
             <div className="stocks_left_top_losers_card_component">
               {topLosersActive === "large" ? (
                 <>
-                  <StockCard
-                    logoUrl={adani}
-                    title="Adani"
-                    cost="2,212.80"
-                    costPerRate="-177.65 (13.76%)"
-                  />
-                  <StockCard
-                    logoUrl={firstsource_soln}
-                    title="Firstsource Soln"
-                    cost="546.10"
-                    costPerRate="-52.50 (4.69%)"
-                  />
-                  <StockCard
-                    logoUrl={SJVN}
-                    title="SJVN"
-                    cost="260.88"
-                    costPerRate="-85.26 (2.16%)"
-                  />
-                  <StockCard
-                    logoUrl={cholamandalam_invest}
-                    title="Cholamandalam Invest"
-                    cost="200.60"
-                    costPerRate="-69.3 (2.24%)"
-                  />
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(0, 4)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : topLosersActive === "mid" ? (
                 <>
-                  <StockCard
-                    logoUrl={cyient}
-                    title="Cyient"
-                    cost="310.39"
-                    costPerRate="-18.17 (9.48%)"
-                  />
-                  <StockCard
-                    logoUrl={gland}
-                    title="Gland"
-                    cost="693.2"
-                    costPerRate="-240.12 (5.52%)"
-                  />
-                  <StockCard
-                    logoUrl={jsw_energy}
-                    title="JWS Energy"
-                    cost="101.32"
-                    costPerRate="-29.04 (4.36%)"
-                  />
-                  <StockCard
-                    logoUrl={bandhanBank}
-                    title="Bandhan Bank"
-                    cost="203.77"
-                    costPerRate="-43.84 (3.42%)"
-                  />
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(4, 8)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               ) : (
                 <>
-                  <StockCard
-                    logoUrl={mahanagar_gas}
-                    title="Mahanagar Gas"
-                    cost="28.32"
-                    costPerRate="-22.10 (10.7%)"
-                  />
-                  <StockCard
-                    logoUrl={pnbHouse}
-                    title="PNB Housing Finance"
-                    cost="392.21"
-                    costPerRate="-17.21 (0.61%)"
-                  />
-                  <StockCard
-                    logoUrl={mahindra}
-                    title="Century Textiles"
-                    cost="990.10"
-                    costPerRate="-252.66 (7.91%)"
-                  />
-                  <StockCard
-                    logoUrl={tata}
-                    title="Tata Motors"
-                    cost="1,128.90"
-                    costPerRate="-57.80 (7.10%)"
-                  />
+                  {topLoserStockApiLoading ? (
+                    <>
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                      <StockCardLoader />
+                    </>
+                  ) : (
+                    topLoserStockApiData &&
+                    topLoserStockApiData
+                      .slice(8, 12)
+                      .map((data) => (
+                        <StockCard
+                          key={data._id}
+                          _id={data._id}
+                          stock_id={data.stock_id}
+                          logoUrl={data.logoUrl}
+                          name={data.name}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                        />
+                      ))
+                  )}
                 </>
               )}
             </div>
@@ -501,7 +628,11 @@ const Stocks = () => {
           <div className="stocks_left_top_sector">
             <div className="stocks_left_top_sector_heading">
               <span>Top Sectors</span>
-              <button>
+              <button
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
                 <p>See more</p>
               </button>
             </div>
@@ -520,8 +651,19 @@ const Stocks = () => {
               <span className="stocks_left_market_cap_heading_title">
                 Top by Market Cap
               </span>
-              <button className="stocks_left_market_cap_heading_seeMore">
-                <p>See more</p>
+              <button
+                className="stocks_left_market_cap_heading_seeMore"
+                onClick={() => {
+                  navigate("/dashboard/topStock");
+                }}
+              >
+                <p
+                  onClick={() => {
+                    navigate("/dashboard/topStock");
+                  }}
+                >
+                  See more
+                </p>
               </button>
             </div>
             <div className="stocks_left_market_cap_card_component_container">
@@ -548,21 +690,41 @@ const Stocks = () => {
                   // ref={PreventScrollMarketCap}
                   // onScroll={handleScrollMarketCap}
                 >
-                  {marketCapData
-                    .slice(paginationStartIndex, paginationEndIndex)
-                    .map((data) => (
-                      <StockMarketCap
-                        key={data.id}
-                        companyName={data.companyName}
-                        cost={data.cost}
-                        costPerRate={data.costPerRate}
-                      />
-                    ))}
+                  {topMarketCapStockApiLoading ? (
+                    <>
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                      <StockMarketCapLoader />
+                    </>
+                  ) : (
+                    topMarketCapStockApiData
+                      .slice(paginationStartIndex, paginationEndIndex)
+                      .map((data) => (
+                        <StockMarketCap
+                          key={data._id}
+                          stockCost={data.stockCost}
+                          stockCostPerRate={data.stockCostPerRate}
+                          stock_id={data.stock_id}
+                          _id={data._id}
+                          name={data.name}
+                          logoUrl={data.logoUrl}
+                        />
+                      ))
+                  )}
                 </div>
                 <div className="stocks_left_market_cap_pagination_section">
                   <div className="stocks_left_market_cap_pagination_section_arrange_width">
                     <Pagination
-                      totalPage={Math.ceil(marketCapData.length / 10)}
+                      totalPage={Math.ceil(
+                        topMarketCapStockApiData.length / 10
+                      )}
                       currentActivePage={(activePage) => {
                         currentActivePage(activePage);
                       }}
@@ -578,21 +740,34 @@ const Stocks = () => {
             <div className="stocks_content_right_yourInvestments_title_head">
               <span id="scry_title_text">Your Investments</span>
               <span id="scry_more">
-                <button>Dashboard</button>
+                <button
+                  onClick={() => {
+                    navigate("/user/investments");
+                  }}
+                >
+                  Investments
+                </button>
               </span>
             </div>
             <div className="stocks_content_right_yourInvestments_card_main">
               <div className="stocks_content_right_yourInvestments_card_main_total_return">
-                <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees">
-                  ₹0
-                </span>
+                {currentValue - buyValue < 0 ? (
+                  <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees" style={{color:'#e62214eb'}}>
+                    ₹{(currentValue - buyValue).toFixed(2)}
+                  </span>
+                ) : (
+                  <span id="stocks_content_right_yourInvestments_card_main_total_return_rupees">
+                    ₹{(currentValue - buyValue).toFixed(2)}
+                  </span>
+                )}
+
                 <span id="stocks_content_right_yourInvestments_card_main_total_return_title">
                   Total Returns
                 </span>
               </div>
               <div className="stocks_content_right_yourInvestments_card_main_current_value">
                 <span id="stocks_content_right_yourInvestments_card_main_current_value_rupees">
-                  ₹0
+                  ₹{currentValue}
                 </span>
                 <span id="stocks_content_right_yourInvestments_card_main_current_value_title">
                   Current Value
@@ -606,33 +781,39 @@ const Stocks = () => {
           <div className="stocks_content_right_watchLists">
             <div className="stocks_content_right_watchLists_title_head">
               <span id="scrw_title_text">All watchlists</span>
-              <span id="scrw_more">View all</span>
+              <span
+                id="scrw_more"
+                onClick={() => {
+                  navigate("/dashboard/watchlist");
+                }}
+              >
+                View all
+              </span>
             </div>
             <div className="stocks_content_right_watchLists_card_main">
               <div className="stocks_content_right_watchLists_card_main_comp">
-                <StockWatchListCard watchlistTitle='vishal'/>
-                <StockWatchListCard watchlistTitle='shubham'/>
+                <StockWatchListCard watchlistTitle="vishal" />
               </div>
               <div className="stocks_content_right_watchLists_card_main_add_box">
                 <div className="stocks_content_right_watchLists_card_main_add_box_arrange_width">
                   <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    id="svg_add"
-                    width="23"
-                    height="23"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#00B386"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-circle-plus"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M8 12h8" />
-                    <path d="M12 8v8" />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      id="svg_add"
+                      width="23"
+                      height="23"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#00B386"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-plus"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M8 12h8" />
+                      <path d="M12 8v8" />
+                    </svg>
                   </span>
                   <span id="stocks_content_right_watchLists_card_main_add_box_arrange_width_title">
                     Create New Watchlist

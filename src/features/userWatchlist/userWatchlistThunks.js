@@ -1,35 +1,27 @@
-// src/features/featureA/featureAThunks.js
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { increment, decrement } from './userWatchlistSlice';
+// Thunk to simulate an API call and asynchronous work
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// Thunk to simulate an API call and increment the state
-export const fetchAndIncrement = createAsyncThunk(
-  'featureA/fetchAndIncrement',
-  async (amount, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await new Promise((resolve) =>
-        setTimeout(() => resolve(amount), 1000)
-      );
-      dispatch(increment(response));
-      return response;
-    } catch (error) {
-      return rejectWithValue('Failed to fetch and increment');
-    }
-  }
-);
+export const fetchUserWatchlistApiDataThunk = createAsyncThunk(
+    'userWatchlistApiDataThunk',
+    async (userEmail) => {
+        const userWatchlistApi = `http://localhost:8080/api/user/getUserWatchlistData?email=${userEmail}`;
+        const localStorageToken = localStorage.getItem('token');
+        if(!localStorageToken){
+            return
+        }
 
-// Thunk to simulate an API call and decrement the state
-export const fetchAndDecrement = createAsyncThunk(
-  'featureA/fetchAndDecrement',
-  async (amount, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await new Promise((resolve) =>
-        setTimeout(() => resolve(amount), 1000)
-      );
-      dispatch(decrement(response));
-      return response;
-    } catch (error) {
-      return rejectWithValue('Failed to fetch and decrement');
+        const response = await fetch(userWatchlistApi, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:`Bearer ${localStorageToken}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error while fetching userWatchlistData');
+        }
+
+        return await response.json();
     }
-  }
 );

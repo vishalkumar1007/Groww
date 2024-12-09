@@ -1,23 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import "./StockWatchListCard.css";
+import { useSelector } from "react-redux";
+import {selectUserWatchlistValue} from '../../features/userWatchlist/centralExportUserWatchlist';
+import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData';
+import { useNavigate } from "react-router-dom";
 
-// ............. data ...........
-
-import watchListData from "../../utils/watchlistItemData.json";
 
 const StockWatchListCard = ({ watchlistTitle = "dummy" }) => {
+  const navigate = useNavigate();
   const getWatchlistHiddenBoxHeight = useRef(0);
   const [isOpenWatchlist, setIsOpenWatchList] = useState(false);
   const [watchListDivHeight, setWatchListDivHeight] = useState(0);
+  const userWatchlistData = useSelector(selectUserWatchlistValue);
+  const userProfileData = useSelector(selectUserProfileData);
 
   useEffect(() => {
     if (getWatchlistHiddenBoxHeight.current) {
       const height = getWatchlistHiddenBoxHeight.current.getBoundingClientRect().height;
       setWatchListDivHeight(height);
     }
-  }, [watchlistTitle]);
+  }, [watchlistTitle,userWatchlistData]);
 
-  // useEffect(()=>{},[watchlistTitle])
+  // useEffect(()=>{
+  //   console.log(userWatchlistData);
+  // },[userWatchlistData])
 
   return (
     <div className="stock_watchList_card_main">
@@ -30,12 +36,11 @@ const StockWatchListCard = ({ watchlistTitle = "dummy" }) => {
         >
           <div className="stock_watchList_card_main_head_title">
             <span id="stock_watchList_card_main_head_title_name">
-              {watchlistTitle.charAt(0).toUpperCase() +
-                watchlistTitle.substring(1, watchlistTitle.length)}
+              {userProfileData.userFirstName}
               's Watchlist
             </span>
             <span id="stock_watchList_card_main_head_title_item">
-              {watchListData[watchlistTitle].length} item
+              {userWatchlistData.length} item
             </span>
           </div>
           <div
@@ -67,23 +72,23 @@ const StockWatchListCard = ({ watchlistTitle = "dummy" }) => {
           style={{height: isOpenWatchlist ? `${watchListDivHeight}px`:'0px'}}
         >
           <div className="stock_watchList_card_main_all_items_list_height_box" ref={getWatchlistHiddenBoxHeight}>
-            {watchListData[watchlistTitle].map((data) => (
+            {userWatchlistData.map((data,index) => (
               <div
-                key={data.id}
+                key={index}
                 className="stock_watchList_card_main_all_items_list"
               >
                 <div className="stock_watchList_card_main_item_box">
                   <div className="stock_watchList_card_main_item_box_title">
-                    <span id="stock_watchList_card_main_item_box_title_name">
-                      {data.companyName || "Tata Steel"}
+                    <span id="stock_watchList_card_main_item_box_title_name" onClick={()=>{navigate(`/stock_detail?${data.stock_id}`)}}>
+                      {data.name || "Tata Steel"}
                     </span>
                   </div>
                   <div className="stock_watchList_card_main_item_box_rate">
                     <span id="stock_watchList_card_main_item_box_rate_cost">
-                      ₹{data.cost || "000.00"}
+                      ₹{data.stockCost || "000.00"}
                     </span>
                     <span id="stock_watchList_card_main_item_box_rate_costPerRate">
-                      {data.costPerRate || "0.00 (0.00%)"}
+                      {data.stockCostPerRate || "0.00 (0.00%)"}
                     </span>
                   </div>
                 </div>

@@ -11,10 +11,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   /* prevent to select text  */
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  position: relative;
+}
+.msg_pop_up{
+  /* background-color: #9e8888; */
+  position: absolute;
+  top: 20px;
+  right:20px;
 }
 .main_center_element_sign_up {
   /* background-color: rgba(94, 15, 28, 0.385); */
@@ -100,11 +108,20 @@
   flex-direction: column;
   gap: 12px;
 }
-#interval {
-  width: 40px;
+
+#interval_signUp {
+  width: 0px;
   height: 8px;
   background-color: #ffffff;
+  animation: interval_sign_up 3s infinite ease-in-out;
 }
+
+@keyframes interval_sign_up{
+  0%{width: 0px;}
+  50%{width: 45px;}
+  100%{width: 0px;}
+}
+
 #left_tagline_bottom_sign_up_text {
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -154,7 +171,11 @@
   /* background-color: rgb(5, 81, 153); */
   width: 100%;
   height: 85%;
+  position: relative;
 }
+
+
+
 
 .input_email_div_sign_up {
   /* background-color: rgb(202, 202, 202); */
@@ -166,6 +187,147 @@
   flex-direction: column;
   gap: 8px;
 }
+/* //---------  */
+
+.input_email_div_sign_up_email_verify{
+  background-color: #27272715;
+  width: 100%;
+  height: 100%;
+  min-width: 231px;
+  position: absolute;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 5;
+  backdrop-filter: blur(105px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input_email_div_sign_up_email_verify_title{
+    /* background-color:rgba(255, 0, 0, 0.649); */
+    width: 100%;
+    max-width: 85%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 18px;
+}
+
+#input_email_div_sign_up_email_verify_head_title{
+  /* background-color:rgb(62, 197, 29); */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 26px;
+  color: #00ac81;
+  font-weight: 500;
+}
+
+#input_email_div_sign_up_email_verify_about_title{
+  /* background-color:rgb(115, 0, 255); */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: #2e2c2f;
+}
+#input_email_div_sign_up_email_verify_about_title span{
+  /* background-color:rgb(115, 0, 255); */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: #ae2328;
+}
+
+.input_email_div_sign_up_email_verify_input_otp{
+  /* background-color:rgb(208, 255, 0); */
+  width: 100%;
+  height: 30%;
+  max-width: 85%;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.input_email_div_sign_up_email_verify_ip_1{
+  background-color:#ffffff;
+  width: 50%;
+  height: 45px;
+  max-width: 130px;
+  min-width: 130px;
+  position: relative;
+  border: 1px solid #00ac81;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.input_email_div_sign_up_email_verify_ip_1 input{
+  /* background-color:rgb(85, 121, 159); */
+  width: 10px;
+  border: none;
+  height: 45px;
+  /* position: absolute; */
+  padding: 0px 0px 4px 25px;
+  font-size: 30px;
+  font-weight: 500;
+  color: #4a4a4ad2;
+}
+.input_email_div_sign_up_email_verify_ip_1::placeholder {
+  color: rgb(221, 221, 221);
+  font-size: 28px;
+}
+
+.input_email_div_sign_up_email_verify_ip_2{
+  background-color:rgb(146, 7, 84);
+}
+.input_email_div_sign_up_email_verify_ip_3{
+  background-color:rgb(20, 92, 164);
+}
+.input_email_div_sign_up_email_verify_ip_4{
+  background-color:rgb(28, 155, 16);
+}
+.input_email_div_sign_up_email_verify_ip_5{
+  background-color:rgb(22, 146, 133);
+}
+.input_email_div_sign_up_email_verify_close_btn{
+  /* background-color: pink; */
+  width: 100%;
+  max-width: 85%;
+  height: 25%;
+  /* margin-top: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input_email_div_sign_up_email_verify_close_btn button{
+  width: 50px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ff00001a;
+  color: rgba(213, 3, 3, 0.745);
+  font-weight: 400;
+}
+.input_email_div_sign_up_email_verify_close_btn button:hover{
+  border: 1px solid #ff000043;
+  background-color: #ff000020;
+}
+
+/* // -----------  */
 
 .ied_center_sign_up_first_name {
   width: 100%;

@@ -5,43 +5,57 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToWatchlist,
   removeFromWatchlist,
-} from "../../features/userWatchlist/userWatchlistSlice";
-import { selectUserWatchlistValue } from "../../features/userWatchlist/userWatchlistSelectors";
+  selectUserWatchlistValue,
+} from "../../features/userWatchlist/centralExportUserWatchlist";
+
 const StocksCard = ({
+  _id = "",
+  stock_id = "",
+  name = "",
+  stockCost = "",
+  stockCostPerRate = "",
   logoUrl = "",
-  title = "",
-  cost = "",
-  costPerRate = "",
 }) => {
   const dispatch = useDispatch();
   const user_watchlist_data = useSelector(selectUserWatchlistValue);
   const navigate = useNavigate();
   const [isCostPerRateNegative, setIsCostPerRateNegative] = useState(false);
   const [isCardAddToWatchList, setIsCardAddToWatchList] = useState(false);
-  const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
+  // const [updatedTitleForUrl, setUpdatedTitleForUrl] = useState("");
 
-  const  HandelAddCardToWatchList=()=>{
-    if(isCardAddToWatchList){
-      dispatch(removeFromWatchlist({title}));
+  // useEffect(()=>{
+  //   console.log('IN : _id = ',_id);
+  //   console.log('IN : stock_id = ',stock_id);
+  //   console.log('IN : name = ',name);
+  //   console.log('IN : stockCost = ',stockCost);
+  //   console.log('IN : stockCostPerRate = ',stockCostPerRate);
+  //   console.log('IN : logoUrl = ',logoUrl);
+  // },[_id, logoUrl, name, stockCost, stockCostPerRate, stock_id])
+
+  const HandelAddCardToWatchList = () => {
+    if (isCardAddToWatchList) {
+      dispatch(removeFromWatchlist({ stock_id }));
       setIsCardAddToWatchList(false);
-    }else{
-      dispatch(addToWatchlist({title,cost,costPerRate,logoUrl}));
+    } else {
+      dispatch(
+        addToWatchlist({ _id, stock_id, name, stockCost, stockCostPerRate, logoUrl })
+      );
     }
-  }
+  };
+
 
   useEffect(() => {
-    for(let i=0;i<user_watchlist_data.length;i++){
-      if(user_watchlist_data[i].title === title){
+    for (let i = 0; i < user_watchlist_data.length; i++) {
+      if (user_watchlist_data[i].stock_id === stock_id) {
         setIsCardAddToWatchList(true);
         break;
       }
     }
-  }, [title, user_watchlist_data]);
-
+  }, [stock_id, user_watchlist_data]);
 
   useEffect(() => {
-    if (costPerRate.length > 0) {
-      for (const element of costPerRate) {
+    if (stockCostPerRate.length > 0) {
+      for (const element of stockCostPerRate) {
         if (element === "-") {
           setIsCostPerRateNegative(true);
           break;
@@ -50,31 +64,31 @@ const StocksCard = ({
         }
       }
     }
-  }, [costPerRate]);
+  }, [stockCostPerRate]);
 
-  useEffect(() => {
-    let updatedTitle = title;
-    for (let i = 0; i < updatedTitle.length; i++) {
-      if (updatedTitle[i] === " ") {
-        updatedTitle =
-          updatedTitle.substring(0, i) + "-" + updatedTitle.substring(i + 1);
-      }
-      if (/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])) {
-        updatedTitle =
-          updatedTitle.substring(0, i) + "" + updatedTitle.substring(i + 1);
-      }
-      if (
-        updatedTitle.charCodeAt(i) >= 65 &&
-        updatedTitle.charCodeAt(i) <= 90
-      ) {
-        updatedTitle =
-          updatedTitle.substring(0, i) +
-          updatedTitle[i].toLowerCase() +
-          updatedTitle.substring(i + 1);
-      }
-    }
-    setUpdatedTitleForUrl(updatedTitle);
-  }, [title]);
+  // useEffect(() => {
+  //   let updatedTitle = title;
+  //   for (let i = 0; i < updatedTitle.length; i++) {
+  //     if (updatedTitle[i] === " ") {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) + "-" + updatedTitle.substring(i + 1);
+  //     }
+  //     if (/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/.test(updatedTitle[i])) {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) + "" + updatedTitle.substring(i + 1);
+  //     }
+  //     if (
+  //       updatedTitle.charCodeAt(i) >= 65 &&
+  //       updatedTitle.charCodeAt(i) <= 90
+  //     ) {
+  //       updatedTitle =
+  //         updatedTitle.substring(0, i) +
+  //         updatedTitle[i].toLowerCase() +
+  //         updatedTitle.substring(i + 1);
+  //     }
+  //   }
+  //   setUpdatedTitleForUrl(updatedTitle);
+  // }, [title]);
 
   return (
     <div className="stocksCard_main">
@@ -83,7 +97,7 @@ const StocksCard = ({
           <div
             className="stocksCard_main_top_logo"
             onClick={() => {
-              navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+              navigate(`/stock_detail?${stock_id}`);
             }}
           >
             <img src={logoUrl} alt="" />
@@ -139,30 +153,30 @@ const StocksCard = ({
         <div
           className="stocksCard_main_top_left_title"
           onClick={() => {
-            navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+            navigate(`/stock_detail?${stock_id}`);
           }}
         >
-          {title || "Stock Title"}
+          {name || "Stock Title"}
         </div>
       </div>
       <div
         className="stocksCard_main_bottom"
         onClick={() => {
-          navigate(`/stock_detail?${updatedTitleForUrl}-ltd`);
+          navigate(`/stock_detail?${stock_id}`);
         }}
       >
-        <div className="stocksCard_main_bottom_cost">₹{cost || "000.00"}</div>
+        <div className="stocksCard_main_bottom_cost">₹{stockCost || "000.00"}</div>
         <div
           className="stocksCard_main_bottom_costPerRate"
           style={{
             color: isCostPerRateNegative
               ? "#EB5B3C"
-              : costPerRate === ""
+              : stockCostPerRate === ""
               ? "#4a4a4a"
               : "#00B386",
           }}
         >
-          {costPerRate || "0.00 (0.00%)"}
+          {stockCostPerRate || "0.00 (0.00%)"}
         </div>
       </div>
     </div>

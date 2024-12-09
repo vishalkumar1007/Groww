@@ -1,0 +1,93 @@
+.Investments_main {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100dvh;
+    /* prevent to select text  */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .Investments_option_main_stock_and_mutualFund {
+    /* background-color: pink; */
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-bottom: 0.5px solid #d9d9d994;
+  }
+  
+  .Investments_option_main_stock_and_mutualFund_Range_fixed {
+    /* background-color: yellowgreen; */
+    max-width: 1230px;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+  .Investments_option_stocks {
+    /* background-color: rgb(255, 255, 255); */
+    height: 100%;
+    /* padding: 0px px; */
+    width: 60px;
+  }
+  .Investments_option_stocks_title {
+    /* background-color: rgb(192, 112, 112); */
+    height: 92%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .Investments_option_stocks_title p {
+    font-size: 17px;
+    color: #4a4848;
+  }
+  .Investments_option_stocks_isActive {
+    background-color: #01d5c0;
+    width: 100%;
+    height: 8%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  .Investments_option_mutualFund {
+    /* background-color: rgb(128, 0, 70); */
+    width: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .Investments_option_mutualFund_title {
+    /* background-color: slateblue; */
+    width: 100%;
+    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .Investments_option_mutualFund_title p {
+    font-size: 17px;
+    color: #4a4848;
+  }
+  .Investments_option_mutualFund_isActive {
+    background-color: #00b5a3;
+    width: 100%;
+    height: 8%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  .Investments_main_comp_section {
+    background-color: white;
+    width: 100%;
+    /* height: 800px; */
+    /* padding-top: 35px; */
+  }
+  

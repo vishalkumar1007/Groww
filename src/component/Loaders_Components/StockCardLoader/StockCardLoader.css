@@ -1,0 +1,163 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.stockCardLoader_main{
+    background-color: #ffffff;
+    width: 188px;
+    height: 176px;
+    min-width: 188px;
+    min-height: 176px;
+    border-radius: 7px;
+    border: 1.5px solid #e5e5e5;
+    padding: 16px;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+.stockCardLoader_main_top{
+    /* background-color: rgb(2, 14, 35); */
+    width: 100%;
+    height: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.stockCardLoader_main_top_logo_and_add{
+    /* background-color: crimson; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.stockCardLoader_main_top_logo{
+    background-color: #f9f9f9; /* color ---------- */
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ebebeb;
+    border-radius: 7px;
+    overflow: hidden;
+}
+.stockCardLoader_main_top_logo img{
+    width: 100%;
+    height: 100%;
+}
+.stockCardLoader_main_top_add{
+    /* background-color: #b6b9b6; */
+    width: 20px;
+    height: 20px;
+    display: block;
+    transition: 0.15s ease-in-out;
+    z-index: 5;
+}
+.stockCardLoader_main_top_add_arrange_width{
+    background-color: #f9f9f9;  /* color ---------- */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.stockCardLoader_main_top_add_circle{
+    /* background-color: red; */
+    background-color: transparent;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+/* .stockCardLoader_main_top_add_circle:hover{
+    width: 30px;
+    height: 30px;
+} */
+
+
+
+
+.stockCardLoader_main_top_left_title{
+    background-color: #f9f9f9;  /* color ---------- */
+    width: 130px;
+    height: 17px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a4a4a;
+    overflow:hidden;
+}
+
+.stockCardLoader_main_bottom{
+    /* background-color: violet; */
+    width: 100%;
+    height: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 8px;
+}
+.stockCardLoader_main_bottom_cost{
+    background-color: #f9f9f9;  /* color ---------- */
+    border-radius: 5px;
+    width: 80px;
+    height: 17px;
+    color: #4a4a4a;
+    font-size: 16px;
+    font-weight: 500;
+    overflow:hidden;
+}
+.stockCardLoader_main_bottom_costPerRate{
+    background-color: #f9f9f9;  /* color ---------- */
+    border-radius: 5px;
+    width: 110px;
+    height: 16px;
+    color: #4a4a4a;
+    /* color: #EB5B3C; */
+    font-size: 14px;
+    font-weight: 500;
+    overflow:hidden;
+}
+
+.stockCardLoader_main_loading_animation_main{
+    /* background-color: pink; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#stockCardLoading_animation_span {
+    background-color: #dcdcdc77;
+    width: 25px;
+    height: 200%;
+    display: block;
+    filter: blur(13px);
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    rotate: 20deg;
+    animation: loadingStockCard 1.5s  infinite;
+    opacity: 0.9;
+}
+
+@keyframes loadingStockCard {
+    0% {
+        left: -30px;
+        /* opacity: 0.1; */
+    }
+    100% {
+        left: 150px;
+        /* opacity: 0.1; */
+    }
+}
+
+
