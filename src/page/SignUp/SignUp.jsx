@@ -133,6 +133,7 @@ const SignUp = () => {
       setTryToVerifyOtpTimes((pvr)=>pvr+1);
       verifyOtpForEmail()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userEmailVerifyOTP]);
 
   const sendEmailOtpCode = async () => {

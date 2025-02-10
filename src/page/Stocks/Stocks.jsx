@@ -186,10 +186,10 @@ const Stocks = () => {
     }
   }, [allStockData, userBuyStockData]);
 
-  useEffect(() => {
-    console.log("Hy : ", currentValue);
-    console.log("Hy : ", buyValue);
-  }, [buyValue, currentValue]);
+  // useEffect(() => {
+  //   console.log("Hy : ", currentValue);
+  //   console.log("Hy : ", buyValue);
+  // }, [buyValue, currentValue]);
 
   return (
     <div className="stocks_main">
