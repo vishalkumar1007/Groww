@@ -23,7 +23,7 @@ const Footer = ()=>{
                             <p>Vaishnavi Tech Park, 3rd & 4th Floor</p>
                             <p>Sarjapur Main Road, Bellandur</p>
                             <p>Bengaluru – 560103</p>
-                            <p><a href="https://vishalkumar07.me/">Contact Us</a></p>
+                            <p><a href="https://vishalkumar1007.github.io/">Contact Us</a></p>
                         </div>
                         <div className='footer_content_main_contact_social_media'>
                             <span><img src={fb_logo} alt="" /></span>
