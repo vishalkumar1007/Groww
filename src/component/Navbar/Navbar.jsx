@@ -8,7 +8,7 @@ import { selectUserCartValue } from "../../features/userCart/centralExportUserCa
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
 import { addUserDetail } from "../../features/userProfileData/centralExportUserProfileData";
 import SearchStock from "../SearchStock/SearchStock";
-import {selectUserProfileData} from '../../features/userProfileData/centralExportUserProfileData';
+import { selectUserProfileData } from '../../features/userProfileData/centralExportUserProfileData';
 import {
   selectUserWatchlistValue,
   // selectUserWatchlistLoading,
@@ -28,7 +28,7 @@ const Navbar = ({ callFrom = "" }) => {
   const userProfileData = useSelector(selectUserProfileData);
 
   // handel to fetch user user cart data through redux
-  
+
   // useEffect(()=>{
   //   if(userTokenData){
   //       dispatch(fetchUserCartThunk(userTokenData.userEmail))
@@ -39,31 +39,31 @@ const Navbar = ({ callFrom = "" }) => {
   //   console.log("userCartData :", userCartData);
   // },[userCartData])
 
-  const saveDataInDataBaseBeforeLogOut = ()=>{
+  const saveDataInDataBaseBeforeLogOut = () => {
 
-      if (!(userProfileData.userEmail && userWatchlistApiData && userCartData)) {
-        return;
-      }
+    if (!(userProfileData.userEmail && userWatchlistApiData && userCartData)) {
+      return;
+    }
 
-      // Prepare watchlist data
-      const watchListData = {
-        email: userProfileData.userEmail,
-        userWatchlistData: [...userWatchlistApiData]
-      };
-      const userWatchlistPushApi = 'http://localhost:8080/api/user/updateUserWatchlist';
-      const blobWatchlist = new Blob([JSON.stringify(watchListData)], { type: 'application/json' });
-      const success = navigator.sendBeacon(userWatchlistPushApi, blobWatchlist);
-      localStorage.setItem('WatchlistDataSaveStatus', success ? 'Saved successfully' : 'Error: Network issue');
+    // Prepare watchlist data
+    const watchListData = {
+      email: userProfileData.userEmail,
+      userWatchlistData: [...userWatchlistApiData]
+    };
+    const userWatchlistPushApi = 'http://localhost:8080/api/user/updateUserWatchlist';
+    const blobWatchlist = new Blob([JSON.stringify(watchListData)], { type: 'application/json' });
+    const success = navigator.sendBeacon(userWatchlistPushApi, blobWatchlist);
+    localStorage.setItem('WatchlistDataSaveStatus', success ? 'Saved successfully' : 'Error: Network issue');
 
-      // Prepare cart data
-      const cartData = {
-        email: userProfileData.userEmail,
-        userCartData: [...userCartData]
-      };
-      const userCartPushApi = 'http://localhost:8080/api/user/updateUserCart';
-      const blobCart = new Blob([JSON.stringify(cartData)], { type: 'application/json' });
-      const successCart = navigator.sendBeacon(userCartPushApi, blobCart);
-      localStorage.setItem('cartDataSaveStatus', successCart ? 'Saved successfully' : 'Error: Network issue');
+    // Prepare cart data
+    const cartData = {
+      email: userProfileData.userEmail,
+      userCartData: [...userCartData]
+    };
+    const userCartPushApi = 'http://localhost:8080/api/user/updateUserCart';
+    const blobCart = new Blob([JSON.stringify(cartData)], { type: 'application/json' });
+    const successCart = navigator.sendBeacon(userCartPushApi, blobCart);
+    localStorage.setItem('cartDataSaveStatus', successCart ? 'Saved successfully' : 'Error: Network issue');
   }
 
 
@@ -71,9 +71,9 @@ const Navbar = ({ callFrom = "" }) => {
     setActiveFeture("");
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserTokenData(userProfileData);
-  },[userProfileData])
+  }, [userProfileData])
 
   useEffect(() => {
     if (callFrom === "Dashboard") {
@@ -119,7 +119,7 @@ const Navbar = ({ callFrom = "" }) => {
       return;
     }
 
-    if(userProfileData.length===0){
+    if (userProfileData.length === 0) {
       const base64Url = token.split(".")[1];
       const base64 = base64Url.replace("-", "+").replace("_", "/");
       const data = JSON.parse(window.atob(base64));
@@ -283,11 +283,16 @@ const Navbar = ({ callFrom = "" }) => {
                     : null,
                 }}
               >
-                <p>
+                {/* <p> */}
                   {userTokenData
-                    ? userTokenData.userFirstName[0].toUpperCase()
+                    ? (
+                      userTokenData?.userAvatar ?
+                        <img src={userTokenData?.userAvatar} alt="User Avatar" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+                        :
+                      userTokenData.userFirstName[0].toUpperCase()
+                    )
                     : "X"}
-                </p>
+                {/* </p> */}
               </div>
               <div
                 className="Navbar_activity_profile_activate_deactivate_icon"
@@ -316,9 +321,8 @@ const Navbar = ({ callFrom = "" }) => {
 
             <div
               ref={profileSectionRef}
-              className={`Navbar_user_Profile_section ${
-                isProfileOpen ? "open" : ""
-              }`}
+              className={`Navbar_user_Profile_section ${isProfileOpen ? "open" : ""
+                }`}
             >
               <div className="Navbar_user_Profile_section_user_about">
                 <div className="Navbar_user_Profile_section_user_about_arrange">
@@ -335,7 +339,7 @@ const Navbar = ({ callFrom = "" }) => {
                     </p>
                   </div>
                   <div className="Navbar_user_Profile_section_user_about_setting"
-                    onClick={()=>{navigate('/user/profile')}}
+                    onClick={() => { navigate('/user/profile') }}
                   >
                     <div className="Navbar_user_Profile_section_user_about_setting_main_div">
                       <svg

@@ -199,12 +199,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.Navbar_activity_profile_image p{
-    font-size: 19px;
-    font-weight: 500;
     color: white;
 }
+
 .Navbar_activity_profile_activate_deactivate_icon{
     /* background-color: #1e1d1d; */
     /* background-color: #ffffffeb; */

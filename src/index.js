@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './app/store';
 import MessagePopUp from './component/MessagePopUp/MessagePopUp';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+const googleOAuthClient = "682439804518-sje64qpoj39gmo6b22ccioja1n4onvjv.apps.googleusercontent.com";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,8 +17,9 @@ root.render(
           <MessagePopUp/> 
         </div>
       </div>
-      <App />
-
+      <GoogleOAuthProvider clientId={googleOAuthClient}>
+        <App />
+      </GoogleOAuthProvider>
   </Provider>
 );
 

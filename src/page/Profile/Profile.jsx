@@ -20,11 +20,12 @@ const Profile = () => {
     setProfileViewFeatureSection(makeActive);
   };
 
-  const handelToOpenSection = (section)=>{
+  const handelToOpenSection = (section) => {
     setProfileViewFeatureSection(section);
   }
 
   useEffect(() => {
+    console.log("userProfileData : ", userProfileData)
     setUserName(userProfileData.userFirstName);
     setUserLastName(userProfileData.userLastName);
   }, [userProfileData]);
@@ -36,12 +37,37 @@ const Profile = () => {
         <div className="user_profile_main_make_center_contain_box">
           <div className="user_profile_left_container">
             <div className="user_profile_left_image_box_main">
+              {/* {
+                userProfileData?.userAvatar ?
+                  <img src={userProfileData?.userAvatar} alt="User Avatar" /> :
+                  <div
+                    className="user_profile_left_image_circle"
+                    style={{ backgroundColor: `${userProfileData?.userColorCode || '#47a778'}` }}
+                  >
+                    {userFirstName[0]}
+                  </div>
+              } */}
+
               <div
                 className="user_profile_left_image_circle"
-                style={{ backgroundColor: `${userProfileData?.userColorCode || '#47a778'}` }}
+                style={{ backgroundColor: userProfileData?.userColorCode || "#47a778" }}
               >
-                {userFirstName[0]}
+                {userProfileData?.userAvatar ? (
+                  <img
+                    src={userProfileData.userAvatar}
+                    alt="User Avatar"
+                    style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null; // prevent infinite loop
+                      e.currentTarget.src = "";       // hide broken img
+                    }}
+                  />
+                ) : (
+                  userFirstName?.[0] || ""
+                )}
               </div>
+
+
               <div className="user_profile_left_image_user_name">
                 <span>{`${userFirstName} ${userLaseName}`}</span>
               </div>
@@ -111,7 +137,7 @@ const Profile = () => {
             {profileViewFeatureSection === "basicDetail" ? (
               <BasicDetail userProfileData={userProfileData} />
             ) : (
-              <UpdateProfile userProfileData={userProfileData}  openSection={(section)=>handelToOpenSection(section)} />
+              <UpdateProfile userProfileData={userProfileData} openSection={(section) => handelToOpenSection(section)} />
             )}
           </div>
         </div>
@@ -141,11 +167,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userFirstName
-                      ? userProfileData.userFirstName
-                      : "update now"
-                  }`
+                ? `${userProfileData.userFirstName
+                  ? userProfileData.userFirstName
+                  : "update now"
+                }`
                 : "user first name"}
             </div>
           </div>
@@ -158,11 +183,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userLastName
-                      ? userProfileData.userLastName
-                      : "update now"
-                  }`
+                ? `${userProfileData.userLastName
+                  ? userProfileData.userLastName
+                  : "update now"
+                }`
                 : "user last name"}
             </div>
           </div>
@@ -175,11 +199,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userEmail
-                      ? userProfileData.userEmail
-                      : "update now"
-                  }`
+                ? `${userProfileData.userEmail
+                  ? userProfileData.userEmail
+                  : "update now"
+                }`
                 : "user@gmail.com"}
             </div>
           </div>
@@ -192,11 +215,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userMobileNumber
-                      ? userProfileData.userMobileNumber
-                      : "update now"
-                  }`
+                ? `${userProfileData.userMobileNumber
+                  ? userProfileData.userMobileNumber
+                  : "update now"
+                }`
                 : "+91 6205594943"}
             </div>
           </div>
@@ -211,11 +233,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userDateOfBirth
-                      ? userProfileData.userDateOfBirth
-                      : "update now"
-                  }`
+                ? `${userProfileData.userDateOfBirth
+                  ? userProfileData.userDateOfBirth
+                  : "update now"
+                }`
                 : "17 July 2003"}
             </div>
           </div>
@@ -228,11 +249,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userGender
-                      ? userProfileData.userGender
-                      : "update now"
-                  }`
+                ? `${userProfileData.userGender
+                  ? userProfileData.userGender
+                  : "update now"
+                }`
                 : "Male"}
             </div>
           </div>
@@ -245,11 +265,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userMaritalStatus
-                      ? userProfileData.userMaritalStatus
-                      : "update now"
-                  }`
+                ? `${userProfileData.userMaritalStatus
+                  ? userProfileData.userMaritalStatus
+                  : "update now"
+                }`
                 : "Single"}
             </div>
           </div>
@@ -262,11 +281,10 @@ const BasicDetail = ({ userProfileData = "" }) => {
             </label>
             <div id="basicDetail_name_showData">
               {userProfileData
-                ? `${
-                    userProfileData.userColorCode
-                      ? userProfileData.userColorCode
-                      : "update now"
-                  }`
+                ? `${userProfileData.userColorCode
+                  ? userProfileData.userColorCode
+                  : "update now"
+                }`
                 : "#000000"}
             </div>
           </div>
@@ -276,7 +294,7 @@ const BasicDetail = ({ userProfileData = "" }) => {
   );
 };
 
-const UpdateProfile = ({ userProfileData = "" , openSection}) => {
+const UpdateProfile = ({ userProfileData = "", openSection }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [activeUpdateButton, setActiveUpdateButton] = useState(false);
@@ -313,7 +331,7 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
     const UpdateProfileApi = "http://localhost:8080/api/user/updateProfile";
     const localStorageToken = localStorage.getItem('token');
 
-    if(!localStorageToken){
+    if (!localStorageToken) {
       dispatch(
         fireTheMessagePopUp({
           messageShow: "token not found , unauthorized request",
@@ -321,13 +339,13 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
           makeFire: true,
         })
       );
-      return ;
+      return;
     }
     const response = await fetch(UpdateProfileApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:`Bearer ${localStorageToken}`
+        Authorization: `Bearer ${localStorageToken}`
       },
       body: JSON.stringify(updatedData),
     });
@@ -523,7 +541,7 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
     userProfileData?.userMaritalStatus,
     userProfileData?.userMobileNumber,
   ]);
-  
+
 
   return (
     <div className="user_profile_update_profile_component_main">
@@ -564,11 +582,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userFirstName
-                          ? userProfileData.userFirstName
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userFirstName
+                      ? userProfileData.userFirstName
+                      : "update now"
+                    }`
                     : "user first name"
                 }
                 onChange={(e) => setUpdateUserFirstName(e.target.value)}
@@ -590,11 +607,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userLastName
-                          ? userProfileData.userLastName
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userLastName
+                      ? userProfileData.userLastName
+                      : "update now"
+                    }`
                     : "user last name"
                 }
                 onChange={(e) => setUpdateUserLastName(e.target.value)}
@@ -617,11 +633,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="email"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userEmail
-                          ? userProfileData.userEmail
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userEmail
+                      ? userProfileData.userEmail
+                      : "update now"
+                    }`
                     : "user@gmail.com"
                 }
                 disabled={true}
@@ -644,11 +659,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="number"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userMobileNumber
-                          ? userProfileData.userMobileNumber
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userMobileNumber
+                      ? userProfileData.userMobileNumber
+                      : "update now"
+                    }`
                     : "+91 6205594943"
                 }
                 onChange={(e) => setUpdateUserMobileNumber(e.target.value)}
@@ -673,11 +687,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userDateOfBirth
-                          ? userProfileData.userDateOfBirth
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userDateOfBirth
+                      ? userProfileData.userDateOfBirth
+                      : "update now"
+                    }`
                     : "17 July 2003"
                 }
                 onChange={(e) => setUpdateUserDateOfBirth(e.target.value)}
@@ -700,11 +713,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userGender
-                          ? userProfileData.userGender
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userGender
+                      ? userProfileData.userGender
+                      : "update now"
+                    }`
                     : "Male"
                 }
                 onChange={(e) => setUpdateUserGender(e.target.value)}
@@ -727,11 +739,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userMaritalStatus
-                          ? userProfileData.userMaritalStatus
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userMaritalStatus
+                      ? userProfileData.userMaritalStatus
+                      : "update now"
+                    }`
                     : "Single"
                 }
                 onChange={(e) => setUpdateUserMaritalStatus(e.target.value)}
@@ -754,11 +765,10 @@ const UpdateProfile = ({ userProfileData = "" , openSection}) => {
                 type="text"
                 placeholder={
                   userProfileData
-                    ? `${
-                        userProfileData.userColorCode
-                          ? userProfileData.userColorCode
-                          : "update now"
-                      }`
+                    ? `${userProfileData.userColorCode
+                      ? userProfileData.userColorCode
+                      : "update now"
+                    }`
                     : "#000000"
                 }
                 onChange={(e) => setUpdateUserProfileColorCode(e.target.value)}

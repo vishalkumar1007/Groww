@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
 import { useDispatch } from "react-redux";
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
+import { useGoogleOneTapLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
 const Login = () => {
@@ -120,7 +122,7 @@ const Login = () => {
       );
     }
 
-    if(statusCode !== 200){
+    if (statusCode !== 200) {
       setAllowContinueEmailVerify(false); // disable continue button
       const timeOut = setTimeout(() => {
         if (statusCode === 404) {
@@ -128,7 +130,7 @@ const Login = () => {
         }
         setAllowContinueEmailVerify(true); // enable continue button
       }, 4000);
-  
+
       return () => clearTimeout(timeOut);
     }
   };
@@ -228,7 +230,7 @@ const Login = () => {
         })
       );
 
-      
+
     } else if (statusCode === 500) {
       // redux ...
       dispatch(
@@ -240,12 +242,12 @@ const Login = () => {
       );
     }
 
-    if(statusCode !== 200){
+    if (statusCode !== 200) {
       setAllowToLogin(false);
       const timeOut = setTimeout(() => {
         setAllowToLogin(true);
       }, 4000);
-  
+
       return () => clearTimeout(timeOut);
     }
 
@@ -301,6 +303,43 @@ const Login = () => {
     }
   }, [inputActive, userEmailId]);
 
+
+  const handelToContinueWithGoogle = (credentialResponse) => {
+    
+    const LoginAPI = `http://localhost:8080/api/user/oAuthgoogle`;
+
+    fetch(LoginAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        credential: credentialResponse.credential,
+      }),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.log("response not ok", response.status);
+          ShowQuickMsgForLogin(response.status);
+          setLoaderActive(false);
+          return;
+        }
+
+        if (response.status === 200) {
+          const data = await response.json();
+          localStorage.setItem("token", data.token);
+        }
+
+        ShowQuickMsgForLogin(response.status);
+        setLoaderActive(false);
+      })
+      .catch((err) => {
+        console.log("error ", err);
+        ShowQuickMsgForLogin(500);
+        setLoaderActive(false);
+      });
+  }
+
   return (
     <div className="main_view">
       <div className="main_center_element">
@@ -332,14 +371,29 @@ const Login = () => {
                     <p>Welcome Back</p>
                   </div>
                   <div className="lwg_box">
-                    <div className="lwg_btn">
-                      <button className="lwg_btn_text">
+                    {/* <div className="lwg_btn">
+                      <button className="lwg_btn_text" >
                         <div id="lwg_img">
                           <img src={google_svg} alt="google" />
                         </div>
                         <p>Continue with Google</p>
                       </button>
-                    </div>
+                    </div> */}
+                    <GoogleLogin
+                      onSuccess={credentialResponse => {
+                        handelToContinueWithGoogle(credentialResponse)
+                      }}
+                      onError={() => {
+                        console.log('Login Failed');
+                        dispatch(
+                          fireTheMessagePopUp({
+                            messageShow: "Google Sign-In failed. Please try again.",
+                            positiveResponse: true,
+                            makeFire: true,
+                          })
+                        );
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="or_main">
