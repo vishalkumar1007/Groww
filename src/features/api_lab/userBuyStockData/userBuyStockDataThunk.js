@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchUserBuyStockData = createAsyncThunk('userBuyStockData',async (email)=>{
-    const buyStockDataApi = 'http://localhost:8080/api/user/getUserBuyData';
+    const buyStockDataApi = 'https://groww-backend-omega.vercel.app/api/user/getUserBuyData';
     const token = localStorage.getItem('token');
     if(!token){
         return;

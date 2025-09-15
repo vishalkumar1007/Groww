@@ -141,7 +141,7 @@ const SignUp = () => {
       return false;
     }
     setLoaderActive(true);
-    const sendOtpApi = `http://localhost:8080/api/user/sendOtpForVerify?email=${userEmailId}`;
+    const sendOtpApi = `https://groww-backend-omega.vercel.app/api/user/sendOtpForVerify?email=${userEmailId}`;
 
     fetch(sendOtpApi, {
       method: "GET",
@@ -179,7 +179,7 @@ const SignUp = () => {
     if (!(userEmailId && userEmailVerifyOTP)) {
       return false;
     }
-    const apiForOtpVerify = `http://localhost:8080/api/user/otpVerification?email=${userEmailId}&otp=${userEmailVerifyOTP}`;
+    const apiForOtpVerify = `https://groww-backend-omega.vercel.app/api/user/otpVerification?email=${userEmailId}&otp=${userEmailVerifyOTP}`;
 
     await fetch(apiForOtpVerify, {
       method: "GET",
@@ -226,7 +226,7 @@ const SignUp = () => {
       password: userPassword,
     };
 
-    const SignUpAPI = "http://localhost:8080/api/user/signup";
+    const SignUpAPI = "https://groww-backend-omega.vercel.app/api/user/signup";
 
     fetch(SignUpAPI, {
       method: "POST",

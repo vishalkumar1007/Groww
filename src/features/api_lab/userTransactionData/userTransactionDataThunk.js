@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchUserTransactionDataThunk = createAsyncThunk('fetchUserTransactionData', async (email) => {   
-    const transactionDataApi = 'http://localhost:8080/api/payment/getUserTransactionAndWallet';
+    const transactionDataApi = 'https://groww-backend-omega.vercel.app/api/payment/getUserTransactionAndWallet';
     const localStorageToken = localStorage.getItem('token');
     const data = {
         email
