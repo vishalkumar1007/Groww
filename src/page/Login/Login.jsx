@@ -53,7 +53,7 @@ const Login = () => {
     }
     setLoaderActive(true);
 
-    const EmailValidationApi = `https://groww-backend-omega.vercel.app/api/user/emailVerification?email=${userEmailId}`;
+    const EmailValidationApi = `http://localhost:8080/api/user/emailVerification?email=${userEmailId}`;
 
     fetch(EmailValidationApi, {
       method: "GET",
@@ -154,7 +154,7 @@ const Login = () => {
       return;
     }
     setLoaderActive(true);
-    const LoginAPI = `https://groww-backend-omega.vercel.app/api/user/login?email=${userEmailId}&password=${userPassword}`;
+    const LoginAPI = `http://localhost:8080/api/user/login?email=${userEmailId}&password=${userPassword}`;
 
     fetch(LoginAPI, {
       method: "GET",
@@ -306,7 +306,7 @@ const Login = () => {
 
   const handelToContinueWithGoogle = (credentialResponse) => {
     
-    const LoginAPI = `https://groww-backend-omega.vercel.app/api/user/oAuthgoogle`;
+    const LoginAPI = `http://localhost:8080/api/user/oAuthgoogle`;
 
     fetch(LoginAPI, {
       method: "POST",

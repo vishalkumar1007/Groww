@@ -44,7 +44,7 @@ const WithDrawAndDeposit = () => {
       const data = {
         amount,
       };
-      const apiOfCreateOrder = "https://groww-backend-omega.vercel.app/api/payment/createOrder";
+      const apiOfCreateOrder = "http://localhost:8080/api/payment/createOrder";
       const response = await fetch(apiOfCreateOrder, {
         method: "POST",
         headers: {
@@ -73,7 +73,7 @@ const WithDrawAndDeposit = () => {
               email: userProfileData.userEmail,
             };
             const verifyPaymentAPI =
-              "https://groww-backend-omega.vercel.app/api/payment/verifySignature";
+              "http://localhost:8080/api/payment/verifySignature";
             await fetch(verifyPaymentAPI, {
               method: "POST",
               headers: {
@@ -178,7 +178,7 @@ const WithDrawAndDeposit = () => {
       setIsLoaderActive(true);
       const localStorageToken = localStorage.getItem("token");
       const withdrawMoneyAPi =
-        "https://groww-backend-omega.vercel.app/api/payment/withdrawUserAmount";
+        "http://localhost:8080/api/payment/withdrawUserAmount";
       const data = {
         email: userProfileData.userEmail,
         amount: withdrawInputMoneyValue,

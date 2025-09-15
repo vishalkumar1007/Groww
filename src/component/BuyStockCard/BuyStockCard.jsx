@@ -79,7 +79,7 @@ const BuyStockCard = ({
       stockQuantity: userInputQytValue,
     };
 
-    const buyStockApi = "https://groww-backend-omega.vercel.app/api/user/buyStock";
+    const buyStockApi = "http://localhost:8080/api/user/buyStock";
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -213,7 +213,7 @@ const BuyStockCard = ({
 
   const handelToSellStock = async () => {
     setLoader(true);
-    const sellStockApi = "https://groww-backend-omega.vercel.app/api/user/sellStock";
+    const sellStockApi = "http://localhost:8080/api/user/sellStock";
     const token = localStorage.getItem("token");
     if (!token) {
       console.log("Token not available to perform sell user stock");

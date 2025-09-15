@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMostBoughtStockThunk = createAsyncThunk('fetchMostBoughtStock', async ()=>{
-    const mostBoughtOnGrowwStocksAPi = 'https://groww-backend-omega.vercel.app/api/specific/stock/mostBoughtOnGrowwStocks';
+    const mostBoughtOnGrowwStocksAPi = 'http://localhost:8080/api/specific/stock/mostBoughtOnGrowwStocks';
     const localStorageToken = localStorage.getItem('token');
     if(!localStorageToken){
         return
