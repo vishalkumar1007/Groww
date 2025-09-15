@@ -211,7 +211,7 @@ const Login = () => {
       // redux ...
       dispatch(
         fireTheMessagePopUp({
-          messageShow: "Login validation successful. Welcome!",
+          messageShow: "Login successful. Welcome Back!",
           positiveResponse: true,
           makeFire: true,
         })
@@ -220,7 +220,19 @@ const Login = () => {
       setInputActive(false);
       navigate("/dashboard");
 
-    } else if (statusCode === 404) {
+    }else if (statusCode === 201) {
+      // redux ...
+      dispatch(
+        fireTheMessagePopUp({
+          messageShow: "Create Account successful. Welcome!",
+          positiveResponse: true,
+          makeFire: true,
+        })
+      );
+      //.... fn
+      setInputActive(false);
+      navigate("/dashboard");
+    }else if (statusCode === 404) {
       // redux ...
       dispatch(
         fireTheMessagePopUp({
@@ -321,22 +333,20 @@ const Login = () => {
         if (!response.ok) {
           console.log("response not ok", response.status);
           ShowQuickMsgForLogin(response.status);
-          setLoaderActive(false);
           return;
         }
 
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           const data = await response.json();
           localStorage.setItem("token", data.token);
+
         }
 
         ShowQuickMsgForLogin(response.status);
-        setLoaderActive(false);
       })
       .catch((err) => {
         console.log("error ", err);
         ShowQuickMsgForLogin(500);
-        setLoaderActive(false);
       });
   }
 
