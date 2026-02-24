@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Logo_dark from "../../assets/svg/groww-logo-dark.svg";
-import google_svg from "../../assets/svg/google.icon.svg";
+// import google_svg from "../../assets/svg/google.icon.svg";
 // import MessagePopUp from "../../component/MessagePopUp/MessagePopUp";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../component/LoaderComponent/Loader";
 import { useDispatch } from "react-redux";
 import { fireTheMessagePopUp } from "../../features/msgPopUpHandel/centralExportMegPopUpHandel";
-import { useGoogleOneTapLogin } from '@react-oauth/google';
+// import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 // import { addUserInformation, removeUserInformation } from "../../features/userInformation/userInformationSlice";
 
