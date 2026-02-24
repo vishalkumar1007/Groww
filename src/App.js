@@ -232,7 +232,7 @@ function App() {
 
   return (
     // basename="/Groww" // for production ---------------
-    <BrowserRouter basename="/Groww">
+    <BrowserRouter basename="">
       <Routes>
         <Route path='*' element={<PageNotFound />} errorElement={<Error />} />
         <Route path='/' element={<Home />} errorElement={<Error />} />
